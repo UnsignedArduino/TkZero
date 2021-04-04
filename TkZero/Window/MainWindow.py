@@ -16,6 +16,7 @@ class MainWindow(tk.Tk):
         super().__init__()
         self.title = "Main Window"
         self.on_close = None
+        self.protocol("WM_DELETE_WINDOW", self.close)
 
     @property
     def title(self) -> str:

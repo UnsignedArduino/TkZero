@@ -18,32 +18,11 @@ class Window(tk.Toplevel):
 
         :param parent: The parent, either a tk.Tk instance of a tk.Toplevel instance.
         """
-        master = parent
-        cnf = {}
-        """Construct a toplevel widget with the parent MASTER.
-
-        Valid resource names: background, bd, bg, borderwidth, class,
-        colormap, container, cursor, height, highlightbackground,
-        highlightcolor, highlightthickness, menu, relief, screen, takefocus,
-        use, visual, width."""
-        extra = ()
-        for wmkey in ['screen', 'class_', 'class', 'visual',
-                      'colormap']:
-            if wmkey in cnf:
-                val = cnf[wmkey]
-                # TBD: a hack needed because some keys
-                # are not valid as keyword arguments
-                if wmkey[-1] == '_':
-                    opt = '-' + wmkey[:-1]
-                else:
-                    opt = '-' + wmkey
-                extra = extra + (opt, val)
-                del cnf[wmkey]
-        tk.BaseWidget.__init__(self, master, "toplevel", cnf, {}, extra)
+        tk.BaseWidget.__init__(self, parent, "toplevel")
         root = self._root()
         self.iconname(root.iconname())
         self.title = "Window"
-        self.protocol("WM_DELETE_WINDOW", self.destroy)
+        self.protocol("WM_DELETE_WINDOW", self.close)
         self.on_close = None
 
     @property
