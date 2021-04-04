@@ -91,6 +91,14 @@ class MainWindow(tk.Tk):
         """
         self.iconify()
 
+    def is_minimized(self) -> bool:
+        """
+        Is this window minimized?
+
+        :return: A bool on whether this window is minimized.
+        """
+        return self.wm_state("iconic")
+
     def restore(self) -> None:
         """
         Restore the window.
@@ -98,6 +106,14 @@ class MainWindow(tk.Tk):
         :return: None.
         """
         self.deiconify()
+
+    def is_restored(self) -> bool:
+        """
+        Is this window **not** minimized?
+
+        :return: A bool on whether this window is not minimized.
+        """
+        return not self.is_minimized()
 
     def maximize(self) -> None:
         """
