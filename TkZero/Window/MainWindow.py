@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from TkZero import Vector
 from TkZero import Platform
-from typing import Union, Any
+from typing import Union, Any, Callable
 
 
 class MainWindow(tk.Tk):

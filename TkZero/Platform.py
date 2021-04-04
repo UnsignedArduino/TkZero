@@ -4,7 +4,7 @@ Get the windowing system.
 import tkinter as tk
 from tkinter import ttk
 from TkZero import Vector
-from typing import Union, Any
+from typing import Union, Any, Callable
 
 
 class WindowingSystem:
