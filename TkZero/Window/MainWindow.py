@@ -98,3 +98,22 @@ class MainWindow(tk.Tk):
         :return: None.
         """
         self.deiconify()
+
+    def maximize(self) -> None:
+        """
+        Maximize the window.
+
+        :return: None.
+        """
+        self.state("zoomed")
+
+    def full_screen(self, full_screen: bool) -> None:
+        """
+        Set to full-screen or not.
+
+        :param full_screen: Whether to full-screen the window or not.
+        :return: None.
+        """
+        if not isinstance(full_screen, bool):
+            raise TypeError(f"full_screen is not a bool! (type passed in: {repr(type(full_screen))})")
+        self.attributes("-fullscreen", full_screen)
