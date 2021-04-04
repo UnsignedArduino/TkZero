@@ -127,7 +127,7 @@ class Window(tk.Toplevel):
 
         :return: A bool on whether this window is minimized.
         """
-        return self.wm_state("iconic")
+        return self.wm_state() == "iconic"
 
     def restore(self) -> None:
         """
@@ -165,7 +165,7 @@ class Window(tk.Toplevel):
         if Platform.on_x11(self):
             return self.attributes("-zoomed")
         else:
-            return self.state("zoomed")
+            return self.wm_state() == "zoomed"
 
     def full_screen(self, full_screen: bool) -> None:
         """
@@ -177,3 +177,19 @@ class Window(tk.Toplevel):
         if not isinstance(full_screen, bool):
             raise TypeError(f"full_screen is not a bool! (type passed in: {repr(type(full_screen))})")
         self.attributes("-fullscreen", full_screen)
+
+    def is_full_screen(self) -> bool:
+        """
+        Is this window full-screen?
+
+        :return: A bool on whether this window is full-screen.
+        """
+        return self.attributes("-fullscreen")
+
+    def close(self) -> None:
+        """
+        Close the window - this usually stops the whole program.
+
+        :return:
+        """
+        self.destroy()
