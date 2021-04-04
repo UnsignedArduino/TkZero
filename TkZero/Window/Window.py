@@ -4,6 +4,7 @@ Create an additional window. Note that you will first need to initiate a main wi
 import tkinter as tk
 from tkinter import ttk
 from TkZero import Vector
+from TkZero import Platform
 from typing import Union, Any
 
 
@@ -120,6 +121,14 @@ class Window(tk.Toplevel):
         """
         self.iconify()
 
+    def is_minimized(self) -> bool:
+        """
+        Is this window minimized?
+
+        :return: A bool on whether this window is minimized.
+        """
+        return self.wm_state("iconic")
+
     def restore(self) -> None:
         """
         Restore the window.
@@ -128,13 +137,35 @@ class Window(tk.Toplevel):
         """
         self.deiconify()
 
+    def is_restored(self) -> bool:
+        """
+        Is this window **not** minimized?
+
+        :return: A bool on whether this window is not minimized.
+        """
+        return not self.is_minimized()
+
     def maximize(self) -> None:
         """
         Maximize the window.
 
         :return: None.
         """
-        self.state("zoomed")
+        if Platform.on_x11(self):
+            self.attributes("-zoomed", True)
+        else:
+            self.state("zoomed")
+
+    def is_maximized(self) -> bool:
+        """
+        Is this window maximized?
+
+        :return: A bool on whether this window is maximized.
+        """
+        if Platform.on_x11(self):
+            return self.attributes("-zoomed")
+        else:
+            return self.state("zoomed")
 
     def full_screen(self, full_screen: bool) -> None:
         """

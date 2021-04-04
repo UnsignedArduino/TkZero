@@ -4,6 +4,7 @@ Create the main window. Note that this should only be called once in your progra
 import tkinter as tk
 from tkinter import ttk
 from TkZero import Vector
+from TkZero import Platform
 from typing import Union, Any
 
 
@@ -121,7 +122,21 @@ class MainWindow(tk.Tk):
 
         :return: None.
         """
-        self.state("zoomed")
+        if Platform.on_x11(self):
+            self.attributes("-zoomed", True)
+        else:
+            self.state("zoomed")
+
+    def is_maximized(self) -> bool:
+        """
+        Is this window maximized?
+
+        :return: A bool on whether this window is maximized.
+        """
+        if Platform.on_x11(self):
+            return self.attributes("-zoomed")
+        else:
+            return self.state("zoomed")
 
     def full_screen(self, full_screen: bool) -> None:
         """
