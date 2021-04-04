@@ -44,6 +44,7 @@ class Window(tk.Toplevel):
         self.iconname(root.iconname())
         self.title = "Window"
         self.protocol("WM_DELETE_WINDOW", self.destroy)
+        self.on_close = None
 
     @property
     def title(self) -> str:
@@ -186,10 +187,33 @@ class Window(tk.Toplevel):
         """
         return self.attributes("-fullscreen")
 
+    @property
+    def on_close(self) -> Union[Callable, None]:
+        """
+        Return the function that will be called when the user tries to close the window. If no function was assigned,
+        return None.
+
+        :return: A function or None.
+        """
+        return self._on_close
+
+    @on_close.setter
+    def on_close(self, new_func: Callable) -> None:
+        """
+        Set the function that will be called
+
+        :param new_func: A function that will be called instead of destroying the window.
+        :return: None.
+        """
+        self._on_close = new_func
+
     def close(self) -> None:
         """
         Close the window - this usually stops the whole program.
 
         :return:
         """
-        self.destroy()
+        if self.on_close is not None:
+            self.on_close()
+        else:
+            self.destroy()

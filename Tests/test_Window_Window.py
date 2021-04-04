@@ -69,6 +69,17 @@ class MainWindowTest(unittest.TestCase):
         self.assertTrue(window.is_maximized())
         root.close()
 
+    def test_on_close(self):
+        root = MainWindow()
+        root.minimize()
+        window = Window(root)
+        on_close_func = lambda: None
+        window.on_close = on_close_func
+        self.assertEqual(window.on_close, on_close_func)
+        window.close()
+        window.destroy()
+        root.close()
+
 
 if __name__ == "__main__":
     unittest.main()
