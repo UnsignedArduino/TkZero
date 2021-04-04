@@ -8,14 +8,14 @@ from TkZero import Vector
 
 
 class MainWindowTest(unittest.TestCase):
-    def test_mainwindow_title(self):
+    def test_title(self):
         root = MainWindow()
         root.update()
         root.title = "My title"
         self.assertEqual(root.title, "My title")
         root.close()
 
-    def test_mainwindow_size(self):
+    def test_size(self):
         root = MainWindow()
         root.update()
         self.assertEqual(root.size, Vector.Size(width=200, height=200))
@@ -23,7 +23,7 @@ class MainWindowTest(unittest.TestCase):
         self.assertEqual(root.size, Vector.Size(width=400, height=400))
         root.close()
 
-    def test_mainwindow_position(self):
+    def test_position(self):
         root = MainWindow()
         root.update()
         root.position = Vector.Position(x=0, y=0)
