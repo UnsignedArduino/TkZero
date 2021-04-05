@@ -78,6 +78,27 @@ class DialogTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             Dialog.select_directory(title=lambda: None)
 
+    def test_color_chooser_no_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        Dialog.choose_color()
+
+    def test_color_chooser_good_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        Dialog.choose_color(initial_color="101010", as_rgb=True)
+
+    def test_color_chooser_bad_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.choose_color(initial_color=1234)
+        with self.assertRaises(TypeError):
+            Dialog.choose_color(as_rgb=42)
+
 
 if __name__ == "__main__":
     unittest.main()
