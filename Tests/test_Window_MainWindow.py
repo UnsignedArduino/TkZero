@@ -57,6 +57,15 @@ class MainWindowTest(unittest.TestCase):
         self.assertTrue(root.is_maximized())
         root.close()
 
+    def test_binds(self):
+        root = MainWindow()
+        root.update()
+        func = lambda: None
+        root.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
+        binds = root.bind_to_event("<<MyOwnSpecialEvent>>")
+        self.assertTrue(len(binds) > 0)
+        root.close()
+
     def test_on_close(self):
         root = MainWindow()
         root.update()

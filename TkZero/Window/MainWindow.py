@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from TkZero import Vector
 from TkZero import Platform
+from threading import Thread
 from typing import Union, Any, Callable
 
 
@@ -158,6 +159,32 @@ class MainWindow(tk.Tk):
         :return: A bool on whether this window is full-screen.
         """
         return self.attributes("-fullscreen")
+
+    def bind_to_event(self, event: str, func: Callable = None,
+                      run_in_thread: bool = False, add: bool = False) -> Union[None, list[str]]:
+        """
+        Bind a event to a function.
+
+        :param event: A str of the event.
+        :param func: A function to call when the even happens. If none is passed in, a list
+        :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
+         will also be made as a daemon thread. (will be terminated if main thread terminates)
+        :param add: Whether to add the function to a list of functions to be called or replace the function that was
+         previously bound to this sequence if any.
+        :return: A list of functions that would be called when this event is triggered or None when binding one.
+        """
+        if not isinstance(event, str):
+            raise TypeError(f"event is not a str! (type passed in: {repr(type(event))})")
+        if not isinstance(run_in_thread, bool):
+            raise TypeError(f"run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})")
+        if not isinstance(add, bool):
+            raise TypeError(f"add is not a bool! (type passed in: {repr(type(add))})")
+        if run_in_thread:
+            func = Thread(target=func, args=(), daemon=True).start
+        binds = self.bind(event, func, add)
+        if binds is not None and type(binds) is not list:
+            binds = [binds]
+        return binds
 
     @property
     def on_close(self) -> Union[Callable, None]:

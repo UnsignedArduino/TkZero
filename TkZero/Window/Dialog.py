@@ -9,8 +9,8 @@ from tkinter import messagebox as mbox
 from TkZero import Vector
 from TkZero import Platform
 from TkZero.Window import Window
+from threading import Thread
 from pathlib import Path
-from time import sleep
 from typing import Union, Any, Callable
 
 

@@ -285,7 +285,7 @@ class DialogTest(unittest.TestCase):
     def test_custom_dialog(self):
         root = MainWindow()
         root.lift()
-        root.after(ms=5000, func=lambda: root.close())
+        root.after(ms=1000, func=lambda: root.close())
         dialog = Dialog.CustomDialog(parent=root)
         dialog.title = "Title"
         # Must lift everything otherwise it hasn't drawn and grabbing the focus will error
@@ -293,6 +293,16 @@ class DialogTest(unittest.TestCase):
         dialog.grab_focus()
         dialog.wait_till_destroyed()
         root.mainloop()
+
+    def test_custom_dialog_binds(self):
+        root = MainWindow()
+        root.minimize()
+        dialog = Dialog.CustomDialog(parent=root)
+        func = lambda: None
+        dialog.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
+        binds = dialog.bind_to_event("<<MyOwnSpecialEvent>>")
+        self.assertTrue(len(binds) > 0)
+        root.close()
 
 
 if __name__ == "__main__":
