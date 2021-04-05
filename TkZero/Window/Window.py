@@ -23,7 +23,7 @@ class Window(tk.Toplevel):
         self.iconname(root.iconname())
         self.title = "Window"
         self.protocol("WM_DELETE_WINDOW", self.close)
-        self.on_close = None
+        self._on_close = None
 
     @property
     def title(self) -> str:
@@ -192,7 +192,7 @@ class Window(tk.Toplevel):
 
         :return:
         """
-        if self.on_close is not None:
-            self.on_close()
+        if self._on_close is not None:
+            self._on_close()
         else:
             self.destroy()

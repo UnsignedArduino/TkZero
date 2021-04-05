@@ -4,6 +4,7 @@ Test the TkZero.Window.Dialog module
 
 import unittest
 from TkZero.Window.MainWindow import MainWindow
+from TkZero.Window import Window
 from TkZero.Window import Dialog
 from pathlib import Path
 

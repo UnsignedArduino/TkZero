@@ -15,7 +15,7 @@ class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title = "Main Window"
-        self.on_close = None
+        self._on_close = None
         self.protocol("WM_DELETE_WINDOW", self.close)
 
     @property
@@ -185,7 +185,7 @@ class MainWindow(tk.Tk):
 
         :return:
         """
-        if self.on_close is not None:
-            self.on_close()
+        if self._on_close is not None:
+            self._on_close()
         else:
             self.destroy()
