@@ -30,8 +30,11 @@ def open_file(initial_dir: Path = None, title: str = None,
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(file_types, tuple) and file_types is not None:
         raise TypeError(f"file_types is not a tuple! (type passed in: {repr(type(file_types))})")
-    file_path = fd.askopenfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
-                                   title=title, filetypes=file_types if file_types is not None else ())
+    try:
+        file_path = fd.askopenfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
+                                       title=title, filetypes=file_types if file_types is not None else ())
+    except tk.TclError:
+        return None
     return Path(file_path) if file_path else None
 
 
@@ -154,7 +157,7 @@ def show_error(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
 
 
 def ask_ok_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-               title: str, message: str, detail: str = None) -> bool:
+                     title: str, message: str, detail: str = None) -> bool:
     """
     Show the user a prompt with the buttons "Ok" or "Cancel".
 
@@ -171,3 +174,43 @@ def ask_ok_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
     return mbox.askokcancel(parent=parent, title=title, message=message, detail=detail)
+
+
+def ask_yes_or_no(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                  title: str, message: str, detail: str = None) -> bool:
+    """
+    Show the user a prompt with the buttons "Yes" or "No".
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Yes else No.
+    """
+    if not isinstance(title, str):
+        raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
+    if not isinstance(message, str):
+        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
+    return mbox.askyesno(parent=parent, title=title, message=message, detail=detail)
+
+
+def ask_yes_or_no_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                            title: str, message: str, detail: str = None) -> Union[bool, None]:
+    """
+    Show the user a prompt with the buttons "Yes" or "No" or "Cancel".
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Yes, False if the user clicks No, and None if the user clicks Cancel.
+    """
+    if not isinstance(title, str):
+        raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
+    if not isinstance(message, str):
+        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
+    return mbox.askyesnocancel(parent=parent, title=title, message=message, detail=detail)
