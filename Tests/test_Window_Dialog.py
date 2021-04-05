@@ -177,6 +177,32 @@ class DialogTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             Dialog.show_error(detail=[])
 
+    def test_ok_cancel_box_no_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.ask_ok_or_cancel()
+
+    def test_ok_cancel_box_good_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        Dialog.ask_ok_or_cancel(parent=root, title="Title", message="Message", detail="Details")
+
+    def test_ok_cancel_box_bad_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.ask_ok_or_cancel(parent="asdf")
+        with self.assertRaises(TypeError):
+            Dialog.ask_ok_or_cancel(title=1)
+        with self.assertRaises(TypeError):
+            Dialog.ask_ok_or_cancel(message=lambda: None)
+        with self.assertRaises(TypeError):
+            Dialog.ask_ok_or_cancel(detail=[])
+
 
 if __name__ == "__main__":
     unittest.main()
