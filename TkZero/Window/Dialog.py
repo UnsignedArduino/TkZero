@@ -9,6 +9,7 @@ from tkinter import messagebox as mbox
 from TkZero import Vector
 from TkZero import Platform
 from pathlib import Path
+from time import sleep
 from typing import Union, Any, Callable
 
 
@@ -90,3 +91,63 @@ def choose_color(initial_color: str = "ffffff", as_rgb: bool = False) -> Union[U
         return color[0] if as_rgb else color[1][1:]
     except TypeError:
         return None
+
+
+def show_info(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+              title: str, message: str, detail: str = None) -> None:
+    """
+    Show a info box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the info box - should be a str.
+    :param message: The message of the info box - should be a str.
+    :param detail: The detail of the info box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    """
+    if not isinstance(title, str):
+        raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
+    if not isinstance(message, str):
+        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
+    mbox.showinfo(parent=parent, title=title, message=message, detail=detail)
+
+
+def show_warning(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                 title: str, message: str, detail: str = None) -> None:
+    """
+    Show a warning box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the warning box - should be a str.
+    :param message: The message of the warning box - should be a str.
+    :param detail: The detail of the warning box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    """
+    if not isinstance(title, str):
+        raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
+    if not isinstance(message, str):
+        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
+    mbox.showwarning(parent=parent, title=title, message=message, detail=detail)
+
+
+def show_error(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+               title: str, message: str, detail: str = None) -> None:
+    """
+    Show an error box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the error box - should be a str.
+    :param message: The message of the error box - should be a str.
+    :param detail: The detail of the error box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    """
+    if not isinstance(title, str):
+        raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
+    if not isinstance(message, str):
+        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
+    mbox.showerror(parent=parent, title=title, message=message, detail=detail)

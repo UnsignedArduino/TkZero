@@ -99,6 +99,84 @@ class DialogTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             Dialog.choose_color(as_rgb=42)
 
+    def test_info_box_no_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.show_info()
+
+    def test_info_box_good_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        Dialog.show_info(parent=root, title="Title", message="Message", detail="Details")
+
+    def test_info_box_bad_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.show_info(parent="asdf")
+        with self.assertRaises(TypeError):
+            Dialog.show_info(title=1)
+        with self.assertRaises(TypeError):
+            Dialog.show_info(message=lambda: None)
+        with self.assertRaises(TypeError):
+            Dialog.show_info(detail=[])
+
+    def test_warning_box_no_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.show_warning()
+
+    def test_warning_box_good_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        Dialog.show_warning(parent=root, title="Title", message="Message", detail="Details")
+
+    def test_warning_box_bad_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.show_warning(parent="asdf")
+        with self.assertRaises(TypeError):
+            Dialog.show_warning(title=1)
+        with self.assertRaises(TypeError):
+            Dialog.show_warning(message=lambda: None)
+        with self.assertRaises(TypeError):
+            Dialog.show_warning(detail=[])
+
+    def test_error_box_no_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.show_error()
+
+    def test_error_box_good_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        Dialog.show_error(parent=root, title="Title", message="Message", detail="Details")
+
+    def test_error_box_bad_params(self):
+        root = MainWindow()
+        root.minimize()
+        root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.show_error(parent="asdf")
+        with self.assertRaises(TypeError):
+            Dialog.show_error(title=1)
+        with self.assertRaises(TypeError):
+            Dialog.show_error(message=lambda: None)
+        with self.assertRaises(TypeError):
+            Dialog.show_error(detail=[])
+
 
 if __name__ == "__main__":
     unittest.main()
