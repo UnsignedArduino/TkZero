@@ -4,8 +4,8 @@ Test the TkZero.Window.Dialog module
 
 import unittest
 from TkZero.Window.MainWindow import MainWindow
-from TkZero.Window import Window
 from TkZero.Window import Dialog
+from tkinter import TclError
 from pathlib import Path
 
 
@@ -281,6 +281,18 @@ class DialogTest(unittest.TestCase):
             Dialog.ask_retry_cancel(message=lambda: None)
         with self.assertRaises(TypeError):
             Dialog.ask_retry_cancel(detail=[])
+
+    def test_custom_dialog(self):
+        root = MainWindow()
+        root.lift()
+        root.after(ms=5000, func=lambda: root.close())
+        dialog = Dialog.CustomDialog(parent=root)
+        dialog.title = "Title"
+        # Must lift everything otherwise it hasn't drawn and grabbing the focus will error
+        dialog.lift()
+        dialog.grab_focus()
+        dialog.wait_till_destroyed()
+        root.mainloop()
 
 
 if __name__ == "__main__":

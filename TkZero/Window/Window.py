@@ -16,11 +16,10 @@ class Window(tk.Toplevel):
         """
         Create a window. (tk.Toplevel)
 
-        :param parent: The parent, either a tk.Tk instance of a tk.Toplevel instance.
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
         """
         tk.BaseWidget.__init__(self, parent, "toplevel")
-        root = self._root()
-        self.iconname(root.iconname())
+        self.iconname(self._root().iconname())
         self.title = "Window"
         self.protocol("WM_DELETE_WINDOW", self.close)
         self._on_close = None

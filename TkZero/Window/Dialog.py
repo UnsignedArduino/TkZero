@@ -8,6 +8,7 @@ from tkinter import colorchooser
 from tkinter import messagebox as mbox
 from TkZero import Vector
 from TkZero import Platform
+from TkZero.Window import Window
 from pathlib import Path
 from time import sleep
 from typing import Union, Any, Callable
@@ -235,3 +236,47 @@ def ask_retry_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
     return mbox.askyesnocancel(parent=parent, title=title, message=message, detail=detail)
 
+
+class CustomDialog(Window.Window):
+    def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
+        """
+        Create a custom dialog. (tk.Toplevel)
+
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
+        """
+        super().__init__(parent=parent)
+        self.transient(master=parent)
+
+    def grab_focus(self) -> None:
+        """
+        Grab all focus to this window.
+
+        :return: None.
+        """
+        self.wait_visibility()
+        self.grab_set()
+
+    def release_focus(self) -> None:
+        """
+        Release the focus.
+
+        :return: None.
+        """
+        self.grab_release()
+
+    def wait_till_destroyed(self) -> None:
+        """
+        Pause here and wait until destroyed.
+
+        :return: None.
+        """
+        self.wait_window()
+
+    def destroy(self) -> None:
+        """
+        Destroy itself and all it's children. This will also release the focus.
+
+        :return: None.
+        """
+        self.release_focus()
+        super().destroy()
