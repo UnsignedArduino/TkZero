@@ -6,10 +6,7 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import colorchooser
 from tkinter import messagebox as mbox
-from TkZero import Vector
-from TkZero import Platform
 from TkZero.Window import Window
-from threading import Thread
 from pathlib import Path
 from typing import Union, Any, Callable
 

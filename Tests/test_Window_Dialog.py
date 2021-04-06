@@ -5,7 +5,6 @@ Test the TkZero.Window.Dialog module
 import unittest
 from TkZero.Window.MainWindow import MainWindow
 from TkZero.Window import Dialog
-from tkinter import TclError
 from pathlib import Path
 
 
