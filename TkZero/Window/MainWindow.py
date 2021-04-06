@@ -186,6 +186,15 @@ class MainWindow(tk.Tk):
             binds = [binds]
         return binds
 
+    def generate_event(self, event: str) -> None:
+        """
+        Generate an event.
+
+        :param event: The event to generate ("<<MyOwnEvent>>")
+        :return: None.
+        """
+        self.event_generate(event)
+
     @property
     def on_close(self) -> Union[Callable, None]:
         """
