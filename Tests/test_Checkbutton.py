@@ -1,17 +1,17 @@
 import unittest
 from TkZero.MainWindow import MainWindow
-from TkZero.Button import Button, DisplayModes
+from TkZero.Checkbutton import Checkbutton, DisplayModes
 from PIL.ImageTk import PhotoImage
 import base64
 from TkZero import Style
 
 
-class ButtonTest(unittest.TestCase):
+class CheckbuttonTest(unittest.TestCase):
     def test_no_params(self):
         root = MainWindow()
         root.update()
         with self.assertRaises(TypeError):
-            Button()
+            Checkbutton()
         root.update()
         root.close()
 
@@ -235,26 +235,38 @@ class ButtonTest(unittest.TestCase):
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        Button(root, text="hi", image=PhotoImage(data=image_data)).grid(row=0, column=0)
+        Checkbutton(root, text="hi", image=PhotoImage(data=image_data)).grid(row=0, column=0)
         root.update()
+        root.close()
+
+    def test_value(self):
+        root = MainWindow()
+        root.update()
+        c = Checkbutton(root, text="Foobar")
+        c.grid(row=0, column=0)
+        root.update()
+        self.assertFalse(c.value)
+        c.value = True
+        root.update()
+        self.assertTrue(c.value)
         root.close()
 
     def test_text(self):
         root = MainWindow()
         root.update()
-        b = Button(root, text="Foobar")
-        b.grid(row=0, column=0)
-        b.text = "Test"
+        c = Checkbutton(root, text="Foobar")
+        c.grid(row=0, column=0)
+        c.text = "Test"
         root.update()
-        self.assertEqual(b.text, "Test")
+        self.assertEqual(c.text, "Test")
         root.close()
 
     def test_image(self):
         root = MainWindow()
         root.update()
-        b = Button(root)
-        b.grid(row=0, column=0)
-        self.assertTrue(b.image is None)
+        c = Checkbutton(root)
+        c.grid(row=0, column=0)
+        self.assertTrue(c.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -472,19 +484,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        b.image = PhotoImage(data=image_data)
+        c.image = PhotoImage(data=image_data)
         root.update()
-        self.assertTrue(b.image is not None)
+        self.assertTrue(c.image is not None)
         root.close()
 
     def test_text_and_image(self):
         root = MainWindow()
         root.update()
-        b = Button(root, text="Click for smiles!")
-        b.grid(row=0, column=0)
+        c = Checkbutton(root, text="Click for smiles!")
+        c.grid(row=0, column=0)
         root.update()
-        self.assertEqual(b.text, "Click for smiles!")
-        self.assertTrue(b.image is None)
+        self.assertEqual(c.text, "Click for smiles!")
+        self.assertTrue(c.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -702,23 +714,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        b.image = PhotoImage(data=image_data)
+        c.image = PhotoImage(data=image_data)
         root.update()
-        self.assertTrue(b.image is not None)
+        self.assertTrue(c.image is not None)
         root.update()
-        self.assertEqual(b.display_mode, DisplayModes.Original)
-        b.display_mode = DisplayModes.ImageTopText
+        self.assertEqual(c.display_mode, DisplayModes.Original)
+        c.display_mode = DisplayModes.ImageTopText
         root.update()
-        self.assertEqual(b.display_mode, DisplayModes.ImageTopText)
+        self.assertEqual(c.display_mode, DisplayModes.ImageTopText)
         root.close()
 
     def test_enabled(self):
         root = MainWindow()
         root.update()
-        b = Button(root)
-        b.grid(row=0, column=0)
+        c = Checkbutton(root)
+        c.grid(row=0, column=0)
         root.update()
-        self.assertTrue(b.enabled)
+        self.assertTrue(c.enabled)
         root.enabled = False
         self.assertFalse(root.enabled)
         root.close()
@@ -726,19 +738,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
     def test_execution(self):
         root = MainWindow()
         root.update()
-        b = Button(root, command=lambda: None)
-        b.grid(row=0, column=0)
+        c = Checkbutton(root, command=lambda: None)
+        c.grid(row=0, column=0)
         root.update()
         root.close()
 
     def test_style(self):
         root = MainWindow()
         root.update()
-        b = Button(root)
-        b.grid(row=0, column=0)
+        c = Checkbutton(root)
+        c.grid(row=0, column=0)
         Style.define_style(Style.WidgetStyleRoots.Button, "Test", background="red")
-        b.apply_style("Test")
-        self.assertEqual(b.cget("style"), "Test.TButton")
+        c.apply_style("Test")
+        self.assertEqual(c.cget("style"), "Test.TCheckbutton")
         root.update()
         root.close()
 

@@ -1,5 +1,5 @@
 """
-Creates a themed Button.
+Creates a themed Checkbutton.
 """
 import tkinter as tk
 from tkinter import ttk
@@ -28,38 +28,68 @@ class DisplayModes:
     ImageRightText = "right"
 
 
-class Button(ttk.Button):
+class Checkbutton(ttk.Checkbutton):
     def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = "",
                  image: Union[PhotoImage, tk.PhotoImage] = None, command: Callable = None):
         """
-        Initiate a ttk.Button.
+        Initiate a ttk.Checkbutton.
 
-        :param parent: The parent of the button.
-        :param text: The text of the button. Defaults to "".
-        :param image: The image on the label. Defaults to None.
-        :param command: The command to run when pressed. Defaults to None.
+        :param parent: The parent of the checkbutton.
+        :param text: The text of the checkbutton. Defaults to "".
+        :param image: The image on the checkbutton. Defaults to None.
+        :param command: The command to run when toggled. Defaults to None.
         """
-        super().__init__(master=parent, command=command)
-        self._style_root = "TButton"
+        self._variable = tk.BooleanVar(value=False)
+        super().__init__(master=parent, command=command, variable=self._variable)
+        self._style_root = "TCheckbutton"
         self._photo_image = None
         self._enabled = True
         self.text = text
         if image is not None:
             self.image = image
+        self.value = False
+
+    @property
+    def value(self) -> Union[bool, None]:
+        """
+        Get the value on this checkbutton.
+
+        :return: None if in special "not-selected-but-not-off" (like dash or boxed or grayed but no check) or True for
+         checked and False otherwise.
+        """
+        if self.instate(["alternate"]):
+            return None
+        return self._variable.get()
+
+    @value.setter
+    def value(self, new_value: Union[bool, None]) -> None:
+        """
+        Set the value on this checkbutton.
+
+        :param new_value: The new value, either None for special "not-selected-but-not-off" (like dash or boxed or
+         grayed but no check) or True for checked and False otherwise.
+        :return: None.
+        """
+        if not isinstance(new_value, bool) and new_value is not None:
+            raise TypeError(f"new_value is not a bool or None! (type passed in: {repr(type(new_value))})")
+        if new_value is None:
+            self.state(["alternate"])
+            return
+        self._variable.set(new_value)
 
     @property
     def text(self) -> str:
         """
-        Get the text on this button.
+        Get the text on this checkbutton.
 
-        :return: A str of the text on this button.
+        :return: A str of the text on this checkbutton.
         """
         return self.cget("text")
 
     @text.setter
     def text(self, new_text: str) -> None:
         """
-        Set the text on this button.
+        Set the text on this checkbutton.
 
         :param new_text: The new text.
         :return: None.
@@ -71,7 +101,7 @@ class Button(ttk.Button):
     @property
     def image(self) -> Union[PhotoImage, None]:
         """
-        Get the PIL.ImageTk.PhotoImage on this button. Returns None if none was ever set.
+        Get the PIL.ImageTk.PhotoImage on this checkbutton. Returns None if none was ever set.
 
         :return: A PIL.ImageTk.PhotoImage or a tk.PhotoImage or None.
         """
@@ -80,7 +110,7 @@ class Button(ttk.Button):
     @image.setter
     def image(self, new_image: Union[PhotoImage, tk.PhotoImage]) -> None:
         """
-        Set the PIL.ImageTk.PhotoImage on this button.
+        Set the PIL.ImageTk.PhotoImage on this checkbutton.
 
         :param new_image: A PIL.ImageTk.PhotoImage or None.
         :return: None.
@@ -94,7 +124,7 @@ class Button(ttk.Button):
     @property
     def display_mode(self) -> str:
         """
-        Get the display mode of this button.
+        Get the display mode of this checkbutton.
 
         :return: A str, either one of "text", "image", "center", "top", "left", "bottom", or "right".
         """
@@ -103,7 +133,7 @@ class Button(ttk.Button):
     @display_mode.setter
     def display_mode(self, new_mode: str) -> None:
         """
-        Set the display mode of this button.
+        Set the display mode of this checkbutton.
 
         :param new_mode: A str, either one of "text", "image", "center", "top", "left", "bottom", or "right".
         :return: None.
@@ -136,7 +166,7 @@ class Button(ttk.Button):
 
     def apply_style(self, style_name: str) -> None:
         """
-        Apply a theme to this label.
+        Apply a theme to this checkbutton.
 
         :param style_name: The name of the theme as a str, ex. "Warning"
         :return: None.
