@@ -167,12 +167,14 @@ class MainWindow(tk.Tk):
         Bind a event to a function.
 
         :param event: A str of the event.
-        :param func: A function to call when the even happens. If none is passed in, a list
+        :param func: A function to call when the even happens. If none is passed in then a list of binds will be
+         returned.
         :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
          will also be made as a daemon thread. (will be terminated if main thread terminates)
         :param add: Whether to add the function to a list of functions to be called or replace the function that was
          previously bound to this sequence if any.
-        :return: A list of functions that would be called when this event is triggered or None when binding one.
+        :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
+         when binding one.
         """
         if not isinstance(event, str):
             raise TypeError(f"event is not a str! (type passed in: {repr(type(event))})")
