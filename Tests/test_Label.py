@@ -1,5 +1,5 @@
 import unittest
-from TkZero.Window.MainWindow import MainWindow
+from TkZero.MainWindow import MainWindow
 from TkZero.Label import Label, DisplayModes
 from PIL.ImageTk import PhotoImage
 import base64

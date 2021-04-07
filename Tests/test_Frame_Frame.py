@@ -1,6 +1,6 @@
 import unittest
-from TkZero.Window.MainWindow import MainWindow
-from TkZero.Frame.Frame import Frame
+from TkZero.MainWindow import MainWindow
+from TkZero.Frame import Frame
 from TkZero.Label import Label
 from TkZero import Style
 

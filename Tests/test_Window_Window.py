@@ -3,8 +3,8 @@ Test the TkZero.Window.Window module
 """
 
 import unittest
-from TkZero.Window.MainWindow import MainWindow
-from TkZero.Window.Window import Window
+from TkZero.MainWindow import MainWindow
+from TkZero.Window import Window
 from TkZero.Label import Label
 from TkZero import Vector
 

@@ -3,8 +3,8 @@ Test the TkZero.Window.Dialog module
 """
 
 import unittest
-from TkZero.Window.MainWindow import MainWindow
-from TkZero.Window import Dialog
+from TkZero.MainWindow import MainWindow
+from TkZero import Dialog
 from TkZero.Label import Label
 from pathlib import Path
 

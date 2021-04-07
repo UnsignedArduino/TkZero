@@ -2,13 +2,12 @@
 Show standard dialogs. You can also sub-class a dialog to make your own.
 """
 import tkinter as tk
-from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import colorchooser
 from tkinter import messagebox as mbox
-from TkZero.Window import Window
+from TkZero import Window
 from pathlib import Path
-from typing import Union, Any, Callable
+from typing import Union
 
 
 def open_file(initial_dir: Path = None, title: str = None,
