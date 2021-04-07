@@ -7,7 +7,7 @@ from TkZero import Style
 
 
 class LabelTest(unittest.TestCase):
-    def test_label_no_params(self):
+    def test_no_params(self):
         root = MainWindow()
         root.update()
         with self.assertRaises(TypeError):
@@ -15,14 +15,14 @@ class LabelTest(unittest.TestCase):
         root.update()
         root.close()
 
-    def test_label_good_params(self):
+    def test_good_params(self):
         root = MainWindow()
         root.update()
         Label(root).grid(row=0, column=0)
         root.update()
         root.close()
 
-    def test_label_text(self):
+    def test_text(self):
         root = MainWindow()
         root.update()
         l = Label(root)
@@ -32,7 +32,7 @@ class LabelTest(unittest.TestCase):
         self.assertEqual(l.text, "Test")
         root.close()
 
-    def test_label_image(self):
+    def test_image(self):
         root = MainWindow()
         root.update()
         l = Label(root)
@@ -260,7 +260,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(l.image is not None)
         root.close()
 
-    def test_label_text_and_image(self):
+    def test_text_and_image(self):
         root = MainWindow()
         root.update()
         l = Label(root)
@@ -496,7 +496,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertEqual(l.display_mode, DisplayModes.ImageLeftText)
         root.close()
 
-    def test_label_style(self):
+    def test_enabled(self):
+        root = MainWindow()
+        root.update()
+        l = Label(root)
+        l.grid(row=0, column=0)
+        root.update()
+        self.assertTrue(l.enabled)
+        root.enabled = False
+        self.assertFalse(root.enabled)
+        root.close()
+
+    def test_style(self):
         root = MainWindow()
         root.update()
         f = Label(root)

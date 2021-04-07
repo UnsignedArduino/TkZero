@@ -38,6 +38,7 @@ class Label(ttk.Label):
         super().__init__(master=parent)
         self._style_root = "TLabel"
         self._photo_image = None
+        self._enabled = True
 
     @property
     def text(self) -> str:
@@ -103,6 +104,28 @@ class Label(ttk.Label):
         if not isinstance(new_mode, str):
             raise TypeError(f"new_mode is not a str! (type passed in: {repr(type(new_mode))})")
         self.configure(compound=new_mode)
+
+    @property
+    def enabled(self) -> bool:
+        """
+        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+
+        :return: A bool, True if normal otherwise False.
+        """
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, new_state: bool) -> None:
+        """
+        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+
+        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :return: None.
+        """
+        if not isinstance(new_state, bool):
+            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+        self._enabled = new_state
+        self.state(["!disabled" if self._enabled else "disabled"])
 
     def apply_style(self, style_name: str) -> None:
         """

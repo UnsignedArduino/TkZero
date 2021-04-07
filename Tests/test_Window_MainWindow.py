@@ -4,6 +4,7 @@ Test the TkZero.Window.MainWindow module
 
 import unittest
 from TkZero.Window.MainWindow import MainWindow
+from TkZero.Label import Label
 from TkZero import Vector
 
 
@@ -64,6 +65,17 @@ class MainWindowTest(unittest.TestCase):
         root.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
         binds = root.bind_to_event("<<MyOwnSpecialEvent>>")
         self.assertTrue(len(binds) > 0)
+        root.close()
+
+    def test_enabled(self):
+        root = MainWindow()
+        root.update()
+        self.assertTrue(root.enabled)
+        Label(root).grid(row=0, column=0)
+        Label(root).grid(row=1, column=0)
+        root.update()
+        root.enabled = False
+        self.assertFalse(root.enabled)
         root.close()
 
     def test_on_close(self):

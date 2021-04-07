@@ -24,6 +24,7 @@ class Window(tk.Toplevel):
         self.title = "Window"
         self.protocol("WM_DELETE_WINDOW", self.close)
         self._on_close = None
+        self._enabled = True
 
     @property
     def title(self) -> str:
@@ -200,6 +201,44 @@ class Window(tk.Toplevel):
         :return: None.
         """
         self.event_generate(event)
+
+    def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -> None:
+        """
+        Enable or disable the children.
+
+        :param parent: A tk.Widget that is our parent. If None then default to self.
+        :param enable: Whether to enable or disable the children.
+        :return: None.
+        """
+        if parent is None:
+            parent = self
+        for child in parent.winfo_children():
+            if child.winfo_class() not in ("Frame", "LabelFrame"):
+                child.state(["!disabled" if enable else "disabled"])
+            else:
+                self._enable_children(parent, enable)
+
+    @property
+    def enabled(self) -> bool:
+        """
+        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+
+        :return: A bool, True if normal otherwise False.
+        """
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, new_state: bool) -> None:
+        """
+        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+
+        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :return: None.
+        """
+        if not isinstance(new_state, bool):
+            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+        self._enabled = new_state
+        self._enable_children(enable=self._enabled)
 
     @property
     def on_close(self) -> Union[Callable, None]:

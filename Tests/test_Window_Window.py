@@ -5,6 +5,7 @@ Test the TkZero.Window.Window module
 import unittest
 from TkZero.Window.MainWindow import MainWindow
 from TkZero.Window.Window import Window
+from TkZero.Label import Label
 from TkZero import Vector
 
 
@@ -71,11 +72,27 @@ class MainWindowTest(unittest.TestCase):
 
     def test_binds(self):
         root = MainWindow()
-        root.update()
+        root.minimize()
+        window = Window(root)
         func = lambda: None
-        root.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
-        binds = root.bind_to_event("<<MyOwnSpecialEvent>>")
+        window.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
+        binds = window.bind_to_event("<<MyOwnSpecialEvent>>")
         self.assertTrue(len(binds) > 0)
+        root.close()
+
+    def test_enabled(self):
+        root = MainWindow()
+        root.lift()
+        root.update()
+        window = Window(root)
+        window.lift()
+        window.update()
+        self.assertTrue(window.enabled)
+        Label(window).grid(row=0, column=0)
+        Label(window).grid(row=1, column=0)
+        window.update()
+        window.enabled = False
+        self.assertFalse(window.enabled)
         root.close()
 
     def test_on_close(self):

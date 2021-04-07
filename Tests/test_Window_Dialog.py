@@ -5,6 +5,7 @@ Test the TkZero.Window.Dialog module
 import unittest
 from TkZero.Window.MainWindow import MainWindow
 from TkZero.Window import Dialog
+from TkZero.Label import Label
 from pathlib import Path
 
 
@@ -301,6 +302,21 @@ class DialogTest(unittest.TestCase):
         dialog.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
         binds = dialog.bind_to_event("<<MyOwnSpecialEvent>>")
         self.assertTrue(len(binds) > 0)
+        root.close()
+
+    def test_custom_dialog_enabled(self):
+        root = MainWindow()
+        root.lift()
+        root.update()
+        dialog = Dialog.CustomDialog(parent=root)
+        dialog.lift()
+        dialog.update()
+        self.assertTrue(dialog.enabled)
+        Label(dialog).grid(row=0, column=0)
+        Label(dialog).grid(row=1, column=0)
+        dialog.update()
+        dialog.enabled = False
+        self.assertFalse(dialog.enabled)
         root.close()
 
 

@@ -1,11 +1,12 @@
 import unittest
 from TkZero.Window.MainWindow import MainWindow
 from TkZero.Frame.Frame import Frame
+from TkZero.Label import Label
 from TkZero import Style
 
 
 class FrameTest(unittest.TestCase):
-    def test_frame_no_params(self):
+    def test_no_params(self):
         root = MainWindow()
         root.update()
         with self.assertRaises(TypeError):
@@ -13,14 +14,14 @@ class FrameTest(unittest.TestCase):
         root.update()
         root.close()
 
-    def test_frame_good_params(self):
+    def test_good_params(self):
         root = MainWindow()
         root.update()
         Frame(root).grid(row=0, column=0)
         root.update()
         root.close()
 
-    def test_frame_width_height(self):
+    def test_width_height(self):
         root = MainWindow()
         root.update()
         f = Frame(root)
@@ -32,7 +33,20 @@ class FrameTest(unittest.TestCase):
         self.assertEqual(f.height, 200)
         root.close()
 
-    def test_frame_style(self):
+    def test_enabled(self):
+        root = MainWindow()
+        root.update()
+        f = Frame(root)
+        f.grid(row=0, column=0)
+        self.assertTrue(f.enabled)
+        Label(f).grid(row=0, column=0)
+        Label(f).grid(row=1, column=0)
+        root.update()
+        f.enabled = False
+        self.assertFalse(f.enabled)
+        root.close()
+
+    def test_style(self):
         root = MainWindow()
         root.update()
         f = Frame(root)
