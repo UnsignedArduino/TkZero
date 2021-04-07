@@ -9,6 +9,7 @@ from typing import Union, Any, Callable
 class WidgetStyleRoots:
     Frame = "TFrame"
     Label = "TLabel"
+    Button = "TButton"
 
 
 def define_style(style_root: str, style_name: str, **kwargs) -> None:

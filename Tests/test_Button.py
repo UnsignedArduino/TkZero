@@ -1,6 +1,6 @@
 import unittest
 from TkZero.MainWindow import MainWindow
-from TkZero.Label import Label, DisplayModes
+from TkZero.Button import Button, DisplayModes
 from PIL.ImageTk import PhotoImage
 import base64
 from TkZero import Style
@@ -11,33 +11,33 @@ class LabelTest(unittest.TestCase):
         root = MainWindow()
         root.update()
         with self.assertRaises(TypeError):
-            Label()
+            Button()
         root.update()
         root.close()
 
     def test_good_params(self):
         root = MainWindow()
         root.update()
-        Label(root).grid(row=0, column=0)
+        Button(root).grid(row=0, column=0)
         root.update()
         root.close()
 
     def test_text(self):
         root = MainWindow()
         root.update()
-        l = Label(root)
-        l.grid(row=0, column=0)
-        l.text = "Test"
+        b = Button(root)
+        b.grid(row=0, column=0)
+        b.text = "Test"
         root.update()
-        self.assertEqual(l.text, "Test")
+        self.assertEqual(b.text, "Test")
         root.close()
 
     def test_image(self):
         root = MainWindow()
         root.update()
-        l = Label(root)
-        l.grid(row=0, column=0)
-        self.assertTrue(l.image is None)
+        b = Button(root)
+        b.grid(row=0, column=0)
+        self.assertTrue(b.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -255,20 +255,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        l.image = PhotoImage(data=image_data)
+        b.image = PhotoImage(data=image_data)
         root.update()
-        self.assertTrue(l.image is not None)
+        self.assertTrue(b.image is not None)
         root.close()
 
     def test_text_and_image(self):
         root = MainWindow()
         root.update()
-        l = Label(root)
-        l.grid(row=0, column=0)
-        l.text = "Figure 1: A smiley face."
+        b = Button(root)
+        b.grid(row=0, column=0)
+        b.text = "Click for smiles!"
         root.update()
-        self.assertEqual(l.text, "Figure 1: A smiley face.")
-        self.assertTrue(l.image is None)
+        self.assertEqual(b.text, "Click for smiles!")
+        self.assertTrue(b.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -486,23 +486,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        l.image = PhotoImage(data=image_data)
+        b.image = PhotoImage(data=image_data)
         root.update()
-        self.assertTrue(l.image is not None)
+        self.assertTrue(b.image is not None)
         root.update()
-        self.assertEqual(l.display_mode, DisplayModes.Original)
-        l.display_mode = DisplayModes.ImageLeftText
+        self.assertEqual(b.display_mode, DisplayModes.Original)
+        b.display_mode = DisplayModes.ImageTopText
         root.update()
-        self.assertEqual(l.display_mode, DisplayModes.ImageLeftText)
+        self.assertEqual(b.display_mode, DisplayModes.ImageTopText)
         root.close()
 
     def test_enabled(self):
         root = MainWindow()
         root.update()
-        l = Label(root)
-        l.grid(row=0, column=0)
+        b = Button(root)
+        b.grid(row=0, column=0)
         root.update()
-        self.assertTrue(l.enabled)
+        self.assertTrue(b.enabled)
         root.enabled = False
         self.assertFalse(root.enabled)
         root.close()
@@ -510,11 +510,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
     def test_style(self):
         root = MainWindow()
         root.update()
-        l = Label(root)
-        l.grid(row=0, column=0)
-        Style.define_style(Style.WidgetStyleRoots.Frame, "Test", background="red")
-        l.apply_style("Test")
-        self.assertEqual(l.cget("style"), "Test.TLabel")
+        b = Button(root)
+        b.grid(row=0, column=0)
+        Style.define_style(Style.WidgetStyleRoots.Button, "Test", background="red")
+        b.apply_style("Test")
+        self.assertEqual(b.cget("style"), "Test.TButton")
         root.update()
         root.close()
 
