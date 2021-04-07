@@ -29,19 +29,23 @@ class DisplayModes:
 
 
 class Button(ttk.Button):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = "", command: Callable = None):
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = "",
+                 image: Union[PhotoImage, tk.PhotoImage] = None, command: Callable = None):
         """
         Initiate a ttk.Button.
 
         :param parent: The parent of the button.
         :param text: The text of the button. Defaults to "".
+        :param image: The image on the label. Defaults to None.
         :param command: The command to run when pressed. Defaults to None.
         """
         super().__init__(master=parent, command=command)
         self._style_root = "TButton"
-        self.text = text
         self._photo_image = None
         self._enabled = True
+        self.text = text
+        if image is not None:
+            self.image = image
 
     @property
     def text(self) -> str:
