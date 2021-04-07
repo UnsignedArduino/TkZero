@@ -18,14 +18,14 @@ class LabelTest(unittest.TestCase):
     def test_good_params(self):
         root = MainWindow()
         root.update()
-        Button(root).grid(row=0, column=0)
+        Button(root, text="hi").grid(row=0, column=0)
         root.update()
         root.close()
 
     def test_text(self):
         root = MainWindow()
         root.update()
-        b = Button(root)
+        b = Button(root, text="Foobar")
         b.grid(row=0, column=0)
         b.text = "Test"
         root.update()
@@ -263,9 +263,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
     def test_text_and_image(self):
         root = MainWindow()
         root.update()
-        b = Button(root)
+        b = Button(root, text="Click for smiles!")
         b.grid(row=0, column=0)
-        b.text = "Click for smiles!"
         root.update()
         self.assertEqual(b.text, "Click for smiles!")
         self.assertTrue(b.image is None)
@@ -505,6 +504,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(b.enabled)
         root.enabled = False
         self.assertFalse(root.enabled)
+        root.close()
+
+    def test_execution(self):
+        root = MainWindow()
+        root.update()
+        b = Button(root, command=lambda: None)
+        b.grid(row=0, column=0)
+        root.update()
         root.close()
 
     def test_style(self):
