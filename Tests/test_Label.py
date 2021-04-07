@@ -18,14 +18,14 @@ class LabelTest(unittest.TestCase):
     def test_good_params(self):
         root = MainWindow()
         root.update()
-        Label(root).grid(row=0, column=0)
+        Label(root, "hi").grid(row=0, column=0)
         root.update()
         root.close()
 
     def test_text(self):
         root = MainWindow()
         root.update()
-        l = Label(root)
+        l = Label(root, text="foo bar")
         l.grid(row=0, column=0)
         l.text = "Test"
         root.update()
@@ -263,9 +263,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
     def test_text_and_image(self):
         root = MainWindow()
         root.update()
-        l = Label(root)
+        l = Label(root, text="Figure 1: A smiley face.")
         l.grid(row=0, column=0)
-        l.text = "Figure 1: A smiley face."
         root.update()
         self.assertEqual(l.text, "Figure 1: A smiley face.")
         self.assertTrue(l.image is None)

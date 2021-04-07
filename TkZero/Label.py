@@ -29,14 +29,16 @@ class DisplayModes:
 
 
 class Label(ttk.Label):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]):
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = ""):
         """
         Initiate a ttk.Label.
 
         :param parent: The parent of the label.
+        :param text: The text on the label. Defaults to "".
         """
         super().__init__(master=parent)
         self._style_root = "TLabel"
+        self.text = text
         self._photo_image = None
         self._enabled = True
 
