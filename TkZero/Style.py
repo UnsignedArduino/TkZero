@@ -8,6 +8,7 @@ from typing import Union, Any, Callable
 
 class WidgetStyleRoots:
     Frame = "TFrame"
+    Label = "TLabel"
 
 
 def define_style(style_root: str, style_name: str, **kwargs) -> None:
