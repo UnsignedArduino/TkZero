@@ -1,6 +1,7 @@
 """
 TkZero - a sane and Pythonic wrapper around Tkinter.
 """
+# TODO: Create into proper Python package - https://antonz.org/python-packaging/
 
 __version_info__ = (0, 0, 1)
 __version__ = ""

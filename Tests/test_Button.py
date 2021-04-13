@@ -719,8 +719,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         b.grid(row=0, column=0)
         root.update()
         self.assertTrue(b.enabled)
-        root.enabled = False
-        self.assertFalse(root.enabled)
+        b.enabled = False
+        self.assertFalse(b.enabled)
         root.close()
 
     def test_execution(self):
