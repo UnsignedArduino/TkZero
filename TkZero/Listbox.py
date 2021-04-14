@@ -36,7 +36,11 @@ class Listbox(tk.Listbox):
         """
         self._values = [str(item) for item in values]
         self._variable = tk.StringVar(value=self._values)
-        super().__init__(master=parent, height=height, width=width, listvariable=self._variable)
+        super().__init__(master=parent, height=height, width=width, listvariable=self._variable, selectmode=select_mode)
+        if on_select is not None:
+            self.bind("<<ListboxSelect>>", lambda event: on_select())
+        if on_double_click is not None:
+            self.bind("<<Double-1>>", lambda event: on_double_click())
         self._enabled = True
 
     @property
