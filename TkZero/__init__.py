@@ -1,6 +1,7 @@
 """
 TkZero - a sane and Pythonic wrapper around Tkinter.
 """
+# TODO: Optimize imports in everything
 # TODO: Add type checking to EVERYTHING
 # TODO: Review all tests to make sure no copy/paste errors and fix them
 # TODO: Review all doc strings to make sure no copy/paste errors and fix them
