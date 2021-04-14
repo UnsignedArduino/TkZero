@@ -719,8 +719,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.grid(row=0, column=0)
         root.update()
         self.assertTrue(l.enabled)
-        root.enabled = False
-        self.assertFalse(root.enabled)
+        l.enabled = False
+        self.assertFalse(l.enabled)
         root.close()
 
     def test_style(self):

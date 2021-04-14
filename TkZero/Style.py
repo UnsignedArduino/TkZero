@@ -10,6 +10,10 @@ class WidgetStyleRoots:
     Frame = "TFrame"
     Label = "TLabel"
     Button = "TButton"
+    Checkbutton = "TCheckbutton"
+    Combobox = "TCombobox"
+    Entry = "TEntry"
+    Scrollbar = "TScrollbar"
 
 
 def define_style(style_root: str, style_name: str, **kwargs) -> None:

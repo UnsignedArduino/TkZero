@@ -37,7 +37,6 @@ class Listbox(tk.Listbox):
         self._values = [str(item) for item in values]
         self._variable = tk.StringVar(value=self._values)
         super().__init__(master=parent, height=height, width=width, listvariable=self._variable)
-        self._style_root = "TListbox"
         self._enabled = True
 
     @property
