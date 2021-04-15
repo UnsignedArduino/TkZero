@@ -60,24 +60,6 @@ class Scale(ttk.Scale):
             raise TypeError(f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})")
         self.set(float(new_value))
 
-    def grid(self, *args, **kwargs) -> None:
-        """Position a widget in the parent widget in a grid. Use as options:
-        column=number - use cell identified with given column (starting with 0)
-        columnspan=number - this widget will span several columns
-        in=master - use master to contain this widget
-        in_=master - see 'in' option description
-        ipadx=amount - add internal padding in x direction
-        ipady=amount - add internal padding in y direction
-        padx=amount - add padding in x direction
-        pady=amount - add padding in y direction
-        row=number - use cell identified with given row (starting with 0)
-        rowspan=number - this widget will span several rows
-        sticky=NSEW - if cell is larger on which sides will this
-                      widget stick to the cell boundary
-        :return: None.
-        """
-        super().grid(*args, **kwargs, sticky=tk.NSEW)
-
     @property
     def enabled(self) -> bool:
         """
