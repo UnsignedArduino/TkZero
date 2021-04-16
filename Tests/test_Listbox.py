@@ -1,7 +1,7 @@
 import unittest
-from TkZero.MainWindow import MainWindow
+
 from TkZero.Listbox import Listbox
-from TkZero import Style
+from TkZero.MainWindow import MainWindow
 
 
 class ListboxTest(unittest.TestCase):

@@ -3,9 +3,10 @@ Test the TkZero.Window.MainWindow module
 """
 
 import unittest
-from TkZero.MainWindow import MainWindow
-from TkZero.Label import Label
+
 from TkZero import Vector
+from TkZero.Label import Label
+from TkZero.MainWindow import MainWindow
 
 
 class MainWindowTest(unittest.TestCase):

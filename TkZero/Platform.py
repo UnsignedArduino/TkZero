@@ -2,9 +2,7 @@
 Get the windowing system.
 """
 import tkinter as tk
-from tkinter import ttk
-from TkZero import Vector
-from typing import Union, Any, Callable
+from typing import Union
 
 
 class WindowingSystem:

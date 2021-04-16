@@ -1,8 +1,9 @@
 import unittest
-from TkZero.MainWindow import MainWindow
+
+from TkZero import Style
 from TkZero.Frame import Frame
 from TkZero.Label import Label
-from TkZero import Style
+from TkZero.MainWindow import MainWindow
 
 
 class FrameTest(unittest.TestCase):

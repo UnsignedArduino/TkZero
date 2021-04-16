@@ -1,9 +1,7 @@
 """
 Create a theme.
 """
-import tkinter as tk
 from tkinter import ttk
-from typing import Union, Any, Callable
 
 
 class WidgetStyleRoots:

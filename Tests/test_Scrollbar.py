@@ -1,8 +1,8 @@
 import unittest
+
+from TkZero.Listbox import Listbox
 from TkZero.MainWindow import MainWindow
 from TkZero.Scrollbar import Scrollbar, OrientModes
-from TkZero.Listbox import Listbox
-from TkZero import Style
 
 
 class LabelTest(unittest.TestCase):

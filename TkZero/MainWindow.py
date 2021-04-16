@@ -2,11 +2,11 @@
 Create the main window. Note that this should only be called once in your program!
 """
 import tkinter as tk
-from tkinter import ttk
-from TkZero import Vector
-from TkZero import Platform
 from threading import Thread
-from typing import Union, Any, Callable
+from typing import Union, Callable
+
+from TkZero import Platform
+from TkZero import Vector
 
 
 class MainWindow(tk.Tk):

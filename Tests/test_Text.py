@@ -1,7 +1,7 @@
 import unittest
+
 from TkZero.MainWindow import MainWindow
 from TkZero.Text import Text, TextWrap
-from TkZero import Style
 
 
 class TextTest(unittest.TestCase):

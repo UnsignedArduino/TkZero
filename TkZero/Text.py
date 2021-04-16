@@ -2,11 +2,9 @@
 Creates a "classic" Text.
 """
 import tkinter as tk
-from tkinter import ttk
+from typing import Union
+
 from TkZero.Platform import on_aqua
-from pathlib import Path
-from PIL.ImageTk import PhotoImage
-from typing import Union, Any, Callable
 
 
 class TextWrap:

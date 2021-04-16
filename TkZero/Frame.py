@@ -3,7 +3,7 @@ Creates a themed frame.
 """
 import tkinter as tk
 from tkinter import ttk
-from typing import Union, Any, Callable
+from typing import Union
 
 
 class Frame(ttk.Frame):

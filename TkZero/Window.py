@@ -2,11 +2,11 @@
 Create an additional window. Note that you will first need to initiate a main window to pass in!
 """
 import tkinter as tk
-from tkinter import ttk
-from TkZero import Vector
-from TkZero import Platform
 from threading import Thread
-from typing import Union, Any, Callable
+from typing import Union, Callable
+
+from TkZero import Platform
+from TkZero import Vector
 
 
 class Window(tk.Toplevel):

@@ -1,7 +1,8 @@
 import unittest
-from TkZero.MainWindow import MainWindow
-from TkZero.Keybind import generate_event_sequence, generate_accelerator_sequence
+
 from TkZero import Platform
+from TkZero.Keybind import generate_event_sequence, generate_accelerator_sequence
+from TkZero.MainWindow import MainWindow
 
 
 class KeybindTest(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
+
 from TkZero.MainWindow import MainWindow
 from TkZero.Scale import Scale, OrientModes
-from TkZero import Style
 
 
 class ScaleTest(unittest.TestCase):

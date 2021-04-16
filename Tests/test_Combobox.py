@@ -1,7 +1,8 @@
 import unittest
-from TkZero.MainWindow import MainWindow
-from TkZero.Combobox import Combobox
+
 from TkZero import Style
+from TkZero.Combobox import Combobox
+from TkZero.MainWindow import MainWindow
 
 
 class ComboboxTest(unittest.TestCase):

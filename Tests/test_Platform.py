@@ -2,9 +2,10 @@
 Test the TkZero.Platform module
 """
 
-import unittest
-from TkZero import Platform
 import tkinter as tk
+import unittest
+
+from TkZero import Platform
 
 
 class PlatformTest(unittest.TestCase):

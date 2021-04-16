@@ -1,7 +1,8 @@
 import unittest
-from TkZero.MainWindow import MainWindow
-from TkZero.Entry import Entry
+
 from TkZero import Style
+from TkZero.Entry import Entry
+from TkZero.MainWindow import MainWindow
 
 
 class EntryTest(unittest.TestCase):

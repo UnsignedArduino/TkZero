@@ -1,9 +1,11 @@
-import unittest
-from TkZero.MainWindow import MainWindow
-from TkZero.Checkbutton import Checkbutton, DisplayModes
-from PIL.ImageTk import PhotoImage
 import base64
+import unittest
+
+from PIL.ImageTk import PhotoImage
+
 from TkZero import Style
+from TkZero.Checkbutton import Checkbutton, DisplayModes
+from TkZero.MainWindow import MainWindow
 
 
 class CheckbuttonTest(unittest.TestCase):

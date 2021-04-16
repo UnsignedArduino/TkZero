@@ -2,9 +2,9 @@
 Generate event sequences for key combos
 """
 import tkinter as tk
-from tkinter import ttk
+from typing import Union
+
 from TkZero import Platform
-from typing import Union, Any, Callable
 
 
 def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],

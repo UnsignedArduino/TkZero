@@ -1,9 +1,11 @@
-import unittest
-from TkZero.MainWindow import MainWindow
-from TkZero.Label import Label, DisplayModes
-from PIL.ImageTk import PhotoImage
 import base64
+import unittest
+
+from PIL.ImageTk import PhotoImage
+
 from TkZero import Style
+from TkZero.Label import Label, DisplayModes
+from TkZero.MainWindow import MainWindow
 
 
 class LabelTest(unittest.TestCase):

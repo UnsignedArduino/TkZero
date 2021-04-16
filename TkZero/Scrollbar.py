@@ -3,9 +3,7 @@ Creates a themed scrollbar.
 """
 import tkinter as tk
 from tkinter import ttk
-from pathlib import Path
-from PIL.ImageTk import PhotoImage
-from typing import Union, Any, Callable
+from typing import Union
 
 
 class OrientModes:

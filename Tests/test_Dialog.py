@@ -3,10 +3,11 @@ Test the TkZero.Window.Dialog module
 """
 
 import unittest
-from TkZero.MainWindow import MainWindow
+from pathlib import Path
+
 from TkZero import Dialog
 from TkZero.Label import Label
-from pathlib import Path
+from TkZero.MainWindow import MainWindow
 
 
 class DialogTest(unittest.TestCase):

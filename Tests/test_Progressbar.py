@@ -1,7 +1,7 @@
 import unittest
+
 from TkZero.MainWindow import MainWindow
 from TkZero.Progressbar import Progressbar, OrientModes, ProgressModes
-from TkZero import Style
 
 
 class ProgressbarTest(unittest.TestCase):

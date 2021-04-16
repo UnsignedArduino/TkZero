@@ -1,10 +1,12 @@
-import unittest
+import base64
 import tkinter as tk
+import unittest
+
+from PIL.ImageTk import PhotoImage
+
+from TkZero import Style
 from TkZero.MainWindow import MainWindow
 from TkZero.Radiobutton import Radiobutton, DisplayModes
-from PIL.ImageTk import PhotoImage
-import base64
-from TkZero import Style
 
 
 class RadiobuttonTest(unittest.TestCase):

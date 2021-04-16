@@ -3,6 +3,7 @@ Test the TkZero.Vector module
 """
 
 import unittest
+
 from TkZero import Vector
 
 

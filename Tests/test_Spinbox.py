@@ -1,7 +1,8 @@
 import unittest
+
+from TkZero import Style
 from TkZero.MainWindow import MainWindow
 from TkZero.Spinbox import Spinbox
-from TkZero import Style
 
 
 class SpinboxTest(unittest.TestCase):

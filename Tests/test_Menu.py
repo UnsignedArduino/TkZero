@@ -1,9 +1,7 @@
 import unittest
+
 from TkZero.MainWindow import MainWindow
-from TkZero.Menu import Menu, DisplayModes, SystemMenuNames
-from PIL.ImageTk import PhotoImage
-import base64
-from TkZero import Style
+from TkZero.Menu import Menu
 
 
 class MenuTest(unittest.TestCase):
