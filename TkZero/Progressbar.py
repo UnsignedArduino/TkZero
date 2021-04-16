@@ -64,7 +64,7 @@ class Progressbar(ttk.Progressbar):
         :param new_value: A float or an int.
         :return: None.
         """
-        if not isinstance(new_value, float) and not isinstance(new_value, int):
+        if not isinstance(new_value, (float, int)):
             raise TypeError(f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})")
         if self._mode != ProgressModes.Determinate:
             raise AttributeError("Can not access value while using indeterminate mode!")
@@ -89,7 +89,7 @@ class Progressbar(ttk.Progressbar):
         :param new_value: A float or an int.
         :return: None.
         """
-        if not isinstance(new_value, float) and not isinstance(new_value, int):
+        if not isinstance(new_value, (float, int)):
             raise TypeError(f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})")
         if self._mode != ProgressModes.Determinate:
             raise AttributeError("Can not access value while using indeterminate mode!")

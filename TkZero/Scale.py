@@ -54,7 +54,7 @@ class Scale(ttk.Scale):
         :param new_value: A float or an int.
         :return: None.
         """
-        if not isinstance(new_value, float) and not isinstance(new_value, int):
+        if not isinstance(new_value, (float, int)):
             raise TypeError(f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})")
         self.set(float(new_value))
 

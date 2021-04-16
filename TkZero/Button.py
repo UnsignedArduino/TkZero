@@ -85,7 +85,7 @@ class Button(ttk.Button):
         :param new_image: A PIL.ImageTk.PhotoImage or None.
         :return: None.
         """
-        if not isinstance(new_image, PhotoImage) and not isinstance(new_image, tk.PhotoImage):
+        if not isinstance(new_image, (PhotoImage, tk.PhotoImage)):
             raise TypeError(f"new_image is not a PIL.ImageTk.PhotoImage or a tk.PhotoImage! (type passed in: "
                             f"{repr(type(new_image))})")
         self._photo_image = new_image
