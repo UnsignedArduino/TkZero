@@ -35,13 +35,19 @@ def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
         raise TypeError(f"letter is not a str! (type passed in: {repr(type(letter))})")
     sequence = "<"
     if Platform.on_aqua(widget):
-        if ctrl_cmd: sequence += "Command-"
-        if alt_option: sequence += "Option-"
+        if ctrl_cmd:
+            sequence += "Command-"
+        if alt_option:
+            sequence += "Option-"
     else:
-        if ctrl_cmd: sequence += "Control-"
-        if alt_option: sequence += "Alt-"
-    if ctrl_ctrl and "Control-" not in sequence: sequence += "Control-"
-    if shift_shift: sequence += "Shift-"
+        if ctrl_cmd:
+            sequence += "Control-"
+        if alt_option:
+            sequence += "Alt-"
+    if ctrl_ctrl and "Control-" not in sequence:
+        sequence += "Control-"
+    if shift_shift:
+        sequence += "Shift-"
     sequence += letter[0].upper() if shift_shift else letter[0].lower()
     sequence += ">"
     return sequence
@@ -73,14 +79,17 @@ def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Tople
     if not isinstance(letter, str):
         raise TypeError(f"letter is not a str! (type passed in: {repr(type(letter))})")
     sequence = ""
-    if ctrl_cmd: sequence += "Command-" if Platform.on_aqua(widget) else "Control-"
+    if ctrl_cmd:
+        sequence += "Command-" if Platform.on_aqua(widget) else "Control-"
     if ctrl_ctrl:
         if "Control-" in sequence:
             raise ValueError(f"ctrl_cmd and ctrl_ctrl is True and we are not on Aqua!")
         else:
             sequence += "Control-"
-    if shift_shift: sequence += "Shift-"
-    if alt_option: sequence += "Option-" if Platform.on_aqua(widget) else "Alt-"
+    if shift_shift:
+        sequence += "Shift-"
+    if alt_option:
+        sequence += "Option-" if Platform.on_aqua(widget) else "Alt-"
     sequence += letter[0].upper()
     if not Platform.on_aqua(widget):
         sequence = sequence.replace("-", "+")

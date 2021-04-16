@@ -101,7 +101,6 @@ class Frame(ttk.Frame):
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 
-
     def apply_style(self, style_name: str) -> None:
         """
         Apply a theme to this frame.

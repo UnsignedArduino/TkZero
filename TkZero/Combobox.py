@@ -9,8 +9,8 @@ from TkZero.Platform import on_aqua
 
 
 class Combobox(ttk.Combobox):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: tuple[str, ...] = (), width: int = None,
-                 show: str = None, validate: Callable = None, command: Callable = None):
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: tuple[str, ...] = (),
+                 width: int = None, show: str = None, validate: Callable = None, command: Callable = None):
         """
         Initiate a ttk.Combobox.
 

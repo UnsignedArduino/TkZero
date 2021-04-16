@@ -34,6 +34,7 @@ class Scrollbar(ttk.Scrollbar):
         if widget is not None:
             self.attach_to(widget=widget)
 
+    # noinspection PyUnresolvedReferences
     def attach_to(self, widget: tk.Widget) -> None:
         """
         Attach to a widget.

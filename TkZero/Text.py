@@ -112,7 +112,7 @@ class Text(tk.Text):
 
         :return: None.
         """
-        if self.selection_present():
+        if self.tag_ranges(tk.SEL):
             self._context_menu.entryconfigure("Copy", state=tk.NORMAL)
             self._context_menu.entryconfigure("Cut", state=tk.NORMAL)
             self._context_menu.entryconfigure("Paste", state=tk.NORMAL)

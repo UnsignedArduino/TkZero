@@ -16,7 +16,7 @@ class SelectModes:
 
 
 class Listbox(tk.Listbox):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: list[str, ...] = [],
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: list[str, ...] = None,
                  select_mode: str = SelectModes.Single, height: int = None, width: int = None,
                  on_select: Callable = None, on_double_click: Callable = None):
         """
@@ -30,7 +30,10 @@ class Listbox(tk.Listbox):
         :param width: The width of the listbox. Defaults to None.
         :param on_select: The function to call
         """
-        self._values = [str(item) for item in values]
+        if values is not None:
+            self._values = [str(item) for item in values]
+        else:
+            self._values = []
         self._variable = tk.StringVar(value=self._values)
         super().__init__(master=parent, height=height, width=width, listvariable=self._variable, selectmode=select_mode)
         if on_select is not None:
