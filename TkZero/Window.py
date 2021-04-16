@@ -19,6 +19,8 @@ class Window(tk.Toplevel):
 
         :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
         """
+        if not isinstance(parent, (tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Tk, tk.Toplevel]! (type passed in: {repr(type(parent))})")
         tk.BaseWidget.__init__(self, parent, "toplevel")
         self.iconname(self._root().iconname())
         self.title = "Window"
@@ -65,10 +67,8 @@ class Window(tk.Toplevel):
         :param new_size: A TkZero.Vector.Size with the width and height attributes set to the size you want.
         :return: None.
         """
-        if not isinstance(new_size.width, int):
-            raise TypeError(f"new_size.width is not a int! (type passed in: {repr(type(new_size.width))})")
-        if not isinstance(new_size.height, int):
-            raise TypeError(f"new_size.height is not a int! (type passed in: {repr(type(new_size.height))})")
+        if not isinstance(new_size, Vector.Size):
+            raise TypeError(f"new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})")
         self.geometry(f"{new_size.width}x{new_size.height}")
 
     @property
@@ -88,10 +88,8 @@ class Window(tk.Toplevel):
         :param new_position: A TkZero.Vector.Position with the new x and y attributes
         :return: None.
         """
-        if not isinstance(new_position.x, int):
-            raise TypeError(f"new_position.x is not a int! (type passed in: {repr(type(new_position.x))})")
-        if not isinstance(new_position.y, int):
-            raise TypeError(f"new_position.y is not a int! (type passed in: {repr(type(new_position.y))})")
+        if not isinstance(new_position, Vector.Position):
+            raise TypeError(f"new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})")
         self.geometry(f"{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}")
 
     def minimize(self) -> None:
@@ -202,6 +200,8 @@ class Window(tk.Toplevel):
         :param event: The event to generate ("<<MyOwnEvent>>")
         :return: None.
         """
+        if not isinstance(event, str):
+            raise TypeError(f"event is not a str! (type passed in: {repr(type(event))})")
         self.event_generate(event)
 
     def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -> None:
@@ -212,6 +212,10 @@ class Window(tk.Toplevel):
         :param enable: Whether to enable or disable the children.
         :return: None.
         """
+        if not isinstance(parent, tk.Widget) and parent is not None:
+            raise TypeError(f"parent is not a tk.Widget! (type passed in: {repr(type(parent))})")
+        if not isinstance(enable, bool):
+            raise TypeError(f"enable is not a bool! (type passed in: {repr(type(enable))})")
         if parent is None:
             parent = self
         for child in parent.winfo_children():

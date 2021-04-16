@@ -16,14 +16,14 @@ class ScaleTest(unittest.TestCase):
     def test_good_params(self):
         root = MainWindow()
         root.update()
-        Scale(root, orientation=OrientModes.Vertical, length=200, minimum=0, maximum=100).grid(row=0, column=1)
+        Scale(root, orientation=OrientModes.Vertical, length=200, minimum=0.0, maximum=100.0).grid(row=0, column=1)
         root.update()
         root.close()
 
     def test_value(self):
         root = MainWindow()
         root.update()
-        s = Scale(root, orientation=OrientModes.Vertical, length=200, minimum=0, maximum=100)
+        s = Scale(root, orientation=OrientModes.Vertical, length=200, minimum=0.0, maximum=100.0)
         s.grid(row=0, column=0)
         root.update()
         self.assertEqual(s.value, 0)
@@ -35,7 +35,7 @@ class ScaleTest(unittest.TestCase):
     def test_enabled(self):
         root = MainWindow()
         root.update()
-        s = Scale(root, orientation=OrientModes.Vertical, length=200, minimum=0, maximum=100)
+        s = Scale(root, orientation=OrientModes.Vertical, length=200, minimum=0.0, maximum=100.0)
         s.grid(row=0, column=0)
         root.update()
         self.assertTrue(s.enabled)

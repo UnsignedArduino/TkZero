@@ -21,6 +21,13 @@ class Entry(ttk.Entry):
          a str (like `validate(contents)`) and should return a bool - True if passed otherwise False.
         :param command: The command to run when the value of the label changes. Defaults to None.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(width, int) and width is not None:
+            raise TypeError(f"width is not a int! (type passed in: {repr(type(width))})")
+        if not isinstance(show, str) and show is not None:
+            raise TypeError(f"show is not a str! (type passed in: {repr(type(show))})")
         self._variable = tk.StringVar(value="")
         if command is not None:
             self._variable.trace_add("write", lambda *args: command())

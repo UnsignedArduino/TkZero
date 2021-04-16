@@ -52,6 +52,13 @@ class Menu(tk.Menu):
         :param is_menubar: Whether this menu should be the menu bar that you attach menus too. Defaults to False.
         :param command: The command to run before actually showing it - useful for updating the menu items.
         """
+        if not isinstance(parent, (tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Tk, tk.Toplevel]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(name, str) and name is not None:
+            raise TypeError(f"name is not a str! (type passed in: {repr(type(name))})")
+        if not isinstance(is_menubar, bool):
+            raise TypeError(f"is_menubar is not a bool! (type passed in: {repr(type(is_menubar))})")
         super().__init__(master=parent, name=name, postcommand=command, tearoff=0)
         if is_menubar:
             parent.configure(menu=self)

@@ -39,6 +39,15 @@ class Progressbar(ttk.Progressbar):
          to OrientModes.Vertical and is a str.
          value.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(length, int):
+            raise TypeError(f"length is not a int! (type passed in: {repr(type(length))})")
+        if not isinstance(mode, str):
+            raise TypeError(f"mode is not a str! (type passed in: {repr(type(mode))})")
+        if not isinstance(orientation, str):
+            raise TypeError(f"orientation is not a str! (type passed in: {repr(type(orientation))})")
         super().__init__(master=parent, orient=orientation, length=length, mode=mode)
         self._style_root = "TProgressbar"
         self._enabled = True

@@ -23,6 +23,9 @@ def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: A str which is the not-so-human-friendly event sequence which you can pass into the bind_to_event on a
      widget.
     """
+    if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(widget))})")
     if not isinstance(ctrl_cmd, bool):
         raise TypeError(f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})")
     if not isinstance(ctrl_ctrl, bool):
@@ -68,6 +71,9 @@ def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Tople
     :param letter: The letter to be pressed along with the modifier keys. A str. Must be one character long.
     :return: A str of the accelerator.
     """
+    if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(widget))})")
     if not isinstance(ctrl_cmd, bool):
         raise TypeError(f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})")
     if not isinstance(ctrl_ctrl, bool):

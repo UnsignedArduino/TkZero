@@ -30,6 +30,17 @@ class Listbox(tk.Listbox):
         :param width: The width of the listbox. Defaults to None.
         :param on_select: The function to call
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(values, list) and values is not None:
+            raise TypeError(f"values is not a list! (type passed in: {repr(type(values))})")
+        if not isinstance(select_mode, str):
+            raise TypeError(f"select_mode is not a str! (type passed in: {repr(type(values))})")
+        if not isinstance(height, int) and height is not None:
+            raise TypeError(f"height is not a int! (type passed in: {repr(type(height))})")
+        if not isinstance(width, int) and height is not None:
+            raise TypeError(f"width is not a int! (type passed in: {repr(type(width))})")
         if values is not None:
             self._values = [str(item) for item in values]
         else:

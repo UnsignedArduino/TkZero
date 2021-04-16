@@ -13,6 +13,9 @@ class Frame(ttk.Frame):
 
         :param parent: The parent of the frame.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
         super().__init__(master=parent)
         self._style_root = "TFrame"
         self._enabled = True

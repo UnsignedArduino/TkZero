@@ -43,6 +43,18 @@ class Radiobutton(ttk.Radiobutton):
         :param value: The value to set the variable when selected. Defaults to None.
         :param command: The command to run when toggled. Defaults to None.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(text, str):
+            raise TypeError(f"text is not a str! (type passed in: {repr(type(text))})")
+        if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
+            raise TypeError(f"image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})")
+        if not isinstance(variable, tk.Variable) and variable is not None:
+            raise TypeError(f"variable is not a tk.Variable! (type passed in: {repr(type(variable))})")
+        if not isinstance(value, (int, float, str, bool)) and value is not None:
+            raise TypeError(f"value is not a Union[int, Union[float, Union[str, bool]]]! "
+                            f"(type passed in: {repr(type(value))})")
         super().__init__(master=parent, command=command, variable=variable, value=value)
         self._style_root = "TRadiobutton"
         self._photo_image = None

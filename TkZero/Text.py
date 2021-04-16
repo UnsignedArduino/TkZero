@@ -32,6 +32,15 @@ class Text(tk.Text):
         :param height: The width of the text. Defaults to None.
         :param wrapping: How to wrap words in the text. Defaults to TextWrap.WordWrapping
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(width, int) and width is not None:
+            raise TypeError(f"width is not a int! (type passed in: {repr(type(width))})")
+        if not isinstance(height, int) and width is not None:
+            raise TypeError(f"height is not a int! (type passed in: {repr(type(height))})")
+        if not isinstance(wrapping, str):
+            raise TypeError(f"wrapping is not a str! (type passed in: {repr(type(wrapping))})")
         super().__init__(master=parent, width=width, height=height, wrap=wrapping)
         self._enabled = True
         self._readonly = False

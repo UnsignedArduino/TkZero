@@ -105,6 +105,9 @@ def show_info(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :param detail: The detail of the info box (displayed under message) - should be a str and defaults to None.
     :return: None.
     """
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(parent))})")
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
@@ -125,6 +128,9 @@ def show_warning(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :param detail: The detail of the warning box (displayed under message) - should be a str and defaults to None.
     :return: None.
     """
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(parent))})")
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
@@ -145,6 +151,9 @@ def show_error(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :param detail: The detail of the error box (displayed under message) - should be a str and defaults to None.
     :return: None.
     """
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(parent))})")
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
@@ -165,6 +174,9 @@ def ask_ok_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
     :return: True if the user clicks Ok else False.
     """
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(parent))})")
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
@@ -185,6 +197,9 @@ def ask_yes_or_no(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
     :return: True if the user clicks Yes else No.
     """
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(parent))})")
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
@@ -205,6 +220,9 @@ def ask_yes_or_no_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
     :return: True if the user clicks Yes, False if the user clicks No, and None if the user clicks Cancel.
     """
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(parent))})")
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
@@ -225,6 +243,9 @@ def ask_retry_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
     :return: True if the user clicks Retry otherwise False.
     """
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                        f"(type passed in: {repr(type(parent))})")
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
@@ -241,6 +262,9 @@ class CustomDialog(Window.Window):
 
         :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
         super().__init__(parent=parent)
         self.transient(master=parent)
 

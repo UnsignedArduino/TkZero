@@ -22,6 +22,15 @@ class Combobox(ttk.Combobox):
          a str (like `validate(contents)`) and should return a bool - True if passed otherwise False.
         :param command: The command to run when the value of the combobox changes. Defaults to None.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(values, tuple):
+            raise TypeError(f"values is not a tuple! (type passed in: {repr(type(values))})")
+        if not isinstance(width, int) and width is not None:
+            raise TypeError(f"width is not a int! (type passed in: {repr(type(width))})")
+        if not isinstance(show, str) and show is not None:
+            raise TypeError(f"show is not a str! (type passed in: {repr(type(show))})")
         self._variable = tk.StringVar(value="")
         if command is not None:
             self._variable.trace_add("write", lambda *args: command())
@@ -84,7 +93,7 @@ class Combobox(ttk.Combobox):
     @property
     def enabled(self) -> bool:
         """
-        Whether this widget is disabled (grayed out and cannot interact with) in Tk terms.
+        Whether this combobox is disabled (grayed out and cannot interact with) in Tk terms.
 
         :return: A bool, True if normal otherwise False.
         """
@@ -93,7 +102,7 @@ class Combobox(ttk.Combobox):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this combobox is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.
@@ -107,7 +116,7 @@ class Combobox(ttk.Combobox):
     @property
     def read_only(self) -> bool:
         """
-        Whether this widget is read only (cannot type in selection manually - must select from pre-defined values) in
+        Whether this combobox is read only (cannot type in selection manually - must select from pre-defined values) in
         Tk terms.
 
         :return: A bool, True if read only otherwise False.
@@ -117,7 +126,7 @@ class Combobox(ttk.Combobox):
     @read_only.setter
     def read_only(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or read only mode (cannot type in selection manually - must select
+        Set whether this combobox is in normal mode or read only mode (cannot type in selection manually - must select
         from pre-defined values) in Tk terms.
 
         :param new_state: The new state (a bool) True for normal and False for read only.

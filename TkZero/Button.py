@@ -39,6 +39,13 @@ class Button(ttk.Button):
         :param image: The image on the label. Defaults to None.
         :param command: The command to run when pressed. Defaults to None.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(text, str):
+            raise TypeError(f"text is not a str! (type passed in: {repr(type(text))})")
+        if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
+            raise TypeError(f"image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})")
         super().__init__(master=parent, command=command)
         self._style_root = "TButton"
         self._photo_image = None
@@ -115,7 +122,7 @@ class Button(ttk.Button):
     @property
     def enabled(self) -> bool:
         """
-        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Whether this button is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
 
         :return: A bool, True if normal otherwise False.
         """
@@ -124,7 +131,7 @@ class Button(ttk.Button):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this button is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.
@@ -136,7 +143,7 @@ class Button(ttk.Button):
 
     def apply_style(self, style_name: str) -> None:
         """
-        Apply a theme to this label.
+        Apply a theme to this button.
 
         :param style_name: The name of the theme as a str, ex. "Warning"
         :return: None.

@@ -39,6 +39,13 @@ class Checkbutton(ttk.Checkbutton):
         :param image: The image on the checkbutton. Defaults to None.
         :param command: The command to run when toggled. Defaults to None.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(text, str):
+            raise TypeError(f"text is not a str! (type passed in: {repr(type(text))})")
+        if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
+            raise TypeError(f"image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})")
         self._variable = tk.BooleanVar(value=False)
         super().__init__(master=parent, command=command, variable=self._variable)
         self._style_root = "TCheckbutton"
@@ -82,7 +89,7 @@ class Checkbutton(ttk.Checkbutton):
         """
         Get the text on this checkbutton.
 
-        :return: A str of the text on this checkbutton.
+        :return: A str of the text.
         """
         return self.cget("text")
 
@@ -145,7 +152,7 @@ class Checkbutton(ttk.Checkbutton):
     @property
     def enabled(self) -> bool:
         """
-        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Whether this checkbutton is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
 
         :return: A bool, True if normal otherwise False.
         """
@@ -154,7 +161,8 @@ class Checkbutton(ttk.Checkbutton):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this checkbutton is in normal mode or disabled mode (grayed out and cannot interact with) in Tk
+        terms.
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.

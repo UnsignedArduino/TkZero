@@ -38,6 +38,13 @@ class Label(ttk.Label):
         :param text: The text on the label. Defaults to "".
         :param image: The image on the label. Defaults to None.
         """
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                            f"(type passed in: {repr(type(parent))})")
+        if not isinstance(text, str):
+            raise TypeError(f"text is not a str! (type passed in: {repr(type(text))})")
+        if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
+            raise TypeError(f"image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})")
         super().__init__(master=parent)
         self._style_root = "TLabel"
         self._photo_image = None
