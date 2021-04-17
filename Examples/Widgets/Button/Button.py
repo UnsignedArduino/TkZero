@@ -1,3 +1,4 @@
+import tkinter as tk
 from time import time
 
 from PIL.ImageTk import PhotoImage
@@ -39,7 +40,7 @@ save_btn.grid(row=1, column=0)
 # Make a button that will print the time
 # You can get the text via button.text
 time_btn = Button(parent=root, command=lambda: print(time_btn.text))
-time_btn.grid(row=1, column=1, columnspan=2)
+time_btn.grid(row=1, column=1, columnspan=2, sticky=tk.NSEW)
 
 
 # Define and schedule a function to run every 100 ms to update the text on the button
