@@ -42,6 +42,7 @@ class Entry(ttk.Entry):
             self.bind("<Control-1>", lambda event: self._popup(event=event))
         else:
             self.bind("<3>", lambda event: self._popup(event=event))
+        self._make_context_menu()
 
     @property
     def value(self) -> str:

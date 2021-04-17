@@ -47,6 +47,7 @@ class Combobox(ttk.Combobox):
             self.bind("<3>", lambda event: self._popup(event=event))
         if values is not None:
             self["values"] = values
+        self._make_context_menu()
 
     @property
     def value(self) -> str:

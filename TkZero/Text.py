@@ -50,6 +50,7 @@ class Text(tk.Text):
             self.bind("<Control-1>", lambda event: self._popup(event=event))
         else:
             self.bind("<3>", lambda event: self._popup(event=event))
+        self._make_context_menu()
 
     @property
     def text(self) -> str:
