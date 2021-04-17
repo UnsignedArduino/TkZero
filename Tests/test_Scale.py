@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Scale module
+"""
+
 import unittest
 
 from TkZero.MainWindow import MainWindow

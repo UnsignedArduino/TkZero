@@ -1,6 +1,7 @@
 """
 Creates a themed Entry.
 """
+
 import tkinter as tk
 from tkinter import ttk
 from typing import Union, Callable
@@ -67,7 +68,7 @@ class Entry(ttk.Entry):
     @property
     def enabled(self) -> bool:
         """
-        Whether this widget is disabled (grayed out and cannot interact with) in Tk terms.
+        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -76,7 +77,7 @@ class Entry(ttk.Entry):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.
@@ -90,7 +91,7 @@ class Entry(ttk.Entry):
     @property
     def read_only(self) -> bool:
         """
-        Whether this widget is read only (can copy and paste but cannot edit) in Tk terms.
+        Get whether this widget is in read only mode. (can copy and paste but cannot edit)
 
         :return: A bool, True if read only otherwise False.
         """
@@ -99,7 +100,7 @@ class Entry(ttk.Entry):
     @read_only.setter
     def read_only(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or read only mode (can copy and paste but cannot edit) in Tk terms.
+        Set whether this widget is in read only mode. (can copy and paste but cannot edit)
 
         :param new_state: The new state (a bool) True for normal and False for read only.
         :return: None.

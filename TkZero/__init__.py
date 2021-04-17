@@ -1,8 +1,6 @@
 """
 TkZero - a sane and Pythonic wrapper around Tkinter.
 """
-# TODO: Review all tests to make sure no copy/paste errors and fix them
-# TODO: Review all doc strings to make sure no copy/paste errors and fix them
 # TODO: Make examples for each widget
 # TODO: Make examples of "full-featured" applications like:
 #  - File downloader

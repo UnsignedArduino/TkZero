@@ -1,6 +1,7 @@
 """
 Creates a themed Combobox.
 """
+
 import tkinter as tk
 from tkinter import ttk
 from typing import Union, Callable
@@ -93,7 +94,7 @@ class Combobox(ttk.Combobox):
     @property
     def enabled(self) -> bool:
         """
-        Whether this combobox is disabled (grayed out and cannot interact with) in Tk terms.
+        Get whether this combobox is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -102,7 +103,7 @@ class Combobox(ttk.Combobox):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this combobox is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this combobox is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.
@@ -116,8 +117,8 @@ class Combobox(ttk.Combobox):
     @property
     def read_only(self) -> bool:
         """
-        Whether this combobox is read only (cannot type in selection manually - must select from pre-defined values) in
-        Tk terms.
+        Get whether this combobox is read only mode. (cannot type in selection manually - must select from pre-defined
+        values)
 
         :return: A bool, True if read only otherwise False.
         """
@@ -126,8 +127,8 @@ class Combobox(ttk.Combobox):
     @read_only.setter
     def read_only(self, new_state: bool) -> None:
         """
-        Set whether this combobox is in normal mode or read only mode (cannot type in selection manually - must select
-        from pre-defined values) in Tk terms.
+        Set whether this combobox is in read only mode (cannot type in selection manually - must select from pre-defined
+        values)
 
         :param new_state: The new state (a bool) True for normal and False for read only.
         :return: None.

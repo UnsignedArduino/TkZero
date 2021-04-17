@@ -1,6 +1,7 @@
 """
 Create an additional window. Note that you will first need to initiate a main window to pass in!
 """
+
 import tkinter as tk
 from threading import Thread
 from typing import Union, Callable
@@ -227,7 +228,7 @@ class Window(tk.Toplevel):
     @property
     def enabled(self) -> bool:
         """
-        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -236,7 +237,7 @@ class Window(tk.Toplevel):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.
@@ -259,7 +260,7 @@ class Window(tk.Toplevel):
     @on_close.setter
     def on_close(self, new_func: Callable) -> None:
         """
-        Set the function that will be called
+        Set the function that will be called.
 
         :param new_func: A function that will be called instead of destroying the window.
         :return: None.

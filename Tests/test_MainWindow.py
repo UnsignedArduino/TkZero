@@ -1,5 +1,5 @@
 """
-Test the TkZero.Window.MainWindow module
+Test the TkZero.MainWindow module
 """
 
 import unittest

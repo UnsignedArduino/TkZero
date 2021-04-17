@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Keybind module
+"""
+
 import unittest
 
 from TkZero import Platform

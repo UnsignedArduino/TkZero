@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Label module
+"""
+
 import base64
 import unittest
 

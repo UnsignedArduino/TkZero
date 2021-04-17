@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Progressbar module
+"""
+
 import unittest
 
 from TkZero.MainWindow import MainWindow

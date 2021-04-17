@@ -1,6 +1,7 @@
 """
 Creates a themed Checkbutton.
 """
+
 import tkinter as tk
 from tkinter import ttk
 from typing import Union, Callable
@@ -10,7 +11,8 @@ from PIL.ImageTk import PhotoImage
 
 class DisplayModes:
     """
-    The display modes for buttons.
+    The display modes for checkbuttons.
+
     Original: Display only the image if set, otherwise text.
     Text: Text only
     Image: Image only
@@ -152,7 +154,7 @@ class Checkbutton(ttk.Checkbutton):
     @property
     def enabled(self) -> bool:
         """
-        Whether this checkbutton is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Whether this checkbutton is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -161,8 +163,7 @@ class Checkbutton(ttk.Checkbutton):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this checkbutton is in normal mode or disabled mode (grayed out and cannot interact with) in Tk
-        terms.
+        Set whether this checkbutton is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.

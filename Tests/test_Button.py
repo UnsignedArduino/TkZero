@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Button module
+"""
+
 import base64
 import unittest
 

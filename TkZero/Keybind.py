@@ -1,6 +1,7 @@
 """
 Generate event sequences for key combos
 """
+
 import tkinter as tk
 from typing import Union
 

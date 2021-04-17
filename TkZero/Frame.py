@@ -1,6 +1,7 @@
 """
 Creates a themed frame.
 """
+
 import tkinter as tk
 from tkinter import ttk
 from typing import Union
@@ -85,7 +86,7 @@ class Frame(ttk.Frame):
     @property
     def enabled(self) -> bool:
         """
-        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -94,7 +95,7 @@ class Frame(ttk.Frame):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.

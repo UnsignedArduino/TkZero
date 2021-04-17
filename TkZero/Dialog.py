@@ -1,6 +1,7 @@
 """
 Show standard dialogs. You can also sub-class a dialog to make your own.
 """
+
 import tkinter as tk
 from pathlib import Path
 from tkinter import colorchooser
@@ -259,6 +260,8 @@ class CustomDialog(Window.Window):
     def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
         """
         Create a custom dialog. (tk.Toplevel)
+        First create an instance of this dialog. Then grid all your widgets into place. Then call
+        grab_focus() (if needed) and then wait_till_destroyed. (if needed)
 
         :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
         """

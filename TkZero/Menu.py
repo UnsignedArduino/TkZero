@@ -1,6 +1,7 @@
 """
 Creates menus.
 """
+
 import tkinter as tk
 from typing import Union, Callable
 

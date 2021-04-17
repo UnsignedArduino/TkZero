@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Combobox module
+"""
+
 import unittest
 
 from TkZero import Style

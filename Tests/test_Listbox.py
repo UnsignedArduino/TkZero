@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Listbox module
+"""
+
 import unittest
 
 from TkZero.Listbox import Listbox

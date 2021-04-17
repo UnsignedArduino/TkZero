@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Checkbutton module
+"""
+
 import base64
 import unittest
 

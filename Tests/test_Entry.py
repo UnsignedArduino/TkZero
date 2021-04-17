@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Entry module
+"""
+
 import unittest
 
 from TkZero import Style

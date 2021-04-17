@@ -1,5 +1,5 @@
 """
-Test the TkZero.Window.Dialog module
+Test the TkZero.Dialog module
 """
 
 import unittest

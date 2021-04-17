@@ -1,6 +1,7 @@
 """
 Creates a themed Button.
 """
+
 import tkinter as tk
 from tkinter import ttk
 from typing import Union, Callable
@@ -11,6 +12,7 @@ from PIL.ImageTk import PhotoImage
 class DisplayModes:
     """
     The display modes for buttons.
+
     Original: Display only the image if set, otherwise text.
     Text: Text only
     Image: Image only
@@ -92,7 +94,7 @@ class Button(ttk.Button):
         :param new_image: A PIL.ImageTk.PhotoImage or None.
         :return: None.
         """
-        if not isinstance(new_image, (PhotoImage, tk.PhotoImage)):
+        if not isinstance(new_image, (PhotoImage, tk.PhotoImage)) and image is not None:
             raise TypeError(f"new_image is not a PIL.ImageTk.PhotoImage or a tk.PhotoImage! (type passed in: "
                             f"{repr(type(new_image))})")
         self._photo_image = new_image
@@ -122,7 +124,7 @@ class Button(ttk.Button):
     @property
     def enabled(self) -> bool:
         """
-        Whether this button is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Whether this button is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -131,7 +133,7 @@ class Button(ttk.Button):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this button is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this button is in normal mode or disabled mode. (grayed out and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False for disabled.
         :return: None.

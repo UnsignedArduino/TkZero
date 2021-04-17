@@ -1,6 +1,7 @@
 """
 Get the windowing system.
 """
+
 import tkinter as tk
 from typing import Union
 

@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Spinbox module
+"""
+
 import unittest
 
 from TkZero import Style

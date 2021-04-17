@@ -1,3 +1,7 @@
+"""
+Test the TkZero.Frame module
+"""
+
 import unittest
 
 from TkZero import Style
