@@ -19,7 +19,7 @@ class Entry(ttk.Entry):
         :param width: The width of the entry. Defaults to None.
         :param show: The character to show instead of the actual text. Defaults to None.
         :param validate: The function to use for validation. Will be passed in a positional argument with the text as
-         a str (like `validate(contents)`) and should return a bool - True if passed otherwise False.
+         a str (like `validate(contents)`) and should return a bool - True if passed otherwise False. Defaults to None.
         :param command: The command to run when the value of the label changes. Defaults to None.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
@@ -32,8 +32,12 @@ class Entry(ttk.Entry):
         self._variable = tk.StringVar(value="")
         if command is not None:
             self._variable.trace_add("write", lambda *args: command())
-        super().__init__(master=parent, width=width, textvariable=self._variable, show=show,
-                         validatecommand=(parent.register(validate), "%p") if validate is not None else None)
+        if validate is not None:
+            wrapper = (parent.register(validate), "%P")
+            super().__init__(master=parent, width=width, textvariable=self._variable, show=show,
+                             validate="key", validatecommand=wrapper)
+        else:
+            super().__init__(master=parent, width=width, textvariable=self._variable, show=show)
         self._style_root = "TEntry"
         self._enabled = True
         self._readonly = False
