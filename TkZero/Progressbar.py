@@ -29,7 +29,7 @@ class ProgressModes:
 
 class Progressbar(ttk.Progressbar):
     def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], length: int,
-                 mode: str = ProgressModes.Determinate, orientation: str = OrientModes.Vertical):
+                 mode: str = ProgressModes.Determinate, orientation: str = OrientModes.Horizontal):
         """
         Initiate a ttk.Scrollbar.
 
@@ -37,7 +37,7 @@ class Progressbar(ttk.Progressbar):
         :param length: An int, which is the length of the scale.
         :param mode: The mode the progress bar should operate in. Defaults to ProgressModes.Determinate
         :param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-         to OrientModes.Vertical and is a str.
+         to OrientModes.Horizontal and is a str.
          value.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):

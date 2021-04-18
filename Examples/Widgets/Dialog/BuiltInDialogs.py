@@ -1,7 +1,6 @@
-from TkZero.MainWindow import MainWindow
-from TkZero.Button import Button
 from TkZero import Dialog
-import tkinter as tk
+from TkZero.Button import Button
+from TkZero.MainWindow import MainWindow
 
 # Make the root window and give it a title
 root = MainWindow()
