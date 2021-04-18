@@ -1,7 +1,6 @@
 from TkZero.Combobox import Combobox
 from TkZero.Label import Label
 from TkZero.MainWindow import MainWindow
-import tkinter as tk
 
 # Make the main window and give it a title
 root = MainWindow()

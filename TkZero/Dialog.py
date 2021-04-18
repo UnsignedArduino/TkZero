@@ -253,7 +253,7 @@ def ask_retry_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
         raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
-    return mbox.askyesnocancel(parent=parent, title=title, message=message, detail=detail)
+    return mbox.askretrycancel(parent=parent, title=title, message=message, detail=detail)
 
 
 class CustomDialog(Window.Window):
