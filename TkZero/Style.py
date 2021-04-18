@@ -6,13 +6,17 @@ from tkinter import ttk
 
 
 class WidgetStyleRoots:
-    Frame = "TFrame"
-    Label = "TLabel"
     Button = "TButton"
     Checkbutton = "TCheckbutton"
     Combobox = "TCombobox"
     Entry = "TEntry"
+    Frame = "TFrame"
+    Label = "TLabel"
+    Progressbar = "TProgressbar"
+    Radiobutton = "TRadiobutton"
+    Scale = "TScale"
     Scrollbar = "TScrollbar"
+    Spinbox = "TSpinbox"
 
 
 def define_style(style_root: str, style_name: str, **kwargs) -> None:
