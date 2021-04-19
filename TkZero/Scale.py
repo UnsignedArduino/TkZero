@@ -19,7 +19,7 @@ class OrientModes:
 
 class Scale(ttk.Scale):
     def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], length: int, minimum: float, maximum: float,
-                 orientation: str = OrientModes.Vertical, command: Callable = None):
+                 orientation: str = OrientModes.Horizontal, command: Callable = None):
         """
         Initiate a ttk.Scrollbar.
 
@@ -28,7 +28,7 @@ class Scale(ttk.Scale):
         :param minimum: The minimum value of the scale, a float.
         :param maximum: The maximum value of the scale, a float.
         :param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-         to OrientModes.Vertical and is a str.
+         to OrientModes.Horizontal and is a str.
         :param command: The command to call when the scale changes. Will be passed in a positional float as the new
          value.
         """
