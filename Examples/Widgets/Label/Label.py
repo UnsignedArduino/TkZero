@@ -1,7 +1,9 @@
+from datetime import datetime
+
+from PIL.ImageTk import PhotoImage
+
 from TkZero.Label import Label
 from TkZero.MainWindow import MainWindow
-from PIL.ImageTk import PhotoImage
-from datetime import datetime
 
 # Make the main window and give it a title
 root = MainWindow()
