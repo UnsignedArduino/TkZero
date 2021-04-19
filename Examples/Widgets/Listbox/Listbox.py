@@ -3,8 +3,8 @@ import tkinter as tk
 from TkZero.Button import Button
 from TkZero.Label import Label
 from TkZero.Listbox import Listbox
-from TkZero.Scrollbar import Scrollbar
 from TkZero.MainWindow import MainWindow
+from TkZero.Scrollbar import Scrollbar
 
 # Make the main window and give it a title
 root = MainWindow()
