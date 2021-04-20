@@ -1,7 +1,6 @@
 """
 TkZero - a sane and Pythonic wrapper around Tkinter.
 """
-# TODO: Make examples for each widget
 # TODO: Make examples of "full-featured" applications like:
 #  - File downloader
 #  - Photo viewer
