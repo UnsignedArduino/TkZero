@@ -24,8 +24,8 @@ def open_image():
         try:
             image_label.image = PhotoImage(file=path)
         except UnidentifiedImageError:
-            show_error(root, title="Simple Photo Viewer: Error!", message="Could not open that file - format not recognized!",
-                       detail=f"Unidentified file: {path}")
+            show_error(root, title="Simple Photo Viewer: Error!",
+                       message="Could not open that file - format not recognized!", detail=f"Unidentified file: {path}")
 
 
 # Create a button to open a new image
