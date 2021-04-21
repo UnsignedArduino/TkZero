@@ -123,6 +123,13 @@ class Text(tk.Text):
 
         :return: None.
         """
+        if not self.enabled:
+            self._context_menu.entryconfigure("Copy", state=tk.DISABLED)
+            self._context_menu.entryconfigure("Cut", state=tk.DISABLED)
+            self._context_menu.entryconfigure("Paste", state=tk.DISABLED)
+            self._context_menu.entryconfigure("Delete", state=tk.DISABLED)
+            self._context_menu.entryconfigure("Select all", state=tk.DISABLED)
+            return
         if self.tag_ranges(tk.SEL):
             self._context_menu.entryconfigure("Copy", state=tk.NORMAL)
             self._context_menu.entryconfigure("Cut", state=tk.NORMAL)
