@@ -1,17 +1,18 @@
 import tkinter as tk
 from pathlib import Path
+from threading import Thread
+
 # noinspection PyPackageRequirements
 import requests
 # noinspection PyPackageRequirements
 from requests import HTTPError
-from threading import Thread
 
 from TkZero.Button import Button
+from TkZero.Dialog import select_directory, show_info, show_error, ask_ok_or_cancel, CustomDialog
 from TkZero.Entry import Entry
 from TkZero.Frame import Frame
 from TkZero.Label import Label
 from TkZero.MainWindow import MainWindow
-from TkZero.Dialog import select_directory, show_info, show_error, ask_ok_or_cancel, CustomDialog
 from TkZero.Progressbar import Progressbar
 
 # Create a main window

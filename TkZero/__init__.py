@@ -3,7 +3,7 @@ TkZero - a sane and Pythonic wrapper around Tkinter.
 """
 # TODO: Make examples of "full-featured" applications like:
 #  [✔] File downloader
-#  [ ] Photo viewer
+#  [✔] Simple photo viewer
 #  [ ] Calculator
 #  [ ] Notepad
 # TODO: Create into proper Python package - https://antonz.org/python-packaging/

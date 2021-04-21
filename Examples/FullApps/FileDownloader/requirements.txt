@@ -1,1 +1,2 @@
+# These requirements are only for the File Downloader example
 requests

@@ -1,0 +1,2 @@
+# These requirements are only for the Photo Viewer example
+# Ah nice no external dependencies for this example
