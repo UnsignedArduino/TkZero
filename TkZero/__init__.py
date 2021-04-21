@@ -6,7 +6,6 @@ TkZero - a sane and Pythonic wrapper around Tkinter.
 #  [ ] Photo viewer
 #  [ ] Calculator
 #  [ ] Notepad
-#  And compare the TkZero code to Tkinter code
 # TODO: Create into proper Python package - https://antonz.org/python-packaging/
 
 __version_info__ = (0, 0, 1)
