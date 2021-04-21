@@ -53,7 +53,6 @@ class Progressbar(ttk.Progressbar):
         self._style_root = "TProgressbar"
         self._enabled = True
         self._orientation = orientation
-        self._mode = mode
 
     @property
     def value(self) -> float:
@@ -62,9 +61,7 @@ class Progressbar(ttk.Progressbar):
 
         :return: A float.
         """
-        if self._mode != ProgressModes.Determinate:
-            raise AttributeError("Can not access value while using indeterminate mode!")
-        return self["value"]
+        return float(self["value"])
 
     @value.setter
     def value(self, new_value: Union[int, float]) -> None:
@@ -76,8 +73,6 @@ class Progressbar(ttk.Progressbar):
         """
         if not isinstance(new_value, (float, int)):
             raise TypeError(f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})")
-        if self._mode != ProgressModes.Determinate:
-            raise AttributeError("Can not access value while using indeterminate mode!")
         self["value"] = float(new_value)
 
     @property
@@ -87,8 +82,6 @@ class Progressbar(ttk.Progressbar):
 
         :return: A float.
         """
-        if self._mode != ProgressModes.Determinate:
-            raise AttributeError("Can not access value while using indeterminate mode!")
         return self["maximum"]
 
     @maximum.setter
@@ -101,8 +94,6 @@ class Progressbar(ttk.Progressbar):
         """
         if not isinstance(new_value, (float, int)):
             raise TypeError(f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})")
-        if self._mode != ProgressModes.Determinate:
-            raise AttributeError("Can not access value while using indeterminate mode!")
         self["maximum"] = float(new_value)
 
     @property
