@@ -43,23 +43,19 @@ class SystemMenuNames:
 
 
 class Menu(tk.Menu):
-    def __init__(self, parent: Union[tk.Tk, tk.Toplevel], name: str = None, is_menubar: bool = False,
-                 command: Callable = None):
+    def __init__(self, parent: Union[tk.Tk, tk.Toplevel], is_menubar: bool = False, command: Callable = None):
         """
         Initiate a tk.Menu
 
         :param parent: The parent of the menu.
-        :param name: The name of the menu. Not used when you first create the menu bar.
         :param is_menubar: Whether this menu should be the menu bar that you attach menus too. Defaults to False.
         :param command: The command to run before actually showing it - useful for updating the menu items.
         """
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
             raise TypeError(f"parent is not a Union[tk.Tk, tk.Toplevel]! "
                             f"(type passed in: {repr(type(parent))})")
-        if not isinstance(name, str) and name is not None:
-            raise TypeError(f"name is not a str! (type passed in: {repr(type(name))})")
         if not isinstance(is_menubar, bool):
             raise TypeError(f"is_menubar is not a bool! (type passed in: {repr(type(is_menubar))})")
-        super().__init__(master=parent, name=name, postcommand=command, tearoff=0)
+        super().__init__(master=parent, postcommand=command, tearoff=0)
         if is_menubar:
             parent.configure(menu=self)

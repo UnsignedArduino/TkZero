@@ -1,0 +1,2 @@
+# These requirements are only for the Notepad example
+# Ah nice no external dependencies for this example

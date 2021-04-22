@@ -51,6 +51,17 @@ class Text(tk.Text):
         else:
             self.bind("<3>", lambda event: self._popup(event=event))
         self._make_context_menu()
+        # https://stackoverflow.com/a/40618152/10291933
+        self._orig = self._w + "_orig"
+        self.tk.call("rename", self._w, self._orig)
+        self.tk.createcommand(self._w, self._proxy)
+
+    def _proxy(self, command, *args):
+        cmd = (self._orig, command) + args
+        result = self.tk.call(cmd)
+        if command in ("insert", "delete", "replace"):
+            self.event_generate("<<TextModified>>")
+        return result
 
     @property
     def text(self) -> str:
