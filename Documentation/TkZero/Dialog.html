@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>TkZero.Dialog API documentation</title>
+<meta name="description" content="Show standard dialogs. You can also sub-class a dialog to make your own." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>TkZero.Dialog</code></h1>
+</header>
+<section id="section-intro">
+<p>Show standard dialogs. You can also sub-class a dialog to make your own.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Show standard dialogs. You can also sub-class a dialog to make your own.
+&#34;&#34;&#34;
+
+import tkinter as tk
+from pathlib import Path
+from tkinter import colorchooser
+from tkinter import filedialog as fd
+from tkinter import messagebox as mbox
+from typing import Union
+
+from TkZero import Window
+
+
+def open_file(initial_dir: Path = None, title: str = None,
+              file_types: tuple[tuple[str, str], ...] = None) -&gt; Union[Path, None]:
+    &#34;&#34;&#34;
+    Ask the user to open a file.
+
+    :param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+    :param title: The title of the dialog. Should be a str and defaults to None.
+    :param file_types: The filetypes allowed. Should be a tuple of tuples of str
+     (ex. ((&#34;Text files, &#34;*.txt&#34;), (&#34;All files&#34;, &#34;*.*&#34;)) and defaults to None.
+    :return: A pathlib.Path of the path, or None if user canceled it.
+    &#34;&#34;&#34;
+    if not isinstance(initial_dir, Path) and initial_dir is not None:
+        raise TypeError(f&#34;initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})&#34;)
+    if not isinstance(title, str) and title is not None:
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(file_types, tuple) and file_types is not None:
+        raise TypeError(f&#34;file_types is not a tuple! (type passed in: {repr(type(file_types))})&#34;)
+    try:
+        file_path = fd.askopenfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
+                                       title=title, filetypes=file_types if file_types is not None else ())
+    except tk.TclError:
+        return None
+    return Path(file_path) if file_path else None
+
+
+def save_file(initial_dir: Path = None, title: str = None,
+              file_types: tuple[tuple[str, str], ...] = None) -&gt; Union[Path, None]:
+    &#34;&#34;&#34;
+    Ask the user to save a file.
+
+    :param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+    :param title: The title of the dialog. Should be a str and defaults to None.
+    :param file_types: The filetypes allowed. Should be a tuple of tuples of str
+     (ex. ((&#34;Text files, &#34;*.txt&#34;), (&#34;All files&#34;, &#34;*.*&#34;)) and defaults to None.
+    :return: A pathlib.Path of the path, or None if user canceled it.
+    &#34;&#34;&#34;
+    if not isinstance(initial_dir, Path) and initial_dir is not None:
+        raise TypeError(f&#34;initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})&#34;)
+    if not isinstance(title, str) and title is not None:
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(file_types, tuple) and file_types is not None:
+        raise TypeError(f&#34;file_types is not a tuple! (type passed in: {repr(type(file_types))})&#34;)
+    file_path = fd.asksaveasfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
+                                     title=title, filetypes=file_types if file_types is not None else ())
+    return Path(file_path) if file_path else None
+
+
+def select_directory(initial_dir: Path = None, title: str = None) -&gt; Union[Path, None]:
+    &#34;&#34;&#34;
+    Ask the user to select a directory.
+
+    :param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+    :param title: The title of the dialog. Should be a str and defaults to None.
+    :return: A pathlib.Path of the path, or None if user canceled it.
+    &#34;&#34;&#34;
+    if not isinstance(initial_dir, Path) and initial_dir is not None:
+        raise TypeError(f&#34;initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})&#34;)
+    if not isinstance(title, str) and title is not None:
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    file_path = fd.askdirectory(initialdir=str(initial_dir), title=title)
+    return Path(file_path) if file_path else None
+
+
+def choose_color(initial_color: str = &#34;ffffff&#34;, as_rgb: bool = False) -&gt; Union[Union[str, tuple[float]], None]:
+    &#34;&#34;&#34;
+    Ask the user to select a color.
+
+    :param initial_color: The inital color to start with. Should be a str and defaults to &#34;ffffff&#34; (white)
+    :param as_rgb: A bool on whether to return it as a tuple of floats or the hex color string.
+    :return: A str of the color (ex. &#34;ff0000&#34; which is red) or a tuple of floats (ex. (255.0, 0.0, 0.0) for red) if
+     as_rgb is True or None if user canceled or dialog failed? (need repro)
+    &#34;&#34;&#34;
+    if not isinstance(initial_color, str):
+        raise TypeError(f&#34;initial_color is not a str! (type passed in: {repr(type(initial_color))})&#34;)
+    if not isinstance(as_rgb, bool):
+        raise TypeError(f&#34;as_rgb is not a bool! (type passed in: {repr(type(as_rgb))})&#34;)
+    color = colorchooser.askcolor(f&#34;#{initial_color}&#34;)
+    try:
+        return color[0] if as_rgb else color[1][1:]
+    except TypeError:
+        return None
+
+
+def show_info(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+              title: str, message: str, detail: str = None) -&gt; None:
+    &#34;&#34;&#34;
+    Show a info box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the info box - should be a str.
+    :param message: The message of the info box - should be a str.
+    :param detail: The detail of the info box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    mbox.showinfo(parent=parent, title=title, message=message, detail=detail)
+
+
+def show_warning(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                 title: str, message: str, detail: str = None) -&gt; None:
+    &#34;&#34;&#34;
+    Show a warning box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the warning box - should be a str.
+    :param message: The message of the warning box - should be a str.
+    :param detail: The detail of the warning box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    mbox.showwarning(parent=parent, title=title, message=message, detail=detail)
+
+
+def show_error(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+               title: str, message: str, detail: str = None) -&gt; None:
+    &#34;&#34;&#34;
+    Show an error box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the error box - should be a str.
+    :param message: The message of the error box - should be a str.
+    :param detail: The detail of the error box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    mbox.showerror(parent=parent, title=title, message=message, detail=detail)
+
+
+def ask_ok_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                     title: str, message: str, detail: str = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Ok&#34; or &#34;Cancel&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Ok else False.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askokcancel(parent=parent, title=title, message=message, detail=detail)
+
+
+def ask_yes_or_no(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                  title: str, message: str, detail: str = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Yes&#34; or &#34;No&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Yes else No.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askyesno(parent=parent, title=title, message=message, detail=detail)
+
+
+def ask_yes_or_no_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                            title: str, message: str, detail: str = None) -&gt; Union[bool, None]:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Yes&#34; or &#34;No&#34; or &#34;Cancel&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Yes, False if the user clicks No, and None if the user clicks Cancel.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askyesnocancel(parent=parent, title=title, message=message, detail=detail)
+
+
+def ask_retry_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                     title: str, message: str, detail: str = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Retry&#34; or &#34;Cancel&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Retry otherwise False.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askretrycancel(parent=parent, title=title, message=message, detail=detail)
+
+
+class CustomDialog(Window.Window):
+    def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
+        &#34;&#34;&#34;
+        Create a custom dialog. (tk.Toplevel)
+        First create an instance of this dialog. Then grid all your widgets into place. Then call
+        grab_focus() (if needed) and then wait_till_destroyed. (if needed)
+
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
+        &#34;&#34;&#34;
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+        super().__init__(parent=parent)
+        self.transient(master=parent)
+
+    def grab_focus(self) -&gt; None:
+        &#34;&#34;&#34;
+        Grab all focus to this window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.wait_visibility()
+        self.grab_set()
+
+    def release_focus(self) -&gt; None:
+        &#34;&#34;&#34;
+        Release the focus.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.grab_release()
+
+    def wait_till_destroyed(self) -&gt; None:
+        &#34;&#34;&#34;
+        Pause here and wait until destroyed.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.wait_window()
+
+    def destroy(self) -&gt; None:
+        &#34;&#34;&#34;
+        Destroy itself and all it&#39;s children. This will also release the focus.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.release_focus()
+        super().destroy()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="TkZero.Dialog.ask_ok_or_cancel"><code class="name flex">
+<span>def <span class="ident">ask_ok_or_cancel</span></span>(<span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], title: str, message: str, detail: str = None) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show the user a prompt with the buttons "Ok" or "Cancel".</p>
+<p>:param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+:param title: The title of the box - should be a str.
+:param message: The message of the box - should be a str.
+:param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+:return: True if the user clicks Ok else False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ask_ok_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                     title: str, message: str, detail: str = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Ok&#34; or &#34;Cancel&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Ok else False.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askokcancel(parent=parent, title=title, message=message, detail=detail)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.ask_retry_cancel"><code class="name flex">
+<span>def <span class="ident">ask_retry_cancel</span></span>(<span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], title: str, message: str, detail: str = None) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show the user a prompt with the buttons "Retry" or "Cancel".</p>
+<p>:param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+:param title: The title of the box - should be a str.
+:param message: The message of the box - should be a str.
+:param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+:return: True if the user clicks Retry otherwise False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ask_retry_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                     title: str, message: str, detail: str = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Retry&#34; or &#34;Cancel&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Retry otherwise False.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askretrycancel(parent=parent, title=title, message=message, detail=detail)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.ask_yes_or_no"><code class="name flex">
+<span>def <span class="ident">ask_yes_or_no</span></span>(<span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], title: str, message: str, detail: str = None) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show the user a prompt with the buttons "Yes" or "No".</p>
+<p>:param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+:param title: The title of the box - should be a str.
+:param message: The message of the box - should be a str.
+:param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+:return: True if the user clicks Yes else No.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ask_yes_or_no(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                  title: str, message: str, detail: str = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Yes&#34; or &#34;No&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Yes else No.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askyesno(parent=parent, title=title, message=message, detail=detail)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.ask_yes_or_no_or_cancel"><code class="name flex">
+<span>def <span class="ident">ask_yes_or_no_or_cancel</span></span>(<span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], title: str, message: str, detail: str = None) ‑> Optional[bool]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show the user a prompt with the buttons "Yes" or "No" or "Cancel".</p>
+<p>:param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+:param title: The title of the box - should be a str.
+:param message: The message of the box - should be a str.
+:param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+:return: True if the user clicks Yes, False if the user clicks No, and None if the user clicks Cancel.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ask_yes_or_no_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                            title: str, message: str, detail: str = None) -&gt; Union[bool, None]:
+    &#34;&#34;&#34;
+    Show the user a prompt with the buttons &#34;Yes&#34; or &#34;No&#34; or &#34;Cancel&#34;.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the box - should be a str.
+    :param message: The message of the box - should be a str.
+    :param detail: The detail of the box (displayed under message) - should be a str and defaults to None.
+    :return: True if the user clicks Yes, False if the user clicks No, and None if the user clicks Cancel.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    return mbox.askyesnocancel(parent=parent, title=title, message=message, detail=detail)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.choose_color"><code class="name flex">
+<span>def <span class="ident">choose_color</span></span>(<span>initial_color: str = 'ffffff', as_rgb: bool = False) ‑> Union[str, tuple, NoneType]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ask the user to select a color.</p>
+<p>:param initial_color: The inital color to start with. Should be a str and defaults to "ffffff" (white)
+:param as_rgb: A bool on whether to return it as a tuple of floats or the hex color string.
+:return: A str of the color (ex. "ff0000" which is red) or a tuple of floats (ex. (255.0, 0.0, 0.0) for red) if
+as_rgb is True or None if user canceled or dialog failed? (need repro)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def choose_color(initial_color: str = &#34;ffffff&#34;, as_rgb: bool = False) -&gt; Union[Union[str, tuple[float]], None]:
+    &#34;&#34;&#34;
+    Ask the user to select a color.
+
+    :param initial_color: The inital color to start with. Should be a str and defaults to &#34;ffffff&#34; (white)
+    :param as_rgb: A bool on whether to return it as a tuple of floats or the hex color string.
+    :return: A str of the color (ex. &#34;ff0000&#34; which is red) or a tuple of floats (ex. (255.0, 0.0, 0.0) for red) if
+     as_rgb is True or None if user canceled or dialog failed? (need repro)
+    &#34;&#34;&#34;
+    if not isinstance(initial_color, str):
+        raise TypeError(f&#34;initial_color is not a str! (type passed in: {repr(type(initial_color))})&#34;)
+    if not isinstance(as_rgb, bool):
+        raise TypeError(f&#34;as_rgb is not a bool! (type passed in: {repr(type(as_rgb))})&#34;)
+    color = colorchooser.askcolor(f&#34;#{initial_color}&#34;)
+    try:
+        return color[0] if as_rgb else color[1][1:]
+    except TypeError:
+        return None</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.open_file"><code class="name flex">
+<span>def <span class="ident">open_file</span></span>(<span>initial_dir: pathlib.Path = None, title: str = None, file_types: tuple = None) ‑> Optional[pathlib.Path]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ask the user to open a file.</p>
+<p>:param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+:param title: The title of the dialog. Should be a str and defaults to None.
+:param file_types: The filetypes allowed. Should be a tuple of tuples of str
+(ex. (("Text files, "<em>.txt"), ("All files", "</em>.*")) and defaults to None.
+:return: A pathlib.Path of the path, or None if user canceled it.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def open_file(initial_dir: Path = None, title: str = None,
+              file_types: tuple[tuple[str, str], ...] = None) -&gt; Union[Path, None]:
+    &#34;&#34;&#34;
+    Ask the user to open a file.
+
+    :param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+    :param title: The title of the dialog. Should be a str and defaults to None.
+    :param file_types: The filetypes allowed. Should be a tuple of tuples of str
+     (ex. ((&#34;Text files, &#34;*.txt&#34;), (&#34;All files&#34;, &#34;*.*&#34;)) and defaults to None.
+    :return: A pathlib.Path of the path, or None if user canceled it.
+    &#34;&#34;&#34;
+    if not isinstance(initial_dir, Path) and initial_dir is not None:
+        raise TypeError(f&#34;initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})&#34;)
+    if not isinstance(title, str) and title is not None:
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(file_types, tuple) and file_types is not None:
+        raise TypeError(f&#34;file_types is not a tuple! (type passed in: {repr(type(file_types))})&#34;)
+    try:
+        file_path = fd.askopenfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
+                                       title=title, filetypes=file_types if file_types is not None else ())
+    except tk.TclError:
+        return None
+    return Path(file_path) if file_path else None</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.save_file"><code class="name flex">
+<span>def <span class="ident">save_file</span></span>(<span>initial_dir: pathlib.Path = None, title: str = None, file_types: tuple = None) ‑> Optional[pathlib.Path]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ask the user to save a file.</p>
+<p>:param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+:param title: The title of the dialog. Should be a str and defaults to None.
+:param file_types: The filetypes allowed. Should be a tuple of tuples of str
+(ex. (("Text files, "<em>.txt"), ("All files", "</em>.*")) and defaults to None.
+:return: A pathlib.Path of the path, or None if user canceled it.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_file(initial_dir: Path = None, title: str = None,
+              file_types: tuple[tuple[str, str], ...] = None) -&gt; Union[Path, None]:
+    &#34;&#34;&#34;
+    Ask the user to save a file.
+
+    :param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+    :param title: The title of the dialog. Should be a str and defaults to None.
+    :param file_types: The filetypes allowed. Should be a tuple of tuples of str
+     (ex. ((&#34;Text files, &#34;*.txt&#34;), (&#34;All files&#34;, &#34;*.*&#34;)) and defaults to None.
+    :return: A pathlib.Path of the path, or None if user canceled it.
+    &#34;&#34;&#34;
+    if not isinstance(initial_dir, Path) and initial_dir is not None:
+        raise TypeError(f&#34;initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})&#34;)
+    if not isinstance(title, str) and title is not None:
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(file_types, tuple) and file_types is not None:
+        raise TypeError(f&#34;file_types is not a tuple! (type passed in: {repr(type(file_types))})&#34;)
+    file_path = fd.asksaveasfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
+                                     title=title, filetypes=file_types if file_types is not None else ())
+    return Path(file_path) if file_path else None</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.select_directory"><code class="name flex">
+<span>def <span class="ident">select_directory</span></span>(<span>initial_dir: pathlib.Path = None, title: str = None) ‑> Optional[pathlib.Path]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ask the user to select a directory.</p>
+<p>:param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+:param title: The title of the dialog. Should be a str and defaults to None.
+:return: A pathlib.Path of the path, or None if user canceled it.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def select_directory(initial_dir: Path = None, title: str = None) -&gt; Union[Path, None]:
+    &#34;&#34;&#34;
+    Ask the user to select a directory.
+
+    :param initial_dir: The directory to start in. Should be a pathlib.Path and defaults to None.
+    :param title: The title of the dialog. Should be a str and defaults to None.
+    :return: A pathlib.Path of the path, or None if user canceled it.
+    &#34;&#34;&#34;
+    if not isinstance(initial_dir, Path) and initial_dir is not None:
+        raise TypeError(f&#34;initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})&#34;)
+    if not isinstance(title, str) and title is not None:
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    file_path = fd.askdirectory(initialdir=str(initial_dir), title=title)
+    return Path(file_path) if file_path else None</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.show_error"><code class="name flex">
+<span>def <span class="ident">show_error</span></span>(<span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], title: str, message: str, detail: str = None) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show an error box.</p>
+<p>:param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+:param title: The title of the error box - should be a str.
+:param message: The message of the error box - should be a str.
+:param detail: The detail of the error box (displayed under message) - should be a str and defaults to None.
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_error(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+               title: str, message: str, detail: str = None) -&gt; None:
+    &#34;&#34;&#34;
+    Show an error box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the error box - should be a str.
+    :param message: The message of the error box - should be a str.
+    :param detail: The detail of the error box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    mbox.showerror(parent=parent, title=title, message=message, detail=detail)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.show_info"><code class="name flex">
+<span>def <span class="ident">show_info</span></span>(<span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], title: str, message: str, detail: str = None) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show a info box.</p>
+<p>:param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+:param title: The title of the info box - should be a str.
+:param message: The message of the info box - should be a str.
+:param detail: The detail of the info box (displayed under message) - should be a str and defaults to None.
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_info(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+              title: str, message: str, detail: str = None) -&gt; None:
+    &#34;&#34;&#34;
+    Show a info box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the info box - should be a str.
+    :param message: The message of the info box - should be a str.
+    :param detail: The detail of the info box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    mbox.showinfo(parent=parent, title=title, message=message, detail=detail)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.show_warning"><code class="name flex">
+<span>def <span class="ident">show_warning</span></span>(<span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], title: str, message: str, detail: str = None) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Show a warning box.</p>
+<p>:param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+:param title: The title of the warning box - should be a str.
+:param message: The message of the warning box - should be a str.
+:param detail: The detail of the warning box (displayed under message) - should be a str and defaults to None.
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_warning(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                 title: str, message: str, detail: str = None) -&gt; None:
+    &#34;&#34;&#34;
+    Show a warning box.
+
+    :param parent: The parent widget - should be a tk.Tk / tk.Toplevel.
+    :param title: The title of the warning box - should be a str.
+    :param message: The message of the warning box - should be a str.
+    :param detail: The detail of the warning box (displayed under message) - should be a str and defaults to None.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+        raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                        f&#34;(type passed in: {repr(type(parent))})&#34;)
+    if not isinstance(title, str):
+        raise TypeError(f&#34;title is not a str! (type passed in: {repr(type(title))})&#34;)
+    if not isinstance(message, str):
+        raise TypeError(f&#34;message is not a str! (type passed in: {repr(type(message))})&#34;)
+    if not isinstance(detail, str) and detail is not None:
+        raise TypeError(f&#34;detail is not a str! (type passed in: {repr(type(detail))})&#34;)
+    mbox.showwarning(parent=parent, title=title, message=message, detail=detail)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="TkZero.Dialog.CustomDialog"><code class="flex name class">
+<span>class <span class="ident">CustomDialog</span></span>
+<span>(</span><span>parent: Union[tkinter.Tk, tkinter.Toplevel])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The window class.</p>
+<p>Create a custom dialog. (tk.Toplevel)
+First create an instance of this dialog. Then grid all your widgets into place. Then call
+grab_focus() (if needed) and then wait_till_destroyed. (if needed)</p>
+<p>:param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CustomDialog(Window.Window):
+    def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
+        &#34;&#34;&#34;
+        Create a custom dialog. (tk.Toplevel)
+        First create an instance of this dialog. Then grid all your widgets into place. Then call
+        grab_focus() (if needed) and then wait_till_destroyed. (if needed)
+
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
+        &#34;&#34;&#34;
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+        super().__init__(parent=parent)
+        self.transient(master=parent)
+
+    def grab_focus(self) -&gt; None:
+        &#34;&#34;&#34;
+        Grab all focus to this window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.wait_visibility()
+        self.grab_set()
+
+    def release_focus(self) -&gt; None:
+        &#34;&#34;&#34;
+        Release the focus.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.grab_release()
+
+    def wait_till_destroyed(self) -&gt; None:
+        &#34;&#34;&#34;
+        Pause here and wait until destroyed.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.wait_window()
+
+    def destroy(self) -&gt; None:
+        &#34;&#34;&#34;
+        Destroy itself and all it&#39;s children. This will also release the focus.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.release_focus()
+        super().destroy()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="TkZero.Window.Window" href="Window.html#TkZero.Window.Window">Window</a></li>
+<li>tkinter.Toplevel</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Wm</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="TkZero.Dialog.CustomDialog.destroy"><code class="name flex">
+<span>def <span class="ident">destroy</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Destroy itself and all it's children. This will also release the focus.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def destroy(self) -&gt; None:
+    &#34;&#34;&#34;
+    Destroy itself and all it&#39;s children. This will also release the focus.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.release_focus()
+    super().destroy()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.CustomDialog.grab_focus"><code class="name flex">
+<span>def <span class="ident">grab_focus</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Grab all focus to this window.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def grab_focus(self) -&gt; None:
+    &#34;&#34;&#34;
+    Grab all focus to this window.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.wait_visibility()
+    self.grab_set()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.CustomDialog.release_focus"><code class="name flex">
+<span>def <span class="ident">release_focus</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Release the focus.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def release_focus(self) -&gt; None:
+    &#34;&#34;&#34;
+    Release the focus.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.grab_release()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Dialog.CustomDialog.wait_till_destroyed"><code class="name flex">
+<span>def <span class="ident">wait_till_destroyed</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Pause here and wait until destroyed.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wait_till_destroyed(self) -&gt; None:
+    &#34;&#34;&#34;
+    Pause here and wait until destroyed.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.wait_window()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="TkZero.Window.Window" href="Window.html#TkZero.Window.Window">Window</a></b></code>:
+<ul class="hlist">
+<li><code><a title="TkZero.Window.Window.bind_to_event" href="Window.html#TkZero.Window.Window.bind_to_event">bind_to_event</a></code></li>
+<li><code><a title="TkZero.Window.Window.close" href="Window.html#TkZero.Window.Window.close">close</a></code></li>
+<li><code><a title="TkZero.Window.Window.enabled" href="Window.html#TkZero.Window.Window.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Window.Window.full_screen" href="Window.html#TkZero.Window.Window.full_screen">full_screen</a></code></li>
+<li><code><a title="TkZero.Window.Window.generate_event" href="Window.html#TkZero.Window.Window.generate_event">generate_event</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_full_screen" href="Window.html#TkZero.Window.Window.is_full_screen">is_full_screen</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_maximized" href="Window.html#TkZero.Window.Window.is_maximized">is_maximized</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_minimized" href="Window.html#TkZero.Window.Window.is_minimized">is_minimized</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_restored" href="Window.html#TkZero.Window.Window.is_restored">is_restored</a></code></li>
+<li><code><a title="TkZero.Window.Window.maximize" href="Window.html#TkZero.Window.Window.maximize">maximize</a></code></li>
+<li><code><a title="TkZero.Window.Window.minimize" href="Window.html#TkZero.Window.Window.minimize">minimize</a></code></li>
+<li><code><a title="TkZero.Window.Window.on_close" href="Window.html#TkZero.Window.Window.on_close">on_close</a></code></li>
+<li><code><a title="TkZero.Window.Window.position" href="Window.html#TkZero.Window.Window.position">position</a></code></li>
+<li><code><a title="TkZero.Window.Window.restore" href="Window.html#TkZero.Window.Window.restore">restore</a></code></li>
+<li><code><a title="TkZero.Window.Window.size" href="Window.html#TkZero.Window.Window.size">size</a></code></li>
+<li><code><a title="TkZero.Window.Window.title" href="Window.html#TkZero.Window.Window.title">title</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="TkZero" href="index.html">TkZero</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="TkZero.Dialog.ask_ok_or_cancel" href="#TkZero.Dialog.ask_ok_or_cancel">ask_ok_or_cancel</a></code></li>
+<li><code><a title="TkZero.Dialog.ask_retry_cancel" href="#TkZero.Dialog.ask_retry_cancel">ask_retry_cancel</a></code></li>
+<li><code><a title="TkZero.Dialog.ask_yes_or_no" href="#TkZero.Dialog.ask_yes_or_no">ask_yes_or_no</a></code></li>
+<li><code><a title="TkZero.Dialog.ask_yes_or_no_or_cancel" href="#TkZero.Dialog.ask_yes_or_no_or_cancel">ask_yes_or_no_or_cancel</a></code></li>
+<li><code><a title="TkZero.Dialog.choose_color" href="#TkZero.Dialog.choose_color">choose_color</a></code></li>
+<li><code><a title="TkZero.Dialog.open_file" href="#TkZero.Dialog.open_file">open_file</a></code></li>
+<li><code><a title="TkZero.Dialog.save_file" href="#TkZero.Dialog.save_file">save_file</a></code></li>
+<li><code><a title="TkZero.Dialog.select_directory" href="#TkZero.Dialog.select_directory">select_directory</a></code></li>
+<li><code><a title="TkZero.Dialog.show_error" href="#TkZero.Dialog.show_error">show_error</a></code></li>
+<li><code><a title="TkZero.Dialog.show_info" href="#TkZero.Dialog.show_info">show_info</a></code></li>
+<li><code><a title="TkZero.Dialog.show_warning" href="#TkZero.Dialog.show_warning">show_warning</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="TkZero.Dialog.CustomDialog" href="#TkZero.Dialog.CustomDialog">CustomDialog</a></code></h4>
+<ul class="">
+<li><code><a title="TkZero.Dialog.CustomDialog.destroy" href="#TkZero.Dialog.CustomDialog.destroy">destroy</a></code></li>
+<li><code><a title="TkZero.Dialog.CustomDialog.grab_focus" href="#TkZero.Dialog.CustomDialog.grab_focus">grab_focus</a></code></li>
+<li><code><a title="TkZero.Dialog.CustomDialog.release_focus" href="#TkZero.Dialog.CustomDialog.release_focus">release_focus</a></code></li>
+<li><code><a title="TkZero.Dialog.CustomDialog.wait_till_destroyed" href="#TkZero.Dialog.CustomDialog.wait_till_destroyed">wait_till_destroyed</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>TkZero.Window API documentation</title>
+<meta name="description" content="Create an additional window. Note that you will first need to initiate a main window to pass in!" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>TkZero.Window</code></h1>
+</header>
+<section id="section-intro">
+<p>Create an additional window. Note that you will first need to initiate a main window to pass in!</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Create an additional window. Note that you will first need to initiate a main window to pass in!
+&#34;&#34;&#34;
+
+import tkinter as tk
+from threading import Thread
+from typing import Union, Callable
+
+from TkZero import Platform
+from TkZero import Vector
+
+
+class Window(tk.Toplevel):
+    &#34;&#34;&#34;
+    The window class.
+    &#34;&#34;&#34;
+    def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
+        &#34;&#34;&#34;
+        Create a window. (tk.Toplevel)
+
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
+        &#34;&#34;&#34;
+        if not isinstance(parent, (tk.Tk, tk.Toplevel)):
+            raise TypeError(f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! (type passed in: {repr(type(parent))})&#34;)
+        tk.BaseWidget.__init__(self, parent, &#34;toplevel&#34;)
+        self.iconname(self._root().iconname())
+        self.title = &#34;Window&#34;
+        self.protocol(&#34;WM_DELETE_WINDOW&#34;, self.close)
+        self._on_close = None
+        self._enabled = True
+
+    @property
+    def title(self) -&gt; str:
+        &#34;&#34;&#34;
+        Return the title of the window.
+
+        :return: A str of the title.
+        &#34;&#34;&#34;
+        return self.wm_title()
+
+    @title.setter
+    def title(self, new_title: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the title of the window.
+
+        :param new_title: A str of the new title for the window.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_title, str):
+            raise TypeError(f&#34;new_title is not a str! (type passed in: {repr(type(new_title))})&#34;)
+        self.wm_title(new_title)
+
+    @property
+    def size(self) -&gt; Vector.Size:
+        &#34;&#34;&#34;
+        Return the size of the window.
+
+        :return: A TkZero.Vector.Size with the width and height attributes.
+        &#34;&#34;&#34;
+        self.update()
+        return Vector.Size(width=self.winfo_width(), height=self.winfo_height())
+
+    @size.setter
+    def size(self, new_size: Vector.Size) -&gt; None:
+        &#34;&#34;&#34;
+        Set the size of the window.
+
+        :param new_size: A TkZero.Vector.Size with the width and height attributes set to the size you want.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_size, Vector.Size):
+            raise TypeError(f&#34;new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})&#34;)
+        self.geometry(f&#34;{new_size.width}x{new_size.height}&#34;)
+
+    @property
+    def position(self) -&gt; Vector.Position:
+        &#34;&#34;&#34;
+        Return the position of the window.
+
+        :return: A TkZero.Vector.Position with the x and y attributes.
+        &#34;&#34;&#34;
+        return Vector.Position(x=self.winfo_x(), y=self.winfo_y())
+
+    @position.setter
+    def position(self, new_position: Vector.Position) -&gt; None:
+        &#34;&#34;&#34;
+        Set the **top-left** position of the window.
+
+        :param new_position: A TkZero.Vector.Position with the new x and y attributes
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_position, Vector.Position):
+            raise TypeError(f&#34;new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})&#34;)
+        self.geometry(f&#34;{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}&#34;)
+
+    def minimize(self) -&gt; None:
+        &#34;&#34;&#34;
+        Minimize the window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.iconify()
+
+    def is_minimized(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window minimized?
+
+        :return: A bool on whether this window is minimized.
+        &#34;&#34;&#34;
+        return self.wm_state() == &#34;iconic&#34;
+
+    def restore(self) -&gt; None:
+        &#34;&#34;&#34;
+        Restore the window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.deiconify()
+
+    def is_restored(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window **not** minimized?
+
+        :return: A bool on whether this window is not minimized.
+        &#34;&#34;&#34;
+        return not self.is_minimized()
+
+    def maximize(self) -&gt; None:
+        &#34;&#34;&#34;
+        Maximize the window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if Platform.on_x11(self):
+            self.attributes(&#34;-zoomed&#34;, True)
+        else:
+            self.state(&#34;zoomed&#34;)
+
+    def is_maximized(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window maximized?
+
+        :return: A bool on whether this window is maximized.
+        &#34;&#34;&#34;
+        if Platform.on_x11(self):
+            return self.attributes(&#34;-zoomed&#34;)
+        else:
+            return self.wm_state() == &#34;zoomed&#34;
+
+    def full_screen(self, full_screen: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set to full-screen or not.
+
+        :param full_screen: Whether to full-screen the window or not.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(full_screen, bool):
+            raise TypeError(f&#34;full_screen is not a bool! (type passed in: {repr(type(full_screen))})&#34;)
+        self.attributes(&#34;-fullscreen&#34;, full_screen)
+
+    def is_full_screen(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window full-screen?
+
+        :return: A bool on whether this window is full-screen.
+        &#34;&#34;&#34;
+        return self.attributes(&#34;-fullscreen&#34;)
+
+    def bind_to_event(self, event: str, func: Callable = None,
+                      run_in_thread: bool = False, add: bool = False) -&gt; Union[None, list[str]]:
+        &#34;&#34;&#34;
+        Bind a event to a function.
+
+        :param event: A str of the event.
+        :param func: A function to call when the even happens. If none is passed in then a list of binds will be
+         returned.
+        :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
+         will also be made as a daemon thread. (will be terminated if main thread terminates)
+        :param add: Whether to add the function to a list of functions to be called or replace the function that was
+         previously bound to this sequence if any.
+        :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
+         when binding one.
+        &#34;&#34;&#34;
+        if not isinstance(event, str):
+            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+        if not isinstance(run_in_thread, bool):
+            raise TypeError(f&#34;run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})&#34;)
+        if not isinstance(add, bool):
+            raise TypeError(f&#34;add is not a bool! (type passed in: {repr(type(add))})&#34;)
+        if run_in_thread:
+            func = Thread(target=func, args=(), daemon=True).start
+        binds = self.bind(event, func, add)
+        if binds is not None and type(binds) is not list:
+            binds = [binds]
+        return binds
+
+    def generate_event(self, event: str) -&gt; None:
+        &#34;&#34;&#34;
+        Generate an event.
+
+        :param event: The event to generate (&#34;&lt;&lt;MyOwnEvent&gt;&gt;&#34;)
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(event, str):
+            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+        self.event_generate(event)
+
+    def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -&gt; None:
+        &#34;&#34;&#34;
+        Enable or disable the children.
+
+        :param parent: A tk.Widget that is our parent. If None then default to self.
+        :param enable: Whether to enable or disable the children.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(parent, tk.Widget) and parent is not None:
+            raise TypeError(f&#34;parent is not a tk.Widget! (type passed in: {repr(type(parent))})&#34;)
+        if not isinstance(enable, bool):
+            raise TypeError(f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;)
+        if parent is None:
+            parent = self
+        for child in parent.winfo_children():
+            if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
+                child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+            else:
+                self._enable_children(parent, enable)
+
+    @property
+    def enabled(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+        :return: A bool, True if normal otherwise False.
+        &#34;&#34;&#34;
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+        self._enabled = new_state
+        self._enable_children(enable=self._enabled)
+
+    @property
+    def on_close(self) -&gt; Union[Callable, None]:
+        &#34;&#34;&#34;
+        Return the function that will be called when the user tries to close the window. If no function was assigned,
+        return None.
+
+        :return: A function or None.
+        &#34;&#34;&#34;
+        return self._on_close
+
+    @on_close.setter
+    def on_close(self, new_func: Callable) -&gt; None:
+        &#34;&#34;&#34;
+        Set the function that will be called.
+
+        :param new_func: A function that will be called instead of destroying the window.
+        :return: None.
+        &#34;&#34;&#34;
+        self._on_close = new_func
+
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;
+        Close the window - this usually stops the whole program.
+
+        :return:
+        &#34;&#34;&#34;
+        if self._on_close is not None:
+            self._on_close()
+        else:
+            self.destroy()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="TkZero.Window.Window"><code class="flex name class">
+<span>class <span class="ident">Window</span></span>
+<span>(</span><span>parent: Union[tkinter.Tk, tkinter.Toplevel])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The window class.</p>
+<p>Create a window. (tk.Toplevel)</p>
+<p>:param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Window(tk.Toplevel):
+    &#34;&#34;&#34;
+    The window class.
+    &#34;&#34;&#34;
+    def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
+        &#34;&#34;&#34;
+        Create a window. (tk.Toplevel)
+
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
+        &#34;&#34;&#34;
+        if not isinstance(parent, (tk.Tk, tk.Toplevel)):
+            raise TypeError(f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! (type passed in: {repr(type(parent))})&#34;)
+        tk.BaseWidget.__init__(self, parent, &#34;toplevel&#34;)
+        self.iconname(self._root().iconname())
+        self.title = &#34;Window&#34;
+        self.protocol(&#34;WM_DELETE_WINDOW&#34;, self.close)
+        self._on_close = None
+        self._enabled = True
+
+    @property
+    def title(self) -&gt; str:
+        &#34;&#34;&#34;
+        Return the title of the window.
+
+        :return: A str of the title.
+        &#34;&#34;&#34;
+        return self.wm_title()
+
+    @title.setter
+    def title(self, new_title: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the title of the window.
+
+        :param new_title: A str of the new title for the window.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_title, str):
+            raise TypeError(f&#34;new_title is not a str! (type passed in: {repr(type(new_title))})&#34;)
+        self.wm_title(new_title)
+
+    @property
+    def size(self) -&gt; Vector.Size:
+        &#34;&#34;&#34;
+        Return the size of the window.
+
+        :return: A TkZero.Vector.Size with the width and height attributes.
+        &#34;&#34;&#34;
+        self.update()
+        return Vector.Size(width=self.winfo_width(), height=self.winfo_height())
+
+    @size.setter
+    def size(self, new_size: Vector.Size) -&gt; None:
+        &#34;&#34;&#34;
+        Set the size of the window.
+
+        :param new_size: A TkZero.Vector.Size with the width and height attributes set to the size you want.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_size, Vector.Size):
+            raise TypeError(f&#34;new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})&#34;)
+        self.geometry(f&#34;{new_size.width}x{new_size.height}&#34;)
+
+    @property
+    def position(self) -&gt; Vector.Position:
+        &#34;&#34;&#34;
+        Return the position of the window.
+
+        :return: A TkZero.Vector.Position with the x and y attributes.
+        &#34;&#34;&#34;
+        return Vector.Position(x=self.winfo_x(), y=self.winfo_y())
+
+    @position.setter
+    def position(self, new_position: Vector.Position) -&gt; None:
+        &#34;&#34;&#34;
+        Set the **top-left** position of the window.
+
+        :param new_position: A TkZero.Vector.Position with the new x and y attributes
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_position, Vector.Position):
+            raise TypeError(f&#34;new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})&#34;)
+        self.geometry(f&#34;{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}&#34;)
+
+    def minimize(self) -&gt; None:
+        &#34;&#34;&#34;
+        Minimize the window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.iconify()
+
+    def is_minimized(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window minimized?
+
+        :return: A bool on whether this window is minimized.
+        &#34;&#34;&#34;
+        return self.wm_state() == &#34;iconic&#34;
+
+    def restore(self) -&gt; None:
+        &#34;&#34;&#34;
+        Restore the window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.deiconify()
+
+    def is_restored(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window **not** minimized?
+
+        :return: A bool on whether this window is not minimized.
+        &#34;&#34;&#34;
+        return not self.is_minimized()
+
+    def maximize(self) -&gt; None:
+        &#34;&#34;&#34;
+        Maximize the window.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if Platform.on_x11(self):
+            self.attributes(&#34;-zoomed&#34;, True)
+        else:
+            self.state(&#34;zoomed&#34;)
+
+    def is_maximized(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window maximized?
+
+        :return: A bool on whether this window is maximized.
+        &#34;&#34;&#34;
+        if Platform.on_x11(self):
+            return self.attributes(&#34;-zoomed&#34;)
+        else:
+            return self.wm_state() == &#34;zoomed&#34;
+
+    def full_screen(self, full_screen: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set to full-screen or not.
+
+        :param full_screen: Whether to full-screen the window or not.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(full_screen, bool):
+            raise TypeError(f&#34;full_screen is not a bool! (type passed in: {repr(type(full_screen))})&#34;)
+        self.attributes(&#34;-fullscreen&#34;, full_screen)
+
+    def is_full_screen(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Is this window full-screen?
+
+        :return: A bool on whether this window is full-screen.
+        &#34;&#34;&#34;
+        return self.attributes(&#34;-fullscreen&#34;)
+
+    def bind_to_event(self, event: str, func: Callable = None,
+                      run_in_thread: bool = False, add: bool = False) -&gt; Union[None, list[str]]:
+        &#34;&#34;&#34;
+        Bind a event to a function.
+
+        :param event: A str of the event.
+        :param func: A function to call when the even happens. If none is passed in then a list of binds will be
+         returned.
+        :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
+         will also be made as a daemon thread. (will be terminated if main thread terminates)
+        :param add: Whether to add the function to a list of functions to be called or replace the function that was
+         previously bound to this sequence if any.
+        :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
+         when binding one.
+        &#34;&#34;&#34;
+        if not isinstance(event, str):
+            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+        if not isinstance(run_in_thread, bool):
+            raise TypeError(f&#34;run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})&#34;)
+        if not isinstance(add, bool):
+            raise TypeError(f&#34;add is not a bool! (type passed in: {repr(type(add))})&#34;)
+        if run_in_thread:
+            func = Thread(target=func, args=(), daemon=True).start
+        binds = self.bind(event, func, add)
+        if binds is not None and type(binds) is not list:
+            binds = [binds]
+        return binds
+
+    def generate_event(self, event: str) -&gt; None:
+        &#34;&#34;&#34;
+        Generate an event.
+
+        :param event: The event to generate (&#34;&lt;&lt;MyOwnEvent&gt;&gt;&#34;)
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(event, str):
+            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+        self.event_generate(event)
+
+    def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -&gt; None:
+        &#34;&#34;&#34;
+        Enable or disable the children.
+
+        :param parent: A tk.Widget that is our parent. If None then default to self.
+        :param enable: Whether to enable or disable the children.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(parent, tk.Widget) and parent is not None:
+            raise TypeError(f&#34;parent is not a tk.Widget! (type passed in: {repr(type(parent))})&#34;)
+        if not isinstance(enable, bool):
+            raise TypeError(f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;)
+        if parent is None:
+            parent = self
+        for child in parent.winfo_children():
+            if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
+                child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+            else:
+                self._enable_children(parent, enable)
+
+    @property
+    def enabled(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+        :return: A bool, True if normal otherwise False.
+        &#34;&#34;&#34;
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+        self._enabled = new_state
+        self._enable_children(enable=self._enabled)
+
+    @property
+    def on_close(self) -&gt; Union[Callable, None]:
+        &#34;&#34;&#34;
+        Return the function that will be called when the user tries to close the window. If no function was assigned,
+        return None.
+
+        :return: A function or None.
+        &#34;&#34;&#34;
+        return self._on_close
+
+    @on_close.setter
+    def on_close(self, new_func: Callable) -&gt; None:
+        &#34;&#34;&#34;
+        Set the function that will be called.
+
+        :param new_func: A function that will be called instead of destroying the window.
+        :return: None.
+        &#34;&#34;&#34;
+        self._on_close = new_func
+
+    def close(self) -&gt; None:
+        &#34;&#34;&#34;
+        Close the window - this usually stops the whole program.
+
+        :return:
+        &#34;&#34;&#34;
+        if self._on_close is not None:
+            self._on_close()
+        else:
+            self.destroy()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>tkinter.Toplevel</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Wm</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="TkZero.Dialog.CustomDialog" href="Dialog.html#TkZero.Dialog.CustomDialog">CustomDialog</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="TkZero.Window.Window.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<p>:return: A bool, True if normal otherwise False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def enabled(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+    :return: A bool, True if normal otherwise False.
+    &#34;&#34;&#34;
+    return self._enabled</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.on_close"><code class="name">var <span class="ident">on_close</span> : Optional[Callable]</code></dt>
+<dd>
+<div class="desc"><p>Return the function that will be called when the user tries to close the window. If no function was assigned,
+return None.</p>
+<p>:return: A function or None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def on_close(self) -&gt; Union[Callable, None]:
+    &#34;&#34;&#34;
+    Return the function that will be called when the user tries to close the window. If no function was assigned,
+    return None.
+
+    :return: A function or None.
+    &#34;&#34;&#34;
+    return self._on_close</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.position"><code class="name">var <span class="ident">position</span> : <a title="TkZero.Vector.Position" href="Vector.html#TkZero.Vector.Position">Position</a></code></dt>
+<dd>
+<div class="desc"><p>Return the position of the window.</p>
+<p>:return: A TkZero.Vector.Position with the x and y attributes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def position(self) -&gt; Vector.Position:
+    &#34;&#34;&#34;
+    Return the position of the window.
+
+    :return: A TkZero.Vector.Position with the x and y attributes.
+    &#34;&#34;&#34;
+    return Vector.Position(x=self.winfo_x(), y=self.winfo_y())</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.size"><code class="name">var <span class="ident">size</span> : <a title="TkZero.Vector.Size" href="Vector.html#TkZero.Vector.Size">Size</a></code></dt>
+<dd>
+<div class="desc"><p>Return the size of the window.</p>
+<p>:return: A TkZero.Vector.Size with the width and height attributes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def size(self) -&gt; Vector.Size:
+    &#34;&#34;&#34;
+    Return the size of the window.
+
+    :return: A TkZero.Vector.Size with the width and height attributes.
+    &#34;&#34;&#34;
+    self.update()
+    return Vector.Size(width=self.winfo_width(), height=self.winfo_height())</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.title"><code class="name">var <span class="ident">title</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return the title of the window.</p>
+<p>:return: A str of the title.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def title(self) -&gt; str:
+    &#34;&#34;&#34;
+    Return the title of the window.
+
+    :return: A str of the title.
+    &#34;&#34;&#34;
+    return self.wm_title()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="TkZero.Window.Window.bind_to_event"><code class="name flex">
+<span>def <span class="ident">bind_to_event</span></span>(<span>self, event: str, func: Callable = None, run_in_thread: bool = False, add: bool = False) ‑> Optional[list]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bind a event to a function.</p>
+<p>:param event: A str of the event.
+:param func: A function to call when the even happens. If none is passed in then a list of binds will be
+returned.
+:param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
+will also be made as a daemon thread. (will be terminated if main thread terminates)
+:param add: Whether to add the function to a list of functions to be called or replace the function that was
+previously bound to this sequence if any.
+:return: A list of functions (As Tk function str) that would be called when this event is triggered or None
+when binding one.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bind_to_event(self, event: str, func: Callable = None,
+                  run_in_thread: bool = False, add: bool = False) -&gt; Union[None, list[str]]:
+    &#34;&#34;&#34;
+    Bind a event to a function.
+
+    :param event: A str of the event.
+    :param func: A function to call when the even happens. If none is passed in then a list of binds will be
+     returned.
+    :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
+     will also be made as a daemon thread. (will be terminated if main thread terminates)
+    :param add: Whether to add the function to a list of functions to be called or replace the function that was
+     previously bound to this sequence if any.
+    :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
+     when binding one.
+    &#34;&#34;&#34;
+    if not isinstance(event, str):
+        raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+    if not isinstance(run_in_thread, bool):
+        raise TypeError(f&#34;run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})&#34;)
+    if not isinstance(add, bool):
+        raise TypeError(f&#34;add is not a bool! (type passed in: {repr(type(add))})&#34;)
+    if run_in_thread:
+        func = Thread(target=func, args=(), daemon=True).start
+    binds = self.bind(event, func, add)
+    if binds is not None and type(binds) is not list:
+        binds = [binds]
+    return binds</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.close"><code class="name flex">
+<span>def <span class="ident">close</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Close the window - this usually stops the whole program.</p>
+<p>:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def close(self) -&gt; None:
+    &#34;&#34;&#34;
+    Close the window - this usually stops the whole program.
+
+    :return:
+    &#34;&#34;&#34;
+    if self._on_close is not None:
+        self._on_close()
+    else:
+        self.destroy()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.full_screen"><code class="name flex">
+<span>def <span class="ident">full_screen</span></span>(<span>self, full_screen: bool) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set to full-screen or not.</p>
+<p>:param full_screen: Whether to full-screen the window or not.
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def full_screen(self, full_screen: bool) -&gt; None:
+    &#34;&#34;&#34;
+    Set to full-screen or not.
+
+    :param full_screen: Whether to full-screen the window or not.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(full_screen, bool):
+        raise TypeError(f&#34;full_screen is not a bool! (type passed in: {repr(type(full_screen))})&#34;)
+    self.attributes(&#34;-fullscreen&#34;, full_screen)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.generate_event"><code class="name flex">
+<span>def <span class="ident">generate_event</span></span>(<span>self, event: str) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate an event.</p>
+<p>:param event: The event to generate ("&lt;<MyOwnEvent>&gt;")
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_event(self, event: str) -&gt; None:
+    &#34;&#34;&#34;
+    Generate an event.
+
+    :param event: The event to generate (&#34;&lt;&lt;MyOwnEvent&gt;&gt;&#34;)
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(event, str):
+        raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+    self.event_generate(event)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.is_full_screen"><code class="name flex">
+<span>def <span class="ident">is_full_screen</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Is this window full-screen?</p>
+<p>:return: A bool on whether this window is full-screen.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_full_screen(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Is this window full-screen?
+
+    :return: A bool on whether this window is full-screen.
+    &#34;&#34;&#34;
+    return self.attributes(&#34;-fullscreen&#34;)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.is_maximized"><code class="name flex">
+<span>def <span class="ident">is_maximized</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Is this window maximized?</p>
+<p>:return: A bool on whether this window is maximized.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_maximized(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Is this window maximized?
+
+    :return: A bool on whether this window is maximized.
+    &#34;&#34;&#34;
+    if Platform.on_x11(self):
+        return self.attributes(&#34;-zoomed&#34;)
+    else:
+        return self.wm_state() == &#34;zoomed&#34;</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.is_minimized"><code class="name flex">
+<span>def <span class="ident">is_minimized</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Is this window minimized?</p>
+<p>:return: A bool on whether this window is minimized.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_minimized(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Is this window minimized?
+
+    :return: A bool on whether this window is minimized.
+    &#34;&#34;&#34;
+    return self.wm_state() == &#34;iconic&#34;</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.is_restored"><code class="name flex">
+<span>def <span class="ident">is_restored</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Is this window <strong>not</strong> minimized?</p>
+<p>:return: A bool on whether this window is not minimized.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_restored(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Is this window **not** minimized?
+
+    :return: A bool on whether this window is not minimized.
+    &#34;&#34;&#34;
+    return not self.is_minimized()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.maximize"><code class="name flex">
+<span>def <span class="ident">maximize</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Maximize the window.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def maximize(self) -&gt; None:
+    &#34;&#34;&#34;
+    Maximize the window.
+
+    :return: None.
+    &#34;&#34;&#34;
+    if Platform.on_x11(self):
+        self.attributes(&#34;-zoomed&#34;, True)
+    else:
+        self.state(&#34;zoomed&#34;)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.minimize"><code class="name flex">
+<span>def <span class="ident">minimize</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Minimize the window.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def minimize(self) -&gt; None:
+    &#34;&#34;&#34;
+    Minimize the window.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.iconify()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.restore"><code class="name flex">
+<span>def <span class="ident">restore</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Restore the window.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def restore(self) -&gt; None:
+    &#34;&#34;&#34;
+    Restore the window.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.deiconify()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="TkZero" href="index.html">TkZero</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="TkZero.Window.Window" href="#TkZero.Window.Window">Window</a></code></h4>
+<ul class="two-column">
+<li><code><a title="TkZero.Window.Window.bind_to_event" href="#TkZero.Window.Window.bind_to_event">bind_to_event</a></code></li>
+<li><code><a title="TkZero.Window.Window.close" href="#TkZero.Window.Window.close">close</a></code></li>
+<li><code><a title="TkZero.Window.Window.enabled" href="#TkZero.Window.Window.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Window.Window.full_screen" href="#TkZero.Window.Window.full_screen">full_screen</a></code></li>
+<li><code><a title="TkZero.Window.Window.generate_event" href="#TkZero.Window.Window.generate_event">generate_event</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_full_screen" href="#TkZero.Window.Window.is_full_screen">is_full_screen</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_maximized" href="#TkZero.Window.Window.is_maximized">is_maximized</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_minimized" href="#TkZero.Window.Window.is_minimized">is_minimized</a></code></li>
+<li><code><a title="TkZero.Window.Window.is_restored" href="#TkZero.Window.Window.is_restored">is_restored</a></code></li>
+<li><code><a title="TkZero.Window.Window.maximize" href="#TkZero.Window.Window.maximize">maximize</a></code></li>
+<li><code><a title="TkZero.Window.Window.minimize" href="#TkZero.Window.Window.minimize">minimize</a></code></li>
+<li><code><a title="TkZero.Window.Window.on_close" href="#TkZero.Window.Window.on_close">on_close</a></code></li>
+<li><code><a title="TkZero.Window.Window.position" href="#TkZero.Window.Window.position">position</a></code></li>
+<li><code><a title="TkZero.Window.Window.restore" href="#TkZero.Window.Window.restore">restore</a></code></li>
+<li><code><a title="TkZero.Window.Window.size" href="#TkZero.Window.Window.size">size</a></code></li>
+<li><code><a title="TkZero.Window.Window.title" href="#TkZero.Window.Window.title">title</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

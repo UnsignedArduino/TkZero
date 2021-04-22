@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>TkZero.Spinbox API documentation</title>
+<meta name="description" content="Creates a themed Spinbox." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>TkZero.Spinbox</code></h1>
+</header>
+<section id="section-intro">
+<p>Creates a themed Spinbox.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Creates a themed Spinbox.
+&#34;&#34;&#34;
+
+import tkinter as tk
+from tkinter import ttk
+from typing import Union, Callable
+
+from TkZero.Platform import on_aqua
+
+
+class Spinbox(ttk.Spinbox):
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: tuple[str, ...] = (),
+                 width: int = None, show: str = None, validate: Callable = None, command: Callable = None):
+        &#34;&#34;&#34;
+        Initiate a ttk.Spinbox.
+
+        :param parent: The parent of the combobox.
+        :param values: The values you can choose, should be a tuple of str. Defaults to ()
+        :param width: The width of the combobox. Defaults to None.
+        :param show: The character to show instead of the actual text. Defaults to None.
+        :param validate: The function to use for validation. Will be passed in a positional argument with the text as
+         a str (like `validate(contents)`) and should return a bool - True if passed otherwise False.
+        :param command: The command to run when the value of the combobox changes. Defaults to None.
+        &#34;&#34;&#34;
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+        if not isinstance(values, tuple) and values is not None:
+            raise TypeError(f&#34;values is not a tuple! (type passed in: {repr(type(values))})&#34;)
+        if not isinstance(width, int) and width is not None:
+            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+        if not isinstance(show, str) and show is not None:
+            raise TypeError(f&#34;show is not a str! (type passed in: {repr(type(show))})&#34;)
+        self._variable = tk.StringVar(value=&#34;&#34;)
+        if command is not None:
+            self._variable.trace_add(&#34;write&#34;, lambda *args: command())
+        super().__init__(master=parent, width=width, textvariable=self._variable, show=show,
+                         validatecommand=(parent.register(validate), &#34;%p&#34;) if validate is not None else None)
+        self._style_root = &#34;TSpinbox&#34;
+        self._enabled = True
+        self._readonly = False
+        if on_aqua(self):
+            self.bind(&#34;&lt;2&gt;&#34;, lambda event: self._popup(event=event))
+            self.bind(&#34;&lt;Control-1&gt;&#34;, lambda event: self._popup(event=event))
+        else:
+            self.bind(&#34;&lt;3&gt;&#34;, lambda event: self._popup(event=event))
+        if values is not None:
+            self[&#34;values&#34;] = values
+        self._make_context_menu()
+
+    @property
+    def value(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the text in this spinbox.
+
+        :return: A str of the text in this entry.
+        &#34;&#34;&#34;
+        return self.get()
+
+    @value.setter
+    def value(self, new_text: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the text on this spinbox.
+
+        :param new_text: The new text.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_text, str):
+            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+        self.delete(0, tk.END)
+        self.insert(0, new_text)
+
+    @property
+    def values(self) -&gt; tuple[str]:
+        &#34;&#34;&#34;
+        Get the options you can select.
+
+        :return: A str of the text in this entry.
+        &#34;&#34;&#34;
+        return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
+
+    @values.setter
+    def values(self, new_values: tuple[str]) -&gt; None:
+        &#34;&#34;&#34;
+        Set the options text on this spinbox.
+
+        :param new_values: The new options, as a tuple of str.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_values, tuple):
+            raise TypeError(f&#34;new_values is not a tuple! (type passed in: {repr(type(new_values))})&#34;)
+        self[&#34;values&#34;] = new_values
+
+    @property
+    def enabled(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+        :return: A bool, True if normal otherwise False.
+        &#34;&#34;&#34;
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+
+        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+        self._enabled = new_state
+        self._readonly = False
+        self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
+
+    @property
+    def read_only(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is in read only mode. (cannot type in selection manually - must select from pre-defined
+        values)
+
+        :return: A bool, True if read only otherwise False.
+        &#34;&#34;&#34;
+        return self._readonly
+
+    @read_only.setter
+    def read_only(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in normal mode or read only mode. (cannot type in selection manually - must select
+        from pre-defined values)
+
+        :param new_state: The new state (a bool) True for normal and False for read only.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+        self._enabled = True
+        self._readonly = new_state
+        self.state([&#34;readonly&#34; if self._readonly else &#34;!readonly&#34;])
+
+    def _make_context_menu(self) -&gt; None:
+        &#34;&#34;&#34;
+        Initiate the context menu.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self._context_menu = tk.Menu(self, tearoff=0)
+        self._context_menu.add_command(label=&#34;Copy&#34;, command=self.copy_contents, underline=0,
+                                       accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;)
+        self._context_menu.add_command(label=&#34;Cut&#34;, command=self.cut_contents,
+                                       accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;)
+        self._context_menu.add_command(label=&#34;Paste&#34;, command=self.paste_contents, underline=0,
+                                       accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;)
+        self._context_menu.add_separator()
+        self._context_menu.add_command(label=&#34;Delete&#34;, command=self.delete_contents,
+                                       accelerator=&#34;Delete&#34;)
+        self._context_menu.add_separator()
+        self._context_menu.add_command(label=&#34;Select all&#34;, command=self.select_all_contents, underline=7,
+                                       accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;)
+
+    def _update_context_menu_states(self) -&gt; None:
+        &#34;&#34;&#34;
+        Update the context menu states, like whether to allow copying or not.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if not self.enabled:
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
+            return
+        if self.read_only:
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.NORMAL)
+            return
+        if self.selection_present():
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
+        else:
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.NORMAL)
+
+    def _popup(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        Try to pop up the context menu.
+
+        :param event: An object that Tk passes in with information about the event that we need.
+        :return: None.
+        &#34;&#34;&#34;
+        self._update_context_menu_states()
+        if self.enabled:
+            try:
+                self._context_menu.tk_popup(event.x_root, event.y_root, 0)
+            finally:
+                self._context_menu.grab_release()
+
+    def select_all_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Select everything.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.select_range(0, tk.END)
+
+    def delete_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Delete the highlighted things.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.selection_present():
+            self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+
+    def paste_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Paste into the entry.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.delete_contents()
+        self.insert(self.index(tk.INSERT), self.clipboard_get())
+
+    def cut_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Cut the highlighted contents.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.selection_present():
+            self.clipboard_clear()
+            self.clipboard_append(self.selection_get())
+            self.update()
+            self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+            self.select_clear()
+
+    def copy_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Copy the highlighted contents.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.selection_present():
+            self.clipboard_clear()
+            self.clipboard_append(self.selection_get())
+            self.update()
+
+    def apply_style(self, style_name: str) -&gt; None:
+        &#34;&#34;&#34;
+        Apply a theme to this spinbox.
+
+        :param style_name: The name of the theme as a str, ex. &#34;Warning&#34;
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(style_name, str):
+            raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+        self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="TkZero.Spinbox.Spinbox"><code class="flex name class">
+<span>class <span class="ident">Spinbox</span></span>
+<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], values: tuple = (), width: int = None, show: str = None, validate: Callable = None, command: Callable = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ttk Spinbox is an Entry with increment and decrement arrows</p>
+<p>It is commonly used for number entry or to select from a list of
+string values.</p>
+<p>Initiate a ttk.Spinbox.</p>
+<p>:param parent: The parent of the combobox.
+:param values: The values you can choose, should be a tuple of str. Defaults to ()
+:param width: The width of the combobox. Defaults to None.
+:param show: The character to show instead of the actual text. Defaults to None.
+:param validate: The function to use for validation. Will be passed in a positional argument with the text as
+a str (like <code>validate(contents)</code>) and should return a bool - True if passed otherwise False.
+:param command: The command to run when the value of the combobox changes. Defaults to None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Spinbox(ttk.Spinbox):
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: tuple[str, ...] = (),
+                 width: int = None, show: str = None, validate: Callable = None, command: Callable = None):
+        &#34;&#34;&#34;
+        Initiate a ttk.Spinbox.
+
+        :param parent: The parent of the combobox.
+        :param values: The values you can choose, should be a tuple of str. Defaults to ()
+        :param width: The width of the combobox. Defaults to None.
+        :param show: The character to show instead of the actual text. Defaults to None.
+        :param validate: The function to use for validation. Will be passed in a positional argument with the text as
+         a str (like `validate(contents)`) and should return a bool - True if passed otherwise False.
+        :param command: The command to run when the value of the combobox changes. Defaults to None.
+        &#34;&#34;&#34;
+        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
+            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+        if not isinstance(values, tuple) and values is not None:
+            raise TypeError(f&#34;values is not a tuple! (type passed in: {repr(type(values))})&#34;)
+        if not isinstance(width, int) and width is not None:
+            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+        if not isinstance(show, str) and show is not None:
+            raise TypeError(f&#34;show is not a str! (type passed in: {repr(type(show))})&#34;)
+        self._variable = tk.StringVar(value=&#34;&#34;)
+        if command is not None:
+            self._variable.trace_add(&#34;write&#34;, lambda *args: command())
+        super().__init__(master=parent, width=width, textvariable=self._variable, show=show,
+                         validatecommand=(parent.register(validate), &#34;%p&#34;) if validate is not None else None)
+        self._style_root = &#34;TSpinbox&#34;
+        self._enabled = True
+        self._readonly = False
+        if on_aqua(self):
+            self.bind(&#34;&lt;2&gt;&#34;, lambda event: self._popup(event=event))
+            self.bind(&#34;&lt;Control-1&gt;&#34;, lambda event: self._popup(event=event))
+        else:
+            self.bind(&#34;&lt;3&gt;&#34;, lambda event: self._popup(event=event))
+        if values is not None:
+            self[&#34;values&#34;] = values
+        self._make_context_menu()
+
+    @property
+    def value(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the text in this spinbox.
+
+        :return: A str of the text in this entry.
+        &#34;&#34;&#34;
+        return self.get()
+
+    @value.setter
+    def value(self, new_text: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the text on this spinbox.
+
+        :param new_text: The new text.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_text, str):
+            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+        self.delete(0, tk.END)
+        self.insert(0, new_text)
+
+    @property
+    def values(self) -&gt; tuple[str]:
+        &#34;&#34;&#34;
+        Get the options you can select.
+
+        :return: A str of the text in this entry.
+        &#34;&#34;&#34;
+        return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
+
+    @values.setter
+    def values(self, new_values: tuple[str]) -&gt; None:
+        &#34;&#34;&#34;
+        Set the options text on this spinbox.
+
+        :param new_values: The new options, as a tuple of str.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_values, tuple):
+            raise TypeError(f&#34;new_values is not a tuple! (type passed in: {repr(type(new_values))})&#34;)
+        self[&#34;values&#34;] = new_values
+
+    @property
+    def enabled(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+        :return: A bool, True if normal otherwise False.
+        &#34;&#34;&#34;
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+
+        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+        self._enabled = new_state
+        self._readonly = False
+        self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
+
+    @property
+    def read_only(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is in read only mode. (cannot type in selection manually - must select from pre-defined
+        values)
+
+        :return: A bool, True if read only otherwise False.
+        &#34;&#34;&#34;
+        return self._readonly
+
+    @read_only.setter
+    def read_only(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in normal mode or read only mode. (cannot type in selection manually - must select
+        from pre-defined values)
+
+        :param new_state: The new state (a bool) True for normal and False for read only.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+        self._enabled = True
+        self._readonly = new_state
+        self.state([&#34;readonly&#34; if self._readonly else &#34;!readonly&#34;])
+
+    def _make_context_menu(self) -&gt; None:
+        &#34;&#34;&#34;
+        Initiate the context menu.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self._context_menu = tk.Menu(self, tearoff=0)
+        self._context_menu.add_command(label=&#34;Copy&#34;, command=self.copy_contents, underline=0,
+                                       accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;)
+        self._context_menu.add_command(label=&#34;Cut&#34;, command=self.cut_contents,
+                                       accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;)
+        self._context_menu.add_command(label=&#34;Paste&#34;, command=self.paste_contents, underline=0,
+                                       accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;)
+        self._context_menu.add_separator()
+        self._context_menu.add_command(label=&#34;Delete&#34;, command=self.delete_contents,
+                                       accelerator=&#34;Delete&#34;)
+        self._context_menu.add_separator()
+        self._context_menu.add_command(label=&#34;Select all&#34;, command=self.select_all_contents, underline=7,
+                                       accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;)
+
+    def _update_context_menu_states(self) -&gt; None:
+        &#34;&#34;&#34;
+        Update the context menu states, like whether to allow copying or not.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if not self.enabled:
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
+            return
+        if self.read_only:
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.NORMAL)
+            return
+        if self.selection_present():
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
+        else:
+            self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
+            self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.NORMAL)
+
+    def _popup(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        Try to pop up the context menu.
+
+        :param event: An object that Tk passes in with information about the event that we need.
+        :return: None.
+        &#34;&#34;&#34;
+        self._update_context_menu_states()
+        if self.enabled:
+            try:
+                self._context_menu.tk_popup(event.x_root, event.y_root, 0)
+            finally:
+                self._context_menu.grab_release()
+
+    def select_all_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Select everything.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.select_range(0, tk.END)
+
+    def delete_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Delete the highlighted things.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.selection_present():
+            self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+
+    def paste_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Paste into the entry.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.delete_contents()
+        self.insert(self.index(tk.INSERT), self.clipboard_get())
+
+    def cut_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Cut the highlighted contents.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.selection_present():
+            self.clipboard_clear()
+            self.clipboard_append(self.selection_get())
+            self.update()
+            self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+            self.select_clear()
+
+    def copy_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Copy the highlighted contents.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.selection_present():
+            self.clipboard_clear()
+            self.clipboard_append(self.selection_get())
+            self.update()
+
+    def apply_style(self, style_name: str) -&gt; None:
+        &#34;&#34;&#34;
+        Apply a theme to this spinbox.
+
+        :param style_name: The name of the theme as a str, ex. &#34;Warning&#34;
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(style_name, str):
+            raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+        self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>tkinter.ttk.Spinbox</li>
+<li>tkinter.ttk.Entry</li>
+<li>tkinter.ttk.Widget</li>
+<li>tkinter.Entry</li>
+<li>tkinter.Widget</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Pack</li>
+<li>tkinter.Place</li>
+<li>tkinter.Grid</li>
+<li>tkinter.XView</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="TkZero.Spinbox.Spinbox.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether this widget is is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<p>:return: A bool, True if normal otherwise False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def enabled(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether this widget is is in normal mode or disabled mode. (grayed out and cannot interact with)
+
+    :return: A bool, True if normal otherwise False.
+    &#34;&#34;&#34;
+    return self._enabled</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.read_only"><code class="name">var <span class="ident">read_only</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether this widget is in read only mode. (cannot type in selection manually - must select from pre-defined
+values)</p>
+<p>:return: A bool, True if read only otherwise False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def read_only(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether this widget is in read only mode. (cannot type in selection manually - must select from pre-defined
+    values)
+
+    :return: A bool, True if read only otherwise False.
+    &#34;&#34;&#34;
+    return self._readonly</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.value"><code class="name">var <span class="ident">value</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Get the text in this spinbox.</p>
+<p>:return: A str of the text in this entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def value(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the text in this spinbox.
+
+    :return: A str of the text in this entry.
+    &#34;&#34;&#34;
+    return self.get()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.values"><code class="name">var <span class="ident">values</span> : tuple</code></dt>
+<dd>
+<div class="desc"><p>Get the options you can select.</p>
+<p>:return: A str of the text in this entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self) -&gt; tuple[str]:
+    &#34;&#34;&#34;
+    Get the options you can select.
+
+    :return: A str of the text in this entry.
+    &#34;&#34;&#34;
+    return self[&#34;values&#34;] if self[&#34;values&#34;] else ()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="TkZero.Spinbox.Spinbox.apply_style"><code class="name flex">
+<span>def <span class="ident">apply_style</span></span>(<span>self, style_name: str) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Apply a theme to this spinbox.</p>
+<p>:param style_name: The name of the theme as a str, ex. "Warning"
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_style(self, style_name: str) -&gt; None:
+    &#34;&#34;&#34;
+    Apply a theme to this spinbox.
+
+    :param style_name: The name of the theme as a str, ex. &#34;Warning&#34;
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(style_name, str):
+        raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+    self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.copy_contents"><code class="name flex">
+<span>def <span class="ident">copy_contents</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Copy the highlighted contents.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy_contents(self) -&gt; None:
+    &#34;&#34;&#34;
+    Copy the highlighted contents.
+
+    :return: None.
+    &#34;&#34;&#34;
+    if self.selection_present():
+        self.clipboard_clear()
+        self.clipboard_append(self.selection_get())
+        self.update()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.cut_contents"><code class="name flex">
+<span>def <span class="ident">cut_contents</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Cut the highlighted contents.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cut_contents(self) -&gt; None:
+    &#34;&#34;&#34;
+    Cut the highlighted contents.
+
+    :return: None.
+    &#34;&#34;&#34;
+    if self.selection_present():
+        self.clipboard_clear()
+        self.clipboard_append(self.selection_get())
+        self.update()
+        self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+        self.select_clear()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.delete_contents"><code class="name flex">
+<span>def <span class="ident">delete_contents</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Delete the highlighted things.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_contents(self) -&gt; None:
+    &#34;&#34;&#34;
+    Delete the highlighted things.
+
+    :return: None.
+    &#34;&#34;&#34;
+    if self.selection_present():
+        self.delete(tk.SEL_FIRST, tk.SEL_LAST)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.paste_contents"><code class="name flex">
+<span>def <span class="ident">paste_contents</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Paste into the entry.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def paste_contents(self) -&gt; None:
+    &#34;&#34;&#34;
+    Paste into the entry.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.delete_contents()
+    self.insert(self.index(tk.INSERT), self.clipboard_get())</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.select_all_contents"><code class="name flex">
+<span>def <span class="ident">select_all_contents</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Select everything.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def select_all_contents(self) -&gt; None:
+    &#34;&#34;&#34;
+    Select everything.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.select_range(0, tk.END)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="TkZero" href="index.html">TkZero</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="TkZero.Spinbox.Spinbox" href="#TkZero.Spinbox.Spinbox">Spinbox</a></code></h4>
+<ul class="two-column">
+<li><code><a title="TkZero.Spinbox.Spinbox.apply_style" href="#TkZero.Spinbox.Spinbox.apply_style">apply_style</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.copy_contents" href="#TkZero.Spinbox.Spinbox.copy_contents">copy_contents</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.cut_contents" href="#TkZero.Spinbox.Spinbox.cut_contents">cut_contents</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.delete_contents" href="#TkZero.Spinbox.Spinbox.delete_contents">delete_contents</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.enabled" href="#TkZero.Spinbox.Spinbox.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.paste_contents" href="#TkZero.Spinbox.Spinbox.paste_contents">paste_contents</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.read_only" href="#TkZero.Spinbox.Spinbox.read_only">read_only</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.select_all_contents" href="#TkZero.Spinbox.Spinbox.select_all_contents">select_all_contents</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.value" href="#TkZero.Spinbox.Spinbox.value">value</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.values" href="#TkZero.Spinbox.Spinbox.values">values</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
