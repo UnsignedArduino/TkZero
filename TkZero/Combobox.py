@@ -10,8 +10,15 @@ from TkZero.Platform import on_aqua
 
 
 class Combobox(ttk.Combobox):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: tuple[str, ...] = (),
-                 width: int = None, show: str = None, validate: Callable = None, command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        values: tuple[str, ...] = (),
+        width: int = None,
+        show: str = None,
+        validate: Callable = None,
+        command: Callable = None,
+    ):
         """
         Initiate a ttk.Combobox.
 
@@ -24,19 +31,32 @@ class Combobox(ttk.Combobox):
         :param command: The command to run when the value of the combobox changes. Defaults to None.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         if not isinstance(values, tuple):
-            raise TypeError(f"values is not a tuple! (type passed in: {repr(type(values))})")
+            raise TypeError(
+                f"values is not a tuple! (type passed in: {repr(type(values))})"
+            )
         if not isinstance(width, int) and width is not None:
-            raise TypeError(f"width is not a int! (type passed in: {repr(type(width))})")
+            raise TypeError(
+                f"width is not a int! (type passed in: {repr(type(width))})"
+            )
         if not isinstance(show, str) and show is not None:
             raise TypeError(f"show is not a str! (type passed in: {repr(type(show))})")
         self._variable = tk.StringVar(value="")
         if command is not None:
             self._variable.trace_add("write", lambda *args: command())
-        super().__init__(master=parent, width=width, textvariable=self._variable, show=show,
-                         validatecommand=(parent.register(validate), "%p") if validate is not None else None)
+        super().__init__(
+            master=parent,
+            width=width,
+            textvariable=self._variable,
+            show=show,
+            validatecommand=(parent.register(validate), "%p")
+            if validate is not None
+            else None,
+        )
         self._style_root = "TCombobox"
         self._enabled = True
         self._readonly = False
@@ -67,7 +87,9 @@ class Combobox(ttk.Combobox):
         :return: None.
         """
         if not isinstance(new_text, str):
-            raise TypeError(f"new_text is not a str! (type passed in: {repr(type(new_text))})")
+            raise TypeError(
+                f"new_text is not a str! (type passed in: {repr(type(new_text))})"
+            )
         self.delete(0, tk.END)
         self.insert(0, new_text)
 
@@ -89,7 +111,9 @@ class Combobox(ttk.Combobox):
         :return: None.
         """
         if not isinstance(new_values, tuple):
-            raise TypeError(f"new_values is not a tuple! (type passed in: {repr(type(new_values))})")
+            raise TypeError(
+                f"new_values is not a tuple! (type passed in: {repr(type(new_values))})"
+            )
         self["values"] = new_values
 
     @property
@@ -110,7 +134,9 @@ class Combobox(ttk.Combobox):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = new_state
         self._readonly = False
         self.state(["!disabled" if self._enabled else "disabled"])
@@ -135,7 +161,9 @@ class Combobox(ttk.Combobox):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = True
         self._readonly = new_state
         self.state(["readonly" if self._readonly else "!readonly"])
@@ -147,18 +175,34 @@ class Combobox(ttk.Combobox):
         :return: None.
         """
         self._context_menu = tk.Menu(self, tearoff=0)
-        self._context_menu.add_command(label="Copy", command=self.copy_contents, underline=0,
-                                       accelerator="Command-C" if on_aqua(self) else "Control+C")
-        self._context_menu.add_command(label="Cut", command=self.cut_contents,
-                                       accelerator="Command-X" if on_aqua(self) else "Control+X")
-        self._context_menu.add_command(label="Paste", command=self.paste_contents, underline=0,
-                                       accelerator="Command-V" if on_aqua(self) else "Control+V")
+        self._context_menu.add_command(
+            label="Copy",
+            command=self.copy_contents,
+            underline=0,
+            accelerator="Command-C" if on_aqua(self) else "Control+C",
+        )
+        self._context_menu.add_command(
+            label="Cut",
+            command=self.cut_contents,
+            accelerator="Command-X" if on_aqua(self) else "Control+X",
+        )
+        self._context_menu.add_command(
+            label="Paste",
+            command=self.paste_contents,
+            underline=0,
+            accelerator="Command-V" if on_aqua(self) else "Control+V",
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label="Delete", command=self.delete_contents,
-                                       accelerator="Delete")
+        self._context_menu.add_command(
+            label="Delete", command=self.delete_contents, accelerator="Delete"
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label="Select all", command=self.select_all_contents, underline=7,
-                                       accelerator="Command-A" if on_aqua(self) else "Control+A")
+        self._context_menu.add_command(
+            label="Select all",
+            command=self.select_all_contents,
+            underline=7,
+            accelerator="Command-A" if on_aqua(self) else "Control+A",
+        )
 
     def _update_context_menu_states(self) -> None:
         """
@@ -265,5 +309,7 @@ class Combobox(ttk.Combobox):
         :return: None.
         """
         if not isinstance(style_name, str):
-            raise TypeError(f"style_name is not a str! (type passed in: {repr(type(style_name))})")
+            raise TypeError(
+                f"style_name is not a str! (type passed in: {repr(type(style_name))})"
+            )
         self.configure(style=f"{style_name}.{self._style_root}")

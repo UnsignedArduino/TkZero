@@ -15,8 +15,10 @@ class Frame(ttk.Frame):
         :param parent: The parent of the frame.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         super().__init__(master=parent)
         self._style_root = "TFrame"
         self._enabled = True
@@ -39,9 +41,13 @@ class Frame(ttk.Frame):
         :return: None.
         """
         if not isinstance(new_width, int):
-            raise TypeError(f"new_height is not a int! (type passed in: {repr(type(new_width))})")
+            raise TypeError(
+                f"new_height is not a int! (type passed in: {repr(type(new_width))})"
+            )
         if new_width < 1:
-            raise ValueError(f"new_height is less than 1! (value passed in: {repr(new_width)})")
+            raise ValueError(
+                f"new_height is less than 1! (value passed in: {repr(new_width)})"
+            )
         self.configure(width=new_width)
 
     @property
@@ -62,12 +68,18 @@ class Frame(ttk.Frame):
         :return: None.
         """
         if not isinstance(new_height, int):
-            raise TypeError(f"new_height is not an int! (type passed in: {repr(type(new_height))})")
+            raise TypeError(
+                f"new_height is not an int! (type passed in: {repr(type(new_height))})"
+            )
         if new_height < 1:
-            raise ValueError(f"new_height is less than 1! (value passed in: {repr(new_height)})")
+            raise ValueError(
+                f"new_height is less than 1! (value passed in: {repr(new_height)})"
+            )
         self.configure(height=new_height)
 
-    def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -> None:
+    def _enable_children(
+        self, parent: Union[tk.Widget, None] = None, enable: bool = True
+    ) -> None:
         """
         Enable or disable the children.
 
@@ -101,7 +113,9 @@ class Frame(ttk.Frame):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 
@@ -113,5 +127,7 @@ class Frame(ttk.Frame):
         :return: None.
         """
         if not isinstance(style_name, str):
-            raise TypeError(f"style_name is not a str! (type passed in: {repr(type(style_name))})")
+            raise TypeError(
+                f"style_name is not a str! (type passed in: {repr(type(style_name))})"
+            )
         self.configure(style=f"{style_name}.{self._style_root}")

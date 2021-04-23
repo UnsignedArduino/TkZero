@@ -8,9 +8,14 @@ from typing import Union
 from TkZero import Platform
 
 
-def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                            ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option,
-                            letter: str) -> str:
+def generate_event_sequence(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    ctrl_cmd: bool,
+    ctrl_ctrl: bool,
+    shift_shift: bool,
+    alt_option,
+    letter: str,
+) -> str:
     """
     Generate an event sequence you can pass in to bind_to_event on a widget from a key combo.
 
@@ -25,16 +30,26 @@ def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
      widget.
     """
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(widget))})")
+        raise TypeError(
+            f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(widget))})"
+        )
     if not isinstance(ctrl_cmd, bool):
-        raise TypeError(f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})")
+        raise TypeError(
+            f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})"
+        )
     if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(f"ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})")
+        raise TypeError(
+            f"ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})"
+        )
     if not isinstance(shift_shift, bool):
-        raise TypeError(f"shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})")
+        raise TypeError(
+            f"shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})"
+        )
     if not isinstance(alt_option, bool):
-        raise TypeError(f"alt_option is not a bool! (type passed in: {repr(type(alt_option))})")
+        raise TypeError(
+            f"alt_option is not a bool! (type passed in: {repr(type(alt_option))})"
+        )
     if not isinstance(letter, str):
         raise TypeError(f"letter is not a str! (type passed in: {repr(type(letter))})")
     sequence = "<"
@@ -57,9 +72,14 @@ def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     return sequence
 
 
-def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                                  ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option,
-                                  letter: str) -> str:
+def generate_accelerator_sequence(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    ctrl_cmd: bool,
+    ctrl_ctrl: bool,
+    shift_shift: bool,
+    alt_option,
+    letter: str,
+) -> str:
     """
     Generate an accelerator sequence you can display in menus.
 
@@ -73,16 +93,26 @@ def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Tople
     :return: A str of the accelerator.
     """
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(widget))})")
+        raise TypeError(
+            f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(widget))})"
+        )
     if not isinstance(ctrl_cmd, bool):
-        raise TypeError(f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})")
+        raise TypeError(
+            f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})"
+        )
     if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(f"ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})")
+        raise TypeError(
+            f"ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})"
+        )
     if not isinstance(shift_shift, bool):
-        raise TypeError(f"shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})")
+        raise TypeError(
+            f"shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})"
+        )
     if not isinstance(alt_option, bool):
-        raise TypeError(f"alt_option is not a bool! (type passed in: {repr(type(alt_option))})")
+        raise TypeError(
+            f"alt_option is not a bool! (type passed in: {repr(type(alt_option))})"
+        )
     if not isinstance(letter, str):
         raise TypeError(f"letter is not a str! (type passed in: {repr(type(letter))})")
     sequence = ""

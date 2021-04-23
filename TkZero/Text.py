@@ -17,14 +17,20 @@ class TextWrap:
     WordWrapping - wrap at word
      spaces.
     """
+
     NoWrapping = tk.NONE
     CharWrapping = tk.CHAR
     WordWrapping = tk.WORD
 
 
 class Text(tk.Text):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 width: int = None, height: int = None, wrapping: str = TextWrap.WordWrapping):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        width: int = None,
+        height: int = None,
+        wrapping: str = TextWrap.WordWrapping,
+    ):
         """
         Initiate a tk.Text.
 
@@ -34,14 +40,22 @@ class Text(tk.Text):
         :param wrapping: How to wrap words in the text. Defaults to TextWrap.WordWrapping
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         if not isinstance(width, int) and width is not None:
-            raise TypeError(f"width is not a int! (type passed in: {repr(type(width))})")
+            raise TypeError(
+                f"width is not a int! (type passed in: {repr(type(width))})"
+            )
         if not isinstance(height, int) and width is not None:
-            raise TypeError(f"height is not a int! (type passed in: {repr(type(height))})")
+            raise TypeError(
+                f"height is not a int! (type passed in: {repr(type(height))})"
+            )
         if not isinstance(wrapping, str):
-            raise TypeError(f"wrapping is not a str! (type passed in: {repr(type(wrapping))})")
+            raise TypeError(
+                f"wrapping is not a str! (type passed in: {repr(type(wrapping))})"
+            )
         super().__init__(master=parent, width=width, height=height, wrap=wrapping)
         self._enabled = True
         self._readonly = False
@@ -81,7 +95,9 @@ class Text(tk.Text):
         :return: None.
         """
         if not isinstance(new_text, str):
-            raise TypeError(f"new_text is not a str! (type passed in: {repr(type(new_text))})")
+            raise TypeError(
+                f"new_text is not a str! (type passed in: {repr(type(new_text))})"
+            )
         self.delete("1.0", tk.END)
         self.insert("1.0", new_text)
 
@@ -103,7 +119,9 @@ class Text(tk.Text):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
@@ -115,18 +133,34 @@ class Text(tk.Text):
         :return: None.
         """
         self._context_menu = tk.Menu(self, tearoff=0)
-        self._context_menu.add_command(label="Copy", command=self.copy_contents, underline=0,
-                                       accelerator="Command-C" if on_aqua(self) else "Control+C")
-        self._context_menu.add_command(label="Cut", command=self.cut_contents,
-                                       accelerator="Command-X" if on_aqua(self) else "Control+X")
-        self._context_menu.add_command(label="Paste", command=self.paste_contents, underline=0,
-                                       accelerator="Command-V" if on_aqua(self) else "Control+V")
+        self._context_menu.add_command(
+            label="Copy",
+            command=self.copy_contents,
+            underline=0,
+            accelerator="Command-C" if on_aqua(self) else "Control+C",
+        )
+        self._context_menu.add_command(
+            label="Cut",
+            command=self.cut_contents,
+            accelerator="Command-X" if on_aqua(self) else "Control+X",
+        )
+        self._context_menu.add_command(
+            label="Paste",
+            command=self.paste_contents,
+            underline=0,
+            accelerator="Command-V" if on_aqua(self) else "Control+V",
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label="Delete", command=self.delete_contents,
-                                       accelerator="Delete")
+        self._context_menu.add_command(
+            label="Delete", command=self.delete_contents, accelerator="Delete"
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label="Select all", command=self.select_all_contents, underline=7,
-                                       accelerator="Command-A" if on_aqua(self) else "Control+A")
+        self._context_menu.add_command(
+            label="Select all",
+            command=self.select_all_contents,
+            underline=7,
+            accelerator="Command-A" if on_aqua(self) else "Control+A",
+        )
 
     def _update_context_menu_states(self) -> None:
         """

@@ -13,13 +13,21 @@ class OrientModes:
     Horizontal - makes the scale horizontal and slides left and right.
     Vertical - makes the scale vertical and slides up and down.
     """
+
     Horizontal = tk.HORIZONTAL
     Vertical = tk.VERTICAL
 
 
 class Scale(ttk.Scale):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], length: int, minimum: float, maximum: float,
-                 orientation: str = OrientModes.Horizontal, command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        length: int,
+        minimum: float,
+        maximum: float,
+        orientation: str = OrientModes.Horizontal,
+        command: Callable = None,
+    ):
         """
         Initiate a ttk.Scrollbar.
 
@@ -33,18 +41,36 @@ class Scale(ttk.Scale):
          value.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         if not isinstance(length, int):
-            raise TypeError(f"length is not a int! (type passed in: {repr(type(length))})")
+            raise TypeError(
+                f"length is not a int! (type passed in: {repr(type(length))})"
+            )
         if not isinstance(minimum, float):
-            raise TypeError(f"minimum is not a float! (type passed in: {repr(type(minimum))})")
+            raise TypeError(
+                f"minimum is not a float! (type passed in: {repr(type(minimum))})"
+            )
         if not isinstance(maximum, float):
-            raise TypeError(f"maximum is not a float! (type passed in: {repr(type(maximum))})")
+            raise TypeError(
+                f"maximum is not a float! (type passed in: {repr(type(maximum))})"
+            )
         if not isinstance(orientation, str):
-            raise TypeError(f"orientation is not a str! (type passed in: {repr(type(orientation))})")
-        super().__init__(master=parent, orient=orientation, length=length, from_=minimum, to=maximum,
-                         command=lambda new_val: command(float(new_val)) if command is not None else None)
+            raise TypeError(
+                f"orientation is not a str! (type passed in: {repr(type(orientation))})"
+            )
+        super().__init__(
+            master=parent,
+            orient=orientation,
+            length=length,
+            from_=minimum,
+            to=maximum,
+            command=lambda new_val: command(float(new_val))
+            if command is not None
+            else None,
+        )
         self._style_root = "TScale"
         self._enabled = True
         self._orientation = orientation
@@ -67,7 +93,9 @@ class Scale(ttk.Scale):
         :return: None.
         """
         if not isinstance(new_value, (float, int)):
-            raise TypeError(f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})")
+            raise TypeError(
+                f"new_value is not a float or an int! (type passed in: {repr(type(new_value))})"
+            )
         self.set(float(new_value))
 
     @property
@@ -88,6 +116,8 @@ class Scale(ttk.Scale):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])

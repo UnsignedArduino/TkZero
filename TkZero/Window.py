@@ -14,6 +14,7 @@ class Window(tk.Toplevel):
     """
     The window class.
     """
+
     def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
         """
         Create a window. (tk.Toplevel)
@@ -21,7 +22,9 @@ class Window(tk.Toplevel):
         :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
         """
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Tk, tk.Toplevel]! (type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Tk, tk.Toplevel]! (type passed in: {repr(type(parent))})"
+            )
         tk.BaseWidget.__init__(self, parent, "toplevel")
         self.iconname(self._root().iconname())
         self.title = "Window"
@@ -47,7 +50,9 @@ class Window(tk.Toplevel):
         :return: None.
         """
         if not isinstance(new_title, str):
-            raise TypeError(f"new_title is not a str! (type passed in: {repr(type(new_title))})")
+            raise TypeError(
+                f"new_title is not a str! (type passed in: {repr(type(new_title))})"
+            )
         self.wm_title(new_title)
 
     @property
@@ -69,7 +74,9 @@ class Window(tk.Toplevel):
         :return: None.
         """
         if not isinstance(new_size, Vector.Size):
-            raise TypeError(f"new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})")
+            raise TypeError(
+                f"new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})"
+            )
         self.geometry(f"{new_size.width}x{new_size.height}")
 
     @property
@@ -90,8 +97,12 @@ class Window(tk.Toplevel):
         :return: None.
         """
         if not isinstance(new_position, Vector.Position):
-            raise TypeError(f"new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})")
-        self.geometry(f"{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}")
+            raise TypeError(
+                f"new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})"
+            )
+        self.geometry(
+            f"{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}"
+        )
 
     def minimize(self) -> None:
         """
@@ -155,7 +166,9 @@ class Window(tk.Toplevel):
         :return: None.
         """
         if not isinstance(full_screen, bool):
-            raise TypeError(f"full_screen is not a bool! (type passed in: {repr(type(full_screen))})")
+            raise TypeError(
+                f"full_screen is not a bool! (type passed in: {repr(type(full_screen))})"
+            )
         self.attributes("-fullscreen", full_screen)
 
     def is_full_screen(self) -> bool:
@@ -166,8 +179,13 @@ class Window(tk.Toplevel):
         """
         return self.attributes("-fullscreen")
 
-    def bind_to_event(self, event: str, func: Callable = None,
-                      run_in_thread: bool = False, add: bool = False) -> Union[None, list[str]]:
+    def bind_to_event(
+        self,
+        event: str,
+        func: Callable = None,
+        run_in_thread: bool = False,
+        add: bool = False,
+    ) -> Union[None, list[str]]:
         """
         Bind a event to a function.
 
@@ -182,9 +200,13 @@ class Window(tk.Toplevel):
          when binding one.
         """
         if not isinstance(event, str):
-            raise TypeError(f"event is not a str! (type passed in: {repr(type(event))})")
+            raise TypeError(
+                f"event is not a str! (type passed in: {repr(type(event))})"
+            )
         if not isinstance(run_in_thread, bool):
-            raise TypeError(f"run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})")
+            raise TypeError(
+                f"run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})"
+            )
         if not isinstance(add, bool):
             raise TypeError(f"add is not a bool! (type passed in: {repr(type(add))})")
         if run_in_thread:
@@ -202,10 +224,14 @@ class Window(tk.Toplevel):
         :return: None.
         """
         if not isinstance(event, str):
-            raise TypeError(f"event is not a str! (type passed in: {repr(type(event))})")
+            raise TypeError(
+                f"event is not a str! (type passed in: {repr(type(event))})"
+            )
         self.event_generate(event)
 
-    def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -> None:
+    def _enable_children(
+        self, parent: Union[tk.Widget, None] = None, enable: bool = True
+    ) -> None:
         """
         Enable or disable the children.
 
@@ -214,9 +240,13 @@ class Window(tk.Toplevel):
         :return: None.
         """
         if not isinstance(parent, tk.Widget) and parent is not None:
-            raise TypeError(f"parent is not a tk.Widget! (type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a tk.Widget! (type passed in: {repr(type(parent))})"
+            )
         if not isinstance(enable, bool):
-            raise TypeError(f"enable is not a bool! (type passed in: {repr(type(enable))})")
+            raise TypeError(
+                f"enable is not a bool! (type passed in: {repr(type(enable))})"
+            )
         if parent is None:
             parent = self
         for child in parent.winfo_children():
@@ -243,7 +273,9 @@ class Window(tk.Toplevel):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 

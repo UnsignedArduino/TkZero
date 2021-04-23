@@ -30,8 +30,12 @@ def define_style(style_root: str, style_name: str, **kwargs) -> None:
     :return: None.
     """
     if not isinstance(style_root, str):
-        raise TypeError(f"style_root is not a str! (type passed in: {repr(type(style_root))})")
+        raise TypeError(
+            f"style_root is not a str! (type passed in: {repr(type(style_root))})"
+        )
     if not isinstance(style_name, str):
-        raise TypeError(f"style_name is not a str! (type passed in: {repr(type(style_name))})")
+        raise TypeError(
+            f"style_name is not a str! (type passed in: {repr(type(style_name))})"
+        )
     style = ttk.Style()
     style.configure(f"{style_name}.{style_root}", **kwargs)

@@ -19,6 +19,7 @@ class DisplayModes:
     Top: Image above text
     Left: Image left of text, etc.
     """
+
     Original = "none"
     TextOnly = "text"
     ImageOnly = "image"
@@ -30,10 +31,15 @@ class DisplayModes:
 
 
 class Radiobutton(ttk.Radiobutton):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = "",
-                 image: Union[PhotoImage, tk.PhotoImage] = None, variable: tk.Variable = None,
-                 value: Union[int, Union[float, Union[str, bool]]] = None,
-                 command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        text: str = "",
+        image: Union[PhotoImage, tk.PhotoImage] = None,
+        variable: tk.Variable = None,
+        value: Union[int, Union[float, Union[str, bool]]] = None,
+        command: Callable = None,
+    ):
         """
         Initiate a ttk.Radiobutton.
 
@@ -45,17 +51,25 @@ class Radiobutton(ttk.Radiobutton):
         :param command: The command to run when toggled. Defaults to None.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         if not isinstance(text, str):
             raise TypeError(f"text is not a str! (type passed in: {repr(type(text))})")
         if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
-            raise TypeError(f"image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})")
+            raise TypeError(
+                f"image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})"
+            )
         if not isinstance(variable, tk.Variable) and variable is not None:
-            raise TypeError(f"variable is not a tk.Variable! (type passed in: {repr(type(variable))})")
+            raise TypeError(
+                f"variable is not a tk.Variable! (type passed in: {repr(type(variable))})"
+            )
         if not isinstance(value, (int, float, str, bool)) and value is not None:
-            raise TypeError(f"value is not a Union[int, Union[float, Union[str, bool]]]! "
-                            f"(type passed in: {repr(type(value))})")
+            raise TypeError(
+                f"value is not a Union[int, Union[float, Union[str, bool]]]! "
+                f"(type passed in: {repr(type(value))})"
+            )
         super().__init__(master=parent, command=command, variable=variable, value=value)
         self._style_root = "TRadiobutton"
         self._photo_image = None
@@ -83,7 +97,9 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         """
         if not isinstance(new_text, str):
-            raise TypeError(f"new_text is not a str! (type passed in: {repr(type(new_text))})")
+            raise TypeError(
+                f"new_text is not a str! (type passed in: {repr(type(new_text))})"
+            )
         self.configure(text=new_text)
 
     @property
@@ -104,8 +120,10 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         """
         if not isinstance(new_image, (PhotoImage, tk.PhotoImage)):
-            raise TypeError(f"new_image is not a PIL.ImageTk.PhotoImage or a tk.PhotoImage! (type passed in: "
-                            f"{repr(type(new_image))})")
+            raise TypeError(
+                f"new_image is not a PIL.ImageTk.PhotoImage or a tk.PhotoImage! (type passed in: "
+                f"{repr(type(new_image))})"
+            )
         self._photo_image = new_image
         self.configure(image=self._photo_image)
 
@@ -127,7 +145,9 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         """
         if not isinstance(new_mode, str):
-            raise TypeError(f"new_mode is not a str! (type passed in: {repr(type(new_mode))})")
+            raise TypeError(
+                f"new_mode is not a str! (type passed in: {repr(type(new_mode))})"
+            )
         self.configure(compound=new_mode)
 
     @property
@@ -148,7 +168,9 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
 
@@ -160,5 +182,7 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         """
         if not isinstance(style_name, str):
-            raise TypeError(f"style_name is not a str! (type passed in: {repr(type(style_name))})")
+            raise TypeError(
+                f"style_name is not a str! (type passed in: {repr(type(style_name))})"
+            )
         self.configure(style=f"{style_name}.{self._style_root}")

@@ -12,8 +12,11 @@ from typing import Union
 from TkZero import Window
 
 
-def open_file(initial_dir: Path = None, title: str = None,
-              file_types: tuple[tuple[str, str], ...] = None) -> Union[Path, None]:
+def open_file(
+    initial_dir: Path = None,
+    title: str = None,
+    file_types: tuple[tuple[str, str], ...] = None,
+) -> Union[Path, None]:
     """
     Ask the user to open a file.
 
@@ -24,21 +27,31 @@ def open_file(initial_dir: Path = None, title: str = None,
     :return: A pathlib.Path of the path, or None if user canceled it.
     """
     if not isinstance(initial_dir, Path) and initial_dir is not None:
-        raise TypeError(f"initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})")
+        raise TypeError(
+            f"initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})"
+        )
     if not isinstance(title, str) and title is not None:
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(file_types, tuple) and file_types is not None:
-        raise TypeError(f"file_types is not a tuple! (type passed in: {repr(type(file_types))})")
+        raise TypeError(
+            f"file_types is not a tuple! (type passed in: {repr(type(file_types))})"
+        )
     try:
-        file_path = fd.askopenfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
-                                       title=title, filetypes=file_types if file_types is not None else ())
+        file_path = fd.askopenfilename(
+            initialdir=str(initial_dir) if initial_dir is not None else None,
+            title=title,
+            filetypes=file_types if file_types is not None else (),
+        )
     except tk.TclError:
         return None
     return Path(file_path) if file_path else None
 
 
-def save_file(initial_dir: Path = None, title: str = None,
-              file_types: tuple[tuple[str, str], ...] = None) -> Union[Path, None]:
+def save_file(
+    initial_dir: Path = None,
+    title: str = None,
+    file_types: tuple[tuple[str, str], ...] = None,
+) -> Union[Path, None]:
     """
     Ask the user to save a file.
 
@@ -49,13 +62,20 @@ def save_file(initial_dir: Path = None, title: str = None,
     :return: A pathlib.Path of the path, or None if user canceled it.
     """
     if not isinstance(initial_dir, Path) and initial_dir is not None:
-        raise TypeError(f"initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})")
+        raise TypeError(
+            f"initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})"
+        )
     if not isinstance(title, str) and title is not None:
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(file_types, tuple) and file_types is not None:
-        raise TypeError(f"file_types is not a tuple! (type passed in: {repr(type(file_types))})")
-    file_path = fd.asksaveasfilename(initialdir=str(initial_dir) if initial_dir is not None else None,
-                                     title=title, filetypes=file_types if file_types is not None else ())
+        raise TypeError(
+            f"file_types is not a tuple! (type passed in: {repr(type(file_types))})"
+        )
+    file_path = fd.asksaveasfilename(
+        initialdir=str(initial_dir) if initial_dir is not None else None,
+        title=title,
+        filetypes=file_types if file_types is not None else (),
+    )
     return Path(file_path) if file_path else None
 
 
@@ -68,14 +88,18 @@ def select_directory(initial_dir: Path = None, title: str = None) -> Union[Path,
     :return: A pathlib.Path of the path, or None if user canceled it.
     """
     if not isinstance(initial_dir, Path) and initial_dir is not None:
-        raise TypeError(f"initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})")
+        raise TypeError(
+            f"initial_dir is not a pathlib.Path! (type passed in: {repr(type(initial_dir))})"
+        )
     if not isinstance(title, str) and title is not None:
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     file_path = fd.askdirectory(initialdir=str(initial_dir), title=title)
     return Path(file_path) if file_path else None
 
 
-def choose_color(initial_color: str = "ffffff", as_rgb: bool = False) -> Union[Union[str, tuple[float]], None]:
+def choose_color(
+    initial_color: str = "ffffff", as_rgb: bool = False
+) -> Union[Union[str, tuple[float]], None]:
     """
     Ask the user to select a color.
 
@@ -85,7 +109,9 @@ def choose_color(initial_color: str = "ffffff", as_rgb: bool = False) -> Union[U
      as_rgb is True or None if user canceled or dialog failed? (need repro)
     """
     if not isinstance(initial_color, str):
-        raise TypeError(f"initial_color is not a str! (type passed in: {repr(type(initial_color))})")
+        raise TypeError(
+            f"initial_color is not a str! (type passed in: {repr(type(initial_color))})"
+        )
     if not isinstance(as_rgb, bool):
         raise TypeError(f"as_rgb is not a bool! (type passed in: {repr(type(as_rgb))})")
     color = colorchooser.askcolor(f"#{initial_color}")
@@ -95,8 +121,12 @@ def choose_color(initial_color: str = "ffffff", as_rgb: bool = False) -> Union[U
         return None
 
 
-def show_info(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-              title: str, message: str, detail: str = None) -> None:
+def show_info(
+    parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    title: str,
+    message: str,
+    detail: str = None,
+) -> None:
     """
     Show a info box.
 
@@ -107,19 +137,27 @@ def show_info(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: None.
     """
     if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(parent))})")
+        raise TypeError(
+            f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(parent))})"
+        )
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
-        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+        raise TypeError(
+            f"message is not a str! (type passed in: {repr(type(message))})"
+        )
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
     mbox.showinfo(parent=parent, title=title, message=message, detail=detail)
 
 
-def show_warning(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 title: str, message: str, detail: str = None) -> None:
+def show_warning(
+    parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    title: str,
+    message: str,
+    detail: str = None,
+) -> None:
     """
     Show a warning box.
 
@@ -130,19 +168,27 @@ def show_warning(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: None.
     """
     if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(parent))})")
+        raise TypeError(
+            f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(parent))})"
+        )
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
-        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+        raise TypeError(
+            f"message is not a str! (type passed in: {repr(type(message))})"
+        )
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
     mbox.showwarning(parent=parent, title=title, message=message, detail=detail)
 
 
-def show_error(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-               title: str, message: str, detail: str = None) -> None:
+def show_error(
+    parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    title: str,
+    message: str,
+    detail: str = None,
+) -> None:
     """
     Show an error box.
 
@@ -153,19 +199,27 @@ def show_error(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: None.
     """
     if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(parent))})")
+        raise TypeError(
+            f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(parent))})"
+        )
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
-        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+        raise TypeError(
+            f"message is not a str! (type passed in: {repr(type(message))})"
+        )
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
     mbox.showerror(parent=parent, title=title, message=message, detail=detail)
 
 
-def ask_ok_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                     title: str, message: str, detail: str = None) -> bool:
+def ask_ok_or_cancel(
+    parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    title: str,
+    message: str,
+    detail: str = None,
+) -> bool:
     """
     Show the user a prompt with the buttons "Ok" or "Cancel".
 
@@ -176,19 +230,27 @@ def ask_ok_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: True if the user clicks Ok else False.
     """
     if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(parent))})")
+        raise TypeError(
+            f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(parent))})"
+        )
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
-        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+        raise TypeError(
+            f"message is not a str! (type passed in: {repr(type(message))})"
+        )
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
     return mbox.askokcancel(parent=parent, title=title, message=message, detail=detail)
 
 
-def ask_yes_or_no(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                  title: str, message: str, detail: str = None) -> bool:
+def ask_yes_or_no(
+    parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    title: str,
+    message: str,
+    detail: str = None,
+) -> bool:
     """
     Show the user a prompt with the buttons "Yes" or "No".
 
@@ -199,19 +261,27 @@ def ask_yes_or_no(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: True if the user clicks Yes else No.
     """
     if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(parent))})")
+        raise TypeError(
+            f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(parent))})"
+        )
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
-        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+        raise TypeError(
+            f"message is not a str! (type passed in: {repr(type(message))})"
+        )
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
     return mbox.askyesno(parent=parent, title=title, message=message, detail=detail)
 
 
-def ask_yes_or_no_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                            title: str, message: str, detail: str = None) -> Union[bool, None]:
+def ask_yes_or_no_or_cancel(
+    parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    title: str,
+    message: str,
+    detail: str = None,
+) -> Union[bool, None]:
     """
     Show the user a prompt with the buttons "Yes" or "No" or "Cancel".
 
@@ -222,19 +292,29 @@ def ask_yes_or_no_or_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: True if the user clicks Yes, False if the user clicks No, and None if the user clicks Cancel.
     """
     if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(parent))})")
+        raise TypeError(
+            f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(parent))})"
+        )
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
-        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+        raise TypeError(
+            f"message is not a str! (type passed in: {repr(type(message))})"
+        )
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
-    return mbox.askyesnocancel(parent=parent, title=title, message=message, detail=detail)
+    return mbox.askyesnocancel(
+        parent=parent, title=title, message=message, detail=detail
+    )
 
 
-def ask_retry_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                     title: str, message: str, detail: str = None) -> bool:
+def ask_retry_cancel(
+    parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    title: str,
+    message: str,
+    detail: str = None,
+) -> bool:
     """
     Show the user a prompt with the buttons "Retry" or "Cancel".
 
@@ -245,15 +325,21 @@ def ask_retry_cancel(parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     :return: True if the user clicks Retry otherwise False.
     """
     if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                        f"(type passed in: {repr(type(parent))})")
+        raise TypeError(
+            f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+            f"(type passed in: {repr(type(parent))})"
+        )
     if not isinstance(title, str):
         raise TypeError(f"title is not a str! (type passed in: {repr(type(title))})")
     if not isinstance(message, str):
-        raise TypeError(f"message is not a str! (type passed in: {repr(type(message))})")
+        raise TypeError(
+            f"message is not a str! (type passed in: {repr(type(message))})"
+        )
     if not isinstance(detail, str) and detail is not None:
         raise TypeError(f"detail is not a str! (type passed in: {repr(type(detail))})")
-    return mbox.askretrycancel(parent=parent, title=title, message=message, detail=detail)
+    return mbox.askretrycancel(
+        parent=parent, title=title, message=message, detail=detail
+    )
 
 
 class CustomDialog(Window.Window):
@@ -266,8 +352,10 @@ class CustomDialog(Window.Window):
         :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         super().__init__(parent=parent)
         self.transient(master=parent)
 

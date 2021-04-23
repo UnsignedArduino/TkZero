@@ -12,14 +12,22 @@ class SelectModes:
     Single: Single item only
     Multiple: Can select multiple items
     """
+
     Single = tk.BROWSE
     Multiple = tk.EXTENDED
 
 
 class Listbox(tk.Listbox):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: list[str, ...] = None,
-                 select_mode: str = SelectModes.Single, height: int = None, width: int = None,
-                 on_select: Callable = None, on_double_click: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        values: list[str, ...] = None,
+        select_mode: str = SelectModes.Single,
+        height: int = None,
+        width: int = None,
+        on_select: Callable = None,
+        on_double_click: Callable = None,
+    ):
         """
         Initiate a tk.Listbox.
 
@@ -32,22 +40,38 @@ class Listbox(tk.Listbox):
         :param on_select: The function to call
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         if not isinstance(values, list) and values is not None:
-            raise TypeError(f"values is not a list! (type passed in: {repr(type(values))})")
+            raise TypeError(
+                f"values is not a list! (type passed in: {repr(type(values))})"
+            )
         if not isinstance(select_mode, str):
-            raise TypeError(f"select_mode is not a str! (type passed in: {repr(type(values))})")
+            raise TypeError(
+                f"select_mode is not a str! (type passed in: {repr(type(values))})"
+            )
         if not isinstance(height, int) and height is not None:
-            raise TypeError(f"height is not a int! (type passed in: {repr(type(height))})")
+            raise TypeError(
+                f"height is not a int! (type passed in: {repr(type(height))})"
+            )
         if not isinstance(width, int) and height is not None:
-            raise TypeError(f"width is not a int! (type passed in: {repr(type(width))})")
+            raise TypeError(
+                f"width is not a int! (type passed in: {repr(type(width))})"
+            )
         if values is not None:
             self._values = [str(item) for item in values]
         else:
             self._values = []
         self._variable = tk.StringVar(value=self._values)
-        super().__init__(master=parent, height=height, width=width, listvariable=self._variable, selectmode=select_mode)
+        super().__init__(
+            master=parent,
+            height=height,
+            width=width,
+            listvariable=self._variable,
+            selectmode=select_mode,
+        )
         if on_select is not None:
             self.bind("<<ListboxSelect>>", lambda event: on_select())
         if on_double_click is not None:
@@ -72,7 +96,9 @@ class Listbox(tk.Listbox):
         :return: None.
         """
         if not isinstance(new_selection, tuple):
-            raise TypeError(f"new_selection is not a tuple! (type passed in: {repr(type(new_selection))})")
+            raise TypeError(
+                f"new_selection is not a tuple! (type passed in: {repr(type(new_selection))})"
+            )
         self.selection_clear(0, tk.END)
         for index in new_selection:
             self.selection_set(index)
@@ -95,7 +121,9 @@ class Listbox(tk.Listbox):
         :return: None.
         """
         if not isinstance(new_values, list):
-            raise TypeError(f"new_values is not a list! (type passed in: {repr(type(new_values))})")
+            raise TypeError(
+                f"new_values is not a list! (type passed in: {repr(type(new_values))})"
+            )
         self._values = [str(item) for item in new_values]
         self._variable.set(self._values)
 
@@ -107,9 +135,13 @@ class Listbox(tk.Listbox):
         :return: None.
         """
         if not isinstance(index, int):
-            raise TypeError(f"index is not a int! (type passed in: {repr(type(index))})")
+            raise TypeError(
+                f"index is not a int! (type passed in: {repr(type(index))})"
+            )
         if index < len(self._values):
-            raise IndexError(f"index is out of range! (index passed in: {index} length of items: {len(self._values)}")
+            raise IndexError(
+                f"index is out of range! (index passed in: {index} length of items: {len(self._values)}"
+            )
         self.see(index=index)
 
     @property
@@ -130,6 +162,8 @@ class Listbox(tk.Listbox):
         :return: None.
         """
         if not isinstance(new_state, bool):
-            raise TypeError(f"new_state is not a bool! (type passed in: {repr(type(new_state))})")
+            raise TypeError(
+                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+            )
         self._enabled = new_state
         self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)

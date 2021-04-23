@@ -16,6 +16,7 @@ class DisplayModes:
     Top: Image above text
     Left: Image left of text, etc.
     """
+
     Original = "none"
     TextOnly = "text"
     ImageOnly = "image"
@@ -36,6 +37,7 @@ class SystemMenuNames:
     System - the menu that pops up when clicking on a Window's icon on the win32 window manager. Anything added will
      be under the list of standard commands already provided.
     """
+
     Application = "apple"
     Help = "help"
     Window = "window"
@@ -43,7 +45,12 @@ class SystemMenuNames:
 
 
 class Menu(tk.Menu):
-    def __init__(self, parent: Union[tk.Tk, tk.Toplevel], is_menubar: bool = False, command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Tk, tk.Toplevel],
+        is_menubar: bool = False,
+        command: Callable = None,
+    ):
         """
         Initiate a tk.Menu
 
@@ -52,10 +59,14 @@ class Menu(tk.Menu):
         :param command: The command to run before actually showing it - useful for updating the menu items.
         """
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
-            raise TypeError(f"parent is not a Union[tk.Tk, tk.Toplevel]! "
-                            f"(type passed in: {repr(type(parent))})")
+            raise TypeError(
+                f"parent is not a Union[tk.Tk, tk.Toplevel]! "
+                f"(type passed in: {repr(type(parent))})"
+            )
         if not isinstance(is_menubar, bool):
-            raise TypeError(f"is_menubar is not a bool! (type passed in: {repr(type(is_menubar))})")
+            raise TypeError(
+                f"is_menubar is not a bool! (type passed in: {repr(type(is_menubar))})"
+            )
         super().__init__(master=parent, postcommand=command, tearoff=0)
         if is_menubar:
             parent.configure(menu=self)
