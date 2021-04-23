@@ -1,5 +1,6 @@
 """
-Create the main window. Note that this should only be called once in your program!
+Create the main window. Note that this should only be called once in your
+program!
 """
 
 import tkinter as tk
@@ -41,7 +42,7 @@ class MainWindow(tk.Tk):
         """
         if not isinstance(new_title, str):
             raise TypeError(
-                f"new_title is not a str! (type passed in: {repr(type(new_title))})"
+                f"new_title is not a str! " f"(type passed in: {repr(type(new_title))})"
             )
         self.wm_title(new_title)
 
@@ -60,12 +61,14 @@ class MainWindow(tk.Tk):
         """
         Set the size of the window.
 
-        :param new_size: A TkZero.Vector.Size with the width and height attributes set to the size you want.
+        :param new_size: A TkZero.Vector.Size with the width and height
+         attributes set to the size you want.
         :return: None.
         """
         if not isinstance(new_size, Vector.Size):
             raise TypeError(
-                f"new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})"
+                f"new_size is not a Vector.Size! "
+                f"(type passed in: {repr(type(new_size))})"
             )
         self.geometry(f"{new_size.width}x{new_size.height}")
 
@@ -83,15 +86,18 @@ class MainWindow(tk.Tk):
         """
         Set the **top-left** position of the window.
 
-        :param new_position: A TkZero.Vector.Position with the new x and y attributes
+        :param new_position: A TkZero.Vector.Position with the new x and y
+         attributes
         :return: None.
         """
         if not isinstance(new_position, Vector.Position):
             raise TypeError(
-                f"new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})"
+                f"new_position is not a Vector.Position! "
+                f"(type passed in: {repr(type(new_position))})"
             )
         self.geometry(
-            f"{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}"
+            f"{self.size.width}x{self.size.height}+"
+            f"{new_position.x}+{new_position.y}"
         )
 
     def minimize(self) -> None:
@@ -157,7 +163,8 @@ class MainWindow(tk.Tk):
         """
         if not isinstance(full_screen, bool):
             raise TypeError(
-                f"full_screen is not a bool! (type passed in: {repr(type(full_screen))})"
+                f"full_screen is not a bool! "
+                f"(type passed in: {repr(type(full_screen))})"
             )
         self.attributes("-fullscreen", full_screen)
 
@@ -180,14 +187,16 @@ class MainWindow(tk.Tk):
         Bind a event to a function.
 
         :param event: A str of the event.
-        :param func: A function to call when the even happens. If none is passed in then a list of binds will be
-         returned.
-        :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
-         will also be made as a daemon thread. (will be terminated if main thread terminates)
-        :param add: Whether to add the function to a list of functions to be called or replace the function that was
-         previously bound to this sequence if any.
-        :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
-         when binding one.
+        :param func: A function to call when the even happens. If none is
+         passed in then a list of binds will be returned.
+        :param run_in_thread: Whether to run the function in a thread when
+         called. No arguments will be passed in. It will also be made as a
+         daemon thread. (will be terminated if main thread terminates)
+        :param add: Whether to add the function to a list of functions to be
+         called or replace the function that was previously bound to this
+         sequence if any.
+        :return: A list of functions (As Tk function str) that would be called
+         when this event is triggered or None when binding one.
         """
         if not isinstance(event, str):
             raise TypeError(
@@ -195,7 +204,8 @@ class MainWindow(tk.Tk):
             )
         if not isinstance(run_in_thread, bool):
             raise TypeError(
-                f"run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})"
+                f"run_in_thread is not a bool! "
+                f"(type passed in: {repr(type(run_in_thread))})"
             )
         if not isinstance(add, bool):
             raise TypeError(f"add is not a bool! (type passed in: {repr(type(add))})")
@@ -221,13 +231,14 @@ class MainWindow(tk.Tk):
         """
         Enable or disable the children.
 
-        :param parent: A tk.Widget that is our parent. If None then default to self.
+        :param parent: A tk.Widget that is our parent. If None then default to
+         self.
         :param enable: Whether to enable or disable the children.
         :return: None.
         """
         if not isinstance(parent, tk.Widget) and parent is not None:
             raise TypeError(
-                f"parent is not a tk.Widget! (type passed in: {repr(type(parent))})"
+                f"parent is not a tk.Widget! " f"(type passed in: {repr(type(parent))})"
             )
         if not isinstance(enable, bool):
             raise TypeError(
@@ -247,7 +258,8 @@ class MainWindow(tk.Tk):
     @property
     def enabled(self) -> bool:
         """
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -256,14 +268,17 @@ class MainWindow(tk.Tk):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         """
         if not isinstance(new_state, bool):
             raise TypeError(
-                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
@@ -271,8 +286,8 @@ class MainWindow(tk.Tk):
     @property
     def on_close(self) -> Union[Callable, None]:
         """
-        Return the function that will be called when the user tries to close the window. If no function was assigned,
-        return None.
+        Return the function that will be called when the user tries to close
+        the window. If no function was assigned, return None.
 
         :return: A function or None.
         """
@@ -283,7 +298,8 @@ class MainWindow(tk.Tk):
         """
         Set the function that will be called
 
-        :param new_func: A function that will be called instead of destroying the window.
+        :param new_func: A function that will be called instead of destroying
+         the window.
         :return: None.
         """
         self._on_close = new_func

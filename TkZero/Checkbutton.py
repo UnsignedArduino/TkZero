@@ -49,14 +49,18 @@ class Checkbutton(ttk.Checkbutton):
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
             raise TypeError(
-                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"parent is not a "
+                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
         if not isinstance(text, str):
-            raise TypeError(f"text is not a str! (type passed in: {repr(type(text))})")
+            raise TypeError(
+                f"text is not a str! " f"(type passed in: {repr(type(text))})"
+            )
         if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
             raise TypeError(
-                f"image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})"
+                f"image is not a Union[PhotoImage, tk.PhotoImage]! "
+                f"(type passed in: {repr(type(image))})"
             )
         self._variable = tk.BooleanVar(value=False)
         super().__init__(master=parent, command=command, variable=self._variable)
@@ -73,8 +77,8 @@ class Checkbutton(ttk.Checkbutton):
         """
         Get the value on this checkbutton.
 
-        :return: None if in special "not-selected-but-not-off" (like dash or boxed or grayed but no check) or True for
-         checked and False otherwise.
+        :return: None if in special "not-selected-but-not-off" (like dash or
+         boxed or grayed but no check) or True for checked and False otherwise.
         """
         if self.instate(["alternate"]):
             return None
@@ -85,13 +89,15 @@ class Checkbutton(ttk.Checkbutton):
         """
         Set the value on this checkbutton.
 
-        :param new_value: The new value, either None for special "not-selected-but-not-off" (like dash or boxed or
-         grayed but no check) or True for checked and False otherwise.
+        :param new_value: The new value, either None for special
+         "not-selected-but-not-off" (like dash or boxed or grayed but no
+         check) or True for checked and False otherwise.
         :return: None.
         """
         if not isinstance(new_value, bool) and new_value is not None:
             raise TypeError(
-                f"new_value is not a bool or None! (type passed in: {repr(type(new_value))})"
+                f"new_value is not a bool or None! "
+                f"(type passed in: {repr(type(new_value))})"
             )
         if new_value is None:
             self.state(["alternate"])
@@ -117,14 +123,15 @@ class Checkbutton(ttk.Checkbutton):
         """
         if not isinstance(new_text, str):
             raise TypeError(
-                f"new_text is not a str! (type passed in: {repr(type(new_text))})"
+                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
             )
         self.configure(text=new_text)
 
     @property
     def image(self) -> Union[PhotoImage, None]:
         """
-        Get the PIL.ImageTk.PhotoImage on this checkbutton. Returns None if none was ever set.
+        Get the PIL.ImageTk.PhotoImage on this checkbutton. Returns None if
+        none was ever set.
 
         :return: A PIL.ImageTk.PhotoImage or a tk.PhotoImage or None.
         """
@@ -140,8 +147,9 @@ class Checkbutton(ttk.Checkbutton):
         """
         if not isinstance(new_image, (PhotoImage, tk.PhotoImage)):
             raise TypeError(
-                f"new_image is not a PIL.ImageTk.PhotoImage or a tk.PhotoImage! (type passed in: "
-                f"{repr(type(new_image))})"
+                f"new_image is not a "
+                f"PIL.ImageTk.PhotoImage or a tk.PhotoImage! "
+                f"(type passed in: {repr(type(new_image))})"
             )
         self._photo_image = new_image
         self.configure(image=self._photo_image)
@@ -151,7 +159,8 @@ class Checkbutton(ttk.Checkbutton):
         """
         Get the display mode of this checkbutton.
 
-        :return: A str, either one of "text", "image", "center", "top", "left", "bottom", or "right".
+        :return: A str, either one of "text", "image", "center", "top",
+         "left", "bottom", or "right".
         """
         return str(self.cget("compound"))
 
@@ -160,7 +169,8 @@ class Checkbutton(ttk.Checkbutton):
         """
         Set the display mode of this checkbutton.
 
-        :param new_mode: A str, either one of "text", "image", "center", "top", "left", "bottom", or "right".
+        :param new_mode: A str, either one of "text", "image", "center",
+         "top", "left", "bottom", or "right".
         :return: None.
         """
         if not isinstance(new_mode, str):
@@ -172,7 +182,8 @@ class Checkbutton(ttk.Checkbutton):
     @property
     def enabled(self) -> bool:
         """
-        Whether this checkbutton is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Whether this checkbutton is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -181,14 +192,17 @@ class Checkbutton(ttk.Checkbutton):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this checkbutton is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this checkbutton is in normal mode or disabled mode.
+        (grayed out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         """
         if not isinstance(new_state, bool):
             raise TypeError(
-                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
             )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
@@ -202,6 +216,7 @@ class Checkbutton(ttk.Checkbutton):
         """
         if not isinstance(style_name, str):
             raise TypeError(
-                f"style_name is not a str! (type passed in: {repr(type(style_name))})"
+                f"style_name is not a str! "
+                f"(type passed in: {repr(type(style_name))})"
             )
         self.configure(style=f"{style_name}.{self._style_root}")

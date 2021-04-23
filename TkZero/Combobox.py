@@ -23,28 +23,36 @@ class Combobox(ttk.Combobox):
         Initiate a ttk.Combobox.
 
         :param parent: The parent of the combobox.
-        :param values: The default values you can choose, should be a tuple of str. Defaults to ()
+        :param values: The default values you can choose, should be a tuple of
+         str. Defaults to ()
         :param width: The width of the combobox. Defaults to None.
-        :param show: The character to show instead of the actual text. Defaults to None.
-        :param validate: The function to use for validation. Will be passed in a positional argument with the text as
-         a str (like `validate(contents)`) and should return a bool - True if passed otherwise False.
-        :param command: The command to run when the value of the combobox changes. Defaults to None.
+        :param show: The character to show instead of the actual text.
+         Defaults to None.
+        :param validate: The function to use for validation. Will be passed in
+         a positional argument with the text as
+         a str (like `validate(contents)`) and should return a bool - True if
+          passed otherwise False.
+        :param command: The command to run when the value of the combobox
+         changes. Defaults to None.
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
             raise TypeError(
-                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"parent is not a "
+                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
         if not isinstance(values, tuple):
             raise TypeError(
-                f"values is not a tuple! (type passed in: {repr(type(values))})"
+                f"values is not a tuple! " f"(type passed in: {repr(type(values))})"
             )
         if not isinstance(width, int) and width is not None:
             raise TypeError(
                 f"width is not a int! (type passed in: {repr(type(width))})"
             )
         if not isinstance(show, str) and show is not None:
-            raise TypeError(f"show is not a str! (type passed in: {repr(type(show))})")
+            raise TypeError(
+                f"show is not a str! " f"(type passed in: {repr(type(show))})"
+            )
         self._variable = tk.StringVar(value="")
         if command is not None:
             self._variable.trace_add("write", lambda *args: command())
@@ -88,7 +96,7 @@ class Combobox(ttk.Combobox):
         """
         if not isinstance(new_text, str):
             raise TypeError(
-                f"new_text is not a str! (type passed in: {repr(type(new_text))})"
+                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
             )
         self.delete(0, tk.END)
         self.insert(0, new_text)
@@ -112,14 +120,16 @@ class Combobox(ttk.Combobox):
         """
         if not isinstance(new_values, tuple):
             raise TypeError(
-                f"new_values is not a tuple! (type passed in: {repr(type(new_values))})"
+                f"new_values is not a tuple! "
+                f"(type passed in: {repr(type(new_values))})"
             )
         self["values"] = new_values
 
     @property
     def enabled(self) -> bool:
         """
-        Get whether this combobox is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this combobox is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -128,14 +138,17 @@ class Combobox(ttk.Combobox):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this combobox is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this combobox is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         """
         if not isinstance(new_state, bool):
             raise TypeError(
-                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
             )
         self._enabled = new_state
         self._readonly = False
@@ -144,8 +157,8 @@ class Combobox(ttk.Combobox):
     @property
     def read_only(self) -> bool:
         """
-        Get whether this combobox is read only mode. (cannot type in selection manually - must select from pre-defined
-        values)
+        Get whether this combobox is read only mode. (cannot type in selection
+        manually - must select from pre-defined values)
 
         :return: A bool, True if read only otherwise False.
         """
@@ -154,15 +167,17 @@ class Combobox(ttk.Combobox):
     @read_only.setter
     def read_only(self, new_state: bool) -> None:
         """
-        Set whether this combobox is in read only mode (cannot type in selection manually - must select from pre-defined
-        values)
+        Set whether this combobox is in read only mode (cannot type in
+        selection manually - must select from pre-defined values)
 
-        :param new_state: The new state (a bool) True for normal and False for read only.
+        :param new_state: The new state (a bool) True for normal and False for
+         read only.
         :return: None.
         """
         if not isinstance(new_state, bool):
             raise TypeError(
-                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
             )
         self._enabled = True
         self._readonly = new_state
@@ -241,7 +256,8 @@ class Combobox(ttk.Combobox):
         """
         Try to pop up the context menu.
 
-        :param event: An object that Tk passes in with information about the event that we need.
+        :param event: An object that Tk passes in with information about the
+         event that we need.
         :return: None.
         """
         self._update_context_menu_states()
@@ -310,6 +326,7 @@ class Combobox(ttk.Combobox):
         """
         if not isinstance(style_name, str):
             raise TypeError(
-                f"style_name is not a str! (type passed in: {repr(type(style_name))})"
+                f"style_name is not a str! "
+                f"(type passed in: {repr(type(style_name))})"
             )
         self.configure(style=f"{style_name}.{self._style_root}")

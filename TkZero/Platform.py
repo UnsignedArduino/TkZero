@@ -22,7 +22,8 @@ def on_platform(
     """
     Return a bool if we are on the windowing system passed in.
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :param system: A str of "x11", "win32", or "aqua".
     :return: A bool on whether we are on the system passed in.
     """
@@ -38,7 +39,8 @@ def on_x11(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -> bool:
     """
     Return whether we are on an X11 windowing system. (Usually Linux)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on an X11 windowing system.
     """
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
@@ -53,7 +55,8 @@ def on_win32(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -> bool:
     """
     Return whether we are on a win32 windowing system. (Usually Windows)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on a win32 windowing system.
     """
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
@@ -68,7 +71,8 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -> bool:
     """
     Return whether we are on an aqua windowing system. (Usually macOS)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on an aqau windowing system.
     """
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):

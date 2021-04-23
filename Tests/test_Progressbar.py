@@ -46,8 +46,6 @@ class ProgressbarTest(unittest.TestCase):
         p.grid(row=0, column=0)
         p.start()
         root.update()
-        with self.assertRaises(AttributeError):
-            p.value = 1
         root.after(ms=1000, func=root.close)
         root.mainloop()
 

@@ -32,25 +32,28 @@ class Listbox(tk.Listbox):
         Initiate a tk.Listbox.
 
         :param parent: The parent of the listbox.
-        :param values: The default values you can choose, should be a list of str. Defaults to []
-        :param select_mode: The select mode to use. (allows you to select one or more items or not) Should be a str and
-         defaults to SelectModes.Single
+        :param values: The default values you can choose, should be a list of
+         str. Defaults to []
+        :param select_mode: The select mode to use. (allows you to select one
+         or more items or not) Should be a str and defaults to
+         SelectModes.Single
         :param height: The height of the listbox. Defaults to None.
         :param width: The width of the listbox. Defaults to None.
         :param on_select: The function to call
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
             raise TypeError(
-                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"parent is not a "
+                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
         if not isinstance(values, list) and values is not None:
             raise TypeError(
-                f"values is not a list! (type passed in: {repr(type(values))})"
+                f"values is not a list! " f"(type passed in: {repr(type(values))})"
             )
         if not isinstance(select_mode, str):
             raise TypeError(
-                f"select_mode is not a str! (type passed in: {repr(type(values))})"
+                f"select_mode is not a str! " f"(type passed in: {repr(type(values))})"
             )
         if not isinstance(height, int) and height is not None:
             raise TypeError(
@@ -92,12 +95,14 @@ class Listbox(tk.Listbox):
         """
         Set the selected items in this listbox.
 
-        :param new_selection: The new selections. Should be a tuple of ints (ex. (0, 1, 3))
+        :param new_selection: The new selections. Should be a tuple of ints
+         (ex. (0, 1, 3))
         :return: None.
         """
         if not isinstance(new_selection, tuple):
             raise TypeError(
-                f"new_selection is not a tuple! (type passed in: {repr(type(new_selection))})"
+                f"new_selection is not a tuple! "
+                f" (type passed in: {repr(type(new_selection))})"
             )
         self.selection_clear(0, tk.END)
         for index in new_selection:
@@ -122,7 +127,8 @@ class Listbox(tk.Listbox):
         """
         if not isinstance(new_values, list):
             raise TypeError(
-                f"new_values is not a list! (type passed in: {repr(type(new_values))})"
+                f"new_values is not a list! "
+                f"(type passed in: {repr(type(new_values))})"
             )
         self._values = [str(item) for item in new_values]
         self._variable.set(self._values)
@@ -131,7 +137,8 @@ class Listbox(tk.Listbox):
         """
         Scroll to the index, so that we can see it.
 
-        :param index: The index to scroll to. Raises IndexError if not in the list.
+        :param index: The index to scroll to. Raises IndexError if not in the
+         list.
         :return: None.
         """
         if not isinstance(index, int):
@@ -140,14 +147,17 @@ class Listbox(tk.Listbox):
             )
         if index < len(self._values):
             raise IndexError(
-                f"index is out of range! (index passed in: {index} length of items: {len(self._values)}"
+                f"index is out of range! "
+                f"(index passed in: {index} "
+                f"length of items: {len(self._values)}"
             )
         self.see(index=index)
 
     @property
     def enabled(self) -> bool:
         """
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -156,14 +166,17 @@ class Listbox(tk.Listbox):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         """
         if not isinstance(new_state, bool):
             raise TypeError(
-                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
             )
         self._enabled = new_state
         self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)

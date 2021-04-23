@@ -37,11 +37,13 @@ class Text(tk.Text):
         :param parent: The parent of the text.
         :param width: The width of the text. Defaults to None.
         :param height: The width of the text. Defaults to None.
-        :param wrapping: How to wrap words in the text. Defaults to TextWrap.WordWrapping
+        :param wrapping: How to wrap words in the text. Defaults to
+         TextWrap.WordWrapping
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
             raise TypeError(
-                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"parent is not a "
+                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
         if not isinstance(width, int) and width is not None:
@@ -54,7 +56,7 @@ class Text(tk.Text):
             )
         if not isinstance(wrapping, str):
             raise TypeError(
-                f"wrapping is not a str! (type passed in: {repr(type(wrapping))})"
+                f"wrapping is not a str! " f"(type passed in: {repr(type(wrapping))})"
             )
         super().__init__(master=parent, width=width, height=height, wrap=wrapping)
         self._enabled = True
@@ -96,7 +98,7 @@ class Text(tk.Text):
         """
         if not isinstance(new_text, str):
             raise TypeError(
-                f"new_text is not a str! (type passed in: {repr(type(new_text))})"
+                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
             )
         self.delete("1.0", tk.END)
         self.insert("1.0", new_text)
@@ -104,7 +106,8 @@ class Text(tk.Text):
     @property
     def enabled(self) -> bool:
         """
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -113,14 +116,17 @@ class Text(tk.Text):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+        for disabled.
         :return: None.
         """
         if not isinstance(new_state, bool):
             raise TypeError(
-                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
             )
         self._enabled = new_state
         self._readonly = False
@@ -192,7 +198,8 @@ class Text(tk.Text):
         """
         Try to pop up the context menu.
 
-        :param event: An object that Tk passes in with information about the event that we need.
+        :param event: An object that Tk passes in with information about the
+         event that we need.
         :return: None.
         """
         self._update_context_menu_states()

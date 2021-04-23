@@ -16,7 +16,8 @@ class Frame(ttk.Frame):
         """
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
             raise TypeError(
-                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
+                f"parent is not a "
+                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
         super().__init__(master=parent)
@@ -37,16 +38,18 @@ class Frame(ttk.Frame):
         """
         Set the width of the frame.
 
-        :param new_width: An int which should be the new width of the frame. Cannot be less than 1.
+        :param new_width: An int which should be the new width of the frame.
+         Cannot be less than 1.
         :return: None.
         """
         if not isinstance(new_width, int):
             raise TypeError(
-                f"new_height is not a int! (type passed in: {repr(type(new_width))})"
+                f"new_height is not a int! "
+                f"(type passed in: {repr(type(new_width))})"
             )
         if new_width < 1:
             raise ValueError(
-                f"new_height is less than 1! (value passed in: {repr(new_width)})"
+                f"new_height is less than 1! " f"(value passed in: {repr(new_width)})"
             )
         self.configure(width=new_width)
 
@@ -64,16 +67,18 @@ class Frame(ttk.Frame):
         """
         Set the width of the frame.
 
-        :param new_height: An int which should be the new height of the frame. Cannot be less than 1.
+        :param new_height: An int which should be the new height of the frame.
+         Cannot be less than 1.
         :return: None.
         """
         if not isinstance(new_height, int):
             raise TypeError(
-                f"new_height is not an int! (type passed in: {repr(type(new_height))})"
+                f"new_height is not an int! "
+                f"(type passed in: {repr(type(new_height))})"
             )
         if new_height < 1:
             raise ValueError(
-                f"new_height is less than 1! (value passed in: {repr(new_height)})"
+                f"new_height is less than 1! " f"(value passed in: {repr(new_height)})"
             )
         self.configure(height=new_height)
 
@@ -83,7 +88,8 @@ class Frame(ttk.Frame):
         """
         Enable or disable the children.
 
-        :param parent: A tk.Widget that is our parent. If None then default to self.
+        :param parent: A tk.Widget that is our parent. If None then default to
+         self.
         :param enable: Whether to enable or disable the children.
         :return: None.
         """
@@ -98,7 +104,8 @@ class Frame(ttk.Frame):
     @property
     def enabled(self) -> bool:
         """
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         """
@@ -107,14 +114,17 @@ class Frame(ttk.Frame):
     @enabled.setter
     def enabled(self, new_state: bool) -> None:
         """
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+        for disabled.
         :return: None.
         """
         if not isinstance(new_state, bool):
             raise TypeError(
-                f"new_state is not a bool! (type passed in: {repr(type(new_state))})"
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
@@ -128,6 +138,7 @@ class Frame(ttk.Frame):
         """
         if not isinstance(style_name, str):
             raise TypeError(
-                f"style_name is not a str! (type passed in: {repr(type(style_name))})"
+                f"style_name is not a str! "
+                f"(type passed in: {repr(type(style_name))})"
             )
         self.configure(style=f"{style_name}.{self._style_root}")

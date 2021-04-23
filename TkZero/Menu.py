@@ -29,13 +29,17 @@ class DisplayModes:
 
 class SystemMenuNames:
     """
-    Names for the system menus you can override - if you pass on of these in it would override/extend that menu.
-    Application - the application menu on aqua. Should only be used on aqua windowing systems. (macOS)
-    Help - the help menu on aqua and x11. On the win32 window manager, just define a "Help" menu last.
-    Window - the window menu on macOS. Anything added to this menu will before the list of windows in your program.
-     (Tk takes care of that)
-    System - the menu that pops up when clicking on a Window's icon on the win32 window manager. Anything added will
-     be under the list of standard commands already provided.
+    Names for the system menus you can override - if you pass on of these in
+    it would override/extend that menu.
+    Application - the application menu on aqua. Should only be used on aqua
+     windowing systems. (macOS)
+    Help - the help menu on aqua and x11. On the win32 window manager, just
+     define a "Help" menu last.
+    Window - the window menu on macOS. Anything added to this menu will before
+     the list of windows in your program. (Tk takes care of that)
+    System - the menu that pops up when clicking on a Window's icon on the
+     win32 window manager. Anything added will be under the list of standard
+     commands already provided.
     """
 
     Application = "apple"
@@ -55,8 +59,10 @@ class Menu(tk.Menu):
         Initiate a tk.Menu
 
         :param parent: The parent of the menu.
-        :param is_menubar: Whether this menu should be the menu bar that you attach menus too. Defaults to False.
-        :param command: The command to run before actually showing it - useful for updating the menu items.
+        :param is_menubar: Whether this menu should be the menu bar that you
+         attach menus too. Defaults to False.
+        :param command: The command to run before actually showing it - useful
+         for updating the menu items.
         """
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
             raise TypeError(
@@ -65,7 +71,8 @@ class Menu(tk.Menu):
             )
         if not isinstance(is_menubar, bool):
             raise TypeError(
-                f"is_menubar is not a bool! (type passed in: {repr(type(is_menubar))})"
+                f"is_menubar is not a bool! "
+                f"(type passed in: {repr(type(is_menubar))})"
             )
         super().__init__(master=parent, postcommand=command, tearoff=0)
         if is_menubar:

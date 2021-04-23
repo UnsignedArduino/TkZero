@@ -1,8 +1,8 @@
 """
 TkZero - a sane and Pythonic wrapper around Tkinter.
 
-Find this project on PyPI at https://pypi.org/project/TkZero/, or it's source code at
-https://github.com/UnsignedArduino/TkZero.
+Find this project on PyPI at https://pypi.org/project/TkZero/, or it's source
+code at https://github.com/UnsignedArduino/TkZero.
 """
 # TODO: Create into proper Python package -
 #  https://antonz.org/python-packaging/#a-readme-and-changelog:~:text=A.%20Readme%20and%20changelog
