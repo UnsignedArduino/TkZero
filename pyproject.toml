@@ -1,0 +1,11 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "TkZero"
+author = "UnsignedArduino"
+author-email = "UnsignedArduino@outlook.com"
+home-page = "https://github.com/UnsignedArduino/TkZero"
+classifiers = [ "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",]
+
