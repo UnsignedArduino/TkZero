@@ -34,3 +34,10 @@ jobs:
               # if: contains(env.USING_COVERAGE, matrix.python-version)
               with:
                   fail_ci_if_error: true
+
+            - name: Upload coverage as artifact
+              uses: actions/upload-artifact@v2
+              with:
+                name: coverage
+                path: .coverage
+                retention-days: 5
