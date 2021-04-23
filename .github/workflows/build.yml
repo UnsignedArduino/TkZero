@@ -38,6 +38,6 @@ jobs:
             - name: Upload coverage as artifact
               uses: actions/upload-artifact@v2
               with:
-                name: coverage
-                path: .coverage
+                name: coverage.xml
+                path: coverage.xml
                 retention-days: 5
