@@ -8,4 +8,6 @@ author = "UnsignedArduino"
 author-email = "UnsignedArduino@outlook.com"
 home-page = "https://github.com/UnsignedArduino/TkZero"
 classifiers = [ "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",]
+description-file = "README.md"
+requires-python = ">=3.8"
 
