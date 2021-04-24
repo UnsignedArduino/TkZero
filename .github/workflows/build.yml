@@ -31,7 +31,7 @@ jobs:
 
             - name: Convert coverage files to XML
               run: |
-                  python -m coverage json -i
+                  python -m coverage xml -i
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
@@ -43,9 +43,16 @@ jobs:
               run: |
                   dir
 
-            - name: Upload coverage as artifact
+            - name: Upload raw coverage as artifact
               uses: actions/upload-artifact@v2
               with:
                 name: .coverage
                 path: .coverage
+                retention-days: 5
+
+            - name: Upload XML coverage as artifact
+              uses: actions/upload-artifact@v2
+              with:
+                name: coverage.xml
+                path: coverage.xml
                 retention-days: 5
