@@ -31,13 +31,17 @@ jobs:
 
             - name: Convert coverage files to XML
               run: |
-                  python -m coverage xml -i
+                  python -m coverage json -i
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
               if: contains(env.USING_COVERAGE, matrix.python-version)
               with:
                   fail_ci_if_error: true
+
+            - name: List all files in directory
+              run: |
+                  dir
 
             - name: Upload coverage as artifact
               uses: actions/upload-artifact@v2
