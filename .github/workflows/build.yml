@@ -8,9 +8,6 @@ jobs:
             matrix:
                 python-version: [3.9]
 
-        env:
-            USING_COVERAGE: "3.9"
-
         steps:
             - name: Checkout sources
               uses: actions/checkout@v2
@@ -29,23 +26,6 @@ jobs:
               run: |
                   python -m tox
 
-            - name: Convert coverage files to JSON
-              run: |
-                  python -m coverage json -i
-                  dir
-
-            - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v1
-              if: contains(env.USING_COVERAGE, matrix.python-version)
-              with:
-                  fail_ci_if_error: true
-                  functionalities:
-                    coveragepy
-
-            - name: List all files in directory
-              run: |
-                  dir
-
             - name: Upload raw coverage as artifact
               uses: actions/upload-artifact@v2
               with:
@@ -53,9 +33,21 @@ jobs:
                 path: .coverage
                 retention-days: 5
 
+            - name: Convert coverage files to JSON
+              run: |
+                  python -m coverage json -i
+                  dir
+
             - name: Upload JSON coverage as artifact
               uses: actions/upload-artifact@v2
               with:
                 name: coverage.json
                 path: coverage.json
                 retention-days: 5
+
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v1
+              with:
+                  fail_ci_if_error: true
+                  functionalities:
+                    coveragepy
