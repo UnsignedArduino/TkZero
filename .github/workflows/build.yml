@@ -31,7 +31,6 @@ jobs:
 
             - name: Convert coverage files to JSON
               run: |
-                  dir
                   python -m coverage json -i
                   dir
 
@@ -40,6 +39,8 @@ jobs:
               if: contains(env.USING_COVERAGE, matrix.python-version)
               with:
                   fail_ci_if_error: true
+                  functionalities:
+                    coveragepy
 
             - name: List all files in directory
               run: |
