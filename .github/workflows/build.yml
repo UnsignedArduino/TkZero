@@ -29,9 +29,10 @@ jobs:
               run: |
                   python -m tox
 
-            - name: Convert coverage files to XML
+            - name: Convert coverage files to JSON
               run: |
-                  python -m coverage xml -i
+                  python -m coverage json -i
+                  del coverage.xml
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
