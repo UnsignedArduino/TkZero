@@ -53,9 +53,9 @@ jobs:
                 path: .coverage
                 retention-days: 5
 
-            - name: Upload XML coverage as artifact
+            - name: Upload JSON coverage as artifact
               uses: actions/upload-artifact@v2
               with:
-                name: coverage.xml
-                path: coverage.xml
+                name: coverage.json
+                path: coverage.json
                 retention-days: 5
