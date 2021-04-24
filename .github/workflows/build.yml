@@ -31,8 +31,9 @@ jobs:
 
             - name: Convert coverage files to JSON
               run: |
+                  dir
                   python -m coverage json -i
-                  del coverage.xml
+                  dir
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
