@@ -2,6 +2,7 @@
 [![PyPI Version][pypi-image]][pypi-url]
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
+[![License][license-image]][license-url]
 
 A _sane_ and _Pythonic_ wrapper around Tkinter.
 
@@ -91,3 +92,5 @@ root.mainloop()
 [build-url]: https://github.com/UnsignedArduino/TkZero/actions/workflows/build.yml
 [coverage-image]: https://codecov.io/gh/UnsignedArduino/TkZero/branch/main/graph/badge.svg?token=ZUP6MD6INL
 [coverage-url]: https://codecov.io/gh/UnsignedArduino/TkZero
+[license-image]: https://badgen.net/github/license/UnsignedArduino/TkZero
+[license-url]: https://github.com/UnsignedArduino/TkZero/blob/main/LICENSE
