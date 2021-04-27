@@ -3,16 +3,46 @@
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
 
-## A _sane_ and _Pythonic_ wrapper around Tkinter.
+A _sane_ and _Pythonic_ wrapper around Tkinter.
 
-Here's the [documentation](https://unsignedarduino.github.io/TkZero/)
+[Documentation](https://unsignedarduino.github.io/TkZero/) is available on 
+GitHub pages. You can find the raw HTML for the docs in the 
+[`docs/`](https://github.com/UnsignedArduino/TkZero/tree/main/docs) directory.
+[`pdoc`](https://pdoc3.github.io/pdoc/) is used to generate the documentation.
+
+You can find examples in the 
+[`Examples/`](https://github.com/UnsignedArduino/TkZero/tree/main/Examples) 
+directory and tests in the 
+[`Tests`](https://github.com/UnsignedArduino/TkZero/tree/main/Tests) directory.
 
 ## Installation
-```pip install TkZero```
+
+### Using PyPI
+Windows:
+```commandline
+pip install TkZero
+```
+macOS and Linux:
+```shell
+pip3 install TkZero
+```
+You may need to use the user (`-U`) flag to install if you are not using a 
+virtual environment!
+
+### From source
+Make sure you have [Git](https://git-scm.com/) before following these steps. 
+If you are on Windows, I highly suggest you install the 
+[Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701)
+as it's much better than the command prompt.
+
+1. `cd` into your project root.
+2. Run `git clone https://github.com/UnsignedArduino/TkZero`
+
+That's it!
 
 ## Basic Usage
+
 ```python
-#Entry Example
 import tkinter as tk
 
 from TkZero.Button import Button
@@ -37,24 +67,12 @@ Label(root, text="Password: ").grid(row=1, column=0, sticky=tk.NW)
 password = Entry(root, width=30, show="*")
 password.grid(row=1, column=1, sticky=tk.NW)
 
-Label(root, text="Secret number: ").grid(row=2, column=0, sticky=tk.NW)
-
-
-# Create a function that only allows numbers
-def numbers_only(new_str: str) -> bool:
-    return new_str.isdecimal()
-
-
-secret_num = Entry(root, width=30, validate=numbers_only)
-secret_num.grid(row=2, column=1, sticky=tk.NW)
-
 
 # "Submit" the form
 def submit():
     root.enabled = False
     print(username.value)
     print(password.value)
-    print(secret_num.value)
 
 
 # Create a button to "submit"
@@ -63,9 +81,7 @@ submit.grid(row=3, column=0, columnspan=2, sticky=tk.NSEW)
 
 # Start the mainloop like in Tkinter
 root.mainloop()
-
 ```
-
 
 <!-- Badges -->
 
