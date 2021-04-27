@@ -5,7 +5,7 @@
 
 ## A _sane_ and _Pythonic_ wrapper around Tkinter.
 
-Here's the [documentation](https://bobingstern.github.io/TkZero/)
+Here's the [documentation](https://unsignedarduino.github.io/TkZero/)
 
 ## Installation
 ```pip install TkZero```
@@ -75,4 +75,3 @@ root.mainloop()
 [build-url]: https://github.com/UnsignedArduino/TkZero/actions/workflows/build.yml
 [coverage-image]: https://codecov.io/gh/UnsignedArduino/TkZero/branch/main/graph/badge.svg?token=ZUP6MD6INL
 [coverage-url]: https://codecov.io/gh/UnsignedArduino/TkZero
-[docs]: https://bobingstern.github.io/TkZero/
