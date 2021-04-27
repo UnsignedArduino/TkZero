@@ -2,7 +2,6 @@
 Test the TkZero.Dialog module
 """
 
-import tkinter as tk
 import unittest
 from pathlib import Path
 
@@ -94,10 +93,7 @@ class DialogTest(unittest.TestCase):
         Dialog.choose_color(initial_color="101010", as_rgb=True)
 
     def test_color_chooser_bad_params(self):
-        try:
-            root = MainWindow()
-        except tk.TclError:
-            return
+        root = MainWindow()
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
