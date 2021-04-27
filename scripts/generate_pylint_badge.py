@@ -7,9 +7,10 @@ from pathlib import Path
 import requests
 from pylint.lint import Run
 
-module_path = Path(r"..\TkZero")
+module_path = Path(r"..\TkZero\TkZero").expanduser().resolve()
 badge_path = Path(r"..\assets\badges\pylint.svg")
 
+print(f"Module path is {repr(str(module_path))}")
 results = Run([str(module_path)], do_exit=False)
 
 score = round(results.linter.stats["global_note"], 2)
