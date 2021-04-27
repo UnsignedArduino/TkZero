@@ -3,7 +3,7 @@
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
 
-### A _sane_ and _Pythonic_ wrapper around Tkinter.
+## A _sane_ and _Pythonic_ wrapper around Tkinter.
 
 Here's the [documentation](https://bobingstern.github.io/TkZero/)
 
