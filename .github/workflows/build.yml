@@ -1,6 +1,8 @@
-# ...
+name: run tests
+
 on:
     push
+
 jobs:
     build:
         runs-on: windows-latest
@@ -37,17 +39,6 @@ jobs:
                 name: .coverage
                 path: .coverage
                 retention-days: 5
-
-#            - name: Convert coverage files to JSON
-#              run: |
-#                  python -m coverage json -i
-#
-#            - name: Upload JSON coverage as artifact
-#              uses: actions/upload-artifact@v2
-#              with:
-#                name: coverage.json
-#                path: coverage.json
-#                retention-days: 5
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
