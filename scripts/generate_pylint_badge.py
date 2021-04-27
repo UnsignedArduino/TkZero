@@ -7,8 +7,8 @@ from pathlib import Path
 import requests
 from pylint.lint import Run
 
-module_path = Path("../TkZero")
-badge_path = Path("../assets/badges/pylint.svg")
+module_path = Path(r"..\TkZero")
+badge_path = Path(r"..\assets\badges\pylint.svg")
 
 results = Run([str(module_path)], do_exit=False)
 
