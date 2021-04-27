@@ -15,7 +15,7 @@ GitHub pages. You can find the raw HTML for the docs in the
 You can find examples in the 
 [`Examples/`](https://github.com/UnsignedArduino/TkZero/tree/main/Examples) 
 directory and tests in the 
-[`Tests`](https://github.com/UnsignedArduino/TkZero/tree/main/Tests) directory.
+[`Tests/`](https://github.com/UnsignedArduino/TkZero/tree/main/Tests) directory.
 
 ## Installation
 
