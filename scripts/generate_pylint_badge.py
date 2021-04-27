@@ -2,9 +2,10 @@
 Generate a badge for the PyLint score
 """
 
+from pathlib import Path
+
 import requests
 from pylint.lint import Run
-from pathlib import Path
 
 module_path = Path("../TkZero")
 badge_path = Path("../assets/badges/pylint.svg")

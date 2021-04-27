@@ -30,7 +30,7 @@ jobs:
 
             - name: Generate PyLint Badge
               run: |
-                  python scripts/generate_pylint_badge.py
+                  python scripts\generate_pylint_badge.py
 
             - name: Run tox
               run: |
