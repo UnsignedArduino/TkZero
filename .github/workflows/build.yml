@@ -28,14 +28,14 @@ jobs:
                   python -m pip install --upgrade pip
                   python -m pip install black coverage flake8 flit mccabe mypy pylint pytest tox tox-gh-actions pillow requests
 
+            - name: Generate PyLint Badge
+              run: |
+                  python scripts/generate_pylint_badge.py
+
             - name: Run tox
               run: |
                   python -m tox -e py39
                   dir
-
-            - name: Generate PyLint Badge
-              run: |
-                  python scripts/generate_pylint_badge.py
 
             - name: Upload raw coverage as artifact
               uses: actions/upload-artifact@v2
