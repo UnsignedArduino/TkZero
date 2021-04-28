@@ -2,10 +2,9 @@
 [![PyPI Version][pypi-image]][pypi-url]
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
-[![PyLint Score][pylint-image]][pylint-url]
 [![License][license-image]][license-url]
 
-A _sane_ and _Pythonic_ wrapper around Tkinter.
+A lightweight and Pythonic wrapper around Tkinter.
 
 [Documentation](https://unsignedarduino.github.io/TkZero/) is available on 
 GitHub pages. You can find the raw HTML for the docs in the 
@@ -99,5 +98,3 @@ root.mainloop()
 [coverage-url]: https://codecov.io/gh/UnsignedArduino/TkZero
 [license-image]: https://badgen.net/github/license/UnsignedArduino/TkZero
 [license-url]: https://github.com/UnsignedArduino/TkZero/blob/main/LICENSE
-[pylint-image]: assets/badges/pylint.svg
-[pylint-url]: https://github.com/mperlet/pybadge
