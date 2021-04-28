@@ -10,7 +10,7 @@ Tests: https://github.com/UnsignedArduino/TkZero/tree/main/Tests
 You can find more information on the GitHub README.
 """
 
-__version_info__ = (0, 0, 5)
+__version_info__ = (0, 0, 6)
 __version__ = ""
 for index, digit in enumerate(__version_info__):
     __version__ += str(digit)
