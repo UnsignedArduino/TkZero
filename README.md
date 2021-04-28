@@ -39,6 +39,10 @@ as it's much better than the command prompt.
 
 1. `cd` into your project root.
 2. Run `git clone https://github.com/UnsignedArduino/TkZero`
+3. Run `cd TkZero`
+4. Install TkZero's dependencies with `pip install requirements.txt -r`. 
+   (`pip3` on Linux and macOS - you may also need to use the user (`-U`) flag 
+   if you are not using a virtual environment)
 
 That's it!
 
