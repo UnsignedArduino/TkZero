@@ -4,3 +4,4 @@ TkZero/__pycache__/*
 dist/*
 .tox/*
 .coverage
+coverage.xml

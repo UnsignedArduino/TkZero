@@ -5,7 +5,7 @@
 
 from TkZero import Dialog
 from TkZero.MainWindow import MainWindow
-from TkZero.Menu import Menu
+from TkZero.Menu import Menu, MenuCascade, MenuCommand, MenuSeparator
 from TkZero.Scrollbar import Scrollbar, OrientModes
 from TkZero.Text import Text
 
@@ -24,9 +24,6 @@ save_location = None
 
 # Create the main menus
 menu_bar = Menu(root, is_menubar=True)
-# Create the file menu
-file_menu = Menu(root)
-menu_bar.add_cascade(menu=file_menu, label="File")
 
 
 # Create a function to open a new document
@@ -47,10 +44,6 @@ def file_new() -> None:
     modified = False
     saved_doc = False
     save_location = None
-
-
-# Add the new command to the file menu
-file_menu.add_command(label="New", command=file_new)
 
 
 # Create a function to open a new document
@@ -76,10 +69,6 @@ def file_open() -> None:
     text_area.text = path.read_text()
 
 
-# Add the open command to the file menu
-file_menu.add_command(label="Open...", command=file_open)
-
-
 # Create a function to save the currently opened document
 def file_save() -> None:
     # Yes, global variables aren't pretty but for the sake of simplicity we will not use a class
@@ -93,13 +82,6 @@ def file_save() -> None:
     modified = False
     saved_doc = True
     root.title = f"{save_location.name} - Notepad"
-
-
-# Add the save command to the file menu
-file_menu.add_command(label="Save", command=file_save)
-
-# Add a separator
-file_menu.add_separator()
 
 
 # Create a function to close the notepad
@@ -118,11 +100,6 @@ def file_close() -> None:
     root.destroy()
 
 
-# Add the exit command to the file menu
-file_menu.add_command(label="Exit", command=file_close)
-root.on_close = file_close
-
-
 # Create a function to update the modified states
 def text_update() -> None:
     # Yes, global variables aren't pretty but for the sake of simplicity we will not use a class
@@ -133,6 +110,17 @@ def text_update() -> None:
         title += "*"
     root.title = title + " - Notepad"
 
+
+# Create the actual menu contents
+menu_bar.items = [
+    MenuCascade(label="File", items=[
+        MenuCommand(label="New", command=file_new),
+        MenuCommand(label="Open...", command=file_open),
+        MenuCommand(label="Save", command=file_save),
+        MenuSeparator(),
+        MenuCommand(label="Exit", command=file_close)
+    ])
+]
 
 # Create the main text area
 text_area = Text(root, width=64, height=16)
