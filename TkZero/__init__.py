@@ -1,8 +1,13 @@
 """
 TkZero - a sane and Pythonic wrapper around Tkinter.
 
-Find this project on PyPI at https://pypi.org/project/TkZero/, or it's source
-code at https://github.com/UnsignedArduino/TkZero.
+PyPI: https://pypi.org/project/TkZero/
+GitHub: https://github.com/UnsignedArduino/TkZero
+Documentation: https://unsignedarduino.github.io/TkZero/
+Examples: https://github.com/UnsignedArduino/TkZero/tree/main/Examples
+Tests: https://github.com/UnsignedArduino/TkZero/tree/main/Tests
+
+You can find more information on the GitHub README.
 """
 
 __version_info__ = (0, 0, 4)
