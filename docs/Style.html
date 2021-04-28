@@ -52,16 +52,22 @@ def define_style(style_root: str, style_name: str, **kwargs) -&gt; None:
     &#34;&#34;&#34;
     Define a style that you can use.
 
-    :param style_root: The widget that this style will apply to, ex. &#34;TFrame&#34;. Should be a str.
-    :param style_name: The name of the style, ex. &#34;Warning&#34;. Should be a str. Then when you define, ex. a Frame, then
-     you can call apply_style(&#34;Warning&#34;)
+    :param style_root: The widget that this style will apply to, ex. &#34;TFrame&#34;.
+     Should be a str.
+    :param style_name: The name of the style, ex. &#34;Warning&#34;. Should be a str.
+     Then when you define, ex. a Frame, then you can call
+     apply_style(&#34;Warning&#34;)
     :param kwargs: The named arguments for the style. (Like background=&#34;red&#34;)
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(style_root, str):
-        raise TypeError(f&#34;style_root is not a str! (type passed in: {repr(type(style_root))})&#34;)
+        raise TypeError(
+            f&#34;style_root is not a str! &#34; f&#34;(type passed in: {repr(type(style_root))})&#34;
+        )
     if not isinstance(style_name, str):
-        raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+        raise TypeError(
+            f&#34;style_name is not a str! &#34; f&#34;(type passed in: {repr(type(style_name))})&#34;
+        )
     style = ttk.Style()
     style.configure(f&#34;{style_name}.{style_root}&#34;, **kwargs)</code></pre>
 </details>
@@ -78,9 +84,11 @@ def define_style(style_root: str, style_name: str, **kwargs) -&gt; None:
 </code></dt>
 <dd>
 <div class="desc"><p>Define a style that you can use.</p>
-<p>:param style_root: The widget that this style will apply to, ex. "TFrame". Should be a str.
-:param style_name: The name of the style, ex. "Warning". Should be a str. Then when you define, ex. a Frame, then
-you can call apply_style("Warning")
+<p>:param style_root: The widget that this style will apply to, ex. "TFrame".
+Should be a str.
+:param style_name: The name of the style, ex. "Warning". Should be a str.
+Then when you define, ex. a Frame, then you can call
+apply_style("Warning")
 :param kwargs: The named arguments for the style. (Like background="red")
 :return: None.</p></div>
 <details class="source">
@@ -91,16 +99,22 @@ you can call apply_style("Warning")
     &#34;&#34;&#34;
     Define a style that you can use.
 
-    :param style_root: The widget that this style will apply to, ex. &#34;TFrame&#34;. Should be a str.
-    :param style_name: The name of the style, ex. &#34;Warning&#34;. Should be a str. Then when you define, ex. a Frame, then
-     you can call apply_style(&#34;Warning&#34;)
+    :param style_root: The widget that this style will apply to, ex. &#34;TFrame&#34;.
+     Should be a str.
+    :param style_name: The name of the style, ex. &#34;Warning&#34;. Should be a str.
+     Then when you define, ex. a Frame, then you can call
+     apply_style(&#34;Warning&#34;)
     :param kwargs: The named arguments for the style. (Like background=&#34;red&#34;)
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(style_root, str):
-        raise TypeError(f&#34;style_root is not a str! (type passed in: {repr(type(style_root))})&#34;)
+        raise TypeError(
+            f&#34;style_root is not a str! &#34; f&#34;(type passed in: {repr(type(style_root))})&#34;
+        )
     if not isinstance(style_name, str):
-        raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+        raise TypeError(
+            f&#34;style_name is not a str! &#34; f&#34;(type passed in: {repr(type(style_name))})&#34;
+        )
     style = ttk.Style()
     style.configure(f&#34;{style_name}.{style_root}&#34;, **kwargs)</code></pre>
 </details>

@@ -42,6 +42,7 @@ class OrientModes:
     Horizontal - makes the progress bar horizontal.
     Vertical - makes the progress bar vertical.
     &#34;&#34;&#34;
+
     Horizontal = tk.HORIZONTAL
     Vertical = tk.VERTICAL
 
@@ -50,34 +51,52 @@ class ProgressModes:
     &#34;&#34;&#34;
     The progress bar modes for, well, progress bars.
     Determinate - you know how much would be completed, etc.
-    Indeterminate - you don&#39;t know, the progress bar will just be loading forever until stopped.
+    Indeterminate - you don&#39;t know, the progress bar will just be loading
+     forever until stopped.
     &#34;&#34;&#34;
+
     Determinate = &#34;determinate&#34;
     Indeterminate = &#34;indeterminate&#34;
 
 
 class Progressbar(ttk.Progressbar):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], length: int,
-                 mode: str = ProgressModes.Determinate, orientation: str = OrientModes.Horizontal):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        length: int,
+        mode: str = ProgressModes.Determinate,
+        orientation: str = OrientModes.Horizontal,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Scrollbar.
 
         :param parent: The parent of the scrollbar.
         :param length: An int, which is the length of the scale.
-        :param mode: The mode the progress bar should operate in. Defaults to ProgressModes.Determinate
-        :param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-         to OrientModes.Horizontal and is a str.
-         value.
+        :param mode: The mode the progress bar should operate in. Defaults to
+         ProgressModes.Determinate
+        :param orientation: The orientation of the scrollbar and what
+         direction it should scroll the widget in. Defaults to
+         OrientModes.Horizontal and is a str value.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(length, int):
-            raise TypeError(f&#34;length is not a int! (type passed in: {repr(type(length))})&#34;)
+            raise TypeError(
+                f&#34;length is not a int! (type passed in: {repr(type(length))})&#34;
+            )
         if not isinstance(mode, str):
-            raise TypeError(f&#34;mode is not a str! (type passed in: {repr(type(mode))})&#34;)
+            raise TypeError(
+                f&#34;mode is not a str! &#34; f&#34;(type passed in: {repr(type(mode))})&#34;
+            )
         if not isinstance(orientation, str):
-            raise TypeError(f&#34;orientation is not a str! (type passed in: {repr(type(orientation))})&#34;)
+            raise TypeError(
+                f&#34;orientation is not a str! &#34;
+                f&#34;(type passed in: {repr(type(orientation))})&#34;
+            )
         super().__init__(master=parent, orient=orientation, length=length, mode=mode)
         self._style_root = &#34;TProgressbar&#34;
         self._enabled = True
@@ -101,7 +120,10 @@ class Progressbar(ttk.Progressbar):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_value, (float, int)):
-            raise TypeError(f&#34;new_value is not a float or an int! (type passed in: {repr(type(new_value))})&#34;)
+            raise TypeError(
+                f&#34;new_value is not a float or an int! &#34;
+                f&#34;(type passed in: {repr(type(new_value))})&#34;
+            )
         self[&#34;value&#34;] = float(new_value)
 
     @property
@@ -122,13 +144,17 @@ class Progressbar(ttk.Progressbar):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_value, (float, int)):
-            raise TypeError(f&#34;new_value is not a float or an int! (type passed in: {repr(type(new_value))})&#34;)
+            raise TypeError(
+                f&#34;new_value is not a float or an int! &#34;
+                f&#34;(type passed in: {repr(type(new_value))})&#34;
+            )
         self[&#34;maximum&#34;] = float(new_value)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -137,13 +163,18 @@ class Progressbar(ttk.Progressbar):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode (grayed out
+        and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])</code></pre>
 </details>
@@ -174,6 +205,7 @@ Vertical - makes the progress bar vertical.</p></div>
     Horizontal - makes the progress bar horizontal.
     Vertical - makes the progress bar vertical.
     &#34;&#34;&#34;
+
     Horizontal = tk.HORIZONTAL
     Vertical = tk.VERTICAL</code></pre>
 </details>
@@ -195,7 +227,8 @@ Vertical - makes the progress bar vertical.</p></div>
 <dd>
 <div class="desc"><p>The progress bar modes for, well, progress bars.
 Determinate - you know how much would be completed, etc.
-Indeterminate - you don't know, the progress bar will just be loading forever until stopped.</p></div>
+Indeterminate - you don't know, the progress bar will just be loading
+forever until stopped.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -204,8 +237,10 @@ Indeterminate - you don't know, the progress bar will just be loading forever un
     &#34;&#34;&#34;
     The progress bar modes for, well, progress bars.
     Determinate - you know how much would be completed, etc.
-    Indeterminate - you don&#39;t know, the progress bar will just be loading forever until stopped.
+    Indeterminate - you don&#39;t know, the progress bar will just be loading
+     forever until stopped.
     &#34;&#34;&#34;
+
     Determinate = &#34;determinate&#34;
     Indeterminate = &#34;indeterminate&#34;</code></pre>
 </details>
@@ -234,36 +269,53 @@ that something is happening.</p>
 <p>Initiate a ttk.Scrollbar.</p>
 <p>:param parent: The parent of the scrollbar.
 :param length: An int, which is the length of the scale.
-:param mode: The mode the progress bar should operate in. Defaults to ProgressModes.Determinate
-:param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-to OrientModes.Horizontal and is a str.
-value.</p></div>
+:param mode: The mode the progress bar should operate in. Defaults to
+ProgressModes.Determinate
+:param orientation: The orientation of the scrollbar and what
+direction it should scroll the widget in. Defaults to
+OrientModes.Horizontal and is a str value.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Progressbar(ttk.Progressbar):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], length: int,
-                 mode: str = ProgressModes.Determinate, orientation: str = OrientModes.Horizontal):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        length: int,
+        mode: str = ProgressModes.Determinate,
+        orientation: str = OrientModes.Horizontal,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Scrollbar.
 
         :param parent: The parent of the scrollbar.
         :param length: An int, which is the length of the scale.
-        :param mode: The mode the progress bar should operate in. Defaults to ProgressModes.Determinate
-        :param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-         to OrientModes.Horizontal and is a str.
-         value.
+        :param mode: The mode the progress bar should operate in. Defaults to
+         ProgressModes.Determinate
+        :param orientation: The orientation of the scrollbar and what
+         direction it should scroll the widget in. Defaults to
+         OrientModes.Horizontal and is a str value.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(length, int):
-            raise TypeError(f&#34;length is not a int! (type passed in: {repr(type(length))})&#34;)
+            raise TypeError(
+                f&#34;length is not a int! (type passed in: {repr(type(length))})&#34;
+            )
         if not isinstance(mode, str):
-            raise TypeError(f&#34;mode is not a str! (type passed in: {repr(type(mode))})&#34;)
+            raise TypeError(
+                f&#34;mode is not a str! &#34; f&#34;(type passed in: {repr(type(mode))})&#34;
+            )
         if not isinstance(orientation, str):
-            raise TypeError(f&#34;orientation is not a str! (type passed in: {repr(type(orientation))})&#34;)
+            raise TypeError(
+                f&#34;orientation is not a str! &#34;
+                f&#34;(type passed in: {repr(type(orientation))})&#34;
+            )
         super().__init__(master=parent, orient=orientation, length=length, mode=mode)
         self._style_root = &#34;TProgressbar&#34;
         self._enabled = True
@@ -287,7 +339,10 @@ value.</p></div>
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_value, (float, int)):
-            raise TypeError(f&#34;new_value is not a float or an int! (type passed in: {repr(type(new_value))})&#34;)
+            raise TypeError(
+                f&#34;new_value is not a float or an int! &#34;
+                f&#34;(type passed in: {repr(type(new_value))})&#34;
+            )
         self[&#34;value&#34;] = float(new_value)
 
     @property
@@ -308,13 +363,17 @@ value.</p></div>
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_value, (float, int)):
-            raise TypeError(f&#34;new_value is not a float or an int! (type passed in: {repr(type(new_value))})&#34;)
+            raise TypeError(
+                f&#34;new_value is not a float or an int! &#34;
+                f&#34;(type passed in: {repr(type(new_value))})&#34;
+            )
         self[&#34;maximum&#34;] = float(new_value)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -323,13 +382,18 @@ value.</p></div>
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode (grayed out
+        and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])</code></pre>
 </details>
@@ -348,7 +412,8 @@ value.</p></div>
 <dl>
 <dt id="TkZero.Progressbar.Progressbar.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed
+out and cannot interact with)</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -357,7 +422,8 @@ value.</p></div>
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+    Get whether this widget is in normal mode or disabled mode. (grayed
+    out and cannot interact with)
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;

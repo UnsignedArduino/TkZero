@@ -48,6 +48,7 @@ class DisplayModes:
     Top: Image above text
     Left: Image left of text, etc.
     &#34;&#34;&#34;
+
     Original = &#34;none&#34;
     TextOnly = &#34;text&#34;
     ImageOnly = &#34;image&#34;
@@ -59,32 +60,50 @@ class DisplayModes:
 
 
 class Radiobutton(ttk.Radiobutton):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = &#34;&#34;,
-                 image: Union[PhotoImage, tk.PhotoImage] = None, variable: tk.Variable = None,
-                 value: Union[int, Union[float, Union[str, bool]]] = None,
-                 command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        text: str = &#34;&#34;,
+        image: Union[PhotoImage, tk.PhotoImage] = None,
+        variable: tk.Variable = None,
+        value: Union[int, Union[float, Union[str, bool]]] = None,
+        command: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Radiobutton.
 
         :param parent: The parent of the radiobutton.
         :param text: The text of the radiobutton. Defaults to &#34;&#34;.
         :param image: The image on the radiobutton. Defaults to None.
-        :param variable: The variable to connect to. (Should be a tk.Variable like a tk.StringVar) Defaults to None.
-        :param value: The value to set the variable when selected. Defaults to None.
+        :param variable: The variable to connect to. (Should be a tk.Variable
+         like a tk.StringVar) Defaults to None.
+        :param value: The value to set the variable when selected. Defaults to
+         None.
         :param command: The command to run when toggled. Defaults to None.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(text, str):
             raise TypeError(f&#34;text is not a str! (type passed in: {repr(type(text))})&#34;)
         if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
-            raise TypeError(f&#34;image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})&#34;)
+            raise TypeError(
+                f&#34;image is not a Union[PhotoImage, tk.PhotoImage]! &#34;
+                f&#34;(type passed in: {repr(type(image))})&#34;
+            )
         if not isinstance(variable, tk.Variable) and variable is not None:
-            raise TypeError(f&#34;variable is not a tk.Variable! (type passed in: {repr(type(variable))})&#34;)
+            raise TypeError(
+                f&#34;variable is not a tk.Variable! &#34;
+                f&#34;(type passed in: {repr(type(variable))})&#34;
+            )
         if not isinstance(value, (int, float, str, bool)) and value is not None:
-            raise TypeError(f&#34;value is not a Union[int, Union[float, Union[str, bool]]]! &#34;
-                            f&#34;(type passed in: {repr(type(value))})&#34;)
+            raise TypeError(
+                f&#34;value is not a Union[int, Union[float, Union[str, bool]]]! &#34;
+                f&#34;(type passed in: {repr(type(value))})&#34;
+            )
         super().__init__(master=parent, command=command, variable=variable, value=value)
         self._style_root = &#34;TRadiobutton&#34;
         self._photo_image = None
@@ -112,13 +131,16 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.configure(text=new_text)
 
     @property
     def image(self) -&gt; Union[PhotoImage, None]:
         &#34;&#34;&#34;
-        Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if none was ever set.
+        Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if
+        none was ever set.
 
         :return: A PIL.ImageTk.PhotoImage or a tk.PhotoImage or None.
         &#34;&#34;&#34;
@@ -133,8 +155,11 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_image, (PhotoImage, tk.PhotoImage)):
-            raise TypeError(f&#34;new_image is not a PIL.ImageTk.PhotoImage or a tk.PhotoImage! (type passed in: &#34;
-                            f&#34;{repr(type(new_image))})&#34;)
+            raise TypeError(
+                f&#34;new_image is not a &#34;
+                f&#34;PIL.ImageTk.PhotoImage or a tk.PhotoImage! &#34;
+                f&#34;(type passed in: {repr(type(new_image))})&#34;
+            )
         self._photo_image = new_image
         self.configure(image=self._photo_image)
 
@@ -143,7 +168,8 @@ class Radiobutton(ttk.Radiobutton):
         &#34;&#34;&#34;
         Get the display mode of this radiobutton.
 
-        :return: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;, &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
+        :return: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;,
+         &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
         &#34;&#34;&#34;
         return str(self.cget(&#34;compound&#34;))
 
@@ -152,17 +178,21 @@ class Radiobutton(ttk.Radiobutton):
         &#34;&#34;&#34;
         Set the display mode of this radiobutton.
 
-        :param new_mode: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;, &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
+        :param new_mode: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;,
+         &#34;top&#34;, &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_mode, str):
-            raise TypeError(f&#34;new_mode is not a str! (type passed in: {repr(type(new_mode))})&#34;)
+            raise TypeError(
+                f&#34;new_mode is not a str! &#34; f&#34;(type passed in: {repr(type(new_mode))})&#34;
+            )
         self.configure(compound=new_mode)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -171,13 +201,18 @@ class Radiobutton(ttk.Radiobutton):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
 
@@ -189,7 +224,10 @@ class Radiobutton(ttk.Radiobutton):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(style_name, str):
-            raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+            raise TypeError(
+                f&#34;style_name is not a str! &#34;
+                f&#34;(type passed in: {repr(type(style_name))})&#34;
+            )
         self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
 </details>
 </section>
@@ -227,6 +265,7 @@ Left: Image left of text, etc.</p></div>
     Top: Image above text
     Left: Image left of text, etc.
     &#34;&#34;&#34;
+
     Original = &#34;none&#34;
     TextOnly = &#34;text&#34;
     ImageOnly = &#34;image&#34;
@@ -283,40 +322,60 @@ set of mutually-exclusive options.</p>
 <p>:param parent: The parent of the radiobutton.
 :param text: The text of the radiobutton. Defaults to "".
 :param image: The image on the radiobutton. Defaults to None.
-:param variable: The variable to connect to. (Should be a tk.Variable like a tk.StringVar) Defaults to None.
-:param value: The value to set the variable when selected. Defaults to None.
+:param variable: The variable to connect to. (Should be a tk.Variable
+like a tk.StringVar) Defaults to None.
+:param value: The value to set the variable when selected. Defaults to
+None.
 :param command: The command to run when toggled. Defaults to None.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Radiobutton(ttk.Radiobutton):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = &#34;&#34;,
-                 image: Union[PhotoImage, tk.PhotoImage] = None, variable: tk.Variable = None,
-                 value: Union[int, Union[float, Union[str, bool]]] = None,
-                 command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        text: str = &#34;&#34;,
+        image: Union[PhotoImage, tk.PhotoImage] = None,
+        variable: tk.Variable = None,
+        value: Union[int, Union[float, Union[str, bool]]] = None,
+        command: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Radiobutton.
 
         :param parent: The parent of the radiobutton.
         :param text: The text of the radiobutton. Defaults to &#34;&#34;.
         :param image: The image on the radiobutton. Defaults to None.
-        :param variable: The variable to connect to. (Should be a tk.Variable like a tk.StringVar) Defaults to None.
-        :param value: The value to set the variable when selected. Defaults to None.
+        :param variable: The variable to connect to. (Should be a tk.Variable
+         like a tk.StringVar) Defaults to None.
+        :param value: The value to set the variable when selected. Defaults to
+         None.
         :param command: The command to run when toggled. Defaults to None.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(text, str):
             raise TypeError(f&#34;text is not a str! (type passed in: {repr(type(text))})&#34;)
         if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
-            raise TypeError(f&#34;image is not a Union[PhotoImage, tk.PhotoImage]! (type passed in: {repr(type(image))})&#34;)
+            raise TypeError(
+                f&#34;image is not a Union[PhotoImage, tk.PhotoImage]! &#34;
+                f&#34;(type passed in: {repr(type(image))})&#34;
+            )
         if not isinstance(variable, tk.Variable) and variable is not None:
-            raise TypeError(f&#34;variable is not a tk.Variable! (type passed in: {repr(type(variable))})&#34;)
+            raise TypeError(
+                f&#34;variable is not a tk.Variable! &#34;
+                f&#34;(type passed in: {repr(type(variable))})&#34;
+            )
         if not isinstance(value, (int, float, str, bool)) and value is not None:
-            raise TypeError(f&#34;value is not a Union[int, Union[float, Union[str, bool]]]! &#34;
-                            f&#34;(type passed in: {repr(type(value))})&#34;)
+            raise TypeError(
+                f&#34;value is not a Union[int, Union[float, Union[str, bool]]]! &#34;
+                f&#34;(type passed in: {repr(type(value))})&#34;
+            )
         super().__init__(master=parent, command=command, variable=variable, value=value)
         self._style_root = &#34;TRadiobutton&#34;
         self._photo_image = None
@@ -344,13 +403,16 @@ set of mutually-exclusive options.</p>
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.configure(text=new_text)
 
     @property
     def image(self) -&gt; Union[PhotoImage, None]:
         &#34;&#34;&#34;
-        Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if none was ever set.
+        Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if
+        none was ever set.
 
         :return: A PIL.ImageTk.PhotoImage or a tk.PhotoImage or None.
         &#34;&#34;&#34;
@@ -365,8 +427,11 @@ set of mutually-exclusive options.</p>
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_image, (PhotoImage, tk.PhotoImage)):
-            raise TypeError(f&#34;new_image is not a PIL.ImageTk.PhotoImage or a tk.PhotoImage! (type passed in: &#34;
-                            f&#34;{repr(type(new_image))})&#34;)
+            raise TypeError(
+                f&#34;new_image is not a &#34;
+                f&#34;PIL.ImageTk.PhotoImage or a tk.PhotoImage! &#34;
+                f&#34;(type passed in: {repr(type(new_image))})&#34;
+            )
         self._photo_image = new_image
         self.configure(image=self._photo_image)
 
@@ -375,7 +440,8 @@ set of mutually-exclusive options.</p>
         &#34;&#34;&#34;
         Get the display mode of this radiobutton.
 
-        :return: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;, &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
+        :return: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;,
+         &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
         &#34;&#34;&#34;
         return str(self.cget(&#34;compound&#34;))
 
@@ -384,17 +450,21 @@ set of mutually-exclusive options.</p>
         &#34;&#34;&#34;
         Set the display mode of this radiobutton.
 
-        :param new_mode: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;, &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
+        :param new_mode: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;,
+         &#34;top&#34;, &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_mode, str):
-            raise TypeError(f&#34;new_mode is not a str! (type passed in: {repr(type(new_mode))})&#34;)
+            raise TypeError(
+                f&#34;new_mode is not a str! &#34; f&#34;(type passed in: {repr(type(new_mode))})&#34;
+            )
         self.configure(compound=new_mode)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -403,13 +473,18 @@ set of mutually-exclusive options.</p>
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
 
@@ -421,7 +496,10 @@ set of mutually-exclusive options.</p>
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(style_name, str):
-            raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+            raise TypeError(
+                f&#34;style_name is not a str! &#34;
+                f&#34;(type passed in: {repr(type(style_name))})&#34;
+            )
         self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -440,7 +518,8 @@ set of mutually-exclusive options.</p>
 <dt id="TkZero.Radiobutton.Radiobutton.display_mode"><code class="name">var <span class="ident">display_mode</span> : str</code></dt>
 <dd>
 <div class="desc"><p>Get the display mode of this radiobutton.</p>
-<p>:return: A str, either one of "text", "image", "center", "top", "left", "bottom", or "right".</p></div>
+<p>:return: A str, either one of "text", "image", "center", "top",
+"left", "bottom", or "right".</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -450,14 +529,16 @@ def display_mode(self) -&gt; str:
     &#34;&#34;&#34;
     Get the display mode of this radiobutton.
 
-    :return: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;, &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
+    :return: A str, either one of &#34;text&#34;, &#34;image&#34;, &#34;center&#34;, &#34;top&#34;,
+     &#34;left&#34;, &#34;bottom&#34;, or &#34;right&#34;.
     &#34;&#34;&#34;
     return str(self.cget(&#34;compound&#34;))</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Radiobutton.Radiobutton.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed
+out and cannot interact with)</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -466,7 +547,8 @@ def display_mode(self) -&gt; str:
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+    Get whether this widget is in normal mode or disabled mode. (grayed
+    out and cannot interact with)
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
@@ -475,7 +557,8 @@ def enabled(self) -&gt; bool:
 </dd>
 <dt id="TkZero.Radiobutton.Radiobutton.image"><code class="name">var <span class="ident">image</span> : Optional[PIL.ImageTk.PhotoImage]</code></dt>
 <dd>
-<div class="desc"><p>Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if none was ever set.</p>
+<div class="desc"><p>Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if
+none was ever set.</p>
 <p>:return: A PIL.ImageTk.PhotoImage or a tk.PhotoImage or None.</p></div>
 <details class="source">
 <summary>
@@ -484,7 +567,8 @@ def enabled(self) -&gt; bool:
 <pre><code class="python">@property
 def image(self) -&gt; Union[PhotoImage, None]:
     &#34;&#34;&#34;
-    Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if none was ever set.
+    Get the PIL.ImageTk.PhotoImage on this radiobutton. Returns None if
+    none was ever set.
 
     :return: A PIL.ImageTk.PhotoImage or a tk.PhotoImage or None.
     &#34;&#34;&#34;
@@ -531,7 +615,10 @@ def text(self) -&gt; str:
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(style_name, str):
-        raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+        raise TypeError(
+            f&#34;style_name is not a str! &#34;
+            f&#34;(type passed in: {repr(type(style_name))})&#34;
+        )
     self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
 </details>
 </dd>

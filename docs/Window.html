@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>TkZero.Window API documentation</title>
-<meta name="description" content="Create an additional window. Note that you will first need to initiate a main window to pass in!" />
+<meta name="description" content="Create an additional window. Note that you will first need to initiate a main
+window to pass in!" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,13 +23,15 @@
 <h1 class="title">Module <code>TkZero.Window</code></h1>
 </header>
 <section id="section-intro">
-<p>Create an additional window. Note that you will first need to initiate a main window to pass in!</p>
+<p>Create an additional window. Note that you will first need to initiate a main
+window to pass in!</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;
-Create an additional window. Note that you will first need to initiate a main window to pass in!
+Create an additional window. Note that you will first need to initiate a main
+window to pass in!
 &#34;&#34;&#34;
 
 import tkinter as tk
@@ -43,14 +46,19 @@ class Window(tk.Toplevel):
     &#34;&#34;&#34;
     The window class.
     &#34;&#34;&#34;
+
     def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
         &#34;&#34;&#34;
         Create a window. (tk.Toplevel)
 
-        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel
+         instance.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! (type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         tk.BaseWidget.__init__(self, parent, &#34;toplevel&#34;)
         self.iconname(self._root().iconname())
         self.title = &#34;Window&#34;
@@ -76,7 +84,9 @@ class Window(tk.Toplevel):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_title, str):
-            raise TypeError(f&#34;new_title is not a str! (type passed in: {repr(type(new_title))})&#34;)
+            raise TypeError(
+                f&#34;new_title is not a str! &#34; f&#34;(type passed in: {repr(type(new_title))})&#34;
+            )
         self.wm_title(new_title)
 
     @property
@@ -94,11 +104,15 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         Set the size of the window.
 
-        :param new_size: A TkZero.Vector.Size with the width and height attributes set to the size you want.
+        :param new_size: A TkZero.Vector.Size with the width and height
+        attributes set to the size you want.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_size, Vector.Size):
-            raise TypeError(f&#34;new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})&#34;)
+            raise TypeError(
+                f&#34;new_size is not a Vector.Size! &#34;
+                f&#34;(type passed in: {repr(type(new_size))})&#34;
+            )
         self.geometry(f&#34;{new_size.width}x{new_size.height}&#34;)
 
     @property
@@ -115,12 +129,19 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         Set the **top-left** position of the window.
 
-        :param new_position: A TkZero.Vector.Position with the new x and y attributes
+        :param new_position: A TkZero.Vector.Position with the new x and y
+         attributes
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_position, Vector.Position):
-            raise TypeError(f&#34;new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})&#34;)
-        self.geometry(f&#34;{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}&#34;)
+            raise TypeError(
+                f&#34;new_position is not a Vector.Position! &#34;
+                f&#34;(type passed in: {repr(type(new_position))})&#34;
+            )
+        self.geometry(
+            f&#34;{self.size.width}x{self.size.height}+&#34;
+            f&#34;{new_position.x}+{new_position.y}&#34;
+        )
 
     def minimize(self) -&gt; None:
         &#34;&#34;&#34;
@@ -184,7 +205,10 @@ class Window(tk.Toplevel):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(full_screen, bool):
-            raise TypeError(f&#34;full_screen is not a bool! (type passed in: {repr(type(full_screen))})&#34;)
+            raise TypeError(
+                f&#34;full_screen is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(full_screen))})&#34;
+            )
         self.attributes(&#34;-fullscreen&#34;, full_screen)
 
     def is_full_screen(self) -&gt; bool:
@@ -195,25 +219,37 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         return self.attributes(&#34;-fullscreen&#34;)
 
-    def bind_to_event(self, event: str, func: Callable = None,
-                      run_in_thread: bool = False, add: bool = False) -&gt; Union[None, list[str]]:
+    def bind_to_event(
+        self,
+        event: str,
+        func: Callable = None,
+        run_in_thread: bool = False,
+        add: bool = False,
+    ) -&gt; Union[None, list[str]]:
         &#34;&#34;&#34;
         Bind a event to a function.
 
         :param event: A str of the event.
-        :param func: A function to call when the even happens. If none is passed in then a list of binds will be
-         returned.
-        :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
-         will also be made as a daemon thread. (will be terminated if main thread terminates)
-        :param add: Whether to add the function to a list of functions to be called or replace the function that was
-         previously bound to this sequence if any.
-        :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
-         when binding one.
+        :param func: A function to call when the even happens. If none is
+         passed in then a list of binds will be returned.
+        :param run_in_thread: Whether to run the function in a thread when
+         called. No arguments will be passed in. It will also be made as a
+         daemon thread. (will be terminated if main thread terminates)
+        :param add: Whether to add the function to a list of functions to be
+         called or replace the function that was previously bound to this
+         sequence if any.
+        :return: A list of functions (As Tk function str) that would be called
+         when this event is triggered or None when binding one.
         &#34;&#34;&#34;
         if not isinstance(event, str):
-            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+            raise TypeError(
+                f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;
+            )
         if not isinstance(run_in_thread, bool):
-            raise TypeError(f&#34;run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})&#34;)
+            raise TypeError(
+                f&#34;run_in_thread is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(run_in_thread))})&#34;
+            )
         if not isinstance(add, bool):
             raise TypeError(f&#34;add is not a bool! (type passed in: {repr(type(add))})&#34;)
         if run_in_thread:
@@ -231,21 +267,32 @@ class Window(tk.Toplevel):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(event, str):
-            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+            raise TypeError(
+                f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;
+            )
         self.event_generate(event)
 
-    def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -&gt; None:
+    def _enable_children(
+        self,
+        parent: Union[tk.Widget, Union[tk.Toplevel, None]] = None,
+        enable: bool = True,
+    ) -&gt; None:
         &#34;&#34;&#34;
         Enable or disable the children.
 
-        :param parent: A tk.Widget that is our parent. If None then default to self.
+        :param parent: A tk.Widget that is our parent. If None then default to
+         self.
         :param enable: Whether to enable or disable the children.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(parent, tk.Widget) and parent is not None:
-            raise TypeError(f&#34;parent is not a tk.Widget! (type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(enable, bool):
-            raise TypeError(f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;)
+            raise TypeError(
+                f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;
+            )
         if parent is None:
             parent = self
         for child in parent.winfo_children():
@@ -257,7 +304,8 @@ class Window(tk.Toplevel):
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -266,21 +314,26 @@ class Window(tk.Toplevel):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 
     @property
     def on_close(self) -&gt; Union[Callable, None]:
         &#34;&#34;&#34;
-        Return the function that will be called when the user tries to close the window. If no function was assigned,
-        return None.
+        Return the function that will be called when the user tries to close
+        the window. If no function was assigned, return None.
 
         :return: A function or None.
         &#34;&#34;&#34;
@@ -291,7 +344,8 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         Set the function that will be called.
 
-        :param new_func: A function that will be called instead of destroying the window.
+        :param new_func: A function that will be called instead of destroying
+         the window.
         :return: None.
         &#34;&#34;&#34;
         self._on_close = new_func
@@ -324,7 +378,8 @@ class Window(tk.Toplevel):
 <dd>
 <div class="desc"><p>The window class.</p>
 <p>Create a window. (tk.Toplevel)</p>
-<p>:param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.</p></div>
+<p>:param parent: The parent, either a tk.Tk instance or a tk.Toplevel
+instance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -333,14 +388,19 @@ class Window(tk.Toplevel):
     &#34;&#34;&#34;
     The window class.
     &#34;&#34;&#34;
+
     def __init__(self, parent: Union[tk.Tk, tk.Toplevel]):
         &#34;&#34;&#34;
         Create a window. (tk.Toplevel)
 
-        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel instance.
+        :param parent: The parent, either a tk.Tk instance or a tk.Toplevel
+         instance.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! (type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         tk.BaseWidget.__init__(self, parent, &#34;toplevel&#34;)
         self.iconname(self._root().iconname())
         self.title = &#34;Window&#34;
@@ -366,7 +426,9 @@ class Window(tk.Toplevel):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_title, str):
-            raise TypeError(f&#34;new_title is not a str! (type passed in: {repr(type(new_title))})&#34;)
+            raise TypeError(
+                f&#34;new_title is not a str! &#34; f&#34;(type passed in: {repr(type(new_title))})&#34;
+            )
         self.wm_title(new_title)
 
     @property
@@ -384,11 +446,15 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         Set the size of the window.
 
-        :param new_size: A TkZero.Vector.Size with the width and height attributes set to the size you want.
+        :param new_size: A TkZero.Vector.Size with the width and height
+        attributes set to the size you want.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_size, Vector.Size):
-            raise TypeError(f&#34;new_size is not a Vector.Size! (type passed in: {repr(type(new_size))})&#34;)
+            raise TypeError(
+                f&#34;new_size is not a Vector.Size! &#34;
+                f&#34;(type passed in: {repr(type(new_size))})&#34;
+            )
         self.geometry(f&#34;{new_size.width}x{new_size.height}&#34;)
 
     @property
@@ -405,12 +471,19 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         Set the **top-left** position of the window.
 
-        :param new_position: A TkZero.Vector.Position with the new x and y attributes
+        :param new_position: A TkZero.Vector.Position with the new x and y
+         attributes
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_position, Vector.Position):
-            raise TypeError(f&#34;new_position is not a Vector.Position! (type passed in: {repr(type(new_position))})&#34;)
-        self.geometry(f&#34;{self.size.width}x{self.size.height}+{new_position.x}+{new_position.y}&#34;)
+            raise TypeError(
+                f&#34;new_position is not a Vector.Position! &#34;
+                f&#34;(type passed in: {repr(type(new_position))})&#34;
+            )
+        self.geometry(
+            f&#34;{self.size.width}x{self.size.height}+&#34;
+            f&#34;{new_position.x}+{new_position.y}&#34;
+        )
 
     def minimize(self) -&gt; None:
         &#34;&#34;&#34;
@@ -474,7 +547,10 @@ class Window(tk.Toplevel):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(full_screen, bool):
-            raise TypeError(f&#34;full_screen is not a bool! (type passed in: {repr(type(full_screen))})&#34;)
+            raise TypeError(
+                f&#34;full_screen is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(full_screen))})&#34;
+            )
         self.attributes(&#34;-fullscreen&#34;, full_screen)
 
     def is_full_screen(self) -&gt; bool:
@@ -485,25 +561,37 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         return self.attributes(&#34;-fullscreen&#34;)
 
-    def bind_to_event(self, event: str, func: Callable = None,
-                      run_in_thread: bool = False, add: bool = False) -&gt; Union[None, list[str]]:
+    def bind_to_event(
+        self,
+        event: str,
+        func: Callable = None,
+        run_in_thread: bool = False,
+        add: bool = False,
+    ) -&gt; Union[None, list[str]]:
         &#34;&#34;&#34;
         Bind a event to a function.
 
         :param event: A str of the event.
-        :param func: A function to call when the even happens. If none is passed in then a list of binds will be
-         returned.
-        :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
-         will also be made as a daemon thread. (will be terminated if main thread terminates)
-        :param add: Whether to add the function to a list of functions to be called or replace the function that was
-         previously bound to this sequence if any.
-        :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
-         when binding one.
+        :param func: A function to call when the even happens. If none is
+         passed in then a list of binds will be returned.
+        :param run_in_thread: Whether to run the function in a thread when
+         called. No arguments will be passed in. It will also be made as a
+         daemon thread. (will be terminated if main thread terminates)
+        :param add: Whether to add the function to a list of functions to be
+         called or replace the function that was previously bound to this
+         sequence if any.
+        :return: A list of functions (As Tk function str) that would be called
+         when this event is triggered or None when binding one.
         &#34;&#34;&#34;
         if not isinstance(event, str):
-            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+            raise TypeError(
+                f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;
+            )
         if not isinstance(run_in_thread, bool):
-            raise TypeError(f&#34;run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})&#34;)
+            raise TypeError(
+                f&#34;run_in_thread is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(run_in_thread))})&#34;
+            )
         if not isinstance(add, bool):
             raise TypeError(f&#34;add is not a bool! (type passed in: {repr(type(add))})&#34;)
         if run_in_thread:
@@ -521,21 +609,32 @@ class Window(tk.Toplevel):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(event, str):
-            raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+            raise TypeError(
+                f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;
+            )
         self.event_generate(event)
 
-    def _enable_children(self, parent: Union[tk.Widget, None] = None, enable: bool = True) -&gt; None:
+    def _enable_children(
+        self,
+        parent: Union[tk.Widget, Union[tk.Toplevel, None]] = None,
+        enable: bool = True,
+    ) -&gt; None:
         &#34;&#34;&#34;
         Enable or disable the children.
 
-        :param parent: A tk.Widget that is our parent. If None then default to self.
+        :param parent: A tk.Widget that is our parent. If None then default to
+         self.
         :param enable: Whether to enable or disable the children.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(parent, tk.Widget) and parent is not None:
-            raise TypeError(f&#34;parent is not a tk.Widget! (type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(enable, bool):
-            raise TypeError(f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;)
+            raise TypeError(
+                f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;
+            )
         if parent is None:
             parent = self
         for child in parent.winfo_children():
@@ -547,7 +646,8 @@ class Window(tk.Toplevel):
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -556,21 +656,26 @@ class Window(tk.Toplevel):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 
     @property
     def on_close(self) -&gt; Union[Callable, None]:
         &#34;&#34;&#34;
-        Return the function that will be called when the user tries to close the window. If no function was assigned,
-        return None.
+        Return the function that will be called when the user tries to close
+        the window. If no function was assigned, return None.
 
         :return: A function or None.
         &#34;&#34;&#34;
@@ -581,7 +686,8 @@ class Window(tk.Toplevel):
         &#34;&#34;&#34;
         Set the function that will be called.
 
-        :param new_func: A function that will be called instead of destroying the window.
+        :param new_func: A function that will be called instead of destroying
+         the window.
         :return: None.
         &#34;&#34;&#34;
         self._on_close = new_func
@@ -612,7 +718,8 @@ class Window(tk.Toplevel):
 <dl>
 <dt id="TkZero.Window.Window.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed
+out and cannot interact with)</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -621,7 +728,8 @@ class Window(tk.Toplevel):
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+    Get whether this widget is in normal mode or disabled mode. (grayed
+    out and cannot interact with)
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
@@ -630,8 +738,8 @@ def enabled(self) -&gt; bool:
 </dd>
 <dt id="TkZero.Window.Window.on_close"><code class="name">var <span class="ident">on_close</span> : Optional[Callable]</code></dt>
 <dd>
-<div class="desc"><p>Return the function that will be called when the user tries to close the window. If no function was assigned,
-return None.</p>
+<div class="desc"><p>Return the function that will be called when the user tries to close
+the window. If no function was assigned, return None.</p>
 <p>:return: A function or None.</p></div>
 <details class="source">
 <summary>
@@ -640,8 +748,8 @@ return None.</p>
 <pre><code class="python">@property
 def on_close(self) -&gt; Union[Callable, None]:
     &#34;&#34;&#34;
-    Return the function that will be called when the user tries to close the window. If no function was assigned,
-    return None.
+    Return the function that will be called when the user tries to close
+    the window. If no function was assigned, return None.
 
     :return: A function or None.
     &#34;&#34;&#34;
@@ -712,37 +820,51 @@ def title(self) -&gt; str:
 <dd>
 <div class="desc"><p>Bind a event to a function.</p>
 <p>:param event: A str of the event.
-:param func: A function to call when the even happens. If none is passed in then a list of binds will be
-returned.
-:param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
-will also be made as a daemon thread. (will be terminated if main thread terminates)
-:param add: Whether to add the function to a list of functions to be called or replace the function that was
-previously bound to this sequence if any.
-:return: A list of functions (As Tk function str) that would be called when this event is triggered or None
-when binding one.</p></div>
+:param func: A function to call when the even happens. If none is
+passed in then a list of binds will be returned.
+:param run_in_thread: Whether to run the function in a thread when
+called. No arguments will be passed in. It will also be made as a
+daemon thread. (will be terminated if main thread terminates)
+:param add: Whether to add the function to a list of functions to be
+called or replace the function that was previously bound to this
+sequence if any.
+:return: A list of functions (As Tk function str) that would be called
+when this event is triggered or None when binding one.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def bind_to_event(self, event: str, func: Callable = None,
-                  run_in_thread: bool = False, add: bool = False) -&gt; Union[None, list[str]]:
+<pre><code class="python">def bind_to_event(
+    self,
+    event: str,
+    func: Callable = None,
+    run_in_thread: bool = False,
+    add: bool = False,
+) -&gt; Union[None, list[str]]:
     &#34;&#34;&#34;
     Bind a event to a function.
 
     :param event: A str of the event.
-    :param func: A function to call when the even happens. If none is passed in then a list of binds will be
-     returned.
-    :param run_in_thread: Whether to run the function in a thread when called. No arguments will be passed in. It
-     will also be made as a daemon thread. (will be terminated if main thread terminates)
-    :param add: Whether to add the function to a list of functions to be called or replace the function that was
-     previously bound to this sequence if any.
-    :return: A list of functions (As Tk function str) that would be called when this event is triggered or None
-     when binding one.
+    :param func: A function to call when the even happens. If none is
+     passed in then a list of binds will be returned.
+    :param run_in_thread: Whether to run the function in a thread when
+     called. No arguments will be passed in. It will also be made as a
+     daemon thread. (will be terminated if main thread terminates)
+    :param add: Whether to add the function to a list of functions to be
+     called or replace the function that was previously bound to this
+     sequence if any.
+    :return: A list of functions (As Tk function str) that would be called
+     when this event is triggered or None when binding one.
     &#34;&#34;&#34;
     if not isinstance(event, str):
-        raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+        raise TypeError(
+            f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;
+        )
     if not isinstance(run_in_thread, bool):
-        raise TypeError(f&#34;run_in_thread is not a bool! (type passed in: {repr(type(run_in_thread))})&#34;)
+        raise TypeError(
+            f&#34;run_in_thread is not a bool! &#34;
+            f&#34;(type passed in: {repr(type(run_in_thread))})&#34;
+        )
     if not isinstance(add, bool):
         raise TypeError(f&#34;add is not a bool! (type passed in: {repr(type(add))})&#34;)
     if run_in_thread:
@@ -794,7 +916,10 @@ when binding one.</p></div>
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(full_screen, bool):
-        raise TypeError(f&#34;full_screen is not a bool! (type passed in: {repr(type(full_screen))})&#34;)
+        raise TypeError(
+            f&#34;full_screen is not a bool! &#34;
+            f&#34;(type passed in: {repr(type(full_screen))})&#34;
+        )
     self.attributes(&#34;-fullscreen&#34;, full_screen)</code></pre>
 </details>
 </dd>
@@ -817,7 +942,9 @@ when binding one.</p></div>
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(event, str):
-        raise TypeError(f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;)
+        raise TypeError(
+            f&#34;event is not a str! (type passed in: {repr(type(event))})&#34;
+        )
     self.event_generate(event)</code></pre>
 </details>
 </dd>

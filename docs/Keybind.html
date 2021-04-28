@@ -37,33 +37,55 @@ from typing import Union
 from TkZero import Platform
 
 
-def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                            ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option,
-                            letter: str) -&gt; str:
+def generate_event_sequence(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    ctrl_cmd: bool,
+    ctrl_ctrl: bool,
+    shift_shift: bool,
+    alt_option: bool,
+    letter: str,
+) -&gt; str:
     &#34;&#34;&#34;
-    Generate an event sequence you can pass in to bind_to_event on a widget from a key combo.
+    Generate an event sequence you can pass in to bind_to_event on a widget
+    from a key combo.
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
-    :param ctrl_cmd: Require control (command for macOS) to be pressed for the event. A bool.
-    :param ctrl_ctrl: Require control (all platforms) to be pressed for the event. ctrl_cmd and ctrl_ctrl do the same
-     thing on win32 and x11. A bool.
-    :param shift_shift: Require shift (all platforms) to be pressed for the event. A bool.
-    :param alt_option: Require alt (option for macOS) to be pressed for the event. A bool.
-    :param letter: The letter to be pressed along with the modifier keys. A str. Must be one character long.
-    :return: A str which is the not-so-human-friendly event sequence which you can pass into the bind_to_event on a
-     widget.
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
+    :param ctrl_cmd: Require control (command for macOS) to be pressed for the
+     event. A bool.
+    :param ctrl_ctrl: Require control (all platforms) to be pressed for the
+     event. ctrl_cmd and ctrl_ctrl do the same thing on win32 and x11. A bool.
+    :param shift_shift: Require shift (all platforms) to be pressed for the
+     event. A bool.
+    :param alt_option: Require alt (option for macOS) to be pressed for the
+     event. A bool.
+    :param letter: The letter to be pressed along with the modifier keys. A
+     str. Must be one character long.
+    :return: A str which is the not-so-human-friendly event sequence which
+     you can pass into the bind_to_event on a widget.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     if not isinstance(ctrl_cmd, bool):
-        raise TypeError(f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;
+        )
     if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(f&#34;ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_ctrl is not a bool! &#34; f&#34;(type passed in: {repr(type(ctrl_ctrl))})&#34;
+        )
     if not isinstance(shift_shift, bool):
-        raise TypeError(f&#34;shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})&#34;)
+        raise TypeError(
+            f&#34;shift_shift is not a bool! &#34;
+            f&#34;(type passed in: {repr(type(shift_shift))})&#34;
+        )
     if not isinstance(alt_option, bool):
-        raise TypeError(f&#34;alt_option is not a bool! (type passed in: {repr(type(alt_option))})&#34;)
+        raise TypeError(
+            f&#34;alt_option is not a bool! &#34; f&#34;(type passed in: {repr(type(alt_option))})&#34;
+        )
     if not isinstance(letter, str):
         raise TypeError(f&#34;letter is not a str! (type passed in: {repr(type(letter))})&#34;)
     sequence = &#34;&lt;&#34;
@@ -86,32 +108,53 @@ def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
     return sequence
 
 
-def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                                  ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option,
-                                  letter: str) -&gt; str:
+def generate_accelerator_sequence(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    ctrl_cmd: bool,
+    ctrl_ctrl: bool,
+    shift_shift: bool,
+    alt_option: bool,
+    letter: str,
+) -&gt; str:
     &#34;&#34;&#34;
     Generate an accelerator sequence you can display in menus.
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
-    :param ctrl_cmd: Require control (command for macOS) to be pressed for the event. A bool.
-    :param ctrl_ctrl: Require control (all platforms) to be pressed for the event. ctrl_cmd and ctrl_ctrl do the same
-     thing on win32 and x11. A bool.
-    :param shift_shift: Require shift (all platforms) to be pressed for the event. A bool.
-    :param alt_option: Require alt (option for macOS) to be pressed for the event. A bool.
-    :param letter: The letter to be pressed along with the modifier keys. A str. Must be one character long.
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
+    :param ctrl_cmd: Require control (command for macOS) to be pressed for the
+     event. A bool.
+    :param ctrl_ctrl: Require control (all platforms) to be pressed for the
+     event. ctrl_cmd and ctrl_ctrl do the same thing on win32 and x11. A bool.
+    :param shift_shift: Require shift (all platforms) to be pressed for the
+     event. A bool.
+    :param alt_option: Require alt (option for macOS) to be pressed for the
+     event. A bool.
+    :param letter: The letter to be pressed along with the modifier keys. A
+     str. Must be one character long.
     :return: A str of the accelerator.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     if not isinstance(ctrl_cmd, bool):
-        raise TypeError(f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;
+        )
     if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(f&#34;ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_ctrl is not a bool! &#34; f&#34;(type passed in: {repr(type(ctrl_ctrl))})&#34;
+        )
     if not isinstance(shift_shift, bool):
-        raise TypeError(f&#34;shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})&#34;)
+        raise TypeError(
+            f&#34;shift_shift is not a bool! &#34;
+            f&#34;(type passed in: {repr(type(shift_shift))})&#34;
+        )
     if not isinstance(alt_option, bool):
-        raise TypeError(f&#34;alt_option is not a bool! (type passed in: {repr(type(alt_option))})&#34;)
+        raise TypeError(
+            f&#34;alt_option is not a bool! &#34; f&#34;(type passed in: {repr(type(alt_option))})&#34;
+        )
     if not isinstance(letter, str):
         raise TypeError(f&#34;letter is not a str! (type passed in: {repr(type(letter))})&#34;)
     sequence = &#34;&#34;
@@ -119,7 +162,9 @@ def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Tople
         sequence += &#34;Command-&#34; if Platform.on_aqua(widget) else &#34;Control-&#34;
     if ctrl_ctrl:
         if &#34;Control-&#34; in sequence:
-            raise ValueError(f&#34;ctrl_cmd and ctrl_ctrl is True and we are not on Aqua!&#34;)
+            raise ValueError(
+                &#34;ctrl_cmd and ctrl_ctrl is True and &#34; &#34;we are not on Aqua!&#34;
+            )
         else:
             sequence += &#34;Control-&#34;
     if shift_shift:
@@ -140,48 +185,74 @@ def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Tople
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="TkZero.Keybind.generate_accelerator_sequence"><code class="name flex">
-<span>def <span class="ident">generate_accelerator_sequence</span></span>(<span>widget: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option, letter: str) ‑> str</span>
+<span>def <span class="ident">generate_accelerator_sequence</span></span>(<span>widget: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option: bool, letter: str) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Generate an accelerator sequence you can display in menus.</p>
-<p>:param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
-:param ctrl_cmd: Require control (command for macOS) to be pressed for the event. A bool.
-:param ctrl_ctrl: Require control (all platforms) to be pressed for the event. ctrl_cmd and ctrl_ctrl do the same
-thing on win32 and x11. A bool.
-:param shift_shift: Require shift (all platforms) to be pressed for the event. A bool.
-:param alt_option: Require alt (option for macOS) to be pressed for the event. A bool.
-:param letter: The letter to be pressed along with the modifier keys. A str. Must be one character long.
+<p>:param widget: A Tkinter thing that we need to use so we can call into Tk.
+(Probably something like root or self)
+:param ctrl_cmd: Require control (command for macOS) to be pressed for the
+event. A bool.
+:param ctrl_ctrl: Require control (all platforms) to be pressed for the
+event. ctrl_cmd and ctrl_ctrl do the same thing on win32 and x11. A bool.
+:param shift_shift: Require shift (all platforms) to be pressed for the
+event. A bool.
+:param alt_option: Require alt (option for macOS) to be pressed for the
+event. A bool.
+:param letter: The letter to be pressed along with the modifier keys. A
+str. Must be one character long.
 :return: A str of the accelerator.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def generate_accelerator_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                                  ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option,
-                                  letter: str) -&gt; str:
+<pre><code class="python">def generate_accelerator_sequence(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    ctrl_cmd: bool,
+    ctrl_ctrl: bool,
+    shift_shift: bool,
+    alt_option: bool,
+    letter: str,
+) -&gt; str:
     &#34;&#34;&#34;
     Generate an accelerator sequence you can display in menus.
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
-    :param ctrl_cmd: Require control (command for macOS) to be pressed for the event. A bool.
-    :param ctrl_ctrl: Require control (all platforms) to be pressed for the event. ctrl_cmd and ctrl_ctrl do the same
-     thing on win32 and x11. A bool.
-    :param shift_shift: Require shift (all platforms) to be pressed for the event. A bool.
-    :param alt_option: Require alt (option for macOS) to be pressed for the event. A bool.
-    :param letter: The letter to be pressed along with the modifier keys. A str. Must be one character long.
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
+    :param ctrl_cmd: Require control (command for macOS) to be pressed for the
+     event. A bool.
+    :param ctrl_ctrl: Require control (all platforms) to be pressed for the
+     event. ctrl_cmd and ctrl_ctrl do the same thing on win32 and x11. A bool.
+    :param shift_shift: Require shift (all platforms) to be pressed for the
+     event. A bool.
+    :param alt_option: Require alt (option for macOS) to be pressed for the
+     event. A bool.
+    :param letter: The letter to be pressed along with the modifier keys. A
+     str. Must be one character long.
     :return: A str of the accelerator.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     if not isinstance(ctrl_cmd, bool):
-        raise TypeError(f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;
+        )
     if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(f&#34;ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_ctrl is not a bool! &#34; f&#34;(type passed in: {repr(type(ctrl_ctrl))})&#34;
+        )
     if not isinstance(shift_shift, bool):
-        raise TypeError(f&#34;shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})&#34;)
+        raise TypeError(
+            f&#34;shift_shift is not a bool! &#34;
+            f&#34;(type passed in: {repr(type(shift_shift))})&#34;
+        )
     if not isinstance(alt_option, bool):
-        raise TypeError(f&#34;alt_option is not a bool! (type passed in: {repr(type(alt_option))})&#34;)
+        raise TypeError(
+            f&#34;alt_option is not a bool! &#34; f&#34;(type passed in: {repr(type(alt_option))})&#34;
+        )
     if not isinstance(letter, str):
         raise TypeError(f&#34;letter is not a str! (type passed in: {repr(type(letter))})&#34;)
     sequence = &#34;&#34;
@@ -189,7 +260,9 @@ thing on win32 and x11. A bool.
         sequence += &#34;Command-&#34; if Platform.on_aqua(widget) else &#34;Control-&#34;
     if ctrl_ctrl:
         if &#34;Control-&#34; in sequence:
-            raise ValueError(f&#34;ctrl_cmd and ctrl_ctrl is True and we are not on Aqua!&#34;)
+            raise ValueError(
+                &#34;ctrl_cmd and ctrl_ctrl is True and &#34; &#34;we are not on Aqua!&#34;
+            )
         else:
             sequence += &#34;Control-&#34;
     if shift_shift:
@@ -203,50 +276,78 @@ thing on win32 and x11. A bool.
 </details>
 </dd>
 <dt id="TkZero.Keybind.generate_event_sequence"><code class="name flex">
-<span>def <span class="ident">generate_event_sequence</span></span>(<span>widget: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option, letter: str) ‑> str</span>
+<span>def <span class="ident">generate_event_sequence</span></span>(<span>widget: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option: bool, letter: str) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Generate an event sequence you can pass in to bind_to_event on a widget from a key combo.</p>
-<p>:param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
-:param ctrl_cmd: Require control (command for macOS) to be pressed for the event. A bool.
-:param ctrl_ctrl: Require control (all platforms) to be pressed for the event. ctrl_cmd and ctrl_ctrl do the same
-thing on win32 and x11. A bool.
-:param shift_shift: Require shift (all platforms) to be pressed for the event. A bool.
-:param alt_option: Require alt (option for macOS) to be pressed for the event. A bool.
-:param letter: The letter to be pressed along with the modifier keys. A str. Must be one character long.
-:return: A str which is the not-so-human-friendly event sequence which you can pass into the bind_to_event on a
-widget.</p></div>
+<div class="desc"><p>Generate an event sequence you can pass in to bind_to_event on a widget
+from a key combo.</p>
+<p>:param widget: A Tkinter thing that we need to use so we can call into Tk.
+(Probably something like root or self)
+:param ctrl_cmd: Require control (command for macOS) to be pressed for the
+event. A bool.
+:param ctrl_ctrl: Require control (all platforms) to be pressed for the
+event. ctrl_cmd and ctrl_ctrl do the same thing on win32 and x11. A bool.
+:param shift_shift: Require shift (all platforms) to be pressed for the
+event. A bool.
+:param alt_option: Require alt (option for macOS) to be pressed for the
+event. A bool.
+:param letter: The letter to be pressed along with the modifier keys. A
+str. Must be one character long.
+:return: A str which is the not-so-human-friendly event sequence which
+you can pass into the bind_to_event on a widget.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def generate_event_sequence(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                            ctrl_cmd: bool, ctrl_ctrl: bool, shift_shift: bool, alt_option,
-                            letter: str) -&gt; str:
+<pre><code class="python">def generate_event_sequence(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+    ctrl_cmd: bool,
+    ctrl_ctrl: bool,
+    shift_shift: bool,
+    alt_option: bool,
+    letter: str,
+) -&gt; str:
     &#34;&#34;&#34;
-    Generate an event sequence you can pass in to bind_to_event on a widget from a key combo.
+    Generate an event sequence you can pass in to bind_to_event on a widget
+    from a key combo.
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
-    :param ctrl_cmd: Require control (command for macOS) to be pressed for the event. A bool.
-    :param ctrl_ctrl: Require control (all platforms) to be pressed for the event. ctrl_cmd and ctrl_ctrl do the same
-     thing on win32 and x11. A bool.
-    :param shift_shift: Require shift (all platforms) to be pressed for the event. A bool.
-    :param alt_option: Require alt (option for macOS) to be pressed for the event. A bool.
-    :param letter: The letter to be pressed along with the modifier keys. A str. Must be one character long.
-    :return: A str which is the not-so-human-friendly event sequence which you can pass into the bind_to_event on a
-     widget.
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
+    :param ctrl_cmd: Require control (command for macOS) to be pressed for the
+     event. A bool.
+    :param ctrl_ctrl: Require control (all platforms) to be pressed for the
+     event. ctrl_cmd and ctrl_ctrl do the same thing on win32 and x11. A bool.
+    :param shift_shift: Require shift (all platforms) to be pressed for the
+     event. A bool.
+    :param alt_option: Require alt (option for macOS) to be pressed for the
+     event. A bool.
+    :param letter: The letter to be pressed along with the modifier keys. A
+     str. Must be one character long.
+    :return: A str which is the not-so-human-friendly event sequence which
+     you can pass into the bind_to_event on a widget.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     if not isinstance(ctrl_cmd, bool):
-        raise TypeError(f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})&#34;
+        )
     if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(f&#34;ctrl_ctrl is not a bool! (type passed in: {repr(type(ctrl_ctrl))})&#34;)
+        raise TypeError(
+            f&#34;ctrl_ctrl is not a bool! &#34; f&#34;(type passed in: {repr(type(ctrl_ctrl))})&#34;
+        )
     if not isinstance(shift_shift, bool):
-        raise TypeError(f&#34;shift_shift is not a bool! (type passed in: {repr(type(shift_shift))})&#34;)
+        raise TypeError(
+            f&#34;shift_shift is not a bool! &#34;
+            f&#34;(type passed in: {repr(type(shift_shift))})&#34;
+        )
     if not isinstance(alt_option, bool):
-        raise TypeError(f&#34;alt_option is not a bool! (type passed in: {repr(type(alt_option))})&#34;)
+        raise TypeError(
+            f&#34;alt_option is not a bool! &#34; f&#34;(type passed in: {repr(type(alt_option))})&#34;
+        )
     if not isinstance(letter, str):
         raise TypeError(f&#34;letter is not a str! (type passed in: {repr(type(letter))})&#34;)
     sequence = &#34;&lt;&#34;

@@ -46,31 +46,47 @@ class TextWrap:
     WordWrapping - wrap at word
      spaces.
     &#34;&#34;&#34;
+
     NoWrapping = tk.NONE
     CharWrapping = tk.CHAR
     WordWrapping = tk.WORD
 
 
 class Text(tk.Text):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 width: int = None, height: int = None, wrapping: str = TextWrap.WordWrapping):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        width: int = None,
+        height: int = None,
+        wrapping: str = TextWrap.WordWrapping,
+    ):
         &#34;&#34;&#34;
         Initiate a tk.Text.
 
         :param parent: The parent of the text.
         :param width: The width of the text. Defaults to None.
         :param height: The width of the text. Defaults to None.
-        :param wrapping: How to wrap words in the text. Defaults to TextWrap.WordWrapping
+        :param wrapping: How to wrap words in the text. Defaults to
+         TextWrap.WordWrapping
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(width, int) and width is not None:
-            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+            raise TypeError(
+                f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
+            )
         if not isinstance(height, int) and width is not None:
-            raise TypeError(f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;)
+            raise TypeError(
+                f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;
+            )
         if not isinstance(wrapping, str):
-            raise TypeError(f&#34;wrapping is not a str! (type passed in: {repr(type(wrapping))})&#34;)
+            raise TypeError(
+                f&#34;wrapping is not a str! &#34; f&#34;(type passed in: {repr(type(wrapping))})&#34;
+            )
         super().__init__(master=parent, width=width, height=height, wrap=wrapping)
         self._enabled = True
         self._readonly = False
@@ -110,14 +126,17 @@ class Text(tk.Text):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.delete(&#34;1.0&#34;, tk.END)
         self.insert(&#34;1.0&#34;, new_text)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -126,13 +145,18 @@ class Text(tk.Text):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+        for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
@@ -144,18 +168,34 @@ class Text(tk.Text):
         :return: None.
         &#34;&#34;&#34;
         self._context_menu = tk.Menu(self, tearoff=0)
-        self._context_menu.add_command(label=&#34;Copy&#34;, command=self.copy_contents, underline=0,
-                                       accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;)
-        self._context_menu.add_command(label=&#34;Cut&#34;, command=self.cut_contents,
-                                       accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;)
-        self._context_menu.add_command(label=&#34;Paste&#34;, command=self.paste_contents, underline=0,
-                                       accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;)
+        self._context_menu.add_command(
+            label=&#34;Copy&#34;,
+            command=self.copy_contents,
+            underline=0,
+            accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Cut&#34;,
+            command=self.cut_contents,
+            accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Paste&#34;,
+            command=self.paste_contents,
+            underline=0,
+            accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;,
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Delete&#34;, command=self.delete_contents,
-                                       accelerator=&#34;Delete&#34;)
+        self._context_menu.add_command(
+            label=&#34;Delete&#34;, command=self.delete_contents, accelerator=&#34;Delete&#34;
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Select all&#34;, command=self.select_all_contents, underline=7,
-                                       accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;)
+        self._context_menu.add_command(
+            label=&#34;Select all&#34;,
+            command=self.select_all_contents,
+            underline=7,
+            accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;,
+        )
 
     def _update_context_menu_states(self) -&gt; None:
         &#34;&#34;&#34;
@@ -187,7 +227,8 @@ class Text(tk.Text):
         &#34;&#34;&#34;
         Try to pop up the context menu.
 
-        :param event: An object that Tk passes in with information about the event that we need.
+        :param event: An object that Tk passes in with information about the
+         event that we need.
         :return: None.
         &#34;&#34;&#34;
         self._update_context_menu_states()
@@ -268,31 +309,47 @@ class Text(tk.Text):
 <p>:param parent: The parent of the text.
 :param width: The width of the text. Defaults to None.
 :param height: The width of the text. Defaults to None.
-:param wrapping: How to wrap words in the text. Defaults to TextWrap.WordWrapping</p></div>
+:param wrapping: How to wrap words in the text. Defaults to
+TextWrap.WordWrapping</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Text(tk.Text):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 width: int = None, height: int = None, wrapping: str = TextWrap.WordWrapping):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        width: int = None,
+        height: int = None,
+        wrapping: str = TextWrap.WordWrapping,
+    ):
         &#34;&#34;&#34;
         Initiate a tk.Text.
 
         :param parent: The parent of the text.
         :param width: The width of the text. Defaults to None.
         :param height: The width of the text. Defaults to None.
-        :param wrapping: How to wrap words in the text. Defaults to TextWrap.WordWrapping
+        :param wrapping: How to wrap words in the text. Defaults to
+         TextWrap.WordWrapping
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(width, int) and width is not None:
-            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+            raise TypeError(
+                f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
+            )
         if not isinstance(height, int) and width is not None:
-            raise TypeError(f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;)
+            raise TypeError(
+                f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;
+            )
         if not isinstance(wrapping, str):
-            raise TypeError(f&#34;wrapping is not a str! (type passed in: {repr(type(wrapping))})&#34;)
+            raise TypeError(
+                f&#34;wrapping is not a str! &#34; f&#34;(type passed in: {repr(type(wrapping))})&#34;
+            )
         super().__init__(master=parent, width=width, height=height, wrap=wrapping)
         self._enabled = True
         self._readonly = False
@@ -332,14 +389,17 @@ class Text(tk.Text):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.delete(&#34;1.0&#34;, tk.END)
         self.insert(&#34;1.0&#34;, new_text)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -348,13 +408,18 @@ class Text(tk.Text):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+        for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
@@ -366,18 +431,34 @@ class Text(tk.Text):
         :return: None.
         &#34;&#34;&#34;
         self._context_menu = tk.Menu(self, tearoff=0)
-        self._context_menu.add_command(label=&#34;Copy&#34;, command=self.copy_contents, underline=0,
-                                       accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;)
-        self._context_menu.add_command(label=&#34;Cut&#34;, command=self.cut_contents,
-                                       accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;)
-        self._context_menu.add_command(label=&#34;Paste&#34;, command=self.paste_contents, underline=0,
-                                       accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;)
+        self._context_menu.add_command(
+            label=&#34;Copy&#34;,
+            command=self.copy_contents,
+            underline=0,
+            accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Cut&#34;,
+            command=self.cut_contents,
+            accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Paste&#34;,
+            command=self.paste_contents,
+            underline=0,
+            accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;,
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Delete&#34;, command=self.delete_contents,
-                                       accelerator=&#34;Delete&#34;)
+        self._context_menu.add_command(
+            label=&#34;Delete&#34;, command=self.delete_contents, accelerator=&#34;Delete&#34;
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Select all&#34;, command=self.select_all_contents, underline=7,
-                                       accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;)
+        self._context_menu.add_command(
+            label=&#34;Select all&#34;,
+            command=self.select_all_contents,
+            underline=7,
+            accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;,
+        )
 
     def _update_context_menu_states(self) -&gt; None:
         &#34;&#34;&#34;
@@ -409,7 +490,8 @@ class Text(tk.Text):
         &#34;&#34;&#34;
         Try to pop up the context menu.
 
-        :param event: An object that Tk passes in with information about the event that we need.
+        :param event: An object that Tk passes in with information about the
+         event that we need.
         :return: None.
         &#34;&#34;&#34;
         self._update_context_menu_states()
@@ -486,7 +568,8 @@ class Text(tk.Text):
 <dl>
 <dt id="TkZero.Text.Text.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed
+out and cannot interact with)</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -495,7 +578,8 @@ class Text(tk.Text):
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+    Get whether this widget is in normal mode or disabled mode. (grayed
+    out and cannot interact with)
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
@@ -654,6 +738,7 @@ spaces.</p></div>
     WordWrapping - wrap at word
      spaces.
     &#34;&#34;&#34;
+
     NoWrapping = tk.NONE
     CharWrapping = tk.CHAR
     WordWrapping = tk.WORD</code></pre>

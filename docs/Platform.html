@@ -39,22 +39,28 @@ class WindowingSystem:
     &#34;&#34;&#34;
     A bunch of variables on the possible windowing systems.
     &#34;&#34;&#34;
+
     X11 = &#34;x11&#34;
     WIN32 = &#34;win32&#34;
     AQUA = &#34;aqua&#34;
 
 
-def on_platform(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], system: str) -&gt; bool:
+def on_platform(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], system: str
+) -&gt; bool:
     &#34;&#34;&#34;
     Return a bool if we are on the windowing system passed in.
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :param system: A str of &#34;x11&#34;, &#34;win32&#34;, or &#34;aqua&#34;.
     :return: A bool on whether we are on the system passed in.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return widget.tk.call(&#34;tk&#34;, &#34;windowingsystem&#34;) == system
 
 
@@ -62,12 +68,15 @@ def on_x11(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
     &#34;&#34;&#34;
     Return whether we are on an X11 windowing system. (Usually Linux)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on an X11 windowing system.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return on_platform(widget=widget, system=WindowingSystem.X11)
 
 
@@ -75,12 +84,15 @@ def on_win32(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
     &#34;&#34;&#34;
     Return whether we are on a win32 windowing system. (Usually Windows)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on a win32 windowing system.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return on_platform(widget=widget, system=WindowingSystem.WIN32)
 
 
@@ -88,12 +100,15 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
     &#34;&#34;&#34;
     Return whether we are on an aqua windowing system. (Usually macOS)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on an aqau windowing system.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return on_platform(widget=widget, system=WindowingSystem.AQUA)</code></pre>
 </details>
 </section>
@@ -109,7 +124,8 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
 </code></dt>
 <dd>
 <div class="desc"><p>Return whether we are on an aqua windowing system. (Usually macOS)</p>
-<p>:param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+<p>:param widget: A Tkinter thing that we need to use so we can call into Tk.
+(Probably something like root or self)
 :return: A bool on whether we are on an aqau windowing system.</p></div>
 <details class="source">
 <summary>
@@ -119,12 +135,15 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
     &#34;&#34;&#34;
     Return whether we are on an aqua windowing system. (Usually macOS)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on an aqau windowing system.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return on_platform(widget=widget, system=WindowingSystem.AQUA)</code></pre>
 </details>
 </dd>
@@ -133,24 +152,30 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
 </code></dt>
 <dd>
 <div class="desc"><p>Return a bool if we are on the windowing system passed in.</p>
-<p>:param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+<p>:param widget: A Tkinter thing that we need to use so we can call into Tk.
+(Probably something like root or self)
 :param system: A str of "x11", "win32", or "aqua".
 :return: A bool on whether we are on the system passed in.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def on_platform(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], system: str) -&gt; bool:
+<pre><code class="python">def on_platform(
+    widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], system: str
+) -&gt; bool:
     &#34;&#34;&#34;
     Return a bool if we are on the windowing system passed in.
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :param system: A str of &#34;x11&#34;, &#34;win32&#34;, or &#34;aqua&#34;.
     :return: A bool on whether we are on the system passed in.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return widget.tk.call(&#34;tk&#34;, &#34;windowingsystem&#34;) == system</code></pre>
 </details>
 </dd>
@@ -159,7 +184,8 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
 </code></dt>
 <dd>
 <div class="desc"><p>Return whether we are on a win32 windowing system. (Usually Windows)</p>
-<p>:param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+<p>:param widget: A Tkinter thing that we need to use so we can call into Tk.
+(Probably something like root or self)
 :return: A bool on whether we are on a win32 windowing system.</p></div>
 <details class="source">
 <summary>
@@ -169,12 +195,15 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
     &#34;&#34;&#34;
     Return whether we are on a win32 windowing system. (Usually Windows)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on a win32 windowing system.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return on_platform(widget=widget, system=WindowingSystem.WIN32)</code></pre>
 </details>
 </dd>
@@ -183,7 +212,8 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
 </code></dt>
 <dd>
 <div class="desc"><p>Return whether we are on an X11 windowing system. (Usually Linux)</p>
-<p>:param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+<p>:param widget: A Tkinter thing that we need to use so we can call into Tk.
+(Probably something like root or self)
 :return: A bool on whether we are on an X11 windowing system.</p></div>
 <details class="source">
 <summary>
@@ -193,12 +223,15 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
     &#34;&#34;&#34;
     Return whether we are on an X11 windowing system. (Usually Linux)
 
-    :param widget: A Tkinter thing that we need to use so we can call into Tk. (Probably something like root or self)
+    :param widget: A Tkinter thing that we need to use so we can call into Tk.
+     (Probably something like root or self)
     :return: A bool on whether we are on an X11 windowing system.
     &#34;&#34;&#34;
     if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                        f&#34;(type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+            f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     return on_platform(widget=widget, system=WindowingSystem.X11)</code></pre>
 </details>
 </dd>
@@ -220,6 +253,7 @@ def on_aqua(widget: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]) -&gt; bool:
     &#34;&#34;&#34;
     A bunch of variables on the possible windowing systems.
     &#34;&#34;&#34;
+
     X11 = &#34;x11&#34;
     WIN32 = &#34;win32&#34;
     AQUA = &#34;aqua&#34;</code></pre>

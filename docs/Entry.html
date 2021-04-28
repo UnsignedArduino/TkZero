@@ -39,23 +39,38 @@ from TkZero.Platform import on_aqua
 
 
 class Entry(ttk.Entry):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], width: int = None,
-                 show: str = None, validate: Callable = None, command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        width: int = None,
+        show: str = None,
+        validate: Callable = None,
+        command: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Entry.
 
         :param parent: The parent of the entry.
         :param width: The width of the entry. Defaults to None.
-        :param show: The character to show instead of the actual text. Defaults to None.
-        :param validate: The function to use for validation. Will be passed in a positional argument with the text as
-         a str (like `validate(contents)`) and should return a bool - True if passed otherwise False. Defaults to None.
-        :param command: The command to run when the value of the label changes. Defaults to None.
+        :param show: The character to show instead of the actual text.
+         Defaults to None.
+        :param validate: The function to use for validation. Will be passed in
+         a positional argument with the text as a str (like
+         `validate(contents)`) and should return a bool - True if passed
+         otherwise False. Defaults to None.
+        :param command: The command to run when the value of the label
+         changes. Defaults to None.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(width, int) and width is not None:
-            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+            raise TypeError(
+                f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
+            )
         if not isinstance(show, str) and show is not None:
             raise TypeError(f&#34;show is not a str! (type passed in: {repr(type(show))})&#34;)
         self._variable = tk.StringVar(value=&#34;&#34;)
@@ -63,10 +78,18 @@ class Entry(ttk.Entry):
             self._variable.trace_add(&#34;write&#34;, lambda *args: command())
         if validate is not None:
             wrapper = (parent.register(validate), &#34;%P&#34;)
-            super().__init__(master=parent, width=width, textvariable=self._variable, show=show,
-                             validate=&#34;key&#34;, validatecommand=wrapper)
+            super().__init__(
+                master=parent,
+                width=width,
+                textvariable=self._variable,
+                show=show,
+                validate=&#34;key&#34;,
+                validatecommand=wrapper,
+            )
         else:
-            super().__init__(master=parent, width=width, textvariable=self._variable, show=show)
+            super().__init__(
+                master=parent, width=width, textvariable=self._variable, show=show
+            )
         self._style_root = &#34;TEntry&#34;
         self._enabled = True
         self._readonly = False
@@ -95,14 +118,17 @@ class Entry(ttk.Entry):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.delete(0, tk.END)
         self.insert(0, new_text)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -111,13 +137,18 @@ class Entry(ttk.Entry):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self._readonly = False
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
@@ -125,7 +156,8 @@ class Entry(ttk.Entry):
     @property
     def read_only(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in read only mode. (can copy and paste but cannot edit)
+        Get whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
 
         :return: A bool, True if read only otherwise False.
         &#34;&#34;&#34;
@@ -134,13 +166,18 @@ class Entry(ttk.Entry):
     @read_only.setter
     def read_only(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in read only mode. (can copy and paste but cannot edit)
+        Set whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
 
-        :param new_state: The new state (a bool) True for normal and False for read only.
+        :param new_state: The new state (a bool) True for normal and False for
+         read only.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = True
         self._readonly = new_state
         self.state([&#34;readonly&#34; if self._readonly else &#34;!readonly&#34;])
@@ -152,18 +189,34 @@ class Entry(ttk.Entry):
         :return: None.
         &#34;&#34;&#34;
         self._context_menu = tk.Menu(self, tearoff=0)
-        self._context_menu.add_command(label=&#34;Copy&#34;, command=self.copy_contents, underline=0,
-                                       accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;)
-        self._context_menu.add_command(label=&#34;Cut&#34;, command=self.cut_contents,
-                                       accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;)
-        self._context_menu.add_command(label=&#34;Paste&#34;, command=self.paste_contents, underline=0,
-                                       accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;)
+        self._context_menu.add_command(
+            label=&#34;Copy&#34;,
+            command=self.copy_contents,
+            underline=0,
+            accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Cut&#34;,
+            command=self.cut_contents,
+            accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Paste&#34;,
+            command=self.paste_contents,
+            underline=0,
+            accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;,
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Delete&#34;, command=self.delete_contents,
-                                       accelerator=&#34;Delete&#34;)
+        self._context_menu.add_command(
+            label=&#34;Delete&#34;, command=self.delete_contents, accelerator=&#34;Delete&#34;
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Select all&#34;, command=self.select_all_contents, underline=7,
-                                       accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;)
+        self._context_menu.add_command(
+            label=&#34;Select all&#34;,
+            command=self.select_all_contents,
+            underline=7,
+            accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;,
+        )
 
     def _update_context_menu_states(self) -&gt; None:
         &#34;&#34;&#34;
@@ -202,7 +255,8 @@ class Entry(ttk.Entry):
         &#34;&#34;&#34;
         Try to pop up the context menu.
 
-        :param event: An object that Tk passes in with information about the event that we need.
+        :param event: An object that Tk passes in with information about the
+         event that we need.
         :return: None.
         &#34;&#34;&#34;
         self._update_context_menu_states()
@@ -270,7 +324,10 @@ class Entry(ttk.Entry):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(style_name, str):
-            raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+            raise TypeError(
+                f&#34;style_name is not a str! &#34;
+                f&#34;(type passed in: {repr(type(style_name))})&#34;
+            )
         self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
 </details>
 </section>
@@ -293,32 +350,51 @@ string to be edited by the user.</p>
 <p>Initiate a ttk.Entry.</p>
 <p>:param parent: The parent of the entry.
 :param width: The width of the entry. Defaults to None.
-:param show: The character to show instead of the actual text. Defaults to None.
-:param validate: The function to use for validation. Will be passed in a positional argument with the text as
-a str (like <code>validate(contents)</code>) and should return a bool - True if passed otherwise False. Defaults to None.
-:param command: The command to run when the value of the label changes. Defaults to None.</p></div>
+:param show: The character to show instead of the actual text.
+Defaults to None.
+:param validate: The function to use for validation. Will be passed in
+a positional argument with the text as a str (like
+<code>validate(contents)</code>) and should return a bool - True if passed
+otherwise False. Defaults to None.
+:param command: The command to run when the value of the label
+changes. Defaults to None.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Entry(ttk.Entry):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], width: int = None,
-                 show: str = None, validate: Callable = None, command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        width: int = None,
+        show: str = None,
+        validate: Callable = None,
+        command: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Entry.
 
         :param parent: The parent of the entry.
         :param width: The width of the entry. Defaults to None.
-        :param show: The character to show instead of the actual text. Defaults to None.
-        :param validate: The function to use for validation. Will be passed in a positional argument with the text as
-         a str (like `validate(contents)`) and should return a bool - True if passed otherwise False. Defaults to None.
-        :param command: The command to run when the value of the label changes. Defaults to None.
+        :param show: The character to show instead of the actual text.
+         Defaults to None.
+        :param validate: The function to use for validation. Will be passed in
+         a positional argument with the text as a str (like
+         `validate(contents)`) and should return a bool - True if passed
+         otherwise False. Defaults to None.
+        :param command: The command to run when the value of the label
+         changes. Defaults to None.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(width, int) and width is not None:
-            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+            raise TypeError(
+                f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
+            )
         if not isinstance(show, str) and show is not None:
             raise TypeError(f&#34;show is not a str! (type passed in: {repr(type(show))})&#34;)
         self._variable = tk.StringVar(value=&#34;&#34;)
@@ -326,10 +402,18 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
             self._variable.trace_add(&#34;write&#34;, lambda *args: command())
         if validate is not None:
             wrapper = (parent.register(validate), &#34;%P&#34;)
-            super().__init__(master=parent, width=width, textvariable=self._variable, show=show,
-                             validate=&#34;key&#34;, validatecommand=wrapper)
+            super().__init__(
+                master=parent,
+                width=width,
+                textvariable=self._variable,
+                show=show,
+                validate=&#34;key&#34;,
+                validatecommand=wrapper,
+            )
         else:
-            super().__init__(master=parent, width=width, textvariable=self._variable, show=show)
+            super().__init__(
+                master=parent, width=width, textvariable=self._variable, show=show
+            )
         self._style_root = &#34;TEntry&#34;
         self._enabled = True
         self._readonly = False
@@ -358,14 +442,17 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! (type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.delete(0, tk.END)
         self.insert(0, new_text)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -374,13 +461,18 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self._readonly = False
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
@@ -388,7 +480,8 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
     @property
     def read_only(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in read only mode. (can copy and paste but cannot edit)
+        Get whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
 
         :return: A bool, True if read only otherwise False.
         &#34;&#34;&#34;
@@ -397,13 +490,18 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
     @read_only.setter
     def read_only(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in read only mode. (can copy and paste but cannot edit)
+        Set whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
 
-        :param new_state: The new state (a bool) True for normal and False for read only.
+        :param new_state: The new state (a bool) True for normal and False for
+         read only.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = True
         self._readonly = new_state
         self.state([&#34;readonly&#34; if self._readonly else &#34;!readonly&#34;])
@@ -415,18 +513,34 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
         :return: None.
         &#34;&#34;&#34;
         self._context_menu = tk.Menu(self, tearoff=0)
-        self._context_menu.add_command(label=&#34;Copy&#34;, command=self.copy_contents, underline=0,
-                                       accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;)
-        self._context_menu.add_command(label=&#34;Cut&#34;, command=self.cut_contents,
-                                       accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;)
-        self._context_menu.add_command(label=&#34;Paste&#34;, command=self.paste_contents, underline=0,
-                                       accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;)
+        self._context_menu.add_command(
+            label=&#34;Copy&#34;,
+            command=self.copy_contents,
+            underline=0,
+            accelerator=&#34;Command-C&#34; if on_aqua(self) else &#34;Control+C&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Cut&#34;,
+            command=self.cut_contents,
+            accelerator=&#34;Command-X&#34; if on_aqua(self) else &#34;Control+X&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Paste&#34;,
+            command=self.paste_contents,
+            underline=0,
+            accelerator=&#34;Command-V&#34; if on_aqua(self) else &#34;Control+V&#34;,
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Delete&#34;, command=self.delete_contents,
-                                       accelerator=&#34;Delete&#34;)
+        self._context_menu.add_command(
+            label=&#34;Delete&#34;, command=self.delete_contents, accelerator=&#34;Delete&#34;
+        )
         self._context_menu.add_separator()
-        self._context_menu.add_command(label=&#34;Select all&#34;, command=self.select_all_contents, underline=7,
-                                       accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;)
+        self._context_menu.add_command(
+            label=&#34;Select all&#34;,
+            command=self.select_all_contents,
+            underline=7,
+            accelerator=&#34;Command-A&#34; if on_aqua(self) else &#34;Control+A&#34;,
+        )
 
     def _update_context_menu_states(self) -&gt; None:
         &#34;&#34;&#34;
@@ -465,7 +579,8 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
         &#34;&#34;&#34;
         Try to pop up the context menu.
 
-        :param event: An object that Tk passes in with information about the event that we need.
+        :param event: An object that Tk passes in with information about the
+         event that we need.
         :return: None.
         &#34;&#34;&#34;
         self._update_context_menu_states()
@@ -533,7 +648,10 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(style_name, str):
-            raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+            raise TypeError(
+                f&#34;style_name is not a str! &#34;
+                f&#34;(type passed in: {repr(type(style_name))})&#34;
+            )
         self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -553,7 +671,8 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
 <dl>
 <dt id="TkZero.Entry.Entry.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed
+out and cannot interact with)</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -562,7 +681,8 @@ a str (like <code>validate(contents)</code>) and should return a bool - True if 
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+    Get whether this widget is in normal mode or disabled mode. (grayed
+    out and cannot interact with)
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
@@ -571,7 +691,8 @@ def enabled(self) -&gt; bool:
 </dd>
 <dt id="TkZero.Entry.Entry.read_only"><code class="name">var <span class="ident">read_only</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Get whether this widget is in read only mode. (can copy and paste but cannot edit)</p>
+<div class="desc"><p>Get whether this widget is in read only mode. (can copy and paste but
+cannot edit)</p>
 <p>:return: A bool, True if read only otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -580,7 +701,8 @@ def enabled(self) -&gt; bool:
 <pre><code class="python">@property
 def read_only(self) -&gt; bool:
     &#34;&#34;&#34;
-    Get whether this widget is in read only mode. (can copy and paste but cannot edit)
+    Get whether this widget is in read only mode. (can copy and paste but
+    cannot edit)
 
     :return: A bool, True if read only otherwise False.
     &#34;&#34;&#34;
@@ -627,7 +749,10 @@ def value(self) -&gt; str:
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(style_name, str):
-        raise TypeError(f&#34;style_name is not a str! (type passed in: {repr(type(style_name))})&#34;)
+        raise TypeError(
+            f&#34;style_name is not a str! &#34;
+            f&#34;(type passed in: {repr(type(style_name))})&#34;
+        )
     self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
 </details>
 </dd>

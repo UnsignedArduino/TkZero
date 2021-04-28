@@ -42,28 +42,43 @@ class OrientModes:
     Horizontal - makes the scrollbar horizontal and scrolls left and right
     Vertical - makes the scrollbar vertical and scrolls up and down
     &#34;&#34;&#34;
+
     Horizontal = tk.HORIZONTAL
     Vertical = tk.VERTICAL
 
 
 class Scrollbar(ttk.Scrollbar):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], orientation: str = OrientModes.Vertical,
-                 widget: tk.Widget = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        orientation: str = OrientModes.Vertical,
+        widget: tk.Widget = None,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Scrollbar.
 
         :param parent: The parent of the scrollbar.
-        :param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-         to OrientModes.Vertical and is a str.
-        :param widget: The widget to scroll. Defaults to None and should be a tk.Widget.
+        :param orientation: The orientation of the scrollbar and what
+         direction it should scroll the widget in. Defaults to
+         OrientModes.Vertical and is a str.
+        :param widget: The widget to scroll. Defaults to None and should be a
+         tk.Widget.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(orientation, str):
-            raise TypeError(f&#34;orientation is not a str! (type passed in: {repr(type(orientation))})&#34;)
+            raise TypeError(
+                f&#34;orientation is not a str! &#34;
+                f&#34;(type passed in: {repr(type(orientation))})&#34;
+            )
         if not isinstance(widget, tk.Widget) and widget is not None:
-            raise TypeError(f&#34;widget is not a tk.Widget! (type passed in: {repr(type(widget))})&#34;)
+            raise TypeError(
+                f&#34;widget is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(widget))})&#34;
+            )
         super().__init__(master=parent, orient=orientation)
         self._style_root = &#34;TScrollbar&#34;
         self._enabled = True
@@ -80,19 +95,27 @@ class Scrollbar(ttk.Scrollbar):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(widget, tk.Widget):
-            raise TypeError(f&#34;widget is not a tk.Widget! (type passed in: {repr(type(widget))})&#34;)
+            raise TypeError(
+                f&#34;widget is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(widget))})&#34;
+            )
         if self._orientation == OrientModes.Vertical:
             try:
                 self.configure(command=widget.yview)
                 widget.configure(yscrollcommand=self.set)
             except AttributeError:
-                raise ValueError(f&#34;This widget ({repr(widget)}) does not support scrolling in the X direction!&#34;)
+                raise ValueError(
+                    f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
+                    f&#34;in the X direction!&#34;
+                )
         else:
             try:
                 self.configure(command=widget.xview)
                 widget.configure(xscrollcommand=self.set)
             except AttributeError:
-                raise ValueError(f&#34;This widget ({repr(widget)}) does not support scrolling in the Y direction!&#34;)
+                raise ValueError(
+                    f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
+                    f&#34;in the Y direction!&#34;
+                )
 
     def grid(self, *args, **kwargs) -&gt; None:
         &#34;&#34;&#34;Position a widget in the parent widget in a grid. Use as options:
@@ -115,7 +138,8 @@ class Scrollbar(ttk.Scrollbar):
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Whether this widget is in normal mode or disabled mode (grayed out and
+        cannot interact with) in Tk terms.
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -124,13 +148,18 @@ class Scrollbar(ttk.Scrollbar):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this widget is in normal mode or disabled mode (grayed out
+        and cannot interact with) in Tk terms.
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])</code></pre>
 </details>
@@ -161,6 +190,7 @@ Vertical - makes the scrollbar vertical and scrolls up and down</p></div>
     Horizontal - makes the scrollbar horizontal and scrolls left and right
     Vertical - makes the scrollbar vertical and scrolls up and down
     &#34;&#34;&#34;
+
     Horizontal = tk.HORIZONTAL
     Vertical = tk.VERTICAL</code></pre>
 </details>
@@ -184,31 +214,47 @@ Vertical - makes the scrollbar vertical and scrolls up and down</p></div>
 <div class="desc"><p>Ttk Scrollbar controls the viewport of a scrollable widget.</p>
 <p>Initiate a ttk.Scrollbar.</p>
 <p>:param parent: The parent of the scrollbar.
-:param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-to OrientModes.Vertical and is a str.
-:param widget: The widget to scroll. Defaults to None and should be a tk.Widget.</p></div>
+:param orientation: The orientation of the scrollbar and what
+direction it should scroll the widget in. Defaults to
+OrientModes.Vertical and is a str.
+:param widget: The widget to scroll. Defaults to None and should be a
+tk.Widget.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Scrollbar(ttk.Scrollbar):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], orientation: str = OrientModes.Vertical,
-                 widget: tk.Widget = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        orientation: str = OrientModes.Vertical,
+        widget: tk.Widget = None,
+    ):
         &#34;&#34;&#34;
         Initiate a ttk.Scrollbar.
 
         :param parent: The parent of the scrollbar.
-        :param orientation: The orientation of the scrollbar and what direction it should scroll the widget in. Defaults
-         to OrientModes.Vertical and is a str.
-        :param widget: The widget to scroll. Defaults to None and should be a tk.Widget.
+        :param orientation: The orientation of the scrollbar and what
+         direction it should scroll the widget in. Defaults to
+         OrientModes.Vertical and is a str.
+        :param widget: The widget to scroll. Defaults to None and should be a
+         tk.Widget.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(orientation, str):
-            raise TypeError(f&#34;orientation is not a str! (type passed in: {repr(type(orientation))})&#34;)
+            raise TypeError(
+                f&#34;orientation is not a str! &#34;
+                f&#34;(type passed in: {repr(type(orientation))})&#34;
+            )
         if not isinstance(widget, tk.Widget) and widget is not None:
-            raise TypeError(f&#34;widget is not a tk.Widget! (type passed in: {repr(type(widget))})&#34;)
+            raise TypeError(
+                f&#34;widget is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(widget))})&#34;
+            )
         super().__init__(master=parent, orient=orientation)
         self._style_root = &#34;TScrollbar&#34;
         self._enabled = True
@@ -225,19 +271,27 @@ to OrientModes.Vertical and is a str.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(widget, tk.Widget):
-            raise TypeError(f&#34;widget is not a tk.Widget! (type passed in: {repr(type(widget))})&#34;)
+            raise TypeError(
+                f&#34;widget is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(widget))})&#34;
+            )
         if self._orientation == OrientModes.Vertical:
             try:
                 self.configure(command=widget.yview)
                 widget.configure(yscrollcommand=self.set)
             except AttributeError:
-                raise ValueError(f&#34;This widget ({repr(widget)}) does not support scrolling in the X direction!&#34;)
+                raise ValueError(
+                    f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
+                    f&#34;in the X direction!&#34;
+                )
         else:
             try:
                 self.configure(command=widget.xview)
                 widget.configure(xscrollcommand=self.set)
             except AttributeError:
-                raise ValueError(f&#34;This widget ({repr(widget)}) does not support scrolling in the Y direction!&#34;)
+                raise ValueError(
+                    f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
+                    f&#34;in the Y direction!&#34;
+                )
 
     def grid(self, *args, **kwargs) -&gt; None:
         &#34;&#34;&#34;Position a widget in the parent widget in a grid. Use as options:
@@ -260,7 +314,8 @@ to OrientModes.Vertical and is a str.
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Whether this widget is in normal mode or disabled mode (grayed out and
+        cannot interact with) in Tk terms.
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -269,13 +324,18 @@ to OrientModes.Vertical and is a str.
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+        Set whether this widget is in normal mode or disabled mode (grayed out
+        and cannot interact with) in Tk terms.
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])</code></pre>
 </details>
@@ -295,7 +355,8 @@ to OrientModes.Vertical and is a str.
 <dl>
 <dt id="TkZero.Scrollbar.Scrollbar.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.</p>
+<div class="desc"><p>Whether this widget is in normal mode or disabled mode (grayed out and
+cannot interact with) in Tk terms.</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -304,7 +365,8 @@ to OrientModes.Vertical and is a str.
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Whether this widget is in normal mode or disabled mode (grayed out and cannot interact with) in Tk terms.
+    Whether this widget is in normal mode or disabled mode (grayed out and
+    cannot interact with) in Tk terms.
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
@@ -333,19 +395,27 @@ def enabled(self) -&gt; bool:
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(widget, tk.Widget):
-        raise TypeError(f&#34;widget is not a tk.Widget! (type passed in: {repr(type(widget))})&#34;)
+        raise TypeError(
+            f&#34;widget is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(widget))})&#34;
+        )
     if self._orientation == OrientModes.Vertical:
         try:
             self.configure(command=widget.yview)
             widget.configure(yscrollcommand=self.set)
         except AttributeError:
-            raise ValueError(f&#34;This widget ({repr(widget)}) does not support scrolling in the X direction!&#34;)
+            raise ValueError(
+                f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
+                f&#34;in the X direction!&#34;
+            )
     else:
         try:
             self.configure(command=widget.xview)
             widget.configure(xscrollcommand=self.set)
         except AttributeError:
-            raise ValueError(f&#34;This widget ({repr(widget)}) does not support scrolling in the Y direction!&#34;)</code></pre>
+            raise ValueError(
+                f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
+                f&#34;in the Y direction!&#34;
+            )</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Scrollbar.Scrollbar.grid"><code class="name flex">

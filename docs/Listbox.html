@@ -41,42 +41,69 @@ class SelectModes:
     Single: Single item only
     Multiple: Can select multiple items
     &#34;&#34;&#34;
+
     Single = tk.BROWSE
     Multiple = tk.EXTENDED
 
 
 class Listbox(tk.Listbox):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: list[str, ...] = None,
-                 select_mode: str = SelectModes.Single, height: int = None, width: int = None,
-                 on_select: Callable = None, on_double_click: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        values: list[str, ...] = None,
+        select_mode: str = SelectModes.Single,
+        height: int = None,
+        width: int = None,
+        on_select: Callable = None,
+        on_double_click: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a tk.Listbox.
 
         :param parent: The parent of the listbox.
-        :param values: The default values you can choose, should be a list of str. Defaults to []
-        :param select_mode: The select mode to use. (allows you to select one or more items or not) Should be a str and
-         defaults to SelectModes.Single
+        :param values: The default values you can choose, should be a list of
+         str. Defaults to []
+        :param select_mode: The select mode to use. (allows you to select one
+         or more items or not) Should be a str and defaults to
+         SelectModes.Single
         :param height: The height of the listbox. Defaults to None.
         :param width: The width of the listbox. Defaults to None.
         :param on_select: The function to call
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(values, list) and values is not None:
-            raise TypeError(f&#34;values is not a list! (type passed in: {repr(type(values))})&#34;)
+            raise TypeError(
+                f&#34;values is not a list! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+            )
         if not isinstance(select_mode, str):
-            raise TypeError(f&#34;select_mode is not a str! (type passed in: {repr(type(values))})&#34;)
+            raise TypeError(
+                f&#34;select_mode is not a str! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+            )
         if not isinstance(height, int) and height is not None:
-            raise TypeError(f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;)
+            raise TypeError(
+                f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;
+            )
         if not isinstance(width, int) and height is not None:
-            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+            raise TypeError(
+                f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
+            )
         if values is not None:
             self._values = [str(item) for item in values]
         else:
             self._values = []
         self._variable = tk.StringVar(value=self._values)
-        super().__init__(master=parent, height=height, width=width, listvariable=self._variable, selectmode=select_mode)
+        super().__init__(
+            master=parent,
+            height=height,
+            width=width,
+            listvariable=self._variable,
+            selectmode=select_mode,
+        )
         if on_select is not None:
             self.bind(&#34;&lt;&lt;ListboxSelect&gt;&gt;&#34;, lambda event: on_select())
         if on_double_click is not None:
@@ -97,11 +124,15 @@ class Listbox(tk.Listbox):
         &#34;&#34;&#34;
         Set the selected items in this listbox.
 
-        :param new_selection: The new selections. Should be a tuple of ints (ex. (0, 1, 3))
+        :param new_selection: The new selections. Should be a tuple of ints
+         (ex. (0, 1, 3))
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_selection, tuple):
-            raise TypeError(f&#34;new_selection is not a tuple! (type passed in: {repr(type(new_selection))})&#34;)
+            raise TypeError(
+                f&#34;new_selection is not a tuple! &#34;
+                f&#34; (type passed in: {repr(type(new_selection))})&#34;
+            )
         self.selection_clear(0, tk.END)
         for index in new_selection:
             self.selection_set(index)
@@ -124,7 +155,10 @@ class Listbox(tk.Listbox):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_values, list):
-            raise TypeError(f&#34;new_values is not a list! (type passed in: {repr(type(new_values))})&#34;)
+            raise TypeError(
+                f&#34;new_values is not a list! &#34;
+                f&#34;(type passed in: {repr(type(new_values))})&#34;
+            )
         self._values = [str(item) for item in new_values]
         self._variable.set(self._values)
 
@@ -132,19 +166,27 @@ class Listbox(tk.Listbox):
         &#34;&#34;&#34;
         Scroll to the index, so that we can see it.
 
-        :param index: The index to scroll to. Raises IndexError if not in the list.
+        :param index: The index to scroll to. Raises IndexError if not in the
+         list.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(index, int):
-            raise TypeError(f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;)
+            raise TypeError(
+                f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;
+            )
         if index &lt; len(self._values):
-            raise IndexError(f&#34;index is out of range! (index passed in: {index} length of items: {len(self._values)}&#34;)
+            raise IndexError(
+                f&#34;index is out of range! &#34;
+                f&#34;(index passed in: {index} &#34;
+                f&#34;length of items: {len(self._values)}&#34;
+            )
         self.see(index=index)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -153,13 +195,18 @@ class Listbox(tk.Listbox):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)</code></pre>
 </details>
@@ -181,9 +228,11 @@ class Listbox(tk.Listbox):
 <div class="desc"><p>Listbox widget which can display a list of strings.</p>
 <p>Initiate a tk.Listbox.</p>
 <p>:param parent: The parent of the listbox.
-:param values: The default values you can choose, should be a list of str. Defaults to []
-:param select_mode: The select mode to use. (allows you to select one or more items or not) Should be a str and
-defaults to SelectModes.Single
+:param values: The default values you can choose, should be a list of
+str. Defaults to []
+:param select_mode: The select mode to use. (allows you to select one
+or more items or not) Should be a str and defaults to
+SelectModes.Single
 :param height: The height of the listbox. Defaults to None.
 :param width: The width of the listbox. Defaults to None.
 :param on_select: The function to call</p></div>
@@ -192,37 +241,63 @@ defaults to SelectModes.Single
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Listbox(tk.Listbox):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], values: list[str, ...] = None,
-                 select_mode: str = SelectModes.Single, height: int = None, width: int = None,
-                 on_select: Callable = None, on_double_click: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        values: list[str, ...] = None,
+        select_mode: str = SelectModes.Single,
+        height: int = None,
+        width: int = None,
+        on_select: Callable = None,
+        on_double_click: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a tk.Listbox.
 
         :param parent: The parent of the listbox.
-        :param values: The default values you can choose, should be a list of str. Defaults to []
-        :param select_mode: The select mode to use. (allows you to select one or more items or not) Should be a str and
-         defaults to SelectModes.Single
+        :param values: The default values you can choose, should be a list of
+         str. Defaults to []
+        :param select_mode: The select mode to use. (allows you to select one
+         or more items or not) Should be a str and defaults to
+         SelectModes.Single
         :param height: The height of the listbox. Defaults to None.
         :param width: The width of the listbox. Defaults to None.
         :param on_select: The function to call
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a &#34;
+                f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(values, list) and values is not None:
-            raise TypeError(f&#34;values is not a list! (type passed in: {repr(type(values))})&#34;)
+            raise TypeError(
+                f&#34;values is not a list! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+            )
         if not isinstance(select_mode, str):
-            raise TypeError(f&#34;select_mode is not a str! (type passed in: {repr(type(values))})&#34;)
+            raise TypeError(
+                f&#34;select_mode is not a str! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+            )
         if not isinstance(height, int) and height is not None:
-            raise TypeError(f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;)
+            raise TypeError(
+                f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;
+            )
         if not isinstance(width, int) and height is not None:
-            raise TypeError(f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;)
+            raise TypeError(
+                f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
+            )
         if values is not None:
             self._values = [str(item) for item in values]
         else:
             self._values = []
         self._variable = tk.StringVar(value=self._values)
-        super().__init__(master=parent, height=height, width=width, listvariable=self._variable, selectmode=select_mode)
+        super().__init__(
+            master=parent,
+            height=height,
+            width=width,
+            listvariable=self._variable,
+            selectmode=select_mode,
+        )
         if on_select is not None:
             self.bind(&#34;&lt;&lt;ListboxSelect&gt;&gt;&#34;, lambda event: on_select())
         if on_double_click is not None:
@@ -243,11 +318,15 @@ defaults to SelectModes.Single
         &#34;&#34;&#34;
         Set the selected items in this listbox.
 
-        :param new_selection: The new selections. Should be a tuple of ints (ex. (0, 1, 3))
+        :param new_selection: The new selections. Should be a tuple of ints
+         (ex. (0, 1, 3))
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_selection, tuple):
-            raise TypeError(f&#34;new_selection is not a tuple! (type passed in: {repr(type(new_selection))})&#34;)
+            raise TypeError(
+                f&#34;new_selection is not a tuple! &#34;
+                f&#34; (type passed in: {repr(type(new_selection))})&#34;
+            )
         self.selection_clear(0, tk.END)
         for index in new_selection:
             self.selection_set(index)
@@ -270,7 +349,10 @@ defaults to SelectModes.Single
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_values, list):
-            raise TypeError(f&#34;new_values is not a list! (type passed in: {repr(type(new_values))})&#34;)
+            raise TypeError(
+                f&#34;new_values is not a list! &#34;
+                f&#34;(type passed in: {repr(type(new_values))})&#34;
+            )
         self._values = [str(item) for item in new_values]
         self._variable.set(self._values)
 
@@ -278,19 +360,27 @@ defaults to SelectModes.Single
         &#34;&#34;&#34;
         Scroll to the index, so that we can see it.
 
-        :param index: The index to scroll to. Raises IndexError if not in the list.
+        :param index: The index to scroll to. Raises IndexError if not in the
+         list.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(index, int):
-            raise TypeError(f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;)
+            raise TypeError(
+                f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;
+            )
         if index &lt; len(self._values):
-            raise IndexError(f&#34;index is out of range! (index passed in: {index} length of items: {len(self._values)}&#34;)
+            raise IndexError(
+                f&#34;index is out of range! &#34;
+                f&#34;(index passed in: {index} &#34;
+                f&#34;length of items: {len(self._values)}&#34;
+            )
         self.see(index=index)
 
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Get whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -299,13 +389,18 @@ defaults to SelectModes.Single
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+        Set whether this widget is in normal mode or disabled mode. (grayed
+        out and cannot interact with)
 
-        :param new_state: The new state (a bool) True for enabled and False for disabled.
+        :param new_state: The new state (a bool) True for enabled and False
+         for disabled.
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_state, bool):
-            raise TypeError(f&#34;new_state is not a bool! (type passed in: {repr(type(new_state))})&#34;)
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
         self._enabled = new_state
         self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)</code></pre>
 </details>
@@ -325,7 +420,8 @@ defaults to SelectModes.Single
 <dl>
 <dt id="TkZero.Listbox.Listbox.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)</p>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed
+out and cannot interact with)</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -334,7 +430,8 @@ defaults to SelectModes.Single
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Get whether this widget is in normal mode or disabled mode. (grayed out and cannot interact with)
+    Get whether this widget is in normal mode or disabled mode. (grayed
+    out and cannot interact with)
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
@@ -385,7 +482,8 @@ def values(self) -&gt; list[str]:
 </code></dt>
 <dd>
 <div class="desc"><p>Scroll to the index, so that we can see it.</p>
-<p>:param index: The index to scroll to. Raises IndexError if not in the list.
+<p>:param index: The index to scroll to. Raises IndexError if not in the
+list.
 :return: None.</p></div>
 <details class="source">
 <summary>
@@ -395,13 +493,20 @@ def values(self) -&gt; list[str]:
     &#34;&#34;&#34;
     Scroll to the index, so that we can see it.
 
-    :param index: The index to scroll to. Raises IndexError if not in the list.
+    :param index: The index to scroll to. Raises IndexError if not in the
+     list.
     :return: None.
     &#34;&#34;&#34;
     if not isinstance(index, int):
-        raise TypeError(f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;)
+        raise TypeError(
+            f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;
+        )
     if index &lt; len(self._values):
-        raise IndexError(f&#34;index is out of range! (index passed in: {index} length of items: {len(self._values)}&#34;)
+        raise IndexError(
+            f&#34;index is out of range! &#34;
+            f&#34;(index passed in: {index} &#34;
+            f&#34;length of items: {len(self._values)}&#34;
+        )
     self.see(index=index)</code></pre>
 </details>
 </dd>
@@ -424,6 +529,7 @@ Multiple: Can select multiple items</p></div>
     Single: Single item only
     Multiple: Can select multiple items
     &#34;&#34;&#34;
+
     Single = tk.BROWSE
     Multiple = tk.EXTENDED</code></pre>
 </details>

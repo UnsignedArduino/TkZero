@@ -45,6 +45,7 @@ class DisplayModes:
     Top: Image above text
     Left: Image left of text, etc.
     &#34;&#34;&#34;
+
     Original = &#34;none&#34;
     TextOnly = &#34;text&#34;
     ImageOnly = &#34;image&#34;
@@ -57,14 +58,19 @@ class DisplayModes:
 
 class SystemMenuNames:
     &#34;&#34;&#34;
-    Names for the system menus you can override - if you pass on of these in it would override/extend that menu.
-    Application - the application menu on aqua. Should only be used on aqua windowing systems. (macOS)
-    Help - the help menu on aqua and x11. On the win32 window manager, just define a &#34;Help&#34; menu last.
-    Window - the window menu on macOS. Anything added to this menu will before the list of windows in your program.
-     (Tk takes care of that)
-    System - the menu that pops up when clicking on a Window&#39;s icon on the win32 window manager. Anything added will
-     be under the list of standard commands already provided.
+    Names for the system menus you can override - if you pass on of these in
+    it would override/extend that menu.
+    Application - the application menu on aqua. Should only be used on aqua
+     windowing systems. (macOS)
+    Help - the help menu on aqua and x11. On the win32 window manager, just
+     define a &#34;Help&#34; menu last.
+    Window - the window menu on macOS. Anything added to this menu will before
+     the list of windows in your program. (Tk takes care of that)
+    System - the menu that pops up when clicking on a Window&#39;s icon on the
+     win32 window manager. Anything added will be under the list of standard
+     commands already provided.
     &#34;&#34;&#34;
+
     Application = &#34;apple&#34;
     Help = &#34;help&#34;
     Window = &#34;window&#34;
@@ -72,19 +78,31 @@ class SystemMenuNames:
 
 
 class Menu(tk.Menu):
-    def __init__(self, parent: Union[tk.Tk, tk.Toplevel], is_menubar: bool = False, command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Tk, tk.Toplevel],
+        is_menubar: bool = False,
+        command: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a tk.Menu
 
         :param parent: The parent of the menu.
-        :param is_menubar: Whether this menu should be the menu bar that you attach menus too. Defaults to False.
-        :param command: The command to run before actually showing it - useful for updating the menu items.
+        :param is_menubar: Whether this menu should be the menu bar that you
+         attach menus too. Defaults to False.
+        :param command: The command to run before actually showing it - useful
+         for updating the menu items.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(is_menubar, bool):
-            raise TypeError(f&#34;is_menubar is not a bool! (type passed in: {repr(type(is_menubar))})&#34;)
+            raise TypeError(
+                f&#34;is_menubar is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(is_menubar))})&#34;
+            )
         super().__init__(master=parent, postcommand=command, tearoff=0)
         if is_menubar:
             parent.configure(menu=self)</code></pre>
@@ -124,6 +142,7 @@ Left: Image left of text, etc.</p></div>
     Top: Image above text
     Left: Image left of text, etc.
     &#34;&#34;&#34;
+
     Original = &#34;none&#34;
     TextOnly = &#34;text&#34;
     ImageOnly = &#34;image&#34;
@@ -177,26 +196,40 @@ Left: Image left of text, etc.</p></div>
 <div class="desc"><p>Menu widget which allows displaying menu bars, pull-down menus and pop-up menus.</p>
 <p>Initiate a tk.Menu</p>
 <p>:param parent: The parent of the menu.
-:param is_menubar: Whether this menu should be the menu bar that you attach menus too. Defaults to False.
-:param command: The command to run before actually showing it - useful for updating the menu items.</p></div>
+:param is_menubar: Whether this menu should be the menu bar that you
+attach menus too. Defaults to False.
+:param command: The command to run before actually showing it - useful
+for updating the menu items.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Menu(tk.Menu):
-    def __init__(self, parent: Union[tk.Tk, tk.Toplevel], is_menubar: bool = False, command: Callable = None):
+    def __init__(
+        self,
+        parent: Union[tk.Tk, tk.Toplevel],
+        is_menubar: bool = False,
+        command: Callable = None,
+    ):
         &#34;&#34;&#34;
         Initiate a tk.Menu
 
         :param parent: The parent of the menu.
-        :param is_menubar: Whether this menu should be the menu bar that you attach menus too. Defaults to False.
-        :param command: The command to run before actually showing it - useful for updating the menu items.
+        :param is_menubar: Whether this menu should be the menu bar that you
+         attach menus too. Defaults to False.
+        :param command: The command to run before actually showing it - useful
+         for updating the menu items.
         &#34;&#34;&#34;
         if not isinstance(parent, (tk.Tk, tk.Toplevel)):
-            raise TypeError(f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! &#34;
-                            f&#34;(type passed in: {repr(type(parent))})&#34;)
+            raise TypeError(
+                f&#34;parent is not a Union[tk.Tk, tk.Toplevel]! &#34;
+                f&#34;(type passed in: {repr(type(parent))})&#34;
+            )
         if not isinstance(is_menubar, bool):
-            raise TypeError(f&#34;is_menubar is not a bool! (type passed in: {repr(type(is_menubar))})&#34;)
+            raise TypeError(
+                f&#34;is_menubar is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(is_menubar))})&#34;
+            )
         super().__init__(master=parent, postcommand=command, tearoff=0)
         if is_menubar:
             parent.configure(menu=self)</code></pre>
@@ -216,27 +249,36 @@ Left: Image left of text, etc.</p></div>
 <span>class <span class="ident">SystemMenuNames</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Names for the system menus you can override - if you pass on of these in it would override/extend that menu.
-Application - the application menu on aqua. Should only be used on aqua windowing systems. (macOS)
-Help - the help menu on aqua and x11. On the win32 window manager, just define a "Help" menu last.
-Window - the window menu on macOS. Anything added to this menu will before the list of windows in your program.
-(Tk takes care of that)
-System - the menu that pops up when clicking on a Window's icon on the win32 window manager. Anything added will
-be under the list of standard commands already provided.</p></div>
+<div class="desc"><p>Names for the system menus you can override - if you pass on of these in
+it would override/extend that menu.
+Application - the application menu on aqua. Should only be used on aqua
+windowing systems. (macOS)
+Help - the help menu on aqua and x11. On the win32 window manager, just
+define a "Help" menu last.
+Window - the window menu on macOS. Anything added to this menu will before
+the list of windows in your program. (Tk takes care of that)
+System - the menu that pops up when clicking on a Window's icon on the
+win32 window manager. Anything added will be under the list of standard
+commands already provided.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class SystemMenuNames:
     &#34;&#34;&#34;
-    Names for the system menus you can override - if you pass on of these in it would override/extend that menu.
-    Application - the application menu on aqua. Should only be used on aqua windowing systems. (macOS)
-    Help - the help menu on aqua and x11. On the win32 window manager, just define a &#34;Help&#34; menu last.
-    Window - the window menu on macOS. Anything added to this menu will before the list of windows in your program.
-     (Tk takes care of that)
-    System - the menu that pops up when clicking on a Window&#39;s icon on the win32 window manager. Anything added will
-     be under the list of standard commands already provided.
+    Names for the system menus you can override - if you pass on of these in
+    it would override/extend that menu.
+    Application - the application menu on aqua. Should only be used on aqua
+     windowing systems. (macOS)
+    Help - the help menu on aqua and x11. On the win32 window manager, just
+     define a &#34;Help&#34; menu last.
+    Window - the window menu on macOS. Anything added to this menu will before
+     the list of windows in your program. (Tk takes care of that)
+    System - the menu that pops up when clicking on a Window&#39;s icon on the
+     win32 window manager. Anything added will be under the list of standard
+     commands already provided.
     &#34;&#34;&#34;
+
     Application = &#34;apple&#34;
     Help = &#34;help&#34;
     Window = &#34;window&#34;
