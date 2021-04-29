@@ -22,6 +22,22 @@ class RadiobuttonTest(unittest.TestCase):
         root.update()
         root.close()
 
+    def test_bad_params(self):
+        root = MainWindow()
+        root.update()
+        with self.assertRaises(TypeError):
+            Radiobutton(parent=1)
+        with self.assertRaises(TypeError):
+            Radiobutton(root, text=2)
+        with self.assertRaises(TypeError):
+            Radiobutton(root, image=[])
+        with self.assertRaises(TypeError):
+            Radiobutton(root, variable="miyu")
+        with self.assertRaises(TypeError):
+            Radiobutton(root, value=[42])
+        root.update()
+        root.close()
+
     def test_good_params(self):
         root = MainWindow()
         root.update()
@@ -265,6 +281,8 @@ class RadiobuttonTest(unittest.TestCase):
         c.text = "Test"
         root.update()
         self.assertEqual(c.text, "Test")
+        with self.assertRaises(TypeError):
+            c.text = 1023.99999999999999
         root.close()
 
     def test_image(self):
@@ -493,6 +511,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.image = PhotoImage(data=image_data)
         root.update()
         self.assertTrue(c.image is not None)
+        with self.assertRaises(TypeError):
+            c.image = "this isn't an image dummy"
         root.close()
 
     def test_text_and_image(self):
@@ -728,6 +748,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.display_mode = DisplayModes.ImageTopText
         root.update()
         self.assertEqual(c.display_mode, DisplayModes.ImageTopText)
+        with self.assertRaises(TypeError):
+            c.display_mode = {}
         root.close()
 
     def test_enabled(self):
@@ -737,8 +759,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.grid(row=0, column=0)
         root.update()
         self.assertTrue(c.enabled)
-        root.enabled = False
-        self.assertFalse(root.enabled)
+        c.enabled = False
+        self.assertFalse(c.enabled)
+        with self.assertRaises(TypeError):
+            c.enabled = "False"
         root.close()
 
     def test_execution(self):
@@ -758,6 +782,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.apply_style("Test")
         self.assertEqual(c.cget("style"), "Test.TRadiobutton")
         root.update()
+        with self.assertRaises(TypeError):
+            c.apply_style(123456789)
         root.close()
 
 
