@@ -21,6 +21,18 @@ class LabelTest(unittest.TestCase):
         root.update()
         root.close()
 
+    def test_bad_params(self):
+        root = MainWindow()
+        root.update()
+        with self.assertRaises(TypeError):
+            Label(parent=1)
+        with self.assertRaises(TypeError):
+            Label(root, text=["blah"])
+        with self.assertRaises(TypeError):
+            Label(root, image=123456789)
+        root.update()
+        root.close()
+
     def test_good_params(self):
         root = MainWindow()
         root.update()
@@ -253,6 +265,8 @@ class LabelTest(unittest.TestCase):
         l.text = "Test"
         root.update()
         self.assertEqual(l.text, "Test")
+        with self.assertRaises(TypeError):
+            l.text = 0.2
         root.close()
 
     def test_image(self):
@@ -481,6 +495,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.image = PhotoImage(data=image_data)
         root.update()
         self.assertTrue(l.image is not None)
+        with self.assertRaises(TypeError):
+            l.image = {}
         root.close()
 
     def test_text_and_image(self):
@@ -716,6 +732,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.display_mode = DisplayModes.ImageLeftText
         root.update()
         self.assertEqual(l.display_mode, DisplayModes.ImageLeftText)
+        with self.assertRaises(TypeError):
+            l.display_mode = []
         root.close()
 
     def test_enabled(self):
@@ -727,6 +745,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(l.enabled)
         l.enabled = False
         self.assertFalse(l.enabled)
+        with self.assertRaises(TypeError):
+            l.enabled = "boo"
         root.close()
 
     def test_style(self):
@@ -738,6 +758,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.apply_style("Test")
         self.assertEqual(l.cget("style"), "Test.TLabel")
         root.update()
+        with self.assertRaises(TypeError):
+            l.apply_style(69)
         root.close()
 
 
