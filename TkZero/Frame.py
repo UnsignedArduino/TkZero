@@ -97,7 +97,10 @@ class Frame(ttk.Frame):
             parent = self
         for child in parent.winfo_children():
             if child.winfo_class() not in ("Frame", "LabelFrame"):
-                child.state(["!disabled" if enable else "disabled"])
+                try:
+                    child.state(["!disabled" if enable else "disabled"])
+                except AttributeError:
+                    child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
                 self._enable_children(parent, enable)
 

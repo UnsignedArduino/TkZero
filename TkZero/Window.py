@@ -254,19 +254,14 @@ class Window(tk.Toplevel):
         :param enable: Whether to enable or disable the children.
         :return: None.
         """
-        if not isinstance(parent, tk.Widget) and parent is not None:
-            raise TypeError(
-                f"parent is not a tk.Widget! " f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(enable, bool):
-            raise TypeError(
-                f"enable is not a bool! (type passed in: {repr(type(enable))})"
-            )
         if parent is None:
             parent = self
         for child in parent.winfo_children():
             if child.winfo_class() not in ("Frame", "LabelFrame"):
-                child.state(["!disabled" if enable else "disabled"])
+                try:
+                    child.state(["!disabled" if enable else "disabled"])
+                except AttributeError:
+                    child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
                 self._enable_children(parent, enable)
 
