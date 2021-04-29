@@ -42,14 +42,11 @@ def open_file(
         raise TypeError(
             f"file_types is not a tuple! " f"(type passed in: {repr(type(file_types))})"
         )
-    try:
-        file_path = fd.askopenfilename(
-            initialdir=str(initial_dir) if initial_dir is not None else None,
-            title=title,
-            filetypes=file_types if file_types is not None else (),
-        )
-    except tk.TclError:
-        return None
+    file_path = fd.askopenfilename(
+        initialdir=str(initial_dir) if initial_dir is not None else None,
+        title=title,
+        filetypes=file_types if file_types is not None else (),
+    )
     return Path(file_path) if file_path else None
 
 

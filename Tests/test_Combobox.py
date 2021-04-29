@@ -93,6 +93,36 @@ class ComboboxTest(unittest.TestCase):
             c.read_only = 1
         root.close()
 
+    def test_right_click(self):
+        root = MainWindow()
+        root.update()
+        c = Combobox(root)
+        c.grid(row=0, column=0)
+        root.update()
+        c.enabled = False
+        root.update()
+        c._update_context_menu_states()
+        root.update()
+        c.enabled = True
+        c.read_only = True
+        root.update()
+        c._update_context_menu_states()
+        root.update()
+        c.read_only = False
+        c.select_all_contents()
+        root.update()
+        c._update_context_menu_states()
+        root.update()
+        c.copy_contents()
+        root.update()
+        c.cut_contents()
+        root.update()
+        c.delete_contents()
+        root.update()
+        c.paste_contents()
+        root.update()
+        root.close()
+
     def test_style(self):
         root = MainWindow()
         root.update()
@@ -102,6 +132,8 @@ class ComboboxTest(unittest.TestCase):
         c.apply_style("Test")
         self.assertEqual(c.cget("style"), "Test.TCombobox")
         root.update()
+        with self.assertRaises(TypeError):
+            c.apply_style([bool])
         root.close()
 
 
