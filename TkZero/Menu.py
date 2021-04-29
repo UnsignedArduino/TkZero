@@ -212,7 +212,7 @@ class MenuCheckbutton:
             raise TypeError(
                 f"label is not a str! " f"(type passed in: {repr(type(label))})"
             )
-        if not isinstance(variable, tk.Variable):
+        if not isinstance(variable, tk.Variable) and variable is not None:
             raise TypeError(
                 f"variable is not a tk.Variable! "
                 f"(type passed in: {repr(type(variable))})"
@@ -252,7 +252,7 @@ class MenuCheckbutton:
             raise ValueError(
                 f"This menu seems to be a menu bar so I can't" f"be added to it!"
             )
-        menu.add_command(
+        menu.add_checkbutton(
             label=self.label,
             variable=self.variable,
             onvalue=self.on_value,
@@ -278,7 +278,7 @@ class MenuRadiobutton:
                 f"onvalue_value is not a str, bool, int, or float! "
                 f"(type passed in: {repr(type(value))})"
             )
-        if not isinstance(variable, tk.Variable):
+        if not isinstance(variable, tk.Variable) and variable is not None:
             raise TypeError(
                 f"variable is not a tk.Variable! "
                 f"(type passed in: {repr(type(variable))})"
@@ -311,7 +311,7 @@ class MenuRadiobutton:
             raise ValueError(
                 f"This menu seems to be a menu bar so I can't" f"be added to it!"
             )
-        menu.add_command(
+        menu.add_radiobutton(
             label=self.label,
             variable=self.variable,
             value=self.value,
@@ -369,9 +369,4 @@ class MenuCascade:
         self.menu = Menu(parent=menu)
         menu.add_cascade(menu=self.menu, label=self.label)
         for item in self.items:
-            try:
-                item.create(menu=self.menu)
-            except RecursionError:
-                raise RecursionError(
-                    "It seems like you have passed in a " "parent to this function!"
-                )
+            item.create(menu=self.menu)
