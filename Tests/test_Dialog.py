@@ -119,13 +119,13 @@ class DialogTest(unittest.TestCase):
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
-            Dialog.show_info(parent="asdf")
+            Dialog.show_info(parent=321123, title="", message="")
         with self.assertRaises(TypeError):
-            Dialog.show_info(title=1)
+            Dialog.show_info(root, title=False, message="")
         with self.assertRaises(TypeError):
-            Dialog.show_info(message=lambda: None)
+            Dialog.show_info(root, title="", message=())
         with self.assertRaises(TypeError):
-            Dialog.show_info(detail=[])
+            Dialog.show_info(root, title="", message="", detail=[])
 
     def test_warning_box_no_params(self):
         root = MainWindow()
@@ -145,13 +145,13 @@ class DialogTest(unittest.TestCase):
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
-            Dialog.show_warning(parent="asdf")
+            Dialog.show_warning(parent="asdf", title="", message="")
         with self.assertRaises(TypeError):
-            Dialog.show_warning(title=1)
+            Dialog.show_warning(root, title=1, message="")
         with self.assertRaises(TypeError):
-            Dialog.show_warning(message=lambda: None)
+            Dialog.show_warning(root, title="", message=lambda: None)
         with self.assertRaises(TypeError):
-            Dialog.show_warning(detail=[])
+            Dialog.show_warning(root, title="", message="", detail=[])
 
     def test_error_box_no_params(self):
         root = MainWindow()
@@ -171,13 +171,13 @@ class DialogTest(unittest.TestCase):
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
-            Dialog.show_error(parent="asdf")
+            Dialog.show_error(parent="asdf", title="", message="")
         with self.assertRaises(TypeError):
-            Dialog.show_error(title=1)
+            Dialog.show_error(root, title=1, message="")
         with self.assertRaises(TypeError):
-            Dialog.show_error(message=lambda: None)
+            Dialog.show_error(root, title="", message=lambda: None)
         with self.assertRaises(TypeError):
-            Dialog.show_error(detail=[])
+            Dialog.show_error(root, title="", message="", detail=[])
 
     def test_ok_cancel_box_no_params(self):
         root = MainWindow()
@@ -197,13 +197,13 @@ class DialogTest(unittest.TestCase):
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
-            Dialog.ask_ok_or_cancel(parent="asdf")
+            Dialog.ask_ok_or_cancel(parent="asdf", title="", message="")
         with self.assertRaises(TypeError):
-            Dialog.ask_ok_or_cancel(title=1)
+            Dialog.ask_ok_or_cancel(root, title=1, message="")
         with self.assertRaises(TypeError):
-            Dialog.ask_ok_or_cancel(message=lambda: None)
+            Dialog.ask_ok_or_cancel(root, title="", message=lambda: None)
         with self.assertRaises(TypeError):
-            Dialog.ask_ok_or_cancel(detail=[])
+            Dialog.ask_ok_or_cancel(root, title="", message="", detail=[])
 
     def test_yes_no_box_no_params(self):
         root = MainWindow()
@@ -223,13 +223,13 @@ class DialogTest(unittest.TestCase):
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no(parent="asdf")
+            Dialog.ask_yes_or_no(parent="asdf", title="", message="")
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no(title=1)
+            Dialog.ask_yes_or_no(root, title=1, message="")
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no(message=lambda: None)
+            Dialog.ask_yes_or_no(root, title="", message=lambda: None)
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no(detail=[])
+            Dialog.ask_yes_or_no(root, title="", message="", detail=[])
 
     def test_yes_no_cancel_box_no_params(self):
         root = MainWindow()
@@ -249,13 +249,14 @@ class DialogTest(unittest.TestCase):
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no_or_cancel(parent="asdf")
+            Dialog.ask_yes_or_no_or_cancel(parent="asdf", title="", message="")
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no_or_cancel(title=1)
+            Dialog.ask_yes_or_no_or_cancel(root, title=1, message="")
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no_or_cancel(message=lambda: None)
+            Dialog.ask_yes_or_no_or_cancel(root, title="", message=lambda: None)
         with self.assertRaises(TypeError):
-            Dialog.ask_yes_or_no_or_cancel(detail=[])
+            Dialog.ask_yes_or_no_or_cancel(root, title="", message="",
+                                           detail=[])
 
     def test_retry_cancel_box_no_params(self):
         root = MainWindow()
@@ -275,21 +276,24 @@ class DialogTest(unittest.TestCase):
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
         with self.assertRaises(TypeError):
-            Dialog.ask_retry_cancel(parent="asdf")
+            Dialog.ask_retry_cancel(parent="asdf", message="", title="")
         with self.assertRaises(TypeError):
-            Dialog.ask_retry_cancel(title=1)
+            Dialog.ask_retry_cancel(root, title=1, message="")
         with self.assertRaises(TypeError):
-            Dialog.ask_retry_cancel(message=lambda: None)
+            Dialog.ask_retry_cancel(root, title="", message=lambda: None)
         with self.assertRaises(TypeError):
-            Dialog.ask_retry_cancel(detail=[])
+            Dialog.ask_retry_cancel(root, title="", message="", detail=[])
 
     def test_custom_dialog(self):
         root = MainWindow()
         root.lift()
         root.after(ms=1000, func=lambda: root.close())
+        with self.assertRaises(TypeError):
+            Dialog.CustomDialog(parent="lol")
         dialog = Dialog.CustomDialog(parent=root)
         dialog.title = "Title"
-        # Must lift everything otherwise it hasn't drawn and grabbing the focus will error
+        # Must lift everything otherwise it hasn't drawn and grabbing the
+        # focus will error
         dialog.lift()
         dialog.grab_focus()
         dialog.wait_till_destroyed()
