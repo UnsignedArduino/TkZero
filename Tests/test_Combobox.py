@@ -36,7 +36,8 @@ class ComboboxTest(unittest.TestCase):
         root = MainWindow()
         root.update()
         Combobox(root, width=20, show="*", values=("foo", "bar"),
-                 command=print("Changed")).grid(row=0, column=0)
+                 command=lambda: print("Changed"),
+                 validate=lambda: True).grid(row=0, column=0)
         root.update()
         root.close()
 
