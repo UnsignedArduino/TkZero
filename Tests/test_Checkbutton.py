@@ -18,6 +18,24 @@ class CheckbuttonTest(unittest.TestCase):
         root.update()
         with self.assertRaises(TypeError):
             Checkbutton()
+        with self.assertRaises(TypeError):
+            Checkbutton(1)
+        with self.assertRaises(TypeError):
+            Checkbutton(root, text=lambda: None)
+        with self.assertRaises(TypeError):
+            Checkbutton(root, image="lol")
+        root.update()
+        root.close()
+
+    def test_bad_params(self):
+        root = MainWindow()
+        root.update()
+        with self.assertRaises(TypeError):
+            Checkbutton(1)
+        with self.assertRaises(TypeError):
+            Checkbutton(root, text=lambda: None)
+        with self.assertRaises(TypeError):
+            Checkbutton(root, image="lol")
         root.update()
         root.close()
 
@@ -255,6 +273,11 @@ class CheckbuttonTest(unittest.TestCase):
         c.value = True
         root.update()
         self.assertTrue(c.value)
+        c.value = None
+        root.update()
+        self.assertEqual(c.value, None)
+        with self.assertRaises(TypeError):
+            c.value = 1
         root.close()
 
     def test_text(self):
@@ -265,6 +288,8 @@ class CheckbuttonTest(unittest.TestCase):
         c.text = "Test"
         root.update()
         self.assertEqual(c.text, "Test")
+        with self.assertRaises(TypeError):
+            c.text = 1234
         root.close()
 
     def test_image(self):
@@ -493,6 +518,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.image = PhotoImage(data=image_data)
         root.update()
         self.assertTrue(c.image is not None)
+        with self.assertRaises(TypeError):
+            c.image = "lalalalala"
         root.close()
 
     def test_text_and_image(self):
@@ -728,6 +755,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.display_mode = DisplayModes.ImageTopText
         root.update()
         self.assertEqual(c.display_mode, DisplayModes.ImageTopText)
+        with self.assertRaises(TypeError):
+            c.display_mode = ["la", "la"]
         root.close()
 
     def test_enabled(self):
@@ -737,8 +766,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.grid(row=0, column=0)
         root.update()
         self.assertTrue(c.enabled)
-        root.enabled = False
-        self.assertFalse(root.enabled)
+        c.enabled = False
+        self.assertFalse(c.enabled)
+        with self.assertRaises(TypeError):
+            c.enabled = {"boo"}
         root.close()
 
     def test_execution(self):
@@ -756,8 +787,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.grid(row=0, column=0)
         Style.define_style(Style.WidgetStyleRoots.Button, "Test", background="red")
         c.apply_style("Test")
-        self.assertEqual(c.cget("style"), "Test.TCheckbutton")
         root.update()
+        self.assertEqual(c.cget("style"), "Test.TCheckbutton")
+        with self.assertRaises(TypeError):
+            c.apply_style(1)
         root.close()
 
 
