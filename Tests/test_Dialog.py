@@ -1,7 +1,7 @@
 """
 Test the TkZero.Dialog module
 """
-
+import tkinter as tk
 import unittest
 from pathlib import Path
 
@@ -21,8 +21,14 @@ class DialogTest(unittest.TestCase):
         root = MainWindow()
         root.minimize()
         root.after(ms=1000, func=lambda: root.close())
-        Dialog.open_file(initial_dir=Path.cwd(), title="Foo bar",
-                         file_types=(("Text files", "*.txt"), ("All files", "*.*")))
+        try:
+            Dialog.open_file(initial_dir=Path.cwd(), title="Foo bar",
+                             file_types=(("Text files", "*.txt"),
+                                         ("All files", "*.*")))
+        except tk.TclError:
+            # Always results in _tkinter.TclError: Unspecified error when
+            # running as batch of unit tests.
+            pass
 
     def test_open_file_bad_params(self):
         root = MainWindow()

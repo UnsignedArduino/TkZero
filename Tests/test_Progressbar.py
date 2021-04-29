@@ -46,7 +46,7 @@ class ProgressbarTest(unittest.TestCase):
         p.grid(row=0, column=0)
         p.start()
         root.update()
-        root.after(ms=1000, func=root.close)
+        root.after(ms=2000, func=root.close)
         root.mainloop()
 
     def test_enabled(self):

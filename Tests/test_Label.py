@@ -255,7 +255,8 @@ class LabelTest(unittest.TestCase):
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         Label(root, text="hi", image=PhotoImage(data=image_data)).grid(row=0, column=0)
         root.update()
-        root.close()
+        root.after(ms=100, func=root.close)
+        root.mainloop()
 
     def test_text(self):
         root = MainWindow()
@@ -274,6 +275,7 @@ class LabelTest(unittest.TestCase):
         root.update()
         l = Label(root)
         l.grid(row=0, column=0)
+        root.update()
         self.assertTrue(l.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -497,7 +499,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(l.image is not None)
         with self.assertRaises(TypeError):
             l.image = {}
-        root.close()
+        root.after(ms=100, func=root.close)
+        root.mainloop()
 
     def test_text_and_image(self):
         root = MainWindow()
@@ -734,7 +737,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertEqual(l.display_mode, DisplayModes.ImageLeftText)
         with self.assertRaises(TypeError):
             l.display_mode = []
-        root.close()
+        root.after(ms=100, func=root.close)
 
     def test_enabled(self):
         root = MainWindow()

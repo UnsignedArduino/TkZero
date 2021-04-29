@@ -68,7 +68,7 @@ class KeybindTest(unittest.TestCase):
             generate_event_sequence(widget=root, ctrl_cmd=False,
                                     ctrl_ctrl=False, shift_shift=False,
                                     alt_option=False, letter=print)
-        if not on_aqua():
+        if not on_aqua(root):
             with self.assertRaises(ValueError):
                 generate_event_sequence(widget=root, ctrl_cmd=True,
                                         ctrl_ctrl=True, shift_shift=False,
@@ -135,7 +135,7 @@ class KeybindTest(unittest.TestCase):
             generate_accelerator_sequence(widget=root, ctrl_cmd=False,
                                           ctrl_ctrl=False, shift_shift=False,
                                           alt_option=False, letter=print)
-        if not on_aqua():
+        if not on_aqua(root):
             with self.assertRaises(ValueError):
                 generate_accelerator_sequence(widget=root, ctrl_cmd=True,
                                               ctrl_ctrl=True,

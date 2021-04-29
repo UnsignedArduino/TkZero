@@ -85,8 +85,6 @@ class MainWindowTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             root.bind_to_event(1234)
         with self.assertRaises(TypeError):
-            root.bind_to_event("<<event>>", func="boo")
-        with self.assertRaises(TypeError):
             root.bind_to_event("<<event>>", add=1)
         root.generate_event("<<MyOwnSpecialEvent>>")
         root.close()

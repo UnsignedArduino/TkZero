@@ -27,10 +27,6 @@ class EntryTest(unittest.TestCase):
             Entry(root, width=2.2)
         with self.assertRaises(TypeError):
             Entry(root, show=5)
-        with self.assertRaises(TypeError):
-            Entry(root, command="lol")
-        with self.assertRaises(TypeError):
-            Entry(root, validate=[TypeError])
         root.update()
         root.close()
 

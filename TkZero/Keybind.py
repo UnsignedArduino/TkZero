@@ -70,8 +70,13 @@ def generate_event_sequence(
             sequence += "Control-"
         if alt_option:
             sequence += "Alt-"
-    if ctrl_ctrl and "Control-" not in sequence:
-        sequence += "Control-"
+    if ctrl_ctrl:
+        if ctrl_cmd and not Platform.on_aqua(widget):
+            raise ValueError(
+                "ctrl_cmd and ctrl_ctrl is True and " "we are not on Aqua!"
+            )
+        else:
+            sequence += "Control-"
     if shift_shift:
         sequence += "Shift-"
     sequence += letter[0].upper() if shift_shift else letter[0].lower()
@@ -132,7 +137,7 @@ def generate_accelerator_sequence(
     if ctrl_cmd:
         sequence += "Command-" if Platform.on_aqua(widget) else "Control-"
     if ctrl_ctrl:
-        if "Control-" in sequence:
+        if ctrl_cmd and not Platform.on_aqua(widget):
             raise ValueError(
                 "ctrl_cmd and ctrl_ctrl is True and " "we are not on Aqua!"
             )

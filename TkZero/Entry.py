@@ -44,7 +44,7 @@ class Entry(ttk.Entry):
             )
         if not isinstance(show, str) and show is not None:
             raise TypeError(f"show is not a str! (type passed in: {repr(type(show))})")
-        self._variable = tk.StringVar(value="")
+        self._variable = tk.StringVar(master=parent, value="")
         if command is not None:
             self._variable.trace_add("write", lambda *args: command())
         if validate is not None:

@@ -59,7 +59,7 @@ class Listbox(tk.Listbox):
             raise TypeError(
                 f"height is not a int! (type passed in: {repr(type(height))})"
             )
-        if not isinstance(width, int) and height is not None:
+        if not isinstance(width, int) and width is not None:
             raise TypeError(
                 f"width is not a int! (type passed in: {repr(type(width))})"
             )
@@ -145,11 +145,11 @@ class Listbox(tk.Listbox):
             raise TypeError(
                 f"index is not a int! (type passed in: {repr(type(index))})"
             )
-        if index < len(self._values):
+        if index >= len(self._values):
             raise IndexError(
                 f"index is out of range! "
                 f"(index passed in: {index} "
-                f"length of items: {len(self._values)}"
+                f"length of items: {len(self._values)})"
             )
         self.see(index=index)
 
