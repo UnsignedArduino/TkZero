@@ -3,5 +3,6 @@ venv/*
 TkZero/__pycache__/*
 dist/*
 .tox/*
+.pytest_cache/*
 .coverage
 coverage.xml

@@ -21,6 +21,18 @@ class ButtonTest(unittest.TestCase):
         root.update()
         root.close()
 
+    def test_bad_params(self):
+        root = MainWindow()
+        root.update()
+        with self.assertRaises(TypeError):
+            Button("asdf")
+        with self.assertRaises(TypeError):
+            Button(root, text=1)
+        with self.assertRaises(TypeError):
+            Button(root, image="foo")
+        root.update()
+        root.close()
+
     def test_good_params(self):
         root = MainWindow()
         root.update()
@@ -253,6 +265,8 @@ class ButtonTest(unittest.TestCase):
         b.text = "Test"
         root.update()
         self.assertEqual(b.text, "Test")
+        with self.assertRaises(TypeError):
+            b.text = 1
         root.close()
 
     def test_image(self):
@@ -481,6 +495,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         b.image = PhotoImage(data=image_data)
         root.update()
         self.assertTrue(b.image is not None)
+        with self.assertRaises(TypeError):
+            b.image = "foo bar"
         root.close()
 
     def test_text_and_image(self):
@@ -716,6 +732,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         b.display_mode = DisplayModes.ImageTopText
         root.update()
         self.assertEqual(b.display_mode, DisplayModes.ImageTopText)
+        with self.assertRaises(TypeError):
+            b.display_mode = False
         root.close()
 
     def test_enabled(self):
@@ -727,6 +745,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(b.enabled)
         b.enabled = False
         self.assertFalse(b.enabled)
+        with self.assertRaises(TypeError):
+            b.enabled = 1
         root.close()
 
     def test_execution(self):
@@ -745,6 +765,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         Style.define_style(Style.WidgetStyleRoots.Button, "Test", background="red")
         b.apply_style("Test")
         self.assertEqual(b.cget("style"), "Test.TButton")
+        with self.assertRaises(TypeError):
+            b.apply_style(1)
         root.update()
         root.close()
 
