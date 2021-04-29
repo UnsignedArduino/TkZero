@@ -208,7 +208,8 @@ class MainWindow(tk.Tk):
                 f"(type passed in: {repr(type(run_in_thread))})"
             )
         if not isinstance(add, bool):
-            raise TypeError(f"add is not a bool! (type passed in: {repr(type(add))})")
+            raise TypeError(f"add is not a bool! "
+                            f"(type passed in: {repr(type(add))})")
         if run_in_thread:
             func = Thread(target=func, args=(), daemon=True).start
         binds = self.bind(event, func, add)

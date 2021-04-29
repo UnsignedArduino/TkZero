@@ -15,6 +15,8 @@ class MainWindowTest(unittest.TestCase):
         root.update()
         root.title = "My title"
         self.assertEqual(root.title, "My title")
+        with self.assertRaises(TypeError):
+            root.title = 1
         root.close()
 
     def test_size(self):
@@ -23,6 +25,8 @@ class MainWindowTest(unittest.TestCase):
         self.assertEqual(root.size, Vector.Size(width=200, height=200))
         root.size = Vector.Size(width=400, height=400)
         self.assertEqual(root.size, Vector.Size(width=400, height=400))
+        with self.assertRaises(TypeError):
+            root.size = (400, 400)
         root.close()
 
     def test_position(self):
@@ -31,6 +35,8 @@ class MainWindowTest(unittest.TestCase):
         root.position = Vector.Position(x=0, y=0)
         root.update()
         self.assertEqual(root.position, Vector.Position(x=0, y=0))
+        with self.assertRaises(TypeError):
+            root.position = (0, 0)
         root.close()
 
     def test_minimized(self):
@@ -59,6 +65,16 @@ class MainWindowTest(unittest.TestCase):
         self.assertTrue(root.is_maximized())
         root.close()
 
+    def test_fullscreen(self):
+        root = MainWindow()
+        root.update()
+        root.full_screen(True)
+        root.update()
+        self.assertTrue(root.is_full_screen())
+        with self.assertRaises(TypeError):
+            root.full_screen("la")
+        root.close()
+
     def test_binds(self):
         root = MainWindow()
         root.update()
@@ -66,6 +82,13 @@ class MainWindowTest(unittest.TestCase):
         root.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
         binds = root.bind_to_event("<<MyOwnSpecialEvent>>")
         self.assertTrue(len(binds) > 0)
+        with self.assertRaises(TypeError):
+            root.bind_to_event(1234)
+        with self.assertRaises(TypeError):
+            root.bind_to_event("<<event>>", func="boo")
+        with self.assertRaises(TypeError):
+            root.bind_to_event("<<event>>", add=1)
+        root.generate_event("<<MyOwnSpecialEvent>>")
         root.close()
 
     def test_enabled(self):
@@ -77,6 +100,8 @@ class MainWindowTest(unittest.TestCase):
         root.update()
         root.enabled = False
         self.assertFalse(root.enabled)
+        with self.assertRaises(TypeError):
+            root.enabled = "False"
         root.close()
 
     def test_on_close(self):
