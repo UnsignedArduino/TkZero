@@ -57,7 +57,6 @@ class Scrollbar(ttk.Scrollbar):
         if widget is not None:
             self.attach_to(widget=widget)
 
-    # noinspection PyUnresolvedReferences
     def attach_to(self, widget: tk.Widget) -> None:
         """
         Attach to a widget.
@@ -76,7 +75,7 @@ class Scrollbar(ttk.Scrollbar):
             except AttributeError:
                 raise ValueError(
                     f"This widget ({repr(widget)}) does not support scrolling "
-                    f"in the X direction!"
+                    f"in the Y direction!"
                 )
         else:
             try:
@@ -85,7 +84,7 @@ class Scrollbar(ttk.Scrollbar):
             except AttributeError:
                 raise ValueError(
                     f"This widget ({repr(widget)}) does not support scrolling "
-                    f"in the Y direction!"
+                    f"in the X direction!"
                 )
 
     def grid(self, *args, **kwargs) -> None:
