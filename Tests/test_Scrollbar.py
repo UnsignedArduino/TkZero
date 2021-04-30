@@ -53,11 +53,11 @@ class LabelTest(unittest.TestCase):
             s.attach_to("lol")
         e = Entry(root)
         e.grid(row=1, column=0)
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             s.attach_to(e)
         s2 = Scrollbar(root, orientation=OrientModes.Horizontal)
         s2.grid(row=2, column=0)
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             s.attach_to(e)
         root.close()
 
