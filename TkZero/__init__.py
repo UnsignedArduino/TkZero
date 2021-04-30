@@ -1,10 +1,14 @@
 """
-TkZero - a sane and Pythonic wrapper around Tkinter.
+TkZero - a lightweight and Pythonic wrapper around Tkinter.
 
 PyPI: https://pypi.org/project/TkZero/
+
 GitHub: https://github.com/UnsignedArduino/TkZero
+
 Documentation: https://unsignedarduino.github.io/TkZero/
+
 Examples: https://github.com/UnsignedArduino/TkZero/tree/main/Examples
+
 Tests: https://github.com/UnsignedArduino/TkZero/tree/main/Tests
 
 You can find more information on the GitHub README.

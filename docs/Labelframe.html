@@ -37,10 +37,11 @@ from typing import Union
 
 
 class Labelframe(ttk.Labelframe):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 text: str = &#34;&#34;):
+    def __init__(
+        self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = &#34;&#34;
+    ):
         &#34;&#34;&#34;
-        Initiate a ttk.Frame.
+        Initiate a ttk.Labelframe.
 
         :param parent: The parent of the frame.
         :param text: The text on the label frame. Should be a str and defaults
@@ -53,8 +54,9 @@ class Labelframe(ttk.Labelframe):
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
         if not isinstance(text, str):
-            raise TypeError(f&#34;text is not a str! &#34;
-                            f&#34;(type passed in: {repr(type(text))})&#34;)
+            raise TypeError(
+                f&#34;text is not a str! &#34; f&#34;(type passed in: {repr(type(text))})&#34;
+            )
         super().__init__(master=parent, text=text)
         self._style_root = &#34;TLabelframe&#34;
         self._enabled = True
@@ -185,8 +187,9 @@ class Labelframe(ttk.Labelframe):
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! &#34;
-                            f&#34;(type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.configure(text=new_text)
 
     def apply_style(self, style_name: str) -&gt; None:
@@ -221,7 +224,7 @@ class Labelframe(ttk.Labelframe):
 <div class="desc"><p>Ttk Labelframe widget is a container used to group other widgets
 together. It has an optional label, which may be a plain text string
 or another widget.</p>
-<p>Initiate a ttk.Frame.</p>
+<p>Initiate a ttk.Labelframe.</p>
 <p>:param parent: The parent of the frame.
 :param text: The text on the label frame. Should be a str and defaults
 to "".</p></div>
@@ -230,10 +233,11 @@ to "".</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Labelframe(ttk.Labelframe):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 text: str = &#34;&#34;):
+    def __init__(
+        self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = &#34;&#34;
+    ):
         &#34;&#34;&#34;
-        Initiate a ttk.Frame.
+        Initiate a ttk.Labelframe.
 
         :param parent: The parent of the frame.
         :param text: The text on the label frame. Should be a str and defaults
@@ -246,8 +250,9 @@ to "".</p></div>
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
         if not isinstance(text, str):
-            raise TypeError(f&#34;text is not a str! &#34;
-                            f&#34;(type passed in: {repr(type(text))})&#34;)
+            raise TypeError(
+                f&#34;text is not a str! &#34; f&#34;(type passed in: {repr(type(text))})&#34;
+            )
         super().__init__(master=parent, text=text)
         self._style_root = &#34;TLabelframe&#34;
         self._enabled = True
@@ -378,8 +383,9 @@ to "".</p></div>
         :return: None.
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
-            raise TypeError(f&#34;new_text is not a str! &#34;
-                            f&#34;(type passed in: {repr(type(new_text))})&#34;)
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
         self.configure(text=new_text)
 
     def apply_style(self, style_name: str) -&gt; None:

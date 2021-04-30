@@ -12,7 +12,7 @@ class Labelframe(ttk.Labelframe):
         self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]], text: str = ""
     ):
         """
-        Initiate a ttk.Frame.
+        Initiate a ttk.Labelframe.
 
         :param parent: The parent of the frame.
         :param text: The text on the label frame. Should be a str and defaults
