@@ -50,7 +50,7 @@ class Text(tk.Text):
             raise TypeError(
                 f"width is not a int! (type passed in: {repr(type(width))})"
             )
-        if not isinstance(height, int) and width is not None:
+        if not isinstance(height, int) and height is not None:
             raise TypeError(
                 f"height is not a int! (type passed in: {repr(type(height))})"
             )
