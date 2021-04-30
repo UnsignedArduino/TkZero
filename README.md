@@ -18,7 +18,7 @@ directory and tests in the
 
 ## Installation
 
-### Using PyPI
+### Using PyPI (recommended)
 Windows:
 ```commandline
 pip install TkZero
@@ -31,6 +31,8 @@ You may need to use the user (`-U`) flag to install if you are not using a
 virtual environment!
 
 ### From source
+
+#### Using Git
 Make sure you have [Git](https://git-scm.com/) before following these steps. 
 If you are on Windows, I highly suggest you install the 
 [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701)
@@ -40,6 +42,20 @@ as it's much better than the command prompt.
 2. Run `git clone https://github.com/UnsignedArduino/TkZero`
 3. Run `cd TkZero`
 4. Install TkZero's dependencies with `pip install -r requirements.txt`. 
+   (`pip3` on Linux and macOS - you may also need to use the user (`-U`) flag 
+   if you are not using a virtual environment)
+
+That's it!
+
+#### Downloading via zip
+Go to the main page of this [repo](https://github.com/UnsignedArduino/TkZero),
+click on the green `Code` button and click `Download ZIP`. Once the zip file 
+finishes downloading, extract all of it to your project root. Then open a 
+terminal and run:
+
+1. `cd` into your project root.
+2. `cd TkZero`
+3. Install TkZero's dependencies with `pip install -r requirements.txt`. 
    (`pip3` on Linux and macOS - you may also need to use the user (`-U`) flag 
    if you are not using a virtual environment)
 
