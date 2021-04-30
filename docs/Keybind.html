@@ -99,8 +99,13 @@ def generate_event_sequence(
             sequence += &#34;Control-&#34;
         if alt_option:
             sequence += &#34;Alt-&#34;
-    if ctrl_ctrl and &#34;Control-&#34; not in sequence:
-        sequence += &#34;Control-&#34;
+    if ctrl_ctrl:
+        if ctrl_cmd and not Platform.on_aqua(widget):
+            raise ValueError(
+                &#34;ctrl_cmd and ctrl_ctrl is True and &#34; &#34;we are not on Aqua!&#34;
+            )
+        else:
+            sequence += &#34;Control-&#34;
     if shift_shift:
         sequence += &#34;Shift-&#34;
     sequence += letter[0].upper() if shift_shift else letter[0].lower()
@@ -161,7 +166,7 @@ def generate_accelerator_sequence(
     if ctrl_cmd:
         sequence += &#34;Command-&#34; if Platform.on_aqua(widget) else &#34;Control-&#34;
     if ctrl_ctrl:
-        if &#34;Control-&#34; in sequence:
+        if ctrl_cmd and not Platform.on_aqua(widget):
             raise ValueError(
                 &#34;ctrl_cmd and ctrl_ctrl is True and &#34; &#34;we are not on Aqua!&#34;
             )
@@ -259,7 +264,7 @@ str. Must be one character long.
     if ctrl_cmd:
         sequence += &#34;Command-&#34; if Platform.on_aqua(widget) else &#34;Control-&#34;
     if ctrl_ctrl:
-        if &#34;Control-&#34; in sequence:
+        if ctrl_cmd and not Platform.on_aqua(widget):
             raise ValueError(
                 &#34;ctrl_cmd and ctrl_ctrl is True and &#34; &#34;we are not on Aqua!&#34;
             )
@@ -361,8 +366,13 @@ you can pass into the bind_to_event on a widget.</p></div>
             sequence += &#34;Control-&#34;
         if alt_option:
             sequence += &#34;Alt-&#34;
-    if ctrl_ctrl and &#34;Control-&#34; not in sequence:
-        sequence += &#34;Control-&#34;
+    if ctrl_ctrl:
+        if ctrl_cmd and not Platform.on_aqua(widget):
+            raise ValueError(
+                &#34;ctrl_cmd and ctrl_ctrl is True and &#34; &#34;we are not on Aqua!&#34;
+            )
+        else:
+            sequence += &#34;Control-&#34;
     if shift_shift:
         sequence += &#34;Shift-&#34;
     sequence += letter[0].upper() if shift_shift else letter[0].lower()

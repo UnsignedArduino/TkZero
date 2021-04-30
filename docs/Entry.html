@@ -73,7 +73,7 @@ class Entry(ttk.Entry):
             )
         if not isinstance(show, str) and show is not None:
             raise TypeError(f&#34;show is not a str! (type passed in: {repr(type(show))})&#34;)
-        self._variable = tk.StringVar(value=&#34;&#34;)
+        self._variable = tk.StringVar(master=parent, value=&#34;&#34;)
         if command is not None:
             self._variable.trace_add(&#34;write&#34;, lambda *args: command())
         if validate is not None:
@@ -397,7 +397,7 @@ changes. Defaults to None.</p></div>
             )
         if not isinstance(show, str) and show is not None:
             raise TypeError(f&#34;show is not a str! (type passed in: {repr(type(show))})&#34;)
-        self._variable = tk.StringVar(value=&#34;&#34;)
+        self._variable = tk.StringVar(master=parent, value=&#34;&#34;)
         if command is not None:
             self._variable.trace_add(&#34;write&#34;, lambda *args: command())
         if validate is not None:

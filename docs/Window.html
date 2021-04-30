@@ -285,19 +285,14 @@ class Window(tk.Toplevel):
         :param enable: Whether to enable or disable the children.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(parent, tk.Widget) and parent is not None:
-            raise TypeError(
-                f&#34;parent is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(parent))})&#34;
-            )
-        if not isinstance(enable, bool):
-            raise TypeError(
-                f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;
-            )
         if parent is None:
             parent = self
         for child in parent.winfo_children():
             if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
-                child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+                try:
+                    child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+                except AttributeError:
+                    child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
                 self._enable_children(parent, enable)
 
@@ -627,19 +622,14 @@ instance.</p></div>
         :param enable: Whether to enable or disable the children.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(parent, tk.Widget) and parent is not None:
-            raise TypeError(
-                f&#34;parent is not a tk.Widget! &#34; f&#34;(type passed in: {repr(type(parent))})&#34;
-            )
-        if not isinstance(enable, bool):
-            raise TypeError(
-                f&#34;enable is not a bool! (type passed in: {repr(type(enable))})&#34;
-            )
         if parent is None:
             parent = self
         for child in parent.winfo_children():
             if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
-                child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+                try:
+                    child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+                except AttributeError:
+                    child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
                 self._enable_children(parent, enable)
 

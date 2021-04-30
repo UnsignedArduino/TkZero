@@ -10,7 +10,7 @@ from TkZero.MainWindow import MainWindow
 from TkZero.Scrollbar import Scrollbar, OrientModes
 
 
-class LabelTest(unittest.TestCase):
+class ScrollbarTest(unittest.TestCase):
     def test_no_params(self):
         root = MainWindow()
         root.update()

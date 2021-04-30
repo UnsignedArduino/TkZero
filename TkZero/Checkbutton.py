@@ -182,7 +182,7 @@ class Checkbutton(ttk.Checkbutton):
     @property
     def enabled(self) -> bool:
         """
-        Whether this checkbutton is in normal mode or disabled mode. (grayed
+        Get whether this checkbutton is in normal mode or disabled mode. (grayed
         out and cannot interact with)
 
         :return: A bool, True if normal otherwise False.

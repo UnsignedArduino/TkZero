@@ -241,7 +241,7 @@ class MenuCheckbutton:
             raise TypeError(
                 f&#34;label is not a str! &#34; f&#34;(type passed in: {repr(type(label))})&#34;
             )
-        if not isinstance(variable, tk.Variable):
+        if not isinstance(variable, tk.Variable) and variable is not None:
             raise TypeError(
                 f&#34;variable is not a tk.Variable! &#34;
                 f&#34;(type passed in: {repr(type(variable))})&#34;
@@ -281,7 +281,7 @@ class MenuCheckbutton:
             raise ValueError(
                 f&#34;This menu seems to be a menu bar so I can&#39;t&#34; f&#34;be added to it!&#34;
             )
-        menu.add_command(
+        menu.add_checkbutton(
             label=self.label,
             variable=self.variable,
             onvalue=self.on_value,
@@ -307,7 +307,7 @@ class MenuRadiobutton:
                 f&#34;onvalue_value is not a str, bool, int, or float! &#34;
                 f&#34;(type passed in: {repr(type(value))})&#34;
             )
-        if not isinstance(variable, tk.Variable):
+        if not isinstance(variable, tk.Variable) and variable is not None:
             raise TypeError(
                 f&#34;variable is not a tk.Variable! &#34;
                 f&#34;(type passed in: {repr(type(variable))})&#34;
@@ -340,7 +340,7 @@ class MenuRadiobutton:
             raise ValueError(
                 f&#34;This menu seems to be a menu bar so I can&#39;t&#34; f&#34;be added to it!&#34;
             )
-        menu.add_command(
+        menu.add_radiobutton(
             label=self.label,
             variable=self.variable,
             value=self.value,
@@ -398,12 +398,7 @@ class MenuCascade:
         self.menu = Menu(parent=menu)
         menu.add_cascade(menu=self.menu, label=self.label)
         for item in self.items:
-            try:
-                item.create(menu=self.menu)
-            except RecursionError:
-                raise RecursionError(
-                    &#34;It seems like you have passed in a &#34; &#34;parent to this function!&#34;
-                )</code></pre>
+            item.create(menu=self.menu)</code></pre>
 </details>
 </section>
 <section>
@@ -675,12 +670,7 @@ def items(self) -&gt; list[Any]:
         self.menu = Menu(parent=menu)
         menu.add_cascade(menu=self.menu, label=self.label)
         for item in self.items:
-            try:
-                item.create(menu=self.menu)
-            except RecursionError:
-                raise RecursionError(
-                    &#34;It seems like you have passed in a &#34; &#34;parent to this function!&#34;
-                )</code></pre>
+            item.create(menu=self.menu)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -709,12 +699,7 @@ def items(self) -&gt; list[Any]:
     self.menu = Menu(parent=menu)
     menu.add_cascade(menu=self.menu, label=self.label)
     for item in self.items:
-        try:
-            item.create(menu=self.menu)
-        except RecursionError:
-            raise RecursionError(
-                &#34;It seems like you have passed in a &#34; &#34;parent to this function!&#34;
-            )</code></pre>
+        item.create(menu=self.menu)</code></pre>
 </details>
 </dd>
 </dl>
@@ -746,7 +731,7 @@ def items(self) -&gt; list[Any]:
             raise TypeError(
                 f&#34;label is not a str! &#34; f&#34;(type passed in: {repr(type(label))})&#34;
             )
-        if not isinstance(variable, tk.Variable):
+        if not isinstance(variable, tk.Variable) and variable is not None:
             raise TypeError(
                 f&#34;variable is not a tk.Variable! &#34;
                 f&#34;(type passed in: {repr(type(variable))})&#34;
@@ -786,7 +771,7 @@ def items(self) -&gt; list[Any]:
             raise ValueError(
                 f&#34;This menu seems to be a menu bar so I can&#39;t&#34; f&#34;be added to it!&#34;
             )
-        menu.add_command(
+        menu.add_checkbutton(
             label=self.label,
             variable=self.variable,
             onvalue=self.on_value,
@@ -822,7 +807,7 @@ def items(self) -&gt; list[Any]:
         raise ValueError(
             f&#34;This menu seems to be a menu bar so I can&#39;t&#34; f&#34;be added to it!&#34;
         )
-    menu.add_command(
+    menu.add_checkbutton(
         label=self.label,
         variable=self.variable,
         onvalue=self.on_value,
@@ -950,7 +935,7 @@ def items(self) -&gt; list[Any]:
                 f&#34;onvalue_value is not a str, bool, int, or float! &#34;
                 f&#34;(type passed in: {repr(type(value))})&#34;
             )
-        if not isinstance(variable, tk.Variable):
+        if not isinstance(variable, tk.Variable) and variable is not None:
             raise TypeError(
                 f&#34;variable is not a tk.Variable! &#34;
                 f&#34;(type passed in: {repr(type(variable))})&#34;
@@ -983,7 +968,7 @@ def items(self) -&gt; list[Any]:
             raise ValueError(
                 f&#34;This menu seems to be a menu bar so I can&#39;t&#34; f&#34;be added to it!&#34;
             )
-        menu.add_command(
+        menu.add_radiobutton(
             label=self.label,
             variable=self.variable,
             value=self.value,
@@ -1018,7 +1003,7 @@ def items(self) -&gt; list[Any]:
         raise ValueError(
             f&#34;This menu seems to be a menu bar so I can&#39;t&#34; f&#34;be added to it!&#34;
         )
-    menu.add_command(
+    menu.add_radiobutton(
         label=self.label,
         variable=self.variable,
         value=self.value,

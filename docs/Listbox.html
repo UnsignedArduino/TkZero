@@ -88,7 +88,7 @@ class Listbox(tk.Listbox):
             raise TypeError(
                 f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;
             )
-        if not isinstance(width, int) and height is not None:
+        if not isinstance(width, int) and width is not None:
             raise TypeError(
                 f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
             )
@@ -174,11 +174,11 @@ class Listbox(tk.Listbox):
             raise TypeError(
                 f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;
             )
-        if index &lt; len(self._values):
+        if index &gt;= len(self._values):
             raise IndexError(
                 f&#34;index is out of range! &#34;
                 f&#34;(index passed in: {index} &#34;
-                f&#34;length of items: {len(self._values)}&#34;
+                f&#34;length of items: {len(self._values)})&#34;
             )
         self.see(index=index)
 
@@ -282,7 +282,7 @@ SelectModes.Single
             raise TypeError(
                 f&#34;height is not a int! (type passed in: {repr(type(height))})&#34;
             )
-        if not isinstance(width, int) and height is not None:
+        if not isinstance(width, int) and width is not None:
             raise TypeError(
                 f&#34;width is not a int! (type passed in: {repr(type(width))})&#34;
             )
@@ -368,11 +368,11 @@ SelectModes.Single
             raise TypeError(
                 f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;
             )
-        if index &lt; len(self._values):
+        if index &gt;= len(self._values):
             raise IndexError(
                 f&#34;index is out of range! &#34;
                 f&#34;(index passed in: {index} &#34;
-                f&#34;length of items: {len(self._values)}&#34;
+                f&#34;length of items: {len(self._values)})&#34;
             )
         self.see(index=index)
 
@@ -501,11 +501,11 @@ list.
         raise TypeError(
             f&#34;index is not a int! (type passed in: {repr(type(index))})&#34;
         )
-    if index &lt; len(self._values):
+    if index &gt;= len(self._values):
         raise IndexError(
             f&#34;index is out of range! &#34;
             f&#34;(index passed in: {index} &#34;
-            f&#34;length of items: {len(self._values)}&#34;
+            f&#34;length of items: {len(self._values)})&#34;
         )
     self.see(index=index)</code></pre>
 </details>

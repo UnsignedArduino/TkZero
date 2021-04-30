@@ -148,7 +148,7 @@ class Button(ttk.Button):
     @property
     def enabled(self) -> bool:
         """
-        Whether this button is in normal mode or disabled mode. (grayed out
+        Get whether this button is in normal mode or disabled mode. (grayed out
         and cannot interact with)
 
         :return: A bool, True if normal otherwise False.

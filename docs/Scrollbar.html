@@ -86,7 +86,6 @@ class Scrollbar(ttk.Scrollbar):
         if widget is not None:
             self.attach_to(widget=widget)
 
-    # noinspection PyUnresolvedReferences
     def attach_to(self, widget: tk.Widget) -&gt; None:
         &#34;&#34;&#34;
         Attach to a widget.
@@ -105,7 +104,7 @@ class Scrollbar(ttk.Scrollbar):
             except AttributeError:
                 raise ValueError(
                     f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
-                    f&#34;in the X direction!&#34;
+                    f&#34;in the Y direction!&#34;
                 )
         else:
             try:
@@ -114,7 +113,7 @@ class Scrollbar(ttk.Scrollbar):
             except AttributeError:
                 raise ValueError(
                     f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
-                    f&#34;in the Y direction!&#34;
+                    f&#34;in the X direction!&#34;
                 )
 
     def grid(self, *args, **kwargs) -&gt; None:
@@ -138,8 +137,8 @@ class Scrollbar(ttk.Scrollbar):
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Whether this widget is in normal mode or disabled mode (grayed out and
-        cannot interact with) in Tk terms.
+        Get whether this widget is in normal mode or disabled mode. (grayed out and
+        cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -148,8 +147,8 @@ class Scrollbar(ttk.Scrollbar):
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode (grayed out
-        and cannot interact with) in Tk terms.
+        Set whether this widget is in normal mode or disabled mode. (grayed out
+        and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False
          for disabled.
@@ -262,7 +261,6 @@ tk.Widget.</p></div>
         if widget is not None:
             self.attach_to(widget=widget)
 
-    # noinspection PyUnresolvedReferences
     def attach_to(self, widget: tk.Widget) -&gt; None:
         &#34;&#34;&#34;
         Attach to a widget.
@@ -281,7 +279,7 @@ tk.Widget.</p></div>
             except AttributeError:
                 raise ValueError(
                     f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
-                    f&#34;in the X direction!&#34;
+                    f&#34;in the Y direction!&#34;
                 )
         else:
             try:
@@ -290,7 +288,7 @@ tk.Widget.</p></div>
             except AttributeError:
                 raise ValueError(
                     f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
-                    f&#34;in the Y direction!&#34;
+                    f&#34;in the X direction!&#34;
                 )
 
     def grid(self, *args, **kwargs) -&gt; None:
@@ -314,8 +312,8 @@ tk.Widget.</p></div>
     @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
-        Whether this widget is in normal mode or disabled mode (grayed out and
-        cannot interact with) in Tk terms.
+        Get whether this widget is in normal mode or disabled mode. (grayed out and
+        cannot interact with)
 
         :return: A bool, True if normal otherwise False.
         &#34;&#34;&#34;
@@ -324,8 +322,8 @@ tk.Widget.</p></div>
     @enabled.setter
     def enabled(self, new_state: bool) -&gt; None:
         &#34;&#34;&#34;
-        Set whether this widget is in normal mode or disabled mode (grayed out
-        and cannot interact with) in Tk terms.
+        Set whether this widget is in normal mode or disabled mode. (grayed out
+        and cannot interact with)
 
         :param new_state: The new state (a bool) True for enabled and False
          for disabled.
@@ -355,8 +353,8 @@ tk.Widget.</p></div>
 <dl>
 <dt id="TkZero.Scrollbar.Scrollbar.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
-<div class="desc"><p>Whether this widget is in normal mode or disabled mode (grayed out and
-cannot interact with) in Tk terms.</p>
+<div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed out and
+cannot interact with)</p>
 <p>:return: A bool, True if normal otherwise False.</p></div>
 <details class="source">
 <summary>
@@ -365,8 +363,8 @@ cannot interact with) in Tk terms.</p>
 <pre><code class="python">@property
 def enabled(self) -&gt; bool:
     &#34;&#34;&#34;
-    Whether this widget is in normal mode or disabled mode (grayed out and
-    cannot interact with) in Tk terms.
+    Get whether this widget is in normal mode or disabled mode. (grayed out and
+    cannot interact with)
 
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
@@ -405,7 +403,7 @@ def enabled(self) -&gt; bool:
         except AttributeError:
             raise ValueError(
                 f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
-                f&#34;in the X direction!&#34;
+                f&#34;in the Y direction!&#34;
             )
     else:
         try:
@@ -414,7 +412,7 @@ def enabled(self) -&gt; bool:
         except AttributeError:
             raise ValueError(
                 f&#34;This widget ({repr(widget)}) does not support scrolling &#34;
-                f&#34;in the Y direction!&#34;
+                f&#34;in the X direction!&#34;
             )</code></pre>
 </details>
 </dd>
