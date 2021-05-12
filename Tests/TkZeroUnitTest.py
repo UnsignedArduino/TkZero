@@ -5,6 +5,7 @@ windows in setUp and tearDown
 
 import tkinter as tk
 import unittest
+from time import sleep
 
 from TkZero.MainWindow import MainWindow
 
@@ -18,7 +19,13 @@ class TkTestCase(unittest.TestCase):
 
         :return: None.
         """
-        self.root = MainWindow()
+        while True:
+            try:
+                self.root = MainWindow()
+            except tk.TclError:
+                sleep(0.1)
+            else:
+                break
         self.root.update()
         self.root.after(ms=10_000, func=self.closeWindow)
 
