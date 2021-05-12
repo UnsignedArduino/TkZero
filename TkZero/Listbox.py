@@ -21,7 +21,7 @@ class Listbox(tk.Listbox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: list[str, ...] = None,
+        values: Union[list[str, ...], tuple[str, ...]] = None,
         select_mode: str = SelectModes.Single,
         height: int = None,
         width: int = None,
@@ -32,8 +32,8 @@ class Listbox(tk.Listbox):
         Initiate a tk.Listbox.
 
         :param parent: The parent of the listbox.
-        :param values: The default values you can choose, should be a list of
-         str. Defaults to []
+        :param values: The default values you can choose, should be a list or
+         tuple of str. Defaults to []
         :param select_mode: The select mode to use. (allows you to select one
          or more items or not) Should be a str and defaults to
          SelectModes.Single
@@ -47,9 +47,10 @@ class Listbox(tk.Listbox):
                 f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
-        if not isinstance(values, list) and values is not None:
+        if not isinstance(values, (list, tuple)) and values is not None:
             raise TypeError(
-                f"values is not a list! " f"(type passed in: {repr(type(values))})"
+                f"values is not a list or a tuple! "
+                f"(type passed in: {repr(type(values))})"
             )
         if not isinstance(select_mode, str):
             raise TypeError(
@@ -118,16 +119,16 @@ class Listbox(tk.Listbox):
         return self._values
 
     @values.setter
-    def values(self, new_values: list[str]) -> None:
+    def values(self, new_values: Union[list[str, ...], tuple[str, ...]]) -> None:
         """
         Set the items on this combobox.
 
-        :param new_values: The new items, as a list of str.
+        :param new_values: The new items, as a list or tuple of str.
         :return: None.
         """
-        if not isinstance(new_values, list):
+        if not isinstance(new_values, (list, tuple)):
             raise TypeError(
-                f"new_values is not a list! "
+                f"new_values is not a list or a tuple! "
                 f"(type passed in: {repr(type(new_values))})"
             )
         self._values = [str(item) for item in new_values]

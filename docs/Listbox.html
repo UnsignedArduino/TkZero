@@ -50,7 +50,7 @@ class Listbox(tk.Listbox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: list[str, ...] = None,
+        values: Union[list[str, ...], tuple[str, ...]] = None,
         select_mode: str = SelectModes.Single,
         height: int = None,
         width: int = None,
@@ -61,8 +61,8 @@ class Listbox(tk.Listbox):
         Initiate a tk.Listbox.
 
         :param parent: The parent of the listbox.
-        :param values: The default values you can choose, should be a list of
-         str. Defaults to []
+        :param values: The default values you can choose, should be a list or
+         tuple of str. Defaults to []
         :param select_mode: The select mode to use. (allows you to select one
          or more items or not) Should be a str and defaults to
          SelectModes.Single
@@ -76,9 +76,10 @@ class Listbox(tk.Listbox):
                 f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
-        if not isinstance(values, list) and values is not None:
+        if not isinstance(values, (list, tuple)) and values is not None:
             raise TypeError(
-                f&#34;values is not a list! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+                f&#34;values is not a list or a tuple! &#34; 
+                f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(select_mode, str):
             raise TypeError(
@@ -147,16 +148,16 @@ class Listbox(tk.Listbox):
         return self._values
 
     @values.setter
-    def values(self, new_values: list[str]) -&gt; None:
+    def values(self, new_values: Union[list[str, ...], tuple[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the items on this combobox.
 
-        :param new_values: The new items, as a list of str.
+        :param new_values: The new items, as a list or tuple of str.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(new_values, list):
+        if not isinstance(new_values, (list, tuple)):
             raise TypeError(
-                f&#34;new_values is not a list! &#34;
+                f&#34;new_values is not a list or a tuple! &#34;
                 f&#34;(type passed in: {repr(type(new_values))})&#34;
             )
         self._values = [str(item) for item in new_values]
@@ -222,14 +223,14 @@ class Listbox(tk.Listbox):
 <dl>
 <dt id="TkZero.Listbox.Listbox"><code class="flex name class">
 <span>class <span class="ident">Listbox</span></span>
-<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], values: list = None, select_mode: str = 'browse', height: int = None, width: int = None, on_select: Callable = None, on_double_click: Callable = None)</span>
+<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], values: Union[list, tuple] = None, select_mode: str = 'browse', height: int = None, width: int = None, on_select: Callable = None, on_double_click: Callable = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Listbox widget which can display a list of strings.</p>
 <p>Initiate a tk.Listbox.</p>
 <p>:param parent: The parent of the listbox.
-:param values: The default values you can choose, should be a list of
-str. Defaults to []
+:param values: The default values you can choose, should be a list or
+tuple of str. Defaults to []
 :param select_mode: The select mode to use. (allows you to select one
 or more items or not) Should be a str and defaults to
 SelectModes.Single
@@ -244,7 +245,7 @@ SelectModes.Single
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: list[str, ...] = None,
+        values: Union[list[str, ...], tuple[str, ...]] = None,
         select_mode: str = SelectModes.Single,
         height: int = None,
         width: int = None,
@@ -255,8 +256,8 @@ SelectModes.Single
         Initiate a tk.Listbox.
 
         :param parent: The parent of the listbox.
-        :param values: The default values you can choose, should be a list of
-         str. Defaults to []
+        :param values: The default values you can choose, should be a list or
+         tuple of str. Defaults to []
         :param select_mode: The select mode to use. (allows you to select one
          or more items or not) Should be a str and defaults to
          SelectModes.Single
@@ -270,9 +271,10 @@ SelectModes.Single
                 f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
-        if not isinstance(values, list) and values is not None:
+        if not isinstance(values, (list, tuple)) and values is not None:
             raise TypeError(
-                f&#34;values is not a list! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+                f&#34;values is not a list or a tuple! &#34; 
+                f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(select_mode, str):
             raise TypeError(
@@ -341,16 +343,16 @@ SelectModes.Single
         return self._values
 
     @values.setter
-    def values(self, new_values: list[str]) -&gt; None:
+    def values(self, new_values: Union[list[str, ...], tuple[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the items on this combobox.
 
-        :param new_values: The new items, as a list of str.
+        :param new_values: The new items, as a list or tuple of str.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(new_values, list):
+        if not isinstance(new_values, (list, tuple)):
             raise TypeError(
-                f&#34;new_values is not a list! &#34;
+                f&#34;new_values is not a list or a tuple! &#34;
                 f&#34;(type passed in: {repr(type(new_values))})&#34;
             )
         self._values = [str(item) for item in new_values]

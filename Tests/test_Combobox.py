@@ -18,7 +18,7 @@ class ComboboxTest(TkTestCase):
         with self.assertRaises(TypeError):
             Combobox(1)
         with self.assertRaises(TypeError):
-            Combobox(self.root, values=[])
+            Combobox(self.root, values={})
         with self.assertRaises(TypeError):
             Combobox(self.root, width=5.5)
         with self.assertRaises(TypeError):
@@ -48,9 +48,10 @@ class ComboboxTest(TkTestCase):
             self.assertEqual(c.values, ())
             c.values = ("Foo", )
             self.assertEqual(c.values, ("Foo", ))
+            c.values = ["Bar"]
+            self.assertEqual(c.values, ("Bar", ))
             with self.assertRaises(TypeError):
-                c.values = ["lol", "this", "doesn't", "work", "it", "must", "be",
-                            "a", "tuple"]
+                c.values = {}
         except tk.TclError:
             pass
 

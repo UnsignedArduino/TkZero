@@ -42,7 +42,7 @@ class Spinbox(ttk.Spinbox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: tuple[str, ...] = (),
+        values: Union[tuple[str, ...], list[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -52,8 +52,8 @@ class Spinbox(ttk.Spinbox):
         Initiate a ttk.Spinbox.
 
         :param parent: The parent of the combobox.
-        :param values: The values you can choose, should be a tuple of str.
-         Defaults to ()
+        :param values: The values you can choose, should be a tuple or list of
+         str. Defaults to ()
         :param width: The width of the combobox. Defaults to None.
         :param show: The character to show instead of the actual text.
          Defaults to None.
@@ -70,9 +70,10 @@ class Spinbox(ttk.Spinbox):
                 f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
-        if not isinstance(values, tuple) and values is not None:
+        if not isinstance(values, (tuple, list)) and values is not None:
             raise TypeError(
-                f&#34;values is not a tuple! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+                f&#34;values is not a tuple or list! &#34; 
+                f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
             raise TypeError(
@@ -101,7 +102,7 @@ class Spinbox(ttk.Spinbox):
         else:
             self.bind(&#34;&lt;3&gt;&#34;, lambda event: self._popup(event=event))
         if values is not None:
-            self[&#34;values&#34;] = values
+            self[&#34;values&#34;] = tuple([str(thing) for thing in values])
         self._make_context_menu()
 
     @property
@@ -123,34 +124,36 @@ class Spinbox(ttk.Spinbox):
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
             raise TypeError(
-                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+                f&#34;new_text is not a str! &#34; 
+                f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
         self.delete(0, tk.END)
         self.insert(0, new_text)
 
     @property
-    def values(self) -&gt; tuple[str]:
+    def values(self) -&gt; tuple[str, ...]:
         &#34;&#34;&#34;
         Get the options you can select.
 
-        :return: A str of the text in this entry.
+        :return: A tuple of str of the options you can select.
         &#34;&#34;&#34;
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self, new_values: tuple[str]) -&gt; None:
+    def values(self,
+               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the options text on this spinbox.
 
-        :param new_values: The new options, as a tuple of str.
+        :param new_values: The new options, as a tuple or list of str.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(new_values, tuple):
+        if not isinstance(new_values, (tuple, list)):
             raise TypeError(
-                f&#34;new_values is not a tuple! &#34;
+                f&#34;new_values is not a tuple or list! &#34;
                 f&#34;(type passed in: {repr(type(new_values))})&#34;
             )
-        self[&#34;values&#34;] = new_values
+        self[&#34;values&#34;] = tuple([str(thing) for thing in new_values])
 
     @property
     def enabled(self) -&gt; bool:
@@ -370,7 +373,7 @@ class Spinbox(ttk.Spinbox):
 <dl>
 <dt id="TkZero.Spinbox.Spinbox"><code class="flex name class">
 <span>class <span class="ident">Spinbox</span></span>
-<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], values: tuple = (), width: int = None, show: str = None, validate: Callable = None, command: Callable = None)</span>
+<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], values: Union[tuple, list] = (), width: int = None, show: str = None, validate: Callable = None, command: Callable = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Ttk Spinbox is an Entry with increment and decrement arrows</p>
@@ -378,8 +381,8 @@ class Spinbox(ttk.Spinbox):
 string values.</p>
 <p>Initiate a ttk.Spinbox.</p>
 <p>:param parent: The parent of the combobox.
-:param values: The values you can choose, should be a tuple of str.
-Defaults to ()
+:param values: The values you can choose, should be a tuple or list of
+str. Defaults to ()
 :param width: The width of the combobox. Defaults to None.
 :param show: The character to show instead of the actual text.
 Defaults to None.
@@ -397,7 +400,7 @@ changes. Defaults to None.</p></div>
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: tuple[str, ...] = (),
+        values: Union[tuple[str, ...], list[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -407,8 +410,8 @@ changes. Defaults to None.</p></div>
         Initiate a ttk.Spinbox.
 
         :param parent: The parent of the combobox.
-        :param values: The values you can choose, should be a tuple of str.
-         Defaults to ()
+        :param values: The values you can choose, should be a tuple or list of
+         str. Defaults to ()
         :param width: The width of the combobox. Defaults to None.
         :param show: The character to show instead of the actual text.
          Defaults to None.
@@ -425,9 +428,10 @@ changes. Defaults to None.</p></div>
                 f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
-        if not isinstance(values, tuple) and values is not None:
+        if not isinstance(values, (tuple, list)) and values is not None:
             raise TypeError(
-                f&#34;values is not a tuple! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+                f&#34;values is not a tuple or list! &#34; 
+                f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
             raise TypeError(
@@ -456,7 +460,7 @@ changes. Defaults to None.</p></div>
         else:
             self.bind(&#34;&lt;3&gt;&#34;, lambda event: self._popup(event=event))
         if values is not None:
-            self[&#34;values&#34;] = values
+            self[&#34;values&#34;] = tuple([str(thing) for thing in values])
         self._make_context_menu()
 
     @property
@@ -478,34 +482,36 @@ changes. Defaults to None.</p></div>
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
             raise TypeError(
-                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+                f&#34;new_text is not a str! &#34; 
+                f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
         self.delete(0, tk.END)
         self.insert(0, new_text)
 
     @property
-    def values(self) -&gt; tuple[str]:
+    def values(self) -&gt; tuple[str, ...]:
         &#34;&#34;&#34;
         Get the options you can select.
 
-        :return: A str of the text in this entry.
+        :return: A tuple of str of the options you can select.
         &#34;&#34;&#34;
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self, new_values: tuple[str]) -&gt; None:
+    def values(self,
+               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the options text on this spinbox.
 
-        :param new_values: The new options, as a tuple of str.
+        :param new_values: The new options, as a tuple or list of str.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(new_values, tuple):
+        if not isinstance(new_values, (tuple, list)):
             raise TypeError(
-                f&#34;new_values is not a tuple! &#34;
+                f&#34;new_values is not a tuple or list! &#34;
                 f&#34;(type passed in: {repr(type(new_values))})&#34;
             )
-        self[&#34;values&#34;] = new_values
+        self[&#34;values&#34;] = tuple([str(thing) for thing in new_values])
 
     @property
     def enabled(self) -&gt; bool:
@@ -790,17 +796,17 @@ def value(self) -&gt; str:
 <dt id="TkZero.Spinbox.Spinbox.values"><code class="name">var <span class="ident">values</span> : tuple</code></dt>
 <dd>
 <div class="desc"><p>Get the options you can select.</p>
-<p>:return: A str of the text in this entry.</p></div>
+<p>:return: A tuple of str of the options you can select.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def values(self) -&gt; tuple[str]:
+def values(self) -&gt; tuple[str, ...]:
     &#34;&#34;&#34;
     Get the options you can select.
 
-    :return: A str of the text in this entry.
+    :return: A tuple of str of the options you can select.
     &#34;&#34;&#34;
     return self[&#34;values&#34;] if self[&#34;values&#34;] else ()</code></pre>
 </details>

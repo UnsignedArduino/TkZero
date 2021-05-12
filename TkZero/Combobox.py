@@ -13,7 +13,7 @@ class Combobox(ttk.Combobox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: tuple[str, ...] = (),
+        values: Union[list[str, ...], tuple[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -23,8 +23,8 @@ class Combobox(ttk.Combobox):
         Initiate a ttk.Combobox.
 
         :param parent: The parent of the combobox.
-        :param values: The default values you can choose, should be a tuple of
-         str. Defaults to ()
+        :param values: The default values you can choose, should be a tuple or
+         list of str. Defaults to ()
         :param width: The width of the combobox. Defaults to None.
         :param show: The character to show instead of the actual text.
          Defaults to None.
@@ -41,9 +41,10 @@ class Combobox(ttk.Combobox):
                 f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
-        if not isinstance(values, tuple):
+        if not isinstance(values, (tuple, list)):
             raise TypeError(
-                f"values is not a tuple! " f"(type passed in: {repr(type(values))})"
+                f"values is not a tuple or a list! "
+                f"(type passed in: {repr(type(values))})"
             )
         if not isinstance(width, int) and width is not None:
             raise TypeError(
@@ -102,7 +103,7 @@ class Combobox(ttk.Combobox):
         self.insert(0, new_text)
 
     @property
-    def values(self) -> tuple[str]:
+    def values(self) -> tuple[str, ...]:
         """
         Get the default options you can select.
 
@@ -111,19 +112,19 @@ class Combobox(ttk.Combobox):
         return self["values"] if self["values"] else ()
 
     @values.setter
-    def values(self, new_values: tuple[str]) -> None:
+    def values(self, new_values: Union[tuple[str, ...], list[str, ...]]) -> None:
         """
         Set the default options text on this combobox.
 
-        :param new_values: The new options, as a tuple of str.
+        :param new_values: The new options, as a tuple or list of str.
         :return: None.
         """
-        if not isinstance(new_values, tuple):
+        if not isinstance(new_values, (tuple, list)):
             raise TypeError(
-                f"new_values is not a tuple! "
+                f"new_values is not a tuple or a list! "
                 f"(type passed in: {repr(type(new_values))})"
             )
-        self["values"] = new_values
+        self["values"] = tuple([str(thing) for thing in new_values])
 
     @property
     def enabled(self) -> bool:

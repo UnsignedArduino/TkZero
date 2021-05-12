@@ -13,7 +13,7 @@ class Spinbox(ttk.Spinbox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: tuple[str, ...] = (),
+        values: Union[tuple[str, ...], list[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -23,8 +23,8 @@ class Spinbox(ttk.Spinbox):
         Initiate a ttk.Spinbox.
 
         :param parent: The parent of the combobox.
-        :param values: The values you can choose, should be a tuple of str.
-         Defaults to ()
+        :param values: The values you can choose, should be a tuple or list of
+         str. Defaults to ()
         :param width: The width of the combobox. Defaults to None.
         :param show: The character to show instead of the actual text.
          Defaults to None.
@@ -41,9 +41,10 @@ class Spinbox(ttk.Spinbox):
                 f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
                 f"(type passed in: {repr(type(parent))})"
             )
-        if not isinstance(values, tuple) and values is not None:
+        if not isinstance(values, (tuple, list)) and values is not None:
             raise TypeError(
-                f"values is not a tuple! " f"(type passed in: {repr(type(values))})"
+                f"values is not a tuple or list! "
+                f"(type passed in: {repr(type(values))})"
             )
         if not isinstance(width, int) and width is not None:
             raise TypeError(
@@ -72,7 +73,7 @@ class Spinbox(ttk.Spinbox):
         else:
             self.bind("<3>", lambda event: self._popup(event=event))
         if values is not None:
-            self["values"] = values
+            self["values"] = tuple([str(thing) for thing in values])
         self._make_context_menu()
 
     @property
@@ -100,28 +101,28 @@ class Spinbox(ttk.Spinbox):
         self.insert(0, new_text)
 
     @property
-    def values(self) -> tuple[str]:
+    def values(self) -> tuple[str, ...]:
         """
         Get the options you can select.
 
-        :return: A str of the text in this entry.
+        :return: A tuple of str of the options you can select.
         """
         return self["values"] if self["values"] else ()
 
     @values.setter
-    def values(self, new_values: tuple[str]) -> None:
+    def values(self, new_values: Union[tuple[str, ...], list[str, ...]]) -> None:
         """
         Set the options text on this spinbox.
 
-        :param new_values: The new options, as a tuple of str.
+        :param new_values: The new options, as a tuple or list of str.
         :return: None.
         """
-        if not isinstance(new_values, tuple):
+        if not isinstance(new_values, (tuple, list)):
             raise TypeError(
-                f"new_values is not a tuple! "
+                f"new_values is not a tuple or list! "
                 f"(type passed in: {repr(type(new_values))})"
             )
-        self["values"] = new_values
+        self["values"] = tuple([str(thing) for thing in new_values])
 
     @property
     def enabled(self) -> bool:

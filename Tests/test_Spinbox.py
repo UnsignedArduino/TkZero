@@ -18,7 +18,7 @@ class SpinboxTest(TkTestCase):
         with self.assertRaises(TypeError):
             Spinbox(parent=1)
         with self.assertRaises(TypeError):
-            Spinbox(self.root, values=["this", "doesn't", "work"])
+            Spinbox(self.root, values={"this", "doesn't", "work"})
         with self.assertRaises(TypeError):
             Spinbox(self.root, width=5.5)
         with self.assertRaises(TypeError):
@@ -46,8 +46,10 @@ class SpinboxTest(TkTestCase):
         self.assertEqual(s.values, ())
         s.values = ("Foo", )
         self.assertEqual(s.values, ("Foo", ))
+        s.values = ["Foo"]
+        self.assertEqual(s.values, ("Foo",))
         with self.assertRaises(TypeError):
-            s.values = []
+            s.values = {}
 
     def test_enabled(self):
         s = Spinbox(self.root)

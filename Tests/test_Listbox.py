@@ -52,8 +52,10 @@ class ListboxTest(TkTestCase):
         self.assertEqual(l.values, [])
         l.values = ["Foo"]
         self.assertEqual(l.values, ["Foo"])
+        l.values = ("Bar", )
+        self.assertEqual(l.values, ["Bar"])
         with self.assertRaises(TypeError):
-            l.values = ()
+            l.values = {}
 
     def test_enabled(self):
         l = Listbox(self.root)

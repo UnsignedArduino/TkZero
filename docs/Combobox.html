@@ -42,7 +42,7 @@ class Combobox(ttk.Combobox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: tuple[str, ...] = (),
+        values: Union[list[str, ...], tuple[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -52,8 +52,8 @@ class Combobox(ttk.Combobox):
         Initiate a ttk.Combobox.
 
         :param parent: The parent of the combobox.
-        :param values: The default values you can choose, should be a tuple of
-         str. Defaults to ()
+        :param values: The default values you can choose, should be a tuple or
+         list of str. Defaults to ()
         :param width: The width of the combobox. Defaults to None.
         :param show: The character to show instead of the actual text.
          Defaults to None.
@@ -70,9 +70,10 @@ class Combobox(ttk.Combobox):
                 f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
-        if not isinstance(values, tuple):
+        if not isinstance(values, (tuple, list)):
             raise TypeError(
-                f&#34;values is not a tuple! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+                f&#34;values is not a tuple or a list! &#34; 
+                f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
             raise TypeError(
@@ -131,7 +132,7 @@ class Combobox(ttk.Combobox):
         self.insert(0, new_text)
 
     @property
-    def values(self) -&gt; tuple[str]:
+    def values(self) -&gt; tuple[str, ...]:
         &#34;&#34;&#34;
         Get the default options you can select.
 
@@ -140,19 +141,20 @@ class Combobox(ttk.Combobox):
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self, new_values: tuple[str]) -&gt; None:
+    def values(self,
+               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the default options text on this combobox.
 
-        :param new_values: The new options, as a tuple of str.
+        :param new_values: The new options, as a tuple or list of str.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(new_values, tuple):
+        if not isinstance(new_values, (tuple, list)):
             raise TypeError(
-                f&#34;new_values is not a tuple! &#34;
+                f&#34;new_values is not a tuple or a list! &#34;
                 f&#34;(type passed in: {repr(type(new_values))})&#34;
             )
-        self[&#34;values&#34;] = new_values
+        self[&#34;values&#34;] = tuple([str(thing) for thing in new_values])
 
     @property
     def enabled(self) -&gt; bool:
@@ -372,15 +374,15 @@ class Combobox(ttk.Combobox):
 <dl>
 <dt id="TkZero.Combobox.Combobox"><code class="flex name class">
 <span>class <span class="ident">Combobox</span></span>
-<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], values: tuple = (), width: int = None, show: str = None, validate: Callable = None, command: Callable = None)</span>
+<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], values: Union[list, tuple] = (), width: int = None, show: str = None, validate: Callable = None, command: Callable = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Ttk Combobox widget combines a text field with a pop-down list of
 values.</p>
 <p>Initiate a ttk.Combobox.</p>
 <p>:param parent: The parent of the combobox.
-:param values: The default values you can choose, should be a tuple of
-str. Defaults to ()
+:param values: The default values you can choose, should be a tuple or
+list of str. Defaults to ()
 :param width: The width of the combobox. Defaults to None.
 :param show: The character to show instead of the actual text.
 Defaults to None.
@@ -398,7 +400,7 @@ changes. Defaults to None.</p></div>
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: tuple[str, ...] = (),
+        values: Union[list[str, ...], tuple[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -408,8 +410,8 @@ changes. Defaults to None.</p></div>
         Initiate a ttk.Combobox.
 
         :param parent: The parent of the combobox.
-        :param values: The default values you can choose, should be a tuple of
-         str. Defaults to ()
+        :param values: The default values you can choose, should be a tuple or
+         list of str. Defaults to ()
         :param width: The width of the combobox. Defaults to None.
         :param show: The character to show instead of the actual text.
          Defaults to None.
@@ -426,9 +428,10 @@ changes. Defaults to None.</p></div>
                 f&#34;Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! &#34;
                 f&#34;(type passed in: {repr(type(parent))})&#34;
             )
-        if not isinstance(values, tuple):
+        if not isinstance(values, (tuple, list)):
             raise TypeError(
-                f&#34;values is not a tuple! &#34; f&#34;(type passed in: {repr(type(values))})&#34;
+                f&#34;values is not a tuple or a list! &#34; 
+                f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
             raise TypeError(
@@ -487,7 +490,7 @@ changes. Defaults to None.</p></div>
         self.insert(0, new_text)
 
     @property
-    def values(self) -&gt; tuple[str]:
+    def values(self) -&gt; tuple[str, ...]:
         &#34;&#34;&#34;
         Get the default options you can select.
 
@@ -496,19 +499,20 @@ changes. Defaults to None.</p></div>
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self, new_values: tuple[str]) -&gt; None:
+    def values(self,
+               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the default options text on this combobox.
 
-        :param new_values: The new options, as a tuple of str.
+        :param new_values: The new options, as a tuple or list of str.
         :return: None.
         &#34;&#34;&#34;
-        if not isinstance(new_values, tuple):
+        if not isinstance(new_values, (tuple, list)):
             raise TypeError(
-                f&#34;new_values is not a tuple! &#34;
+                f&#34;new_values is not a tuple or a list! &#34;
                 f&#34;(type passed in: {repr(type(new_values))})&#34;
             )
-        self[&#34;values&#34;] = new_values
+        self[&#34;values&#34;] = tuple([str(thing) for thing in new_values])
 
     @property
     def enabled(self) -&gt; bool:
@@ -799,7 +803,7 @@ def value(self) -&gt; str:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def values(self) -&gt; tuple[str]:
+def values(self) -&gt; tuple[str, ...]:
     &#34;&#34;&#34;
     Get the default options you can select.
 
