@@ -52,8 +52,8 @@ class Scale(ttk.Scale):
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
         length: int,
-        minimum: float,
-        maximum: float,
+        minimum: Union[int, float],
+        maximum: Union[int, float],
         orientation: str = OrientModes.Horizontal,
         command: Callable = None,
     ):
@@ -62,8 +62,8 @@ class Scale(ttk.Scale):
 
         :param parent: The parent of the scrollbar.
         :param length: An int, which is the length of the scale.
-        :param minimum: The minimum value of the scale, a float.
-        :param maximum: The maximum value of the scale, a float.
+        :param minimum: The minimum value of the scale, an int or a float.
+        :param maximum: The maximum value of the scale, an int or a float.
         :param orientation: The orientation of the scrollbar and what
          direction it should scroll the widget in. Defaults to
          OrientModes.Horizontal and is a str.
@@ -80,13 +80,15 @@ class Scale(ttk.Scale):
             raise TypeError(
                 f&#34;length is not a int! (type passed in: {repr(type(length))})&#34;
             )
-        if not isinstance(minimum, float):
+        if not isinstance(minimum, (int, float)):
             raise TypeError(
-                f&#34;minimum is not a float! &#34; f&#34;(type passed in: {repr(type(minimum))})&#34;
+                f&#34;minimum is not an int or a float! &#34;
+                f&#34;(type passed in: {repr(type(minimum))})&#34;
             )
         if not isinstance(maximum, float):
             raise TypeError(
-                f&#34;maximum is not a float! &#34; f&#34;(type passed in: {repr(type(maximum))})&#34;
+                f&#34;maximum is not an int or a float! &#34;
+                f&#34;(type passed in: {repr(type(maximum))})&#34;
             )
         if not isinstance(orientation, str):
             raise TypeError(
@@ -97,8 +99,8 @@ class Scale(ttk.Scale):
             master=parent,
             orient=orientation,
             length=length,
-            from_=minimum,
-            to=maximum,
+            from_=float(minimum),
+            to=float(maximum),
             command=lambda new_val: command(float(new_val))
             if command is not None
             else None,
@@ -204,7 +206,7 @@ Vertical - makes the scale vertical and slides up and down.</p></div>
 </dd>
 <dt id="TkZero.Scale.Scale"><code class="flex name class">
 <span>class <span class="ident">Scale</span></span>
-<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], length: int, minimum: float, maximum: float, orientation: str = 'horizontal', command: Callable = None)</span>
+<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], length: int, minimum: Union[int, float], maximum: Union[int, float], orientation: str = 'horizontal', command: Callable = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Ttk Scale widget is typically used to control the numeric value of
@@ -212,8 +214,8 @@ a linked variable that varies uniformly over some range.</p>
 <p>Initiate a ttk.Scrollbar.</p>
 <p>:param parent: The parent of the scrollbar.
 :param length: An int, which is the length of the scale.
-:param minimum: The minimum value of the scale, a float.
-:param maximum: The maximum value of the scale, a float.
+:param minimum: The minimum value of the scale, an int or a float.
+:param maximum: The maximum value of the scale, an int or a float.
 :param orientation: The orientation of the scrollbar and what
 direction it should scroll the widget in. Defaults to
 OrientModes.Horizontal and is a str.
@@ -228,8 +230,8 @@ passed in a positional float as the new value.</p></div>
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
         length: int,
-        minimum: float,
-        maximum: float,
+        minimum: Union[int, float],
+        maximum: Union[int, float],
         orientation: str = OrientModes.Horizontal,
         command: Callable = None,
     ):
@@ -238,8 +240,8 @@ passed in a positional float as the new value.</p></div>
 
         :param parent: The parent of the scrollbar.
         :param length: An int, which is the length of the scale.
-        :param minimum: The minimum value of the scale, a float.
-        :param maximum: The maximum value of the scale, a float.
+        :param minimum: The minimum value of the scale, an int or a float.
+        :param maximum: The maximum value of the scale, an int or a float.
         :param orientation: The orientation of the scrollbar and what
          direction it should scroll the widget in. Defaults to
          OrientModes.Horizontal and is a str.
@@ -256,13 +258,15 @@ passed in a positional float as the new value.</p></div>
             raise TypeError(
                 f&#34;length is not a int! (type passed in: {repr(type(length))})&#34;
             )
-        if not isinstance(minimum, float):
+        if not isinstance(minimum, (int, float)):
             raise TypeError(
-                f&#34;minimum is not a float! &#34; f&#34;(type passed in: {repr(type(minimum))})&#34;
+                f&#34;minimum is not an int or a float! &#34;
+                f&#34;(type passed in: {repr(type(minimum))})&#34;
             )
         if not isinstance(maximum, float):
             raise TypeError(
-                f&#34;maximum is not a float! &#34; f&#34;(type passed in: {repr(type(maximum))})&#34;
+                f&#34;maximum is not an int or a float! &#34;
+                f&#34;(type passed in: {repr(type(maximum))})&#34;
             )
         if not isinstance(orientation, str):
             raise TypeError(
@@ -273,8 +277,8 @@ passed in a positional float as the new value.</p></div>
             master=parent,
             orient=orientation,
             length=length,
-            from_=minimum,
-            to=maximum,
+            from_=float(minimum),
+            to=float(maximum),
             command=lambda new_val: command(float(new_val))
             if command is not None
             else None,
