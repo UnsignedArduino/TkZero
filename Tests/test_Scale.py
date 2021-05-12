@@ -19,9 +19,9 @@ class ScaleTest(TkTestCase):
         with self.assertRaises(TypeError):
             Scale(self.root, length="5", minimum=0.0, maximum=5.0)
         with self.assertRaises(TypeError):
-            Scale(self.root, length=5, minimum=0, maximum=5.0)
+            Scale(self.root, length=5, minimum="0.0", maximum=5.0)
         with self.assertRaises(TypeError):
-            Scale(self.root, length=5, minimum=0.0, maximum=5)
+            Scale(self.root, length=5, minimum=0.0, maximum="5.0")
         with self.assertRaises(TypeError):
             Scale(self.root, length=5, minimum=0.0, maximum=5.0,
                   orientation=[])

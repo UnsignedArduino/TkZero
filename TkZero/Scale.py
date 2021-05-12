@@ -23,8 +23,8 @@ class Scale(ttk.Scale):
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
         length: int,
-        minimum: float,
-        maximum: float,
+        minimum: Union[int, float],
+        maximum: Union[int, float],
         orientation: str = OrientModes.Horizontal,
         command: Callable = None,
     ):
@@ -33,8 +33,8 @@ class Scale(ttk.Scale):
 
         :param parent: The parent of the scrollbar.
         :param length: An int, which is the length of the scale.
-        :param minimum: The minimum value of the scale, a float.
-        :param maximum: The maximum value of the scale, a float.
+        :param minimum: The minimum value of the scale, an int or a float.
+        :param maximum: The maximum value of the scale, an int or a float.
         :param orientation: The orientation of the scrollbar and what
          direction it should scroll the widget in. Defaults to
          OrientModes.Horizontal and is a str.
@@ -51,13 +51,15 @@ class Scale(ttk.Scale):
             raise TypeError(
                 f"length is not a int! (type passed in: {repr(type(length))})"
             )
-        if not isinstance(minimum, float):
+        if not isinstance(minimum, (int, float)):
             raise TypeError(
-                f"minimum is not a float! " f"(type passed in: {repr(type(minimum))})"
+                f"minimum is not an int or a float! "
+                f"(type passed in: {repr(type(minimum))})"
             )
         if not isinstance(maximum, float):
             raise TypeError(
-                f"maximum is not a float! " f"(type passed in: {repr(type(maximum))})"
+                f"maximum is not an int or a float! "
+                f"(type passed in: {repr(type(maximum))})"
             )
         if not isinstance(orientation, str):
             raise TypeError(
@@ -68,8 +70,8 @@ class Scale(ttk.Scale):
             master=parent,
             orient=orientation,
             length=length,
-            from_=minimum,
-            to=maximum,
+            from_=float(minimum),
+            to=float(maximum),
             command=lambda new_val: command(float(new_val))
             if command is not None
             else None,

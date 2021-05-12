@@ -72,13 +72,17 @@ class MainWindow(tk.Tk):
             )
         if isinstance(new_size, tuple):
             if len(new_size) != 2:
-                raise ValueError(f"new_size has "
-                                 f"{'more than' if len(new_size) > 2 else 'less than'}"
-                                 f" 2 values! (got: {len(new_size)})")
+                raise ValueError(
+                    f"new_size has "
+                    f"{'more than' if len(new_size) > 2 else 'less than'}"
+                    f" 2 values! (got: {len(new_size)})"
+                )
             for index, axis in enumerate(new_size):
                 if not isinstance(axis, int):
-                    raise TypeError(f"new_size[{index}] is not an int! "
-                                    f"(type passed in: {repr(type(axis))})")
+                    raise TypeError(
+                        f"new_size[{index}] is not an int! "
+                        f"(type passed in: {repr(type(axis))})"
+                    )
         if isinstance(new_size, tuple):
             self.geometry(f"{new_size[0]}x{new_size[1]}")
         else:
@@ -96,9 +100,7 @@ class MainWindow(tk.Tk):
         return Vector.Position(x=self.winfo_x(), y=self.winfo_y())
 
     @position.setter
-    def position(self,
-                 new_position: Union[Vector.Position, tuple[int, int]]
-                 ) -> None:
+    def position(self, new_position: Union[Vector.Position, tuple[int, int]]) -> None:
         """
         Set the **top-left** position of the window.
 
@@ -113,13 +115,17 @@ class MainWindow(tk.Tk):
             )
         if isinstance(new_position, tuple):
             if len(new_position) != 2:
-                raise ValueError(f"new_position has "
-                                 f"{'more than' if len(new_position) > 2 else 'less than'}"
-                                 f" 2 values! (got: {len(new_position)})")
+                raise ValueError(
+                    f"new_position has "
+                    f"{'more than' if len(new_position) > 2 else 'less than'}"
+                    f" 2 values! (got: {len(new_position)})"
+                )
             for index, axis in enumerate(new_position):
                 if not isinstance(axis, int):
-                    raise TypeError(f"new_position[{index}] is not an int! "
-                                    f"(type passed in: {repr(type(axis))})")
+                    raise TypeError(
+                        f"new_position[{index}] is not an int! "
+                        f"(type passed in: {repr(type(axis))})"
+                    )
         if isinstance(new_position, tuple):
             self.geometry(
                 f"{self.size.width}x{self.size.height}+"
