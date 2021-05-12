@@ -32,18 +32,20 @@ class MainWindowTest(TkTestCase):
         window.update()
         self.assertEqual(window.size, Vector.Size(width=200, height=200))
         window.size = Vector.Size(width=400, height=400)
-        window.update()
         self.assertEqual(window.size, Vector.Size(width=400, height=400))
+        window.size = (120, 120)
+        self.assertEqual(window.size, Vector.Size(width=120, height=120))
         with self.assertRaises(TypeError):
-            window.size = (100, 100)
+            window.size = [200, 100]
 
     def test_position(self):
         window = Window(self.root)
         window.position = Vector.Position(x=0, y=0)
-        window.update()
         self.assertEqual(window.position, Vector.Position(x=0, y=0))
+        window.position = (100, 100)
+        self.assertEqual(window.position, Vector.Position(x=100, y=100))
         with self.assertRaises(TypeError):
-            window.position = (0, 0)
+            window.position = [0, 0]
 
     def test_minimized(self):
         window = Window(self.root)

@@ -66,23 +66,37 @@ class Window(tk.Toplevel):
         :return: A TkZero.Vector.Size with the width and height attributes.
         """
         self.update()
-        return Vector.Size(width=self.winfo_width(), height=self.winfo_height())
+        return Vector.Size(width=self.winfo_width(),
+                           height=self.winfo_height())
 
     @size.setter
-    def size(self, new_size: Vector.Size) -> None:
+    def size(self, new_size: Union[Vector.Size, tuple[int, int]]) -> None:
         """
         Set the size of the window.
 
-        :param new_size: A TkZero.Vector.Size with the width and height
-        attributes set to the size you want.
+        :param new_size: A TkZero.Vector.Size or a tuple with the width and
+        height attributes set to the size you want.
         :return: None.
         """
-        if not isinstance(new_size, Vector.Size):
+        if not isinstance(new_size, (Vector.Size, tuple)):
             raise TypeError(
-                f"new_size is not a Vector.Size! "
+                f"new_size is not a Vector.Size or a tuple! "
                 f"(type passed in: {repr(type(new_size))})"
             )
-        self.geometry(f"{new_size.width}x{new_size.height}")
+        if isinstance(new_size, tuple):
+            if len(new_size) != 2:
+                raise ValueError(f"new_size has "
+                                 f"{'more than' if len(new_size) > 2 else 'less than'}"
+                                 f" 2 values! (got: {len(new_size)})")
+            for index, axis in enumerate(new_size):
+                if not isinstance(axis, int):
+                    raise TypeError(f"new_size[{index}] is not an int! "
+                                    f"(type passed in: {repr(type(axis))})")
+        if isinstance(new_size, tuple):
+            self.geometry(f"{new_size[0]}x{new_size[1]}")
+        else:
+            self.geometry(f"{new_size.width}x{new_size.height}")
+        self.update()
 
     @property
     def position(self) -> Vector.Position:
@@ -91,26 +105,44 @@ class Window(tk.Toplevel):
 
         :return: A TkZero.Vector.Position with the x and y attributes.
         """
+        self.update()
         return Vector.Position(x=self.winfo_x(), y=self.winfo_y())
 
     @position.setter
-    def position(self, new_position: Vector.Position) -> None:
+    def position(self,
+                 new_position: Union[Vector.Position, tuple[int, int]]
+                 ) -> None:
         """
         Set the **top-left** position of the window.
 
-        :param new_position: A TkZero.Vector.Position with the new x and y
-         attributes
+        :param new_position: A TkZero.Vector.Position or a tuple with the new
+         x and y attributes.
         :return: None.
         """
-        if not isinstance(new_position, Vector.Position):
+        if not isinstance(new_position, (Vector.Position, tuple)):
             raise TypeError(
-                f"new_position is not a Vector.Position! "
+                f"new_position is not a Vector.Position or a tuple! "
                 f"(type passed in: {repr(type(new_position))})"
             )
-        self.geometry(
-            f"{self.size.width}x{self.size.height}+"
-            f"{new_position.x}+{new_position.y}"
-        )
+        if isinstance(new_position, tuple):
+            if len(new_position) != 2:
+                raise ValueError(f"new_position has "
+                                 f"{'more than' if len(new_position) > 2 else 'less than'}"
+                                 f" 2 values! (got: {len(new_position)})")
+            for index, axis in enumerate(new_position):
+                if not isinstance(axis, int):
+                    raise TypeError(f"new_position[{index}] is not an int! "
+                                    f"(type passed in: {repr(type(axis))})")
+        if isinstance(new_position, tuple):
+            self.geometry(
+                f"{self.size.width}x{self.size.height}+"
+                f"{new_position[0]}+{new_position[1]}"
+            )
+        else:
+            self.geometry(
+                f"{self.size.width}x{self.size.height}+"
+                f"{new_position.x}+{new_position.y}"
+            )
 
     def minimize(self) -> None:
         """
@@ -189,11 +221,11 @@ class Window(tk.Toplevel):
         return self.attributes("-fullscreen")
 
     def bind_to_event(
-        self,
-        event: str,
-        func: Callable = None,
-        run_in_thread: bool = False,
-        add: bool = False,
+            self,
+            event: str,
+            func: Callable = None,
+            run_in_thread: bool = False,
+            add: bool = False,
     ) -> Union[None, list[str]]:
         """
         Bind a event to a function.
@@ -220,7 +252,8 @@ class Window(tk.Toplevel):
                 f"(type passed in: {repr(type(run_in_thread))})"
             )
         if not isinstance(add, bool):
-            raise TypeError(f"add is not a bool! (type passed in: {repr(type(add))})")
+            raise TypeError(
+                f"add is not a bool! (type passed in: {repr(type(add))})")
         if run_in_thread:
             func = Thread(target=func, args=(), daemon=True).start
         binds = self.bind(event, func, add)
@@ -242,9 +275,9 @@ class Window(tk.Toplevel):
         self.event_generate(event)
 
     def _enable_children(
-        self,
-        parent: Union[tk.Widget, Union[tk.Toplevel, None]] = None,
-        enable: bool = True,
+            self,
+            parent: Union[tk.Widget, Union[tk.Toplevel, None]] = None,
+            enable: bool = True,
     ) -> None:
         """
         Enable or disable the children.

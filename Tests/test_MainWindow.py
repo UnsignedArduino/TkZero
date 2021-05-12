@@ -20,15 +20,18 @@ class MainWindowTest(TkTestCase):
         self.assertEqual(self.root.size, Vector.Size(width=200, height=200))
         self.root.size = Vector.Size(width=400, height=400)
         self.assertEqual(self.root.size, Vector.Size(width=400, height=400))
+        self.root.size = (300, 300)
+        self.assertEqual(self.root.size, Vector.Size(width=300, height=300))
         with self.assertRaises(TypeError):
-            self.root.size = (400, 400)
+            self.root.size = [400, 400]
 
     def test_position(self):
         self.root.position = Vector.Position(x=0, y=0)
-        self.root.update()
         self.assertEqual(self.root.position, Vector.Position(x=0, y=0))
+        self.root.position = (100, 100)
+        self.assertEqual(self.root.position, Vector.Position(x=100, y=100))
         with self.assertRaises(TypeError):
-            self.root.position = (0, 0)
+            self.root.position = [0, 0]
 
     def test_minimized(self):
         self.root.minimize()
