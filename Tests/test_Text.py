@@ -4,91 +4,70 @@ Test the TkZero.Text module
 
 import unittest
 
-from TkZero.MainWindow import MainWindow
 from TkZero.Text import Text, TextWrap
+from TkZeroUnitTest import TkTestCase
 
 
-class TextTest(unittest.TestCase):
+class TextTest(TkTestCase):
     def test_no_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Text()
-        root.update()
-        root.close()
 
     def test_bad_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Text(parent=1)
         with self.assertRaises(TypeError):
-            Text(root, width=5.5)
+            Text(self.root, width=5.5)
         with self.assertRaises(TypeError):
-            Text(root, height=-3.2)
+            Text(self.root, height=-3.2)
         with self.assertRaises(TypeError):
-            Text(root, wrapping=False)
-        root.update()
-        root.close()
+            Text(self.root, wrapping=False)
 
     def test_good_params(self):
-        root = MainWindow()
-        root.update()
-        Text(root, width=20, height=10, wrapping=TextWrap.NoWrapping).grid(row=0, column=0)
-        root.update()
-        root.close()
+        Text(self.root, width=20, height=10,
+             wrapping=TextWrap.NoWrapping).grid(row=0, column=0)
 
     def test_text(self):
-        root = MainWindow()
-        root.update()
-        t = Text(root)
+        t = Text(self.root)
         t.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertEqual(t.text, "\n")
         t.text = "Foo"
         self.assertEqual(t.text, "Foo\n")
         with self.assertRaises(TypeError):
             t.text = False
-        root.close()
 
     def test_enabled(self):
-        root = MainWindow()
-        root.update()
-        t = Text(root)
+        t = Text(self.root)
         t.grid(row=0, column=0)
         self.assertTrue(t.enabled)
         t.enabled = False
-        root.update()
+        self.root.update()
         self.assertFalse(t.enabled)
         with self.assertRaises(TypeError):
             t.enabled = "False"
-        root.close()
 
     def test_right_click(self):
-        root = MainWindow()
-        root.update()
-        t = Text(root)
+        t = Text(self.root)
         t.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         t.enabled = False
-        root.update()
+        self.root.update()
         t._update_context_menu_states()
-        root.update()
+        self.root.update()
         t.enabled = True
-        root.update()
+        self.root.update()
         t.select_all_contents()
-        root.update()
+        self.root.update()
         t._update_context_menu_states()
-        root.update()
+        self.root.update()
         t.copy_contents()
-        root.update()
+        self.root.update()
         t.cut_contents()
-        root.update()
+        self.root.update()
         t.delete_contents()
-        root.update()
+        self.root.update()
         t.paste_contents()
-        root.update()
-        root.close()
 
 
 if __name__ == '__main__':

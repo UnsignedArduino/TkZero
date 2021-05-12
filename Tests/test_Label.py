@@ -9,33 +9,23 @@ from PIL.ImageTk import PhotoImage
 
 from TkZero import Style
 from TkZero.Label import Label, DisplayModes
-from TkZero.MainWindow import MainWindow
+from TkZeroUnitTest import TkTestCase
 
 
-class LabelTest(unittest.TestCase):
+class LabelTest(TkTestCase):
     def test_no_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Label()
-        root.update()
-        root.close()
 
     def test_bad_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Label(parent=1)
         with self.assertRaises(TypeError):
-            Label(root, text=["blah"])
+            Label(self.root, text=["blah"])
         with self.assertRaises(TypeError):
-            Label(root, image=123456789)
-        root.update()
-        root.close()
+            Label(self.root, image=123456789)
 
     def test_good_params(self):
-        root = MainWindow()
-        root.update()
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -253,29 +243,25 @@ class LabelTest(unittest.TestCase):
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        Label(root, text="hi", image=PhotoImage(data=image_data)).grid(row=0, column=0)
-        root.update()
-        root.after(ms=100, func=root.close)
-        root.mainloop()
+        Label(self.root, text="hi",
+              image=PhotoImage(data=image_data)).grid(row=0, column=0)
+        self.root.update()
+        self.root.after(ms=100, func=self.root.close)
+        self.root.mainloop()
 
     def test_text(self):
-        root = MainWindow()
-        root.update()
-        l = Label(root, text="foo bar")
+        l = Label(self.root, text="foo bar")
         l.grid(row=0, column=0)
         l.text = "Test"
-        root.update()
+        self.root.update()
         self.assertEqual(l.text, "Test")
         with self.assertRaises(TypeError):
             l.text = 0.2
-        root.close()
 
     def test_image(self):
-        root = MainWindow()
-        root.update()
-        l = Label(root)
+        l = Label(self.root)
         l.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertTrue(l.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -495,19 +481,17 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.image = PhotoImage(data=image_data)
-        root.update()
+        self.root.update()
         self.assertTrue(l.image is not None)
         with self.assertRaises(TypeError):
             l.image = {}
-        root.after(ms=100, func=root.close)
-        root.mainloop()
+        self.root.after(ms=100, func=self.root.close)
+        self.root.mainloop()
 
     def test_text_and_image(self):
-        root = MainWindow()
-        root.update()
-        l = Label(root, text="Figure 1: A smiley face.")
+        l = Label(self.root, text="Figure 1: A smiley face.")
         l.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertEqual(l.text, "Figure 1: A smiley face.")
         self.assertTrue(l.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
@@ -728,42 +712,37 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.image = PhotoImage(data=image_data)
-        root.update()
         self.assertTrue(l.image is not None)
-        root.update()
+        self.root.update()
         self.assertEqual(l.display_mode, DisplayModes.Original)
         l.display_mode = DisplayModes.ImageLeftText
-        root.update()
+        self.root.update()
         self.assertEqual(l.display_mode, DisplayModes.ImageLeftText)
         with self.assertRaises(TypeError):
             l.display_mode = []
-        root.after(ms=100, func=root.close)
+        self.root.after(ms=100, func=self.root.close)
+        self.root.mainloop()
 
     def test_enabled(self):
-        root = MainWindow()
-        root.update()
-        l = Label(root)
+        l = Label(self.root)
         l.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertTrue(l.enabled)
         l.enabled = False
         self.assertFalse(l.enabled)
         with self.assertRaises(TypeError):
             l.enabled = "boo"
-        root.close()
 
     def test_style(self):
-        root = MainWindow()
-        root.update()
-        l = Label(root)
+        l = Label(self.root)
         l.grid(row=0, column=0)
-        Style.define_style(Style.WidgetStyleRoots.Frame, "Test", background="red")
+        Style.define_style(Style.WidgetStyleRoots.Frame, "Test",
+                           background="red")
         l.apply_style("Test")
         self.assertEqual(l.cget("style"), "Test.TLabel")
-        root.update()
+        self.root.update()
         with self.assertRaises(TypeError):
             l.apply_style(69)
-        root.close()
 
 
 if __name__ == '__main__':

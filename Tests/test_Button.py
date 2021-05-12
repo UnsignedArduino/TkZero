@@ -9,33 +9,23 @@ from PIL.ImageTk import PhotoImage
 
 from TkZero import Style
 from TkZero.Button import Button, DisplayModes
-from TkZero.MainWindow import MainWindow
+from TkZeroUnitTest import TkTestCase
 
 
-class ButtonTest(unittest.TestCase):
+class ButtonTest(TkTestCase):
     def test_no_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Button()
-        root.update()
-        root.close()
 
     def test_bad_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Button("asdf")
         with self.assertRaises(TypeError):
-            Button(root, text=1)
+            Button(self.root, text=1)
         with self.assertRaises(TypeError):
-            Button(root, image="foo")
-        root.update()
-        root.close()
+            Button(self.root, image="foo")
 
     def test_good_params(self):
-        root = MainWindow()
-        root.update()
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -253,26 +243,19 @@ class ButtonTest(unittest.TestCase):
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        Button(root, text="hi", image=PhotoImage(data=image_data)).grid(row=0, column=0)
-        root.update()
-        root.close()
+        Button(self.root, text="hi", image=PhotoImage(data=image_data)).grid(row=0, column=0)
 
     def test_text(self):
-        root = MainWindow()
-        root.update()
-        b = Button(root, text="Foobar")
+        b = Button(self.root, text="Foobar")
         b.grid(row=0, column=0)
         b.text = "Test"
-        root.update()
+        self.root.update()
         self.assertEqual(b.text, "Test")
         with self.assertRaises(TypeError):
             b.text = 1
-        root.close()
 
     def test_image(self):
-        root = MainWindow()
-        root.update()
-        b = Button(root)
+        b = Button(self.root)
         b.grid(row=0, column=0)
         self.assertTrue(b.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
@@ -493,18 +476,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         b.image = PhotoImage(data=image_data)
-        root.update()
+        self.root.update()
         self.assertTrue(b.image is not None)
         with self.assertRaises(TypeError):
             b.image = "foo bar"
-        root.close()
 
     def test_text_and_image(self):
-        root = MainWindow()
-        root.update()
-        b = Button(root, text="Click for smiles!")
+        b = Button(self.root, text="Click for smiles!")
         b.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertEqual(b.text, "Click for smiles!")
         self.assertTrue(b.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
@@ -725,50 +705,39 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         b.image = PhotoImage(data=image_data)
-        root.update()
+        self.root.update()
         self.assertTrue(b.image is not None)
-        root.update()
+        self.root.update()
         self.assertEqual(b.display_mode, DisplayModes.Original)
         b.display_mode = DisplayModes.ImageTopText
-        root.update()
+        self.root.update()
         self.assertEqual(b.display_mode, DisplayModes.ImageTopText)
         with self.assertRaises(TypeError):
             b.display_mode = False
-        root.close()
 
     def test_enabled(self):
-        root = MainWindow()
-        root.update()
-        b = Button(root)
+        b = Button(self.root)
         b.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertTrue(b.enabled)
         b.enabled = False
         self.assertFalse(b.enabled)
         with self.assertRaises(TypeError):
             b.enabled = 1
-        root.close()
 
     def test_execution(self):
-        root = MainWindow()
-        root.update()
-        b = Button(root, command=lambda: None)
+        b = Button(self.root, command=lambda: None)
         b.grid(row=0, column=0)
-        root.update()
-        root.close()
 
     def test_style(self):
-        root = MainWindow()
-        root.update()
-        b = Button(root)
+        b = Button(self.root)
         b.grid(row=0, column=0)
-        Style.define_style(Style.WidgetStyleRoots.Button, "Test", background="red")
+        Style.define_style(Style.WidgetStyleRoots.Button, "Test",
+                           background="red")
         b.apply_style("Test")
         self.assertEqual(b.cget("style"), "Test.TButton")
         with self.assertRaises(TypeError):
             b.apply_style(1)
-        root.update()
-        root.close()
 
 
 if __name__ == '__main__':

@@ -9,38 +9,28 @@ import unittest
 from PIL.ImageTk import PhotoImage
 
 from TkZero import Style
-from TkZero.MainWindow import MainWindow
 from TkZero.Radiobutton import Radiobutton, DisplayModes
+from TkZeroUnitTest import TkTestCase
 
 
-class RadiobuttonTest(unittest.TestCase):
+class RadiobuttonTest(TkTestCase):
     def test_no_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Radiobutton()
-        root.update()
-        root.close()
 
     def test_bad_params(self):
-        root = MainWindow()
-        root.update()
         with self.assertRaises(TypeError):
             Radiobutton(parent=1)
         with self.assertRaises(TypeError):
-            Radiobutton(root, text=2)
+            Radiobutton(self.root, text=2)
         with self.assertRaises(TypeError):
-            Radiobutton(root, image=[])
+            Radiobutton(self.root, image=[])
         with self.assertRaises(TypeError):
-            Radiobutton(root, variable="miyu")
+            Radiobutton(self.root, variable="miyu")
         with self.assertRaises(TypeError):
-            Radiobutton(root, value=[42])
-        root.update()
-        root.close()
+            Radiobutton(self.root, value=[42])
 
     def test_good_params(self):
-        root = MainWindow()
-        root.update()
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -258,37 +248,27 @@ class RadiobuttonTest(unittest.TestCase):
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
-        Radiobutton(root, text="hi", image=PhotoImage(data=image_data), variable=tk.StringVar(), value="1").grid(
-            row=0, column=0)
-        root.update()
-        root.close()
+        Radiobutton(self.root, text="hi", image=PhotoImage(data=image_data),
+                    variable=tk.StringVar(), value="1").grid(row=0, column=0)
 
     def test_value(self):
-        root = MainWindow()
-        root.update()
         v = tk.StringVar(value="Foobar")
-        c = Radiobutton(root, text="Foobar", variable=v, value="Foobar")
+        c = Radiobutton(self.root, text="Foobar", variable=v, value="Foobar")
         c.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertEqual(v.get(), "Foobar")
-        root.close()
 
     def test_text(self):
-        root = MainWindow()
-        root.update()
-        c = Radiobutton(root, text="Foobar")
+        c = Radiobutton(self.root, text="Foobar")
         c.grid(row=0, column=0)
         c.text = "Test"
-        root.update()
+        self.root.update()
         self.assertEqual(c.text, "Test")
         with self.assertRaises(TypeError):
             c.text = 1023.99999999999999
-        root.close()
 
     def test_image(self):
-        root = MainWindow()
-        root.update()
-        c = Radiobutton(root)
+        c = Radiobutton(self.root)
         c.grid(row=0, column=0)
         self.assertTrue(c.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
@@ -509,18 +489,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.image = PhotoImage(data=image_data)
-        root.update()
+        self.root.update()
         self.assertTrue(c.image is not None)
         with self.assertRaises(TypeError):
             c.image = "this isn't an image dummy"
-        root.close()
 
     def test_text_and_image(self):
-        root = MainWindow()
-        root.update()
-        c = Radiobutton(root, text="Click for smiles!")
+        c = Radiobutton(self.root, text="Click for smiles!")
         c.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertEqual(c.text, "Click for smiles!")
         self.assertTrue(c.image is None)
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
@@ -741,50 +718,40 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.image = PhotoImage(data=image_data)
-        root.update()
+        self.root.update()
         self.assertTrue(c.image is not None)
-        root.update()
+        self.root.update()
         self.assertEqual(c.display_mode, DisplayModes.Original)
         c.display_mode = DisplayModes.ImageTopText
-        root.update()
+        self.root.update()
         self.assertEqual(c.display_mode, DisplayModes.ImageTopText)
         with self.assertRaises(TypeError):
             c.display_mode = {}
-        root.close()
 
     def test_enabled(self):
-        root = MainWindow()
-        root.update()
-        c = Radiobutton(root)
+        c = Radiobutton(self.root)
         c.grid(row=0, column=0)
-        root.update()
+        self.root.update()
         self.assertTrue(c.enabled)
         c.enabled = False
         self.assertFalse(c.enabled)
         with self.assertRaises(TypeError):
             c.enabled = "False"
-        root.close()
 
     def test_execution(self):
-        root = MainWindow()
-        root.update()
-        c = Radiobutton(root, command=lambda: None)
+        c = Radiobutton(self.root, command=lambda: None)
         c.grid(row=0, column=0)
-        root.update()
-        root.close()
 
     def test_style(self):
-        root = MainWindow()
-        root.update()
-        c = Radiobutton(root)
+        c = Radiobutton(self.root)
         c.grid(row=0, column=0)
-        Style.define_style(Style.WidgetStyleRoots.Button, "Test", background="red")
+        Style.define_style(Style.WidgetStyleRoots.Button, "Test",
+                           background="red")
         c.apply_style("Test")
         self.assertEqual(c.cget("style"), "Test.TRadiobutton")
-        root.update()
+        self.root.update()
         with self.assertRaises(TypeError):
             c.apply_style(123456789)
-        root.close()
 
 
 if __name__ == '__main__':

@@ -6,110 +6,82 @@ import unittest
 
 from TkZero import Vector
 from TkZero.Label import Label
-from TkZero.MainWindow import MainWindow
+from TkZeroUnitTest import TkTestCase
 
 
-class MainWindowTest(unittest.TestCase):
+class MainWindowTest(TkTestCase):
     def test_title(self):
-        root = MainWindow()
-        root.update()
-        root.title = "My title"
-        self.assertEqual(root.title, "My title")
+        self.root.title = "My title"
+        self.assertEqual(self.root.title, "My title")
         with self.assertRaises(TypeError):
-            root.title = 1
-        root.close()
+            self.root.title = 1
 
     def test_size(self):
-        root = MainWindow()
-        root.update()
-        self.assertEqual(root.size, Vector.Size(width=200, height=200))
-        root.size = Vector.Size(width=400, height=400)
-        self.assertEqual(root.size, Vector.Size(width=400, height=400))
+        self.assertEqual(self.root.size, Vector.Size(width=200, height=200))
+        self.root.size = Vector.Size(width=400, height=400)
+        self.assertEqual(self.root.size, Vector.Size(width=400, height=400))
         with self.assertRaises(TypeError):
-            root.size = (400, 400)
-        root.close()
+            self.root.size = (400, 400)
 
     def test_position(self):
-        root = MainWindow()
-        root.update()
-        root.position = Vector.Position(x=0, y=0)
-        root.update()
-        self.assertEqual(root.position, Vector.Position(x=0, y=0))
+        self.root.position = Vector.Position(x=0, y=0)
+        self.root.update()
+        self.assertEqual(self.root.position, Vector.Position(x=0, y=0))
         with self.assertRaises(TypeError):
-            root.position = (0, 0)
-        root.close()
+            self.root.position = (0, 0)
 
     def test_minimized(self):
-        root = MainWindow()
-        root.update()
-        root.minimize()
-        root.update()
-        self.assertTrue(root.is_minimized())
-        root.close()
+        self.root.minimize()
+        self.root.update()
+        self.assertTrue(self.root.is_minimized())
 
     def test_restored(self):
-        root = MainWindow()
-        root.update()
-        root.minimize()
-        root.update()
-        root.restore()
-        root.update()
-        self.assertTrue(root.is_restored())
-        root.close()
+        self.root.minimize()
+        self.root.update()
+        self.root.restore()
+        self.root.update()
+        self.assertTrue(self.root.is_restored())
 
     def test_maximized(self):
-        root = MainWindow()
-        root.update()
-        root.maximize()
-        root.update()
-        self.assertTrue(root.is_maximized())
-        root.close()
+        self.root.maximize()
+        self.root.update()
+        self.assertTrue(self.root.is_maximized())
 
     def test_fullscreen(self):
-        root = MainWindow()
-        root.update()
-        root.full_screen(True)
-        root.update()
-        self.assertTrue(root.is_full_screen())
+        self.root.full_screen(True)
+        self.root.update()
+        self.assertTrue(self.root.is_full_screen())
         with self.assertRaises(TypeError):
-            root.full_screen("la")
-        root.close()
+            self.root.full_screen("la")
 
     def test_binds(self):
-        root = MainWindow()
-        root.update()
         func = lambda: None
-        root.bind_to_event("<<MyOwnSpecialEvent>>", func, run_in_thread=True)
-        binds = root.bind_to_event("<<MyOwnSpecialEvent>>")
+        self.root.bind_to_event("<<MyOwnSpecialEvent>>", func,
+                                run_in_thread=True)
+        binds = self.root.bind_to_event("<<MyOwnSpecialEvent>>")
         self.assertTrue(len(binds) > 0)
         with self.assertRaises(TypeError):
-            root.bind_to_event(1234)
+            self.root.bind_to_event(1234)
         with self.assertRaises(TypeError):
-            root.bind_to_event("<<event>>", add=1)
-        root.generate_event("<<MyOwnSpecialEvent>>")
-        root.close()
+            self.root.bind_to_event("<<event>>", add=1)
+        self.root.generate_event("<<MyOwnSpecialEvent>>")
 
     def test_enabled(self):
-        root = MainWindow()
-        root.update()
-        self.assertTrue(root.enabled)
-        Label(root).grid(row=0, column=0)
-        Label(root).grid(row=1, column=0)
-        root.update()
-        root.enabled = False
-        self.assertFalse(root.enabled)
+        self.assertTrue(self.root.enabled)
+        Label(self.root).grid(row=0, column=0)
+        Label(self.root).grid(row=1, column=0)
+        self.root.update()
+        self.root.enabled = False
+        self.assertFalse(self.root.enabled)
         with self.assertRaises(TypeError):
-            root.enabled = "False"
-        root.close()
+            self.root.enabled = "False"
 
     def test_on_close(self):
-        root = MainWindow()
-        root.update()
         on_close_func = lambda: None
-        root.on_close = on_close_func
-        self.assertEqual(root.on_close, on_close_func)
-        root.close()
-        root.destroy()
+        self.root.on_close = on_close_func
+        self.assertEqual(self.root.on_close, on_close_func)
+        self.root.close()
+        self.root.destroy()
 
 
 if __name__ == "__main__":
