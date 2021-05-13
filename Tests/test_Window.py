@@ -49,35 +49,51 @@ class MainWindowTest(TkTestCase):
 
     def test_minimized(self):
         window = Window(self.root)
-        window.minimize()
+        window.minimized = True
         window.update()
-        self.assertTrue(window.is_minimized())
-        self.root.close()
+        self.assertTrue(window.minimized)
+        window.minimized = False
+        window.update()
+        self.assertFalse(window.minimized)
+        with self.assertRaises(TypeError):
+            window.minimized = "True"
 
     def test_restored(self):
         window = Window(self.root)
         window.update()
-        window.minimize()
+        window.minimized = True
         window.update()
-        window.restore()
+        window.restored = True
         window.update()
-        self.assertTrue(window.is_restored())
+        self.assertTrue(window.restored)
+        window.restored = False
+        window.update()
+        self.assertFalse(window.restored)
+        with self.assertRaises(TypeError):
+            window.restored = "False"
 
     def test_maximized(self):
         window = Window(self.root)
         window.update()
-        window.maximize()
+        window.maximized = True
         window.update()
-        self.assertTrue(window.is_maximized())
-        self.root.close()
+        self.assertTrue(window.maximized)
+        window.maximized = False
+        window.update()
+        self.assertFalse(window.maximized)
+        with self.assertRaises(TypeError):
+            window.maximized = "True"
 
     def test_fullscreen(self):
         window = Window(self.root)
-        window.full_screen(True)
+        window.full_screen = True
         window.update()
-        self.assertTrue(window.is_full_screen())
+        self.assertTrue(window.full_screen)
+        window.full_screen = False
+        window.update()
+        self.assertFalse(window.full_screen)
         with self.assertRaises(TypeError):
-            window.full_screen("la")
+            window.full_screen = "la"
 
     def test_binds(self):
         window = Window(self.root)

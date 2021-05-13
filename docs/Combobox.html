@@ -72,7 +72,7 @@ class Combobox(ttk.Combobox):
             )
         if not isinstance(values, (tuple, list)):
             raise TypeError(
-                f&#34;values is not a tuple or a list! &#34; 
+                f&#34;values is not a tuple or a list! &#34;
                 f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
@@ -141,8 +141,7 @@ class Combobox(ttk.Combobox):
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self,
-               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
+    def values(self, new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the default options text on this combobox.
 
@@ -430,7 +429,7 @@ changes. Defaults to None.</p></div>
             )
         if not isinstance(values, (tuple, list)):
             raise TypeError(
-                f&#34;values is not a tuple or a list! &#34; 
+                f&#34;values is not a tuple or a list! &#34;
                 f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
@@ -499,8 +498,7 @@ changes. Defaults to None.</p></div>
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self,
-               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
+    def values(self, new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the default options text on this combobox.
 

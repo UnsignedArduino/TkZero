@@ -34,28 +34,46 @@ class MainWindowTest(TkTestCase):
             self.root.position = [0, 0]
 
     def test_minimized(self):
-        self.root.minimize()
+        self.root.minimized = True
         self.root.update()
-        self.assertTrue(self.root.is_minimized())
+        self.assertTrue(self.root.minimized)
+        self.root.minimized = False
+        self.root.update()
+        self.assertFalse(self.root.minimized)
+        with self.assertRaises(TypeError):
+            self.root.minimized = "bar"
 
     def test_restored(self):
-        self.root.minimize()
+        self.root.minimized = True
         self.root.update()
-        self.root.restore()
+        self.root.restored = True
         self.root.update()
-        self.assertTrue(self.root.is_restored())
+        self.assertTrue(self.root.restored)
+        self.root.restored = False
+        self.root.update()
+        self.assertFalse(self.root.restored)
+        with self.assertRaises(TypeError):
+            self.root.restored = "foo"
 
     def test_maximized(self):
-        self.root.maximize()
+        self.root.maximized = True
         self.root.update()
-        self.assertTrue(self.root.is_maximized())
+        self.assertTrue(self.root.maximized)
+        self.root.maximized = False
+        self.root.update()
+        self.assertFalse(self.root.maximized)
+        with self.assertRaises(TypeError):
+            self.root.maximized = "boo"
 
     def test_fullscreen(self):
-        self.root.full_screen(True)
+        self.root.full_screen = True
         self.root.update()
-        self.assertTrue(self.root.is_full_screen())
+        self.assertTrue(self.root.full_screen)
+        self.root.full_screen = False
+        self.root.update()
+        self.assertFalse(self.root.full_screen)
         with self.assertRaises(TypeError):
-            self.root.full_screen("la")
+            self.root.full_screen = "la"
 
     def test_binds(self):
         func = lambda: None

@@ -72,7 +72,7 @@ class Spinbox(ttk.Spinbox):
             )
         if not isinstance(values, (tuple, list)) and values is not None:
             raise TypeError(
-                f&#34;values is not a tuple or list! &#34; 
+                f&#34;values is not a tuple or list! &#34;
                 f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
@@ -124,8 +124,7 @@ class Spinbox(ttk.Spinbox):
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
             raise TypeError(
-                f&#34;new_text is not a str! &#34; 
-                f&#34;(type passed in: {repr(type(new_text))})&#34;
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
         self.delete(0, tk.END)
         self.insert(0, new_text)
@@ -140,8 +139,7 @@ class Spinbox(ttk.Spinbox):
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self,
-               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
+    def values(self, new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the options text on this spinbox.
 
@@ -430,7 +428,7 @@ changes. Defaults to None.</p></div>
             )
         if not isinstance(values, (tuple, list)) and values is not None:
             raise TypeError(
-                f&#34;values is not a tuple or list! &#34; 
+                f&#34;values is not a tuple or list! &#34;
                 f&#34;(type passed in: {repr(type(values))})&#34;
             )
         if not isinstance(width, int) and width is not None:
@@ -482,8 +480,7 @@ changes. Defaults to None.</p></div>
         &#34;&#34;&#34;
         if not isinstance(new_text, str):
             raise TypeError(
-                f&#34;new_text is not a str! &#34; 
-                f&#34;(type passed in: {repr(type(new_text))})&#34;
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
         self.delete(0, tk.END)
         self.insert(0, new_text)
@@ -498,8 +495,7 @@ changes. Defaults to None.</p></div>
         return self[&#34;values&#34;] if self[&#34;values&#34;] else ()
 
     @values.setter
-    def values(self,
-               new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
+    def values(self, new_values: Union[tuple[str, ...], list[str, ...]]) -&gt; None:
         &#34;&#34;&#34;
         Set the options text on this spinbox.
 

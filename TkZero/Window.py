@@ -149,15 +149,8 @@ class Window(tk.Toplevel):
                 f"{new_position.x}+{new_position.y}"
             )
 
-    def minimize(self) -> None:
-        """
-        Minimize the window.
-
-        :return: None.
-        """
-        self.iconify()
-
-    def is_minimized(self) -> bool:
+    @property
+    def minimized(self) -> bool:
         """
         Is this window minimized?
 
@@ -165,34 +158,53 @@ class Window(tk.Toplevel):
         """
         return self.wm_state() == "iconic"
 
-    def restore(self) -> None:
+    @minimized.setter
+    def minimized(self, to_minimize: bool) -> None:
         """
-        Restore the window.
+        Minimize the window.
 
+        :param to_minimize: A bool on whether to minimize or to restore it.
         :return: None.
         """
-        self.deiconify()
+        if not isinstance(to_minimize, bool):
+            raise TypeError(
+                f"to_minimize is not a bool! "
+                f"(type passed in: {repr(type(to_minimize))})"
+            )
+        if to_minimize:
+            self.iconify()
+        else:
+            self.deiconify()
 
-    def is_restored(self) -> bool:
+    @property
+    def restored(self) -> bool:
         """
         Is this window **not** minimized?
 
         :return: A bool on whether this window is not minimized.
         """
-        return not self.is_minimized()
+        return not self.minimized
 
-    def maximize(self) -> None:
+    @restored.setter
+    def restored(self, to_restore: bool) -> None:
         """
-        Maximize the window.
+        Restore the window.
 
+        :param to_restore: A bool on whether to restore or to minimize it.
         :return: None.
         """
-        if Platform.on_x11(self):
-            self.attributes("-zoomed", True)
+        if not isinstance(to_restore, bool):
+            raise TypeError(
+                f"to_restore is not a bool! "
+                f"(type passed in: {repr(type(to_restore))})"
+            )
+        if to_restore:
+            self.deiconify()
         else:
-            self.state("zoomed")
+            self.iconify()
 
-    def is_maximized(self) -> bool:
+    @property
+    def maximized(self) -> bool:
         """
         Is this window maximized?
 
@@ -203,6 +215,37 @@ class Window(tk.Toplevel):
         else:
             return self.wm_state() == "zoomed"
 
+    @maximized.setter
+    def maximized(self, to_mazimize: bool) -> None:
+        """
+        Maximize the window.
+
+        :param to_mazimize: Whether to maximize the window or minimize it.
+        :return: None.
+        """
+        if not isinstance(to_mazimize, bool):
+            raise TypeError(
+                f"to_mazimize is not a bool! "
+                f"(type passed in: {repr(type(to_mazimize))})"
+            )
+        if to_mazimize:
+            if Platform.on_x11(self):
+                self.attributes("-zoomed", True)
+            else:
+                self.state("zoomed")
+        else:
+            self.iconify()
+
+    @property
+    def full_screen(self) -> bool:
+        """
+        Is this window full-screen?
+
+        :return: A bool on whether this window is full-screen.
+        """
+        return self.attributes("-fullscreen")
+
+    @full_screen.setter
     def full_screen(self, full_screen: bool) -> None:
         """
         Set to full-screen or not.
@@ -216,14 +259,6 @@ class Window(tk.Toplevel):
                 f"(type passed in: {repr(type(full_screen))})"
             )
         self.attributes("-fullscreen", full_screen)
-
-    def is_full_screen(self) -> bool:
-        """
-        Is this window full-screen?
-
-        :return: A bool on whether this window is full-screen.
-        """
-        return self.attributes("-fullscreen")
 
     def bind_to_event(
         self,
