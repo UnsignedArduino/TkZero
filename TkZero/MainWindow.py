@@ -9,6 +9,7 @@ from typing import Union, Callable
 
 from TkZero import Platform
 from TkZero import Vector
+from TkZero.Menu import Menu
 
 
 class MainWindow(tk.Tk):
@@ -22,6 +23,8 @@ class MainWindow(tk.Tk):
         self._on_close = None
         self.protocol("WM_DELETE_WINDOW", self.close)
         self._enabled = True
+        if Platform.on_aqua(self):
+            Menu(self, is_menubar=True)
 
     @property
     def title(self) -> str:
