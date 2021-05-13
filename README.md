@@ -61,7 +61,7 @@ terminal and run:
 
 That's it!
 
-## Basic Usage
+## A simple example
 
 ```python
 import tkinter as tk
@@ -102,6 +102,79 @@ submit.grid(row=3, column=0, columnspan=2, sticky=tk.NSEW)
 
 # Start the mainloop like in Tkinter
 root.mainloop()
+```
+
+See? Looks much better than Tkinter code ;)
+
+## How you can help
+
+Want to help! Great! Here are some ways you can help: (from easiest to hardest)
+
+### Suggest an idea
+
+Are you annoyed by something in Tkinter that hasn't been wrapped in TkZero? 
+Please comment in this 
+[discussion](https://github.com/UnsignedArduino/TkZero/discussions/4)! You can 
+also open an issue for a feature request 
+[here](https://github.com/UnsignedArduino/TkZero/issues/new?template=feature_request.md)
+but don't forget to make sure that there isn't an issue for it open already!
+
+### Report a bug
+
+Found a bug? Great! Please report it 
+[here](https://github.com/UnsignedArduino/TkZero/issues/new?template=bug_report.md)
+but don't forget to make sure that there isn't an issue for it open already!
+
+### Run unit tests and improve test coverage
+
+As I develop on Windows, I'm unable to run my unit tests on macOS and Linux. If
+you could run your unit tests and report any failures as a bug report, I would 
+be ever grateful. Even better, you can improve the test coverage by adding on 
+to the unit tests!
+
+To get the coverage make sure you install `coverage` with 
+`pip install coverage` (`pip3` for macOS and Linux and you may need to use the
+user (`-U`) flag if you are not in a virtual environment) and then you can run 
+these commands: (make sure you `git clone`d this repo and `cd` into it!)
+
+```commandline
+coverage erase
+coverage run --include=TkZero/* -m pytest -ra
+coverage report -m
+```
+
+### Adding examples
+
+You can help by adding or improving (or simplifying!) examples, like for 
+individual widgets
+[here](https://github.com/UnsignedArduino/TkZero/tree/main/Examples/Widgets) or
+"full applications" 
+[here](https://github.com/UnsignedArduino/TkZero/tree/main/Examples/FullApps).
+
+
+### Help fix bugs and full-fill feature requests with a pull request
+
+Squashing bugs and implementing features can take time. If you are impatient 
+like me, you can help to try to fix those bugs and full-fill feature requests! 
+Please do not forget to run your code through `black`, `flake8`, `pylint`, and
+`mypy`! You can also automate this by using `tox` at the repo root:
+
+```commandline
+tox -e py39
+```
+
+### Donate
+
+If you want to give me your money (even just 1 dollar goes a long way) here is 
+my Monero address :)
+
+Don't worry, I'll let you mine to it as well ;) 
+```text
+43PuCHFFAc1EGCN5vjuerVNrxzc37r3fSV73EmimxsMw3Uxh6grNqAGUy97GwnH2g52HMsAj8LdRmbjGbJQHRs3WUpL9oGq
+```
+And my Bitcoin address:
+```text
+No Bitcoin address just yet! (Syncing the blockchain takes forever)
 ```
 
 <!-- Badges -->
