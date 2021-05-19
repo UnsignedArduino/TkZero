@@ -73,7 +73,7 @@ from TkZero.MainWindow import MainWindow
 
 # Make the main window and give it a title
 root = MainWindow()
-root.title = "Simple Entry Example"
+root.title = "Log in"
 
 # Create a label and grid it
 Label(root, text="Username: ").grid(row=0, column=0, sticky=tk.NW)
@@ -105,6 +105,12 @@ root.mainloop()
 ```
 
 See? Looks much better than Tkinter code ;)
+
+## Help! I don't understand how to use this!
+
+If you still don't understand, please open a 
+[discussion](https://github.com/UnsignedArduino/TkZero/discussions/new) - I'd 
+love to help you!
 
 ## How you can help
 
@@ -165,16 +171,18 @@ tox -e py39
 
 ### Donate
 
-If you want to give me your money (even just 1 dollar goes a long way) here is 
-my Monero address :)
+If you want to give me your money (even just 1 dollar goes a long way) here 
+are my addresses :)
 
 Don't worry, I'll let you mine to it as well ;) 
+
+Monero address:
 ```text
-43PuCHFFAc1EGCN5vjuerVNrxzc37r3fSV73EmimxsMw3Uxh6grNqAGUy97GwnH2g52HMsAj8LdRmbjGbJQHRs3WUpL9oGq
+89tu7CLRFHV1b1qZ6Y8WixeSsFpUJm1gC3dAx5jUb7gqHP5ssczPqyRP7Pt98uEB3TQ4hEEoB7wTA97AC8gXU89o6gNYeyD
 ```
-And my Bitcoin address:
+Bitcoin address:
 ```text
-No Bitcoin address just yet! (Syncing the blockchain takes forever)
+bc1qgq88e0hcf2q2xhg503zmhaqz7d7dfc8k9nvu9x
 ```
 
 <!-- Badges -->
