@@ -33,7 +33,7 @@ class MenuTest(TkTestCase):
                 MenuCommand(label="Save"),
                 MenuSeparator(),
                 MenuCommand(label="Exit")
-            ])
+            ], underline=0)
         ]
         m.items = items
         self.root.update()
@@ -42,12 +42,24 @@ class MenuTest(TkTestCase):
             m.items = ("tuples", "don't", "work")
         with self.assertRaises(TypeError):
             m.items = [1, MenuCommand(label="Break")]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="File", items=[], underline=0.0)
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="File", items=[], underline=-1)
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="File", items=[], underline=42)
+            ]
 
     def test_commands(self):
         m = Menu(self.root, is_menubar=True)
         m.items = [
             MenuCascade(label="File", items=[
-                MenuCommand(label="New")
+                MenuCommand(label="New", underline=0)
             ])
         ]
         with self.assertRaises(TypeError):
@@ -66,6 +78,24 @@ class MenuTest(TkTestCase):
             m.items = [
                 MenuCommand(label="Fail")
             ]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="File", items=[
+                    MenuCommand(underline=0.0),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="File", items=[
+                    MenuCommand(underline=-1),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="File", items=[
+                    MenuCommand(underline=42),
+                ])
+            ]
 
     def test_separator(self):
         m = Menu(self.root, is_menubar=True)
@@ -83,7 +113,7 @@ class MenuTest(TkTestCase):
         m = Menu(self.root, is_menubar=True)
         m.items = [
             MenuCascade(label="Settings", items=[
-                MenuCheckbutton(label="Verbose logging")
+                MenuCheckbutton(label="Verbose logging", underline=0)
             ])
         ]
         with self.assertRaises(TypeError):
@@ -120,12 +150,30 @@ class MenuTest(TkTestCase):
             m.items = [
                 MenuCheckbutton(label="Fail")
             ]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuCheckbutton(underline=0.0),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuCheckbutton(underline=-1),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuCheckbutton(underline=42),
+                ])
+            ]
 
     def test_radiobutton(self):
         m = Menu(self.root, is_menubar=True)
         m.items = [
             MenuCascade(label="Language", items=[
-                MenuRadiobutton(value="eng", label="English")
+                MenuRadiobutton(value="eng", label="English", underline=0)
             ])
         ]
         with self.assertRaises(TypeError):
@@ -156,12 +204,30 @@ class MenuTest(TkTestCase):
             m.items = [
                 MenuRadiobutton(value="eng", label="Fail")
             ]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuRadiobutton(value="eng", label="English", underline=0.0),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuRadiobutton(value="eng", label="English", underline=-1),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuRadiobutton(value="eng", label="English", underline=42),
+                ])
+            ]
 
     def test_cascade(self):
         m = Menu(self.root, is_menubar=True)
         m.items = [
             MenuCascade(label="File", items=[
-                MenuCascade(label="Recently opened", items=[])
+                MenuCascade(label="Recently opened", items=[], underline=0)
             ])
         ]
         with self.assertRaises(TypeError):
@@ -180,6 +246,24 @@ class MenuTest(TkTestCase):
             m.items = [
                 MenuCascade(label="File", items=[
                     MenuCommand(enabled=123.456),
+                ])
+            ]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="File", items=[
+                    MenuCommand(underline=0.0),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="File", items=[
+                    MenuCommand(underline=-1),
+                ])
+            ]
+        with self.assertRaises(ValueError):
+            m.items = [
+                MenuCascade(label="File", items=[
+                    MenuCommand(underline=42),
                 ])
             ]
 

@@ -134,7 +134,11 @@ class MenuCommand:
     """
 
     def __init__(
-        self, label: str = "", command: Callable = lambda: None, enabled: bool = True
+        self,
+        label: str = "",
+        command: Callable = lambda: None,
+        enabled: bool = True,
+        underline: int = None,
     ):
         if not isinstance(label, str):
             raise TypeError(
@@ -144,9 +148,25 @@ class MenuCommand:
             raise TypeError(
                 f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
             )
+        if not isinstance(underline, int) and underline is not None:
+            raise TypeError(
+                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
+            )
         self.label = label
         self.command = command
         self.enabled = enabled
+        self.underline = underline
+        if self.underline:
+            if self.underline >= len(self.label):
+                raise ValueError(
+                    f"underline cannot be greater then "
+                    f"{len(self.label)}! "
+                    f"(passed in: {self.underline})"
+                )
+            if self.underline < 0:
+                raise ValueError(
+                    f"underline cannot less then 0! " f"(passed in: {self.underline})"
+                )
 
     def create(self, menu: Menu):
         """
@@ -168,6 +188,7 @@ class MenuCommand:
             label=self.label,
             command=self.command,
             state=tk.NORMAL if self.enabled else tk.DISABLED,
+            underline=self.underline,
         )
 
 
@@ -207,6 +228,7 @@ class MenuCheckbutton:
         on_value: Union[str, Union[bool, Union[int, float]]] = True,
         off_value: Union[str, Union[bool, Union[int, float]]] = False,
         enabled: bool = True,
+        underline: int = None,
     ):
         if not isinstance(label, str):
             raise TypeError(
@@ -231,11 +253,27 @@ class MenuCheckbutton:
             raise TypeError(
                 f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
             )
+        if not isinstance(underline, int) and underline is not None:
+            raise TypeError(
+                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
+            )
         self.label = label
         self.variable = variable
         self.on_value = on_value
         self.off_value = off_value
         self.enabled = enabled
+        self.underline = underline
+        if self.underline:
+            if self.underline >= len(self.label):
+                raise ValueError(
+                    f"underline cannot be greater then "
+                    f"{len(self.label)}! "
+                    f"(passed in: {self.underline})"
+                )
+            if self.underline < 0:
+                raise ValueError(
+                    f"underline cannot less then 0! " f"(passed in: {self.underline})"
+                )
 
     def create(self, menu: Menu):
         """
@@ -258,6 +296,7 @@ class MenuCheckbutton:
             onvalue=self.on_value,
             offvalue=self.off_value,
             state=tk.NORMAL if self.enabled else tk.DISABLED,
+            underline=self.underline,
         )
 
 
@@ -272,6 +311,7 @@ class MenuRadiobutton:
         label: str = "",
         variable: tk.Variable = None,
         enabled: bool = True,
+        underline: int = None,
     ):
         if not isinstance(value, (str, bool, int, float)):
             raise TypeError(
@@ -291,10 +331,26 @@ class MenuRadiobutton:
             raise TypeError(
                 f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
             )
+        if not isinstance(underline, int) and underline is not None:
+            raise TypeError(
+                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
+            )
         self.label = label
         self.variable = variable
         self.value = value
         self.enabled = enabled
+        self.underline = underline
+        if self.underline:
+            if self.underline >= len(self.label):
+                raise ValueError(
+                    f"underline cannot be greater then "
+                    f"{len(self.label)}! "
+                    f"(passed in: {self.underline})"
+                )
+            if self.underline < 0:
+                raise ValueError(
+                    f"underline cannot less then 0! " f"(passed in: {self.underline})"
+                )
 
     def create(self, menu: Menu):
         """
@@ -316,6 +372,7 @@ class MenuRadiobutton:
             variable=self.variable,
             value=self.value,
             state=tk.NORMAL if self.enabled else tk.DISABLED,
+            underline=self.underline,
         )
 
 
@@ -337,6 +394,7 @@ class MenuCascade:
             ...,
         ] = [],
         enabled: bool = True,
+        underline: int = None,
     ):
         if not isinstance(label, str):
             raise TypeError(
@@ -350,10 +408,26 @@ class MenuCascade:
             raise TypeError(
                 f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
             )
+        if not isinstance(underline, int) and underline is not None:
+            raise TypeError(
+                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
+            )
         self.menu = None
         self.label = label
         self.enabled = enabled
         self.items = items
+        self.underline = underline
+        if self.underline:
+            if self.underline >= len(self.label):
+                raise ValueError(
+                    f"underline cannot be greater then "
+                    f"{len(self.label)}! "
+                    f"(passed in: {self.underline})"
+                )
+            if self.underline < 0:
+                raise ValueError(
+                    f"underline cannot less then 0! " f"(passed in: {self.underline})"
+                )
 
     def create(self, menu: Menu):
         """
@@ -367,6 +441,6 @@ class MenuCascade:
                 f"menu is not a tk.Menu! " f"(type passed in: {repr(type(menu))})"
             )
         self.menu = Menu(parent=menu)
-        menu.add_cascade(menu=self.menu, label=self.label)
+        menu.add_cascade(menu=self.menu, label=self.label, underline=self.underline)
         for item in self.items:
             item.create(menu=self.menu)

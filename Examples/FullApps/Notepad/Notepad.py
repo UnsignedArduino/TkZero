@@ -114,12 +114,12 @@ def text_update() -> None:
 # Create the actual menu contents
 menu_bar.items = [
     MenuCascade(label="File", items=[
-        MenuCommand(label="New", command=file_new),
-        MenuCommand(label="Open...", command=file_open),
-        MenuCommand(label="Save", command=file_save),
+        MenuCommand(label="New", command=file_new, underline=0),
+        MenuCommand(label="Open...", command=file_open, underline=0),
+        MenuCommand(label="Save", command=file_save, underline=0),
         MenuSeparator(),
-        MenuCommand(label="Exit", command=file_close)
-    ])
+        MenuCommand(label="Exit", command=file_close, underline=0)
+    ], underline=0)
 ]
 
 # Create the main text area
