@@ -3,6 +3,7 @@
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
 [![License][license-image]][license-url]
+[![Code style: black][code-style-image]][code-style-link]
 
 A lightweight and Pythonic wrapper around Tkinter.
 
@@ -195,3 +196,5 @@ bc1qgq88e0hcf2q2xhg503zmhaqz7d7dfc8k9nvu9x
 [coverage-url]: https://codecov.io/gh/UnsignedArduino/TkZero
 [license-image]: https://badgen.net/github/license/UnsignedArduino/TkZero
 [license-url]: https://github.com/UnsignedArduino/TkZero/blob/main/LICENSE
+[code-style-image]: https://img.shields.io/badge/code%20style-black-000000.svg
+[code-style-link]: https://github.com/psf/black
