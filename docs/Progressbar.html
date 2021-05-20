@@ -59,6 +59,10 @@ class ProgressModes:
     Indeterminate = &#34;indeterminate&#34;
 
 
+# Used for differentiating between the different styles
+_pbar_id = 0
+
+
 class Progressbar(ttk.Progressbar):
     def __init__(
         self,
@@ -97,7 +101,58 @@ class Progressbar(ttk.Progressbar):
                 f&#34;orientation is not a str! &#34;
                 f&#34;(type passed in: {repr(type(orientation))})&#34;
             )
-        super().__init__(master=parent, orient=orientation, length=length, mode=mode)
+        self._style = ttk.Style()
+        global _pbar_id
+        if mode == OrientModes.Horizontal:
+            self.style_name = f&#34;LabeledProgressbar{_pbar_id}.Horizontal.TProgressbar&#34;
+            self._style.layout(
+                self.style_name,
+                [
+                    (
+                        &#34;Horizontal.Progressbar.trough&#34;,
+                        {
+                            &#34;sticky&#34;: &#34;nswe&#34;,
+                            &#34;children&#34;: [
+                                (
+                                    &#34;Horizontal.Progressbar.pbar&#34;,
+                                    {&#34;side&#34;: &#34;left&#34;, &#34;sticky&#34;: &#34;ns&#34;},
+                                ),
+                                (f&#34;{self.style_name}.label&#34;, {&#34;sticky&#34;: &#34;&#34;}),
+                            ],
+                        },
+                    )
+                ],
+            )
+        else:
+            self.style_name = f&#34;LabeledProgressbar{_pbar_id}.Vertical.TProgressbar&#34;
+            self._style.layout(
+                self.style_name,
+                [
+                    (
+                        &#34;Vertical.Progressbar.trough&#34;,
+                        {
+                            &#34;sticky&#34;: &#34;nswe&#34;,
+                            &#34;children&#34;: [
+                                (
+                                    &#34;Vertical.Progressbar.pbar&#34;,
+                                    {&#34;side&#34;: &#34;left&#34;, &#34;sticky&#34;: &#34;ns&#34;},
+                                ),
+                                (f&#34;{self.style_name}.label&#34;, {&#34;sticky&#34;: &#34;&#34;}),
+                            ],
+                        },
+                    )
+                ],
+            )
+        _pbar_id += 1
+        # https://stackoverflow.com/a/40348163/10291933
+        self._text = &#34;&#34;
+        super().__init__(
+            master=parent,
+            orient=orientation,
+            length=length,
+            mode=mode,
+            style=self.style_name,
+        )
         self._style_root = &#34;TProgressbar&#34;
         self._enabled = True
         self._orientation = orientation
@@ -149,6 +204,30 @@ class Progressbar(ttk.Progressbar):
                 f&#34;(type passed in: {repr(type(new_value))})&#34;
             )
         self[&#34;maximum&#34;] = float(new_value)
+
+    @property
+    def text(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the text on this progressbar.
+
+        :return: A str.
+        &#34;&#34;&#34;
+        return self._text
+
+    @text.setter
+    def text(self, new_text: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the text on this progressbar.
+
+        :param new_text: A str.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_text, str):
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
+        self._text = new_text
+        self._style.configure(self.style_name, text=self._text)
 
     @property
     def enabled(self) -&gt; bool:
@@ -316,7 +395,58 @@ OrientModes.Horizontal and is a str value.</p></div>
                 f&#34;orientation is not a str! &#34;
                 f&#34;(type passed in: {repr(type(orientation))})&#34;
             )
-        super().__init__(master=parent, orient=orientation, length=length, mode=mode)
+        self._style = ttk.Style()
+        global _pbar_id
+        if mode == OrientModes.Horizontal:
+            self.style_name = f&#34;LabeledProgressbar{_pbar_id}.Horizontal.TProgressbar&#34;
+            self._style.layout(
+                self.style_name,
+                [
+                    (
+                        &#34;Horizontal.Progressbar.trough&#34;,
+                        {
+                            &#34;sticky&#34;: &#34;nswe&#34;,
+                            &#34;children&#34;: [
+                                (
+                                    &#34;Horizontal.Progressbar.pbar&#34;,
+                                    {&#34;side&#34;: &#34;left&#34;, &#34;sticky&#34;: &#34;ns&#34;},
+                                ),
+                                (f&#34;{self.style_name}.label&#34;, {&#34;sticky&#34;: &#34;&#34;}),
+                            ],
+                        },
+                    )
+                ],
+            )
+        else:
+            self.style_name = f&#34;LabeledProgressbar{_pbar_id}.Vertical.TProgressbar&#34;
+            self._style.layout(
+                self.style_name,
+                [
+                    (
+                        &#34;Vertical.Progressbar.trough&#34;,
+                        {
+                            &#34;sticky&#34;: &#34;nswe&#34;,
+                            &#34;children&#34;: [
+                                (
+                                    &#34;Vertical.Progressbar.pbar&#34;,
+                                    {&#34;side&#34;: &#34;left&#34;, &#34;sticky&#34;: &#34;ns&#34;},
+                                ),
+                                (f&#34;{self.style_name}.label&#34;, {&#34;sticky&#34;: &#34;&#34;}),
+                            ],
+                        },
+                    )
+                ],
+            )
+        _pbar_id += 1
+        # https://stackoverflow.com/a/40348163/10291933
+        self._text = &#34;&#34;
+        super().__init__(
+            master=parent,
+            orient=orientation,
+            length=length,
+            mode=mode,
+            style=self.style_name,
+        )
         self._style_root = &#34;TProgressbar&#34;
         self._enabled = True
         self._orientation = orientation
@@ -368,6 +498,30 @@ OrientModes.Horizontal and is a str value.</p></div>
                 f&#34;(type passed in: {repr(type(new_value))})&#34;
             )
         self[&#34;maximum&#34;] = float(new_value)
+
+    @property
+    def text(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the text on this progressbar.
+
+        :return: A str.
+        &#34;&#34;&#34;
+        return self._text
+
+    @text.setter
+    def text(self, new_text: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the text on this progressbar.
+
+        :param new_text: A str.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_text, str):
+            raise TypeError(
+                f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
+            )
+        self._text = new_text
+        self._style.configure(self.style_name, text=self._text)
 
     @property
     def enabled(self) -&gt; bool:
@@ -448,6 +602,24 @@ def maximum(self) -&gt; float:
     return self[&#34;maximum&#34;]</code></pre>
 </details>
 </dd>
+<dt id="TkZero.Progressbar.Progressbar.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Get the text on this progressbar.</p>
+<p>:return: A str.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def text(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the text on this progressbar.
+
+    :return: A str.
+    &#34;&#34;&#34;
+    return self._text</code></pre>
+</details>
+</dd>
 <dt id="TkZero.Progressbar.Progressbar.value"><code class="name">var <span class="ident">value</span> : float</code></dt>
 <dd>
 <div class="desc"><p>Get the value on this progress bar.</p>
@@ -503,6 +675,7 @@ def value(self) -&gt; float:
 <ul class="">
 <li><code><a title="TkZero.Progressbar.Progressbar.enabled" href="#TkZero.Progressbar.Progressbar.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Progressbar.Progressbar.maximum" href="#TkZero.Progressbar.Progressbar.maximum">maximum</a></code></li>
+<li><code><a title="TkZero.Progressbar.Progressbar.text" href="#TkZero.Progressbar.Progressbar.text">text</a></code></li>
 <li><code><a title="TkZero.Progressbar.Progressbar.value" href="#TkZero.Progressbar.Progressbar.value">value</a></code></li>
 </ul>
 </li>

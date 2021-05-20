@@ -30,6 +30,10 @@ class ProgressModes:
     Indeterminate = "indeterminate"
 
 
+# Used for differentiating between the different styles
+_pbar_id = 0
+
+
 class Progressbar(ttk.Progressbar):
     def __init__(
         self,
@@ -68,7 +72,58 @@ class Progressbar(ttk.Progressbar):
                 f"orientation is not a str! "
                 f"(type passed in: {repr(type(orientation))})"
             )
-        super().__init__(master=parent, orient=orientation, length=length, mode=mode)
+        self._style = ttk.Style()
+        global _pbar_id
+        if mode == OrientModes.Horizontal:
+            self.style_name = f"LabeledProgressbar{_pbar_id}.Horizontal.TProgressbar"
+            self._style.layout(
+                self.style_name,
+                [
+                    (
+                        "Horizontal.Progressbar.trough",
+                        {
+                            "sticky": "nswe",
+                            "children": [
+                                (
+                                    "Horizontal.Progressbar.pbar",
+                                    {"side": "left", "sticky": "ns"},
+                                ),
+                                (f"{self.style_name}.label", {"sticky": ""}),
+                            ],
+                        },
+                    )
+                ],
+            )
+        else:
+            self.style_name = f"LabeledProgressbar{_pbar_id}.Vertical.TProgressbar"
+            self._style.layout(
+                self.style_name,
+                [
+                    (
+                        "Vertical.Progressbar.trough",
+                        {
+                            "sticky": "nswe",
+                            "children": [
+                                (
+                                    "Vertical.Progressbar.pbar",
+                                    {"side": "left", "sticky": "ns"},
+                                ),
+                                (f"{self.style_name}.label", {"sticky": ""}),
+                            ],
+                        },
+                    )
+                ],
+            )
+        _pbar_id += 1
+        # https://stackoverflow.com/a/40348163/10291933
+        self._text = ""
+        super().__init__(
+            master=parent,
+            orient=orientation,
+            length=length,
+            mode=mode,
+            style=self.style_name,
+        )
         self._style_root = "TProgressbar"
         self._enabled = True
         self._orientation = orientation
@@ -120,6 +175,30 @@ class Progressbar(ttk.Progressbar):
                 f"(type passed in: {repr(type(new_value))})"
             )
         self["maximum"] = float(new_value)
+
+    @property
+    def text(self) -> str:
+        """
+        Get the text on this progressbar.
+
+        :return: A str.
+        """
+        return self._text
+
+    @text.setter
+    def text(self, new_text: str) -> None:
+        """
+        Set the text on this progressbar.
+
+        :param new_text: A str.
+        :return: None.
+        """
+        if not isinstance(new_text, str):
+            raise TypeError(
+                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
+            )
+        self._text = new_text
+        self._style.configure(self.style_name, text=self._text)
 
     @property
     def enabled(self) -> bool:

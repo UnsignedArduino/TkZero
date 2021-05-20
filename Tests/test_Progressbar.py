@@ -54,6 +54,20 @@ class ProgressbarTest(TkTestCase):
         with self.assertRaises(TypeError):
             p.maximum = "5"
 
+    def test_text(self):
+        p = Progressbar(self.root, orientation=OrientModes.Vertical,
+                        mode=ProgressModes.Determinate, length=200)
+        p.grid(row=0, column=0)
+        p.value = 0
+        p.maximum = 100
+        self.root.update()
+        self.assertEqual(p.text, "")
+        p.text = "Foobar"
+        self.root.update()
+        self.assertEqual(p.text, "Foobar")
+        with self.assertRaises(TypeError):
+            p.text = False
+
     def test_indeterminate(self):
         p = Progressbar(self.root, orientation=OrientModes.Horizontal,
                         mode=ProgressModes.Indeterminate, length=200)
