@@ -4,6 +4,7 @@ Test the TkZero.Menu module
 
 import unittest
 
+from TkZero.Keybind import generate_accelerator_sequence
 from TkZero.Menu import Menu
 from TkZero.Menu import MenuCheckbutton, MenuRadiobutton
 from TkZero.Menu import MenuCommand, MenuCascade, MenuSeparator
@@ -59,7 +60,11 @@ class MenuTest(TkTestCase):
         m = Menu(self.root, is_menubar=True)
         m.items = [
             MenuCascade(label="File", items=[
-                MenuCommand(label="New", underline=0)
+                MenuCommand(label="New", underline=0,
+                            accelerator=generate_accelerator_sequence(
+                                m, ctrl_cmd=True, ctrl_ctrl=False,
+                                shift_shift=False, alt_option=False, letter="N"
+                            ))
             ])
         ]
         with self.assertRaises(TypeError):
@@ -96,6 +101,12 @@ class MenuTest(TkTestCase):
                     MenuCommand(underline=42),
                 ])
             ]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="File", items=[
+                    MenuCommand(accelerator=("la", "la")),
+                ])
+            ]
 
     def test_separator(self):
         m = Menu(self.root, is_menubar=True)
@@ -113,7 +124,12 @@ class MenuTest(TkTestCase):
         m = Menu(self.root, is_menubar=True)
         m.items = [
             MenuCascade(label="Settings", items=[
-                MenuCheckbutton(label="Verbose logging", underline=0)
+                MenuCheckbutton(label="Verbose logging", underline=0,
+                                accelerator=generate_accelerator_sequence(
+                                    m, ctrl_cmd=True, ctrl_ctrl=False,
+                                    shift_shift=False, alt_option=False,
+                                    letter="v"
+                                ))
             ])
         ]
         with self.assertRaises(TypeError):
@@ -168,12 +184,23 @@ class MenuTest(TkTestCase):
                     MenuCheckbutton(underline=42),
                 ])
             ]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuCheckbutton(accelerator=("la", "la")),
+                ])
+            ]
 
     def test_radiobutton(self):
         m = Menu(self.root, is_menubar=True)
         m.items = [
             MenuCascade(label="Language", items=[
-                MenuRadiobutton(value="eng", label="English", underline=0)
+                MenuRadiobutton(value="eng", label="English", underline=0,
+                                accelerator=generate_accelerator_sequence(
+                                    m, ctrl_cmd=True, ctrl_ctrl=False,
+                                    shift_shift=False, alt_option=False,
+                                    letter="E"
+                                ))
             ])
         ]
         with self.assertRaises(TypeError):
@@ -220,6 +247,12 @@ class MenuTest(TkTestCase):
             m.items = [
                 MenuCascade(label="Settings", items=[
                     MenuRadiobutton(value="eng", label="English", underline=42),
+                ])
+            ]
+        with self.assertRaises(TypeError):
+            m.items = [
+                MenuCascade(label="Settings", items=[
+                    MenuRadiobutton(accelerator=("la", "la")),
                 ])
             ]
 

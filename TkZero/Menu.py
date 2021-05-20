@@ -139,6 +139,7 @@ class MenuCommand:
         command: Callable = lambda: None,
         enabled: bool = True,
         underline: int = None,
+        accelerator: str = None,
     ):
         if not isinstance(label, str):
             raise TypeError(
@@ -151,6 +152,11 @@ class MenuCommand:
         if not isinstance(underline, int) and underline is not None:
             raise TypeError(
                 f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
+            )
+        if not isinstance(accelerator, str) and accelerator is not None:
+            raise TypeError(
+                f"accelerator is not a str! "
+                f"(type passed in: {repr(type(accelerator))})"
             )
         self.label = label
         self.command = command
@@ -167,6 +173,7 @@ class MenuCommand:
                 raise ValueError(
                     f"underline cannot less then 0! " f"(passed in: {self.underline})"
                 )
+        self.accelerator = accelerator
 
     def create(self, menu: Menu):
         """
@@ -189,6 +196,7 @@ class MenuCommand:
             command=self.command,
             state=tk.NORMAL if self.enabled else tk.DISABLED,
             underline=self.underline,
+            accelerator=self.accelerator,
         )
 
 
@@ -229,6 +237,7 @@ class MenuCheckbutton:
         off_value: Union[str, Union[bool, Union[int, float]]] = False,
         enabled: bool = True,
         underline: int = None,
+        accelerator: str = None,
     ):
         if not isinstance(label, str):
             raise TypeError(
@@ -257,6 +266,11 @@ class MenuCheckbutton:
             raise TypeError(
                 f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
             )
+        if not isinstance(accelerator, str) and accelerator is not None:
+            raise TypeError(
+                f"accelerator is not a str! "
+                f"(type passed in: {repr(type(accelerator))})"
+            )
         self.label = label
         self.variable = variable
         self.on_value = on_value
@@ -274,6 +288,7 @@ class MenuCheckbutton:
                 raise ValueError(
                     f"underline cannot less then 0! " f"(passed in: {self.underline})"
                 )
+        self.accelerator = accelerator
 
     def create(self, menu: Menu):
         """
@@ -297,6 +312,7 @@ class MenuCheckbutton:
             offvalue=self.off_value,
             state=tk.NORMAL if self.enabled else tk.DISABLED,
             underline=self.underline,
+            accelerator=self.accelerator,
         )
 
 
@@ -312,6 +328,7 @@ class MenuRadiobutton:
         variable: tk.Variable = None,
         enabled: bool = True,
         underline: int = None,
+        accelerator: str = None,
     ):
         if not isinstance(value, (str, bool, int, float)):
             raise TypeError(
@@ -335,6 +352,11 @@ class MenuRadiobutton:
             raise TypeError(
                 f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
             )
+        if not isinstance(accelerator, str) and accelerator is not None:
+            raise TypeError(
+                f"accelerator is not a str! "
+                f"(type passed in: {repr(type(accelerator))})"
+            )
         self.label = label
         self.variable = variable
         self.value = value
@@ -351,6 +373,7 @@ class MenuRadiobutton:
                 raise ValueError(
                     f"underline cannot less then 0! " f"(passed in: {self.underline})"
                 )
+        self.accelerator = accelerator
 
     def create(self, menu: Menu):
         """
@@ -373,6 +396,7 @@ class MenuRadiobutton:
             value=self.value,
             state=tk.NORMAL if self.enabled else tk.DISABLED,
             underline=self.underline,
+            accelerator=self.accelerator,
         )
 
 
