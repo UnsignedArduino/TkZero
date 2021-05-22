@@ -103,7 +103,10 @@ class Text(tk.Text):
 
     def _proxy(self, command, *args):
         cmd = (self._orig, command) + args
-        result = self.tk.call(cmd)
+        try:
+            result = self.tk.call(cmd)
+        except tk.TclError:
+            return
         if command in (&#34;insert&#34;, &#34;delete&#34;, &#34;replace&#34;):
             self.event_generate(&#34;&lt;&lt;TextModified&gt;&gt;&#34;)
         return result
@@ -366,7 +369,10 @@ TextWrap.WordWrapping</p></div>
 
     def _proxy(self, command, *args):
         cmd = (self._orig, command) + args
-        result = self.tk.call(cmd)
+        try:
+            result = self.tk.call(cmd)
+        except tk.TclError:
+            return
         if command in (&#34;insert&#34;, &#34;delete&#34;, &#34;replace&#34;):
             self.event_generate(&#34;&lt;&lt;TextModified&gt;&gt;&#34;)
         return result
