@@ -34,6 +34,7 @@ Creates a themed frame.
 import tkinter as tk
 from tkinter import ttk
 from typing import Union
+from TkZero import Platform
 
 
 class Frame(ttk.Frame):
@@ -173,7 +174,142 @@ class Frame(ttk.Frame):
                 f&#34;style_name is not a str! &#34;
                 f&#34;(type passed in: {repr(type(style_name))})&#34;
             )
-        self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
+        self.configure(style=f&#34;{style_name}.{self._style_root}&#34;)
+
+
+class ScrollableFrame(Frame):
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                 x_scrolling: bool = False, y_scrolling: bool = True):
+        &#34;&#34;&#34;
+        Create a scrollable frame.
+        MAKE SURE WHEN GRIDING WIDGETS TO THIS FRAME TO USE THE FRAME
+        ATTRIBUTE INSTEAD OF THIS FRAME DIRECTLY.
+
+        :param parent: The parent of this frame.
+        :param x_scrolling: A bool on whether to add a scrollbar in the x
+         direction.
+        :param y_scrolling: A bool on whether to add a scrollbar in the y
+         direction.
+        &#34;&#34;&#34;
+        # https://blog.teclado.com/tkinter-scrollable-frames/
+        super().__init__(parent)
+        self.canvas = tk.Canvas(self)
+        if x_scrolling:
+            x_scrollbar = ttk.Scrollbar(self, orient=tk.HORIZONTAL,
+                                        command=self.canvas.xview)
+        if y_scrolling:
+            y_scrollbar = ttk.Scrollbar(self, orient=tk.VERTICAL,
+                                        command=self.canvas.yview)
+        self.frame = Frame(self.canvas)
+        self.frame.bind(
+            &#34;&lt;Configure&gt;&#34;,
+            lambda _: self.canvas.configure(
+                scrollregion=self.canvas.bbox(tk.ALL)
+            )
+        )
+        self.canvas.create_window((0, 0), window=self.frame, anchor=tk.NW)
+        if x_scrolling:
+            self.canvas.configure(xscrollcommand=x_scrollbar.set)
+        if y_scrolling:
+            self.canvas.configure(yscrollcommand=y_scrollbar.set)
+        self.canvas.grid(row=0, column=0)
+        if x_scrolling:
+            x_scrollbar.grid(row=1, column=0, sticky=tk.NSEW)
+        if y_scrolling:
+            y_scrollbar.grid(row=0, column=1, sticky=tk.NSEW)
+        # https://stackoverflow.com/a/37858368/10291933
+        self.frame.bind(&#34;&lt;Enter&gt;&#34;, self._bind_to_mousewheel)
+        self.frame.bind(&#34;&lt;Leave&gt;&#34;, self._unbind_to_mousewheel)
+        self._shift_pressed = False
+        # https://stackoverflow.com/a/8089241/10291933
+        # http://www.tcl.tk/man/tcl8.4/TkCmd/keysyms.htm
+        self.frame.bind_all(&#34;&lt;Shift_L&gt;&#34;,
+                            lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(&#34;&lt;Shift_R&gt;&#34;,
+                            lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_L&gt;&#34;,
+                            lambda _: self._set_shift_pressed(False))
+        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_R&gt;&#34;,
+                            lambda _: self._set_shift_pressed(False))
+
+    def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether shift is pressed or not.
+
+        :param is_pressed: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._shift_pressed = is_pressed
+
+    def _bind_to_mousewheel(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        Bind to the mousewheel.
+
+        :param event: An event that Tkinter passes in.
+        :return: None
+        &#34;&#34;&#34;
+        self.canvas.bind_all(&#34;&lt;MouseWheel&gt;&#34;, self._on_mousewheel)
+
+    def _unbind_to_mousewheel(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        Unbind to the mousewheel.
+
+        :param event: An event that Tkinter passes in.
+        :return: None
+        &#34;&#34;&#34;
+        self.canvas.unbind_all(&#34;&lt;MouseWheel&gt;&#34;)
+
+    def _on_mousewheel(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        A callback for the mousewheel to scroll.
+
+        :param event: An event that Tkinter passes in.
+        :return: None.
+        &#34;&#34;&#34;
+        if Platform.on_aqua(self):
+            scroll = str(int(-1 * event.delta))
+        else:
+            scroll = str(int(-1 * (event.delta / 120)))
+        if self._shift_pressed:
+            self.canvas.xview_scroll(scroll, tk.UNITS)
+        else:
+            self.canvas.yview_scroll(scroll, tk.UNITS)
+
+    def _enable_children(
+        self, parent: Union[tk.Widget, None] = None, enable: bool = True
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Enable or disable the children.
+
+        :param parent: A tk.Widget that is our parent. If None then default to
+         self.
+        :param enable: Whether to enable or disable the children.
+        :return: None.
+        &#34;&#34;&#34;
+        if parent is None:
+            parent = self.frame
+        for child in parent.winfo_children():
+            if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
+                try:
+                    child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+                except AttributeError:
+                    child.configure(state=tk.NORMAL if enable else tk.DISABLED)
+            else:
+                self._enable_children(parent, enable)
+
+    def apply_style(self, style_name: str) -&gt; None:
+        &#34;&#34;&#34;
+        Apply a theme to this frame.
+
+        :param style_name: The name of the theme as a str, ex. &#34;Warning&#34;
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(style_name, str):
+            raise TypeError(
+                f&#34;style_name is not a str! &#34;
+                f&#34;(type passed in: {repr(type(style_name))})&#34;
+            )
+        self.frame.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -350,6 +486,7 @@ together.</p>
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
+<li><a title="TkZero.Frame.ScrollableFrame" href="#TkZero.Frame.ScrollableFrame">ScrollableFrame</a></li>
 <li><a title="TkZero.Notebook.Tab" href="Notebook.html#TkZero.Notebook.Tab">Tab</a></li>
 </ul>
 <h3>Instance variables</h3>
@@ -441,6 +578,183 @@ def width(self) -&gt; int:
 </dd>
 </dl>
 </dd>
+<dt id="TkZero.Frame.ScrollableFrame"><code class="flex name class">
+<span>class <span class="ident">ScrollableFrame</span></span>
+<span>(</span><span>parent: Union[tkinter.Widget, tkinter.Tk, tkinter.Toplevel], x_scrolling: bool = False, y_scrolling: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ttk Frame widget is a container, used to group other widgets
+together.</p>
+<p>Create a scrollable frame.
+MAKE SURE WHEN GRIDING WIDGETS TO THIS FRAME TO USE THE FRAME
+ATTRIBUTE INSTEAD OF THIS FRAME DIRECTLY.</p>
+<p>:param parent: The parent of this frame.
+:param x_scrolling: A bool on whether to add a scrollbar in the x
+direction.
+:param y_scrolling: A bool on whether to add a scrollbar in the y
+direction.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ScrollableFrame(Frame):
+    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+                 x_scrolling: bool = False, y_scrolling: bool = True):
+        &#34;&#34;&#34;
+        Create a scrollable frame.
+        MAKE SURE WHEN GRIDING WIDGETS TO THIS FRAME TO USE THE FRAME
+        ATTRIBUTE INSTEAD OF THIS FRAME DIRECTLY.
+
+        :param parent: The parent of this frame.
+        :param x_scrolling: A bool on whether to add a scrollbar in the x
+         direction.
+        :param y_scrolling: A bool on whether to add a scrollbar in the y
+         direction.
+        &#34;&#34;&#34;
+        # https://blog.teclado.com/tkinter-scrollable-frames/
+        super().__init__(parent)
+        self.canvas = tk.Canvas(self)
+        if x_scrolling:
+            x_scrollbar = ttk.Scrollbar(self, orient=tk.HORIZONTAL,
+                                        command=self.canvas.xview)
+        if y_scrolling:
+            y_scrollbar = ttk.Scrollbar(self, orient=tk.VERTICAL,
+                                        command=self.canvas.yview)
+        self.frame = Frame(self.canvas)
+        self.frame.bind(
+            &#34;&lt;Configure&gt;&#34;,
+            lambda _: self.canvas.configure(
+                scrollregion=self.canvas.bbox(tk.ALL)
+            )
+        )
+        self.canvas.create_window((0, 0), window=self.frame, anchor=tk.NW)
+        if x_scrolling:
+            self.canvas.configure(xscrollcommand=x_scrollbar.set)
+        if y_scrolling:
+            self.canvas.configure(yscrollcommand=y_scrollbar.set)
+        self.canvas.grid(row=0, column=0)
+        if x_scrolling:
+            x_scrollbar.grid(row=1, column=0, sticky=tk.NSEW)
+        if y_scrolling:
+            y_scrollbar.grid(row=0, column=1, sticky=tk.NSEW)
+        # https://stackoverflow.com/a/37858368/10291933
+        self.frame.bind(&#34;&lt;Enter&gt;&#34;, self._bind_to_mousewheel)
+        self.frame.bind(&#34;&lt;Leave&gt;&#34;, self._unbind_to_mousewheel)
+        self._shift_pressed = False
+        # https://stackoverflow.com/a/8089241/10291933
+        # http://www.tcl.tk/man/tcl8.4/TkCmd/keysyms.htm
+        self.frame.bind_all(&#34;&lt;Shift_L&gt;&#34;,
+                            lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(&#34;&lt;Shift_R&gt;&#34;,
+                            lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_L&gt;&#34;,
+                            lambda _: self._set_shift_pressed(False))
+        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_R&gt;&#34;,
+                            lambda _: self._set_shift_pressed(False))
+
+    def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether shift is pressed or not.
+
+        :param is_pressed: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._shift_pressed = is_pressed
+
+    def _bind_to_mousewheel(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        Bind to the mousewheel.
+
+        :param event: An event that Tkinter passes in.
+        :return: None
+        &#34;&#34;&#34;
+        self.canvas.bind_all(&#34;&lt;MouseWheel&gt;&#34;, self._on_mousewheel)
+
+    def _unbind_to_mousewheel(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        Unbind to the mousewheel.
+
+        :param event: An event that Tkinter passes in.
+        :return: None
+        &#34;&#34;&#34;
+        self.canvas.unbind_all(&#34;&lt;MouseWheel&gt;&#34;)
+
+    def _on_mousewheel(self, event) -&gt; None:
+        &#34;&#34;&#34;
+        A callback for the mousewheel to scroll.
+
+        :param event: An event that Tkinter passes in.
+        :return: None.
+        &#34;&#34;&#34;
+        if Platform.on_aqua(self):
+            scroll = str(int(-1 * event.delta))
+        else:
+            scroll = str(int(-1 * (event.delta / 120)))
+        if self._shift_pressed:
+            self.canvas.xview_scroll(scroll, tk.UNITS)
+        else:
+            self.canvas.yview_scroll(scroll, tk.UNITS)
+
+    def _enable_children(
+        self, parent: Union[tk.Widget, None] = None, enable: bool = True
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Enable or disable the children.
+
+        :param parent: A tk.Widget that is our parent. If None then default to
+         self.
+        :param enable: Whether to enable or disable the children.
+        :return: None.
+        &#34;&#34;&#34;
+        if parent is None:
+            parent = self.frame
+        for child in parent.winfo_children():
+            if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
+                try:
+                    child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
+                except AttributeError:
+                    child.configure(state=tk.NORMAL if enable else tk.DISABLED)
+            else:
+                self._enable_children(parent, enable)
+
+    def apply_style(self, style_name: str) -&gt; None:
+        &#34;&#34;&#34;
+        Apply a theme to this frame.
+
+        :param style_name: The name of the theme as a str, ex. &#34;Warning&#34;
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(style_name, str):
+            raise TypeError(
+                f&#34;style_name is not a str! &#34;
+                f&#34;(type passed in: {repr(type(style_name))})&#34;
+            )
+        self.frame.configure(style=f&#34;{style_name}.{self._style_root}&#34;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="TkZero.Frame.Frame" href="#TkZero.Frame.Frame">Frame</a></li>
+<li>tkinter.ttk.Frame</li>
+<li>tkinter.ttk.Widget</li>
+<li>tkinter.Widget</li>
+<li>tkinter.BaseWidget</li>
+<li>tkinter.Misc</li>
+<li>tkinter.Pack</li>
+<li>tkinter.Place</li>
+<li>tkinter.Grid</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="TkZero.Frame.Frame" href="#TkZero.Frame.Frame">Frame</a></b></code>:
+<ul class="hlist">
+<li><code><a title="TkZero.Frame.Frame.apply_style" href="#TkZero.Frame.Frame.apply_style">apply_style</a></code></li>
+<li><code><a title="TkZero.Frame.Frame.enabled" href="#TkZero.Frame.Frame.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Frame.Frame.height" href="#TkZero.Frame.Frame.height">height</a></code></li>
+<li><code><a title="TkZero.Frame.Frame.width" href="#TkZero.Frame.Frame.width">width</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
 </dl>
 </section>
 </article>
@@ -465,6 +779,9 @@ def width(self) -&gt; int:
 <li><code><a title="TkZero.Frame.Frame.height" href="#TkZero.Frame.Frame.height">height</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.width" href="#TkZero.Frame.Frame.width">width</a></code></li>
 </ul>
+</li>
+<li>
+<h4><code><a title="TkZero.Frame.ScrollableFrame" href="#TkZero.Frame.ScrollableFrame">ScrollableFrame</a></code></h4>
 </li>
 </ul>
 </li>
