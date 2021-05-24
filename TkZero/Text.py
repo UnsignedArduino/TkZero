@@ -58,7 +58,14 @@ class Text(tk.Text):
             raise TypeError(
                 f"wrapping is not a str! " f"(type passed in: {repr(type(wrapping))})"
             )
-        super().__init__(master=parent, width=width, height=height, wrap=wrapping)
+        super().__init__(
+            master=parent,
+            width=width,
+            height=height,
+            wrap=wrapping,
+            undo=True,
+            maxundo=50_000,
+        )
         self._enabled = True
         self._readonly = False
         if on_aqua(self):
@@ -143,6 +150,19 @@ class Text(tk.Text):
         """
         self._context_menu = tk.Menu(self, tearoff=0)
         self._context_menu.add_command(
+            label="Undo",
+            command=self.undo_contents,
+            underline=0,
+            accelerator="Command-Z" if on_aqua(self) else "Control+Z",
+        )
+        self._context_menu.add_command(
+            label="Redo",
+            command=self.redo_contents,
+            underline=0,
+            accelerator="Command-Y" if on_aqua(self) else "Control+Y",
+        )
+        self._context_menu.add_separator()
+        self._context_menu.add_command(
             label="Copy",
             command=self.copy_contents,
             underline=0,
@@ -178,6 +198,8 @@ class Text(tk.Text):
         :return: None.
         """
         if not self.enabled:
+            self._context_menu.entryconfigure("Undo", state=tk.DISABLED)
+            self._context_menu.entryconfigure("Redo", state=tk.DISABLED)
             self._context_menu.entryconfigure("Copy", state=tk.DISABLED)
             self._context_menu.entryconfigure("Cut", state=tk.DISABLED)
             self._context_menu.entryconfigure("Paste", state=tk.DISABLED)
@@ -185,12 +207,20 @@ class Text(tk.Text):
             self._context_menu.entryconfigure("Select all", state=tk.DISABLED)
             return
         if self.tag_ranges(tk.SEL):
+            self._context_menu.entryconfigure("Undo", state=tk.DISABLED)
+            self._context_menu.entryconfigure("Redo", state=tk.DISABLED)
             self._context_menu.entryconfigure("Copy", state=tk.NORMAL)
             self._context_menu.entryconfigure("Cut", state=tk.NORMAL)
             self._context_menu.entryconfigure("Paste", state=tk.NORMAL)
             self._context_menu.entryconfigure("Delete", state=tk.NORMAL)
             self._context_menu.entryconfigure("Select all", state=tk.DISABLED)
         else:
+            self._context_menu.entryconfigure(
+                "Undo", state=tk.NORMAL if self.can_undo() else tk.DISABLED
+            )
+            self._context_menu.entryconfigure(
+                "Redo", state=tk.NORMAL if self.can_redo() else tk.DISABLED
+            )
             self._context_menu.entryconfigure("Copy", state=tk.DISABLED)
             self._context_menu.entryconfigure("Cut", state=tk.DISABLED)
             self._context_menu.entryconfigure("Paste", state=tk.NORMAL)
@@ -230,6 +260,7 @@ class Text(tk.Text):
         """
         if self.tag_ranges(tk.SEL):
             self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+            self.add_undo_separator()
 
     def paste_contents(self) -> None:
         """
@@ -239,6 +270,7 @@ class Text(tk.Text):
         """
         self.delete_contents()
         self.insert(self.index(tk.INSERT), self.clipboard_get())
+        self.add_undo_separator()
 
     def cut_contents(self) -> None:
         """
@@ -249,6 +281,7 @@ class Text(tk.Text):
         if self.tag_ranges(tk.SEL):
             self.clipboard_clear()
             self.clipboard_append(self.selection_get())
+            self.add_undo_separator()
             self.update()
             self.delete_contents()
 
@@ -261,4 +294,51 @@ class Text(tk.Text):
         if self.tag_ranges(tk.SEL):
             self.clipboard_clear()
             self.clipboard_append(self.selection_get())
+            self.add_undo_separator()
             self.update()
+
+    def undo_contents(self) -> None:
+        """
+        Do an undo.
+
+        :return: None.
+        """
+        if self.can_undo():
+            self.edit_undo()
+            self.update()
+
+    def can_undo(self) -> bool:
+        """
+        Return a bool on whether we can undo or not.
+
+        :return: A bool.
+        """
+        # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=false-,pathname%20edit%20canundo,-Returns
+        return bool(self.tk.call(self, "edit", "canundo"))
+
+    def redo_contents(self) -> None:
+        """
+        Do a redo.
+
+        :return: None.
+        """
+        if self.can_redo():
+            self.edit_redo()
+            self.update()
+
+    def can_redo(self) -> bool:
+        """
+        Return a bool on whether we can redo or not.
+
+        :return: A bool.
+        """
+        # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=supported-,pathname%20edit%20canredo,-Returns
+        return bool(self.tk.call(self, "edit", "canredo"))
+
+    def add_undo_separator(self) -> None:
+        """
+        Inserts a separator on the undo stack.
+
+        :return: None.
+        """
+        self.tk.call(self, "edit", "separator")

@@ -85,9 +85,11 @@ class Text(tk.Text):
             )
         if not isinstance(wrapping, str):
             raise TypeError(
-                f&#34;wrapping is not a str! &#34; f&#34;(type passed in: {repr(type(wrapping))})&#34;
+                f&#34;wrapping is not a str! &#34; 
+                f&#34;(type passed in: {repr(type(wrapping))})&#34;
             )
-        super().__init__(master=parent, width=width, height=height, wrap=wrapping)
+        super().__init__(master=parent, width=width, height=height,
+                         wrap=wrapping, undo=True, maxundo=50_000)
         self._enabled = True
         self._readonly = False
         if on_aqua(self):
@@ -172,6 +174,19 @@ class Text(tk.Text):
         &#34;&#34;&#34;
         self._context_menu = tk.Menu(self, tearoff=0)
         self._context_menu.add_command(
+            label=&#34;Undo&#34;,
+            command=self.undo_contents,
+            underline=0,
+            accelerator=&#34;Command-Z&#34; if on_aqua(self) else &#34;Control+Z&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Redo&#34;,
+            command=self.redo_contents,
+            underline=0,
+            accelerator=&#34;Command-Y&#34; if on_aqua(self) else &#34;Control+Y&#34;,
+        )
+        self._context_menu.add_separator()
+        self._context_menu.add_command(
             label=&#34;Copy&#34;,
             command=self.copy_contents,
             underline=0,
@@ -207,6 +222,8 @@ class Text(tk.Text):
         :return: None.
         &#34;&#34;&#34;
         if not self.enabled:
+            self._context_menu.entryconfigure(&#34;Undo&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Redo&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.DISABLED)
@@ -214,12 +231,18 @@ class Text(tk.Text):
             self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
             return
         if self.tag_ranges(tk.SEL):
+            self._context_menu.entryconfigure(&#34;Undo&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Redo&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
         else:
+            self._context_menu.entryconfigure(&#34;Undo&#34;,
+                                              state=tk.NORMAL if self.can_undo() else tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Redo&#34;,
+                                              state=tk.NORMAL if self.can_redo() else tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
@@ -259,6 +282,7 @@ class Text(tk.Text):
         &#34;&#34;&#34;
         if self.tag_ranges(tk.SEL):
             self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+            self.add_undo_separator()
 
     def paste_contents(self) -&gt; None:
         &#34;&#34;&#34;
@@ -268,6 +292,7 @@ class Text(tk.Text):
         &#34;&#34;&#34;
         self.delete_contents()
         self.insert(self.index(tk.INSERT), self.clipboard_get())
+        self.add_undo_separator()
 
     def cut_contents(self) -&gt; None:
         &#34;&#34;&#34;
@@ -278,6 +303,7 @@ class Text(tk.Text):
         if self.tag_ranges(tk.SEL):
             self.clipboard_clear()
             self.clipboard_append(self.selection_get())
+            self.add_undo_separator()
             self.update()
             self.delete_contents()
 
@@ -290,7 +316,54 @@ class Text(tk.Text):
         if self.tag_ranges(tk.SEL):
             self.clipboard_clear()
             self.clipboard_append(self.selection_get())
-            self.update()</code></pre>
+            self.add_undo_separator()
+            self.update()
+
+    def undo_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Do an undo.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.can_undo():
+            self.edit_undo()
+            self.update()
+
+    def can_undo(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Return a bool on whether we can undo or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=false-,pathname%20edit%20canundo,-Returns
+        return bool(self.tk.call(self, &#34;edit&#34;, &#34;canundo&#34;))
+
+    def redo_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Do a redo.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.can_redo():
+            self.edit_redo()
+            self.update()
+
+    def can_redo(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Return a bool on whether we can redo or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=supported-,pathname%20edit%20canredo,-Returns
+        return bool(self.tk.call(self, &#34;edit&#34;, &#34;canredo&#34;))
+
+    def add_undo_separator(self) -&gt; None:
+        &#34;&#34;&#34;
+        Inserts a separator on the undo stack.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.tk.call(self, &#34;edit&#34;, &#34;separator&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -351,9 +424,11 @@ TextWrap.WordWrapping</p></div>
             )
         if not isinstance(wrapping, str):
             raise TypeError(
-                f&#34;wrapping is not a str! &#34; f&#34;(type passed in: {repr(type(wrapping))})&#34;
+                f&#34;wrapping is not a str! &#34; 
+                f&#34;(type passed in: {repr(type(wrapping))})&#34;
             )
-        super().__init__(master=parent, width=width, height=height, wrap=wrapping)
+        super().__init__(master=parent, width=width, height=height,
+                         wrap=wrapping, undo=True, maxundo=50_000)
         self._enabled = True
         self._readonly = False
         if on_aqua(self):
@@ -438,6 +513,19 @@ TextWrap.WordWrapping</p></div>
         &#34;&#34;&#34;
         self._context_menu = tk.Menu(self, tearoff=0)
         self._context_menu.add_command(
+            label=&#34;Undo&#34;,
+            command=self.undo_contents,
+            underline=0,
+            accelerator=&#34;Command-Z&#34; if on_aqua(self) else &#34;Control+Z&#34;,
+        )
+        self._context_menu.add_command(
+            label=&#34;Redo&#34;,
+            command=self.redo_contents,
+            underline=0,
+            accelerator=&#34;Command-Y&#34; if on_aqua(self) else &#34;Control+Y&#34;,
+        )
+        self._context_menu.add_separator()
+        self._context_menu.add_command(
             label=&#34;Copy&#34;,
             command=self.copy_contents,
             underline=0,
@@ -473,6 +561,8 @@ TextWrap.WordWrapping</p></div>
         :return: None.
         &#34;&#34;&#34;
         if not self.enabled:
+            self._context_menu.entryconfigure(&#34;Undo&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Redo&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.DISABLED)
@@ -480,12 +570,18 @@ TextWrap.WordWrapping</p></div>
             self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
             return
         if self.tag_ranges(tk.SEL):
+            self._context_menu.entryconfigure(&#34;Undo&#34;, state=tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Redo&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
         else:
+            self._context_menu.entryconfigure(&#34;Undo&#34;,
+                                              state=tk.NORMAL if self.can_undo() else tk.DISABLED)
+            self._context_menu.entryconfigure(&#34;Redo&#34;,
+                                              state=tk.NORMAL if self.can_redo() else tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
@@ -525,6 +621,7 @@ TextWrap.WordWrapping</p></div>
         &#34;&#34;&#34;
         if self.tag_ranges(tk.SEL):
             self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+            self.add_undo_separator()
 
     def paste_contents(self) -&gt; None:
         &#34;&#34;&#34;
@@ -534,6 +631,7 @@ TextWrap.WordWrapping</p></div>
         &#34;&#34;&#34;
         self.delete_contents()
         self.insert(self.index(tk.INSERT), self.clipboard_get())
+        self.add_undo_separator()
 
     def cut_contents(self) -&gt; None:
         &#34;&#34;&#34;
@@ -544,6 +642,7 @@ TextWrap.WordWrapping</p></div>
         if self.tag_ranges(tk.SEL):
             self.clipboard_clear()
             self.clipboard_append(self.selection_get())
+            self.add_undo_separator()
             self.update()
             self.delete_contents()
 
@@ -556,7 +655,54 @@ TextWrap.WordWrapping</p></div>
         if self.tag_ranges(tk.SEL):
             self.clipboard_clear()
             self.clipboard_append(self.selection_get())
-            self.update()</code></pre>
+            self.add_undo_separator()
+            self.update()
+
+    def undo_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Do an undo.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.can_undo():
+            self.edit_undo()
+            self.update()
+
+    def can_undo(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Return a bool on whether we can undo or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=false-,pathname%20edit%20canundo,-Returns
+        return bool(self.tk.call(self, &#34;edit&#34;, &#34;canundo&#34;))
+
+    def redo_contents(self) -&gt; None:
+        &#34;&#34;&#34;
+        Do a redo.
+
+        :return: None.
+        &#34;&#34;&#34;
+        if self.can_redo():
+            self.edit_redo()
+            self.update()
+
+    def can_redo(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Return a bool on whether we can redo or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=supported-,pathname%20edit%20canredo,-Returns
+        return bool(self.tk.call(self, &#34;edit&#34;, &#34;canredo&#34;))
+
+    def add_undo_separator(self) -&gt; None:
+        &#34;&#34;&#34;
+        Inserts a separator on the undo stack.
+
+        :return: None.
+        &#34;&#34;&#34;
+        self.tk.call(self, &#34;edit&#34;, &#34;separator&#34;)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -613,6 +759,65 @@ def text(self) -&gt; str:
 </dl>
 <h3>Methods</h3>
 <dl>
+<dt id="TkZero.Text.Text.add_undo_separator"><code class="name flex">
+<span>def <span class="ident">add_undo_separator</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Inserts a separator on the undo stack.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_undo_separator(self) -&gt; None:
+    &#34;&#34;&#34;
+    Inserts a separator on the undo stack.
+
+    :return: None.
+    &#34;&#34;&#34;
+    self.tk.call(self, &#34;edit&#34;, &#34;separator&#34;)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Text.Text.can_redo"><code class="name flex">
+<span>def <span class="ident">can_redo</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a bool on whether we can redo or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def can_redo(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Return a bool on whether we can redo or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=supported-,pathname%20edit%20canredo,-Returns
+    return bool(self.tk.call(self, &#34;edit&#34;, &#34;canredo&#34;))</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Text.Text.can_undo"><code class="name flex">
+<span>def <span class="ident">can_undo</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a bool on whether we can undo or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def can_undo(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Return a bool on whether we can undo or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    # https://tcl.tk/man/tcl8.6/TkCmd/text.htm#:~:text=false-,pathname%20edit%20canundo,-Returns
+    return bool(self.tk.call(self, &#34;edit&#34;, &#34;canundo&#34;))</code></pre>
+</details>
+</dd>
 <dt id="TkZero.Text.Text.copy_contents"><code class="name flex">
 <span>def <span class="ident">copy_contents</span></span>(<span>self) ‑> NoneType</span>
 </code></dt>
@@ -632,6 +837,7 @@ def text(self) -&gt; str:
     if self.tag_ranges(tk.SEL):
         self.clipboard_clear()
         self.clipboard_append(self.selection_get())
+        self.add_undo_separator()
         self.update()</code></pre>
 </details>
 </dd>
@@ -654,6 +860,7 @@ def text(self) -&gt; str:
     if self.tag_ranges(tk.SEL):
         self.clipboard_clear()
         self.clipboard_append(self.selection_get())
+        self.add_undo_separator()
         self.update()
         self.delete_contents()</code></pre>
 </details>
@@ -675,7 +882,8 @@ def text(self) -&gt; str:
     :return: None.
     &#34;&#34;&#34;
     if self.tag_ranges(tk.SEL):
-        self.delete(tk.SEL_FIRST, tk.SEL_LAST)</code></pre>
+        self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+        self.add_undo_separator()</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Text.Text.paste_contents"><code class="name flex">
@@ -695,7 +903,29 @@ def text(self) -&gt; str:
     :return: None.
     &#34;&#34;&#34;
     self.delete_contents()
-    self.insert(self.index(tk.INSERT), self.clipboard_get())</code></pre>
+    self.insert(self.index(tk.INSERT), self.clipboard_get())
+    self.add_undo_separator()</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Text.Text.redo_contents"><code class="name flex">
+<span>def <span class="ident">redo_contents</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Do a redo.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def redo_contents(self) -&gt; None:
+    &#34;&#34;&#34;
+    Do a redo.
+
+    :return: None.
+    &#34;&#34;&#34;
+    if self.can_redo():
+        self.edit_redo()
+        self.update()</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Text.Text.select_all_contents"><code class="name flex">
@@ -717,6 +947,27 @@ def text(self) -&gt; str:
     self.tag_add(tk.SEL, &#34;1.0&#34;, tk.END)
     self.mark_set(tk.INSERT, &#34;1.0&#34;)
     self.see(tk.INSERT)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Text.Text.undo_contents"><code class="name flex">
+<span>def <span class="ident">undo_contents</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Do an undo.</p>
+<p>:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def undo_contents(self) -&gt; None:
+    &#34;&#34;&#34;
+    Do an undo.
+
+    :return: None.
+    &#34;&#34;&#34;
+    if self.can_undo():
+        self.edit_undo()
+        self.update()</code></pre>
 </details>
 </dd>
 </dl>
@@ -784,13 +1035,18 @@ spaces.</p></div>
 <li>
 <h4><code><a title="TkZero.Text.Text" href="#TkZero.Text.Text">Text</a></code></h4>
 <ul class="two-column">
+<li><code><a title="TkZero.Text.Text.add_undo_separator" href="#TkZero.Text.Text.add_undo_separator">add_undo_separator</a></code></li>
+<li><code><a title="TkZero.Text.Text.can_redo" href="#TkZero.Text.Text.can_redo">can_redo</a></code></li>
+<li><code><a title="TkZero.Text.Text.can_undo" href="#TkZero.Text.Text.can_undo">can_undo</a></code></li>
 <li><code><a title="TkZero.Text.Text.copy_contents" href="#TkZero.Text.Text.copy_contents">copy_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.cut_contents" href="#TkZero.Text.Text.cut_contents">cut_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.delete_contents" href="#TkZero.Text.Text.delete_contents">delete_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.enabled" href="#TkZero.Text.Text.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Text.Text.paste_contents" href="#TkZero.Text.Text.paste_contents">paste_contents</a></code></li>
+<li><code><a title="TkZero.Text.Text.redo_contents" href="#TkZero.Text.Text.redo_contents">redo_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.select_all_contents" href="#TkZero.Text.Text.select_all_contents">select_all_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.text" href="#TkZero.Text.Text.text">text</a></code></li>
+<li><code><a title="TkZero.Text.Text.undo_contents" href="#TkZero.Text.Text.undo_contents">undo_contents</a></code></li>
 </ul>
 </li>
 <li>

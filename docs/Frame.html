@@ -34,6 +34,7 @@ Creates a themed frame.
 import tkinter as tk
 from tkinter import ttk
 from typing import Union
+
 from TkZero import Platform
 
 
@@ -178,8 +179,12 @@ class Frame(ttk.Frame):
 
 
 class ScrollableFrame(Frame):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 x_scrolling: bool = False, y_scrolling: bool = True):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        x_scrolling: bool = False,
+        y_scrolling: bool = True,
+    ):
         &#34;&#34;&#34;
         Create a scrollable frame.
         MAKE SURE WHEN GRIDING WIDGETS TO THIS FRAME TO USE THE FRAME
@@ -195,17 +200,17 @@ class ScrollableFrame(Frame):
         super().__init__(parent)
         self.canvas = tk.Canvas(self)
         if x_scrolling:
-            x_scrollbar = ttk.Scrollbar(self, orient=tk.HORIZONTAL,
-                                        command=self.canvas.xview)
+            x_scrollbar = ttk.Scrollbar(
+                self, orient=tk.HORIZONTAL, command=self.canvas.xview
+            )
         if y_scrolling:
-            y_scrollbar = ttk.Scrollbar(self, orient=tk.VERTICAL,
-                                        command=self.canvas.yview)
+            y_scrollbar = ttk.Scrollbar(
+                self, orient=tk.VERTICAL, command=self.canvas.yview
+            )
         self.frame = Frame(self.canvas)
         self.frame.bind(
             &#34;&lt;Configure&gt;&#34;,
-            lambda _: self.canvas.configure(
-                scrollregion=self.canvas.bbox(tk.ALL)
-            )
+            lambda _: self.canvas.configure(scrollregion=self.canvas.bbox(tk.ALL)),
         )
         self.canvas.create_window((0, 0), window=self.frame, anchor=tk.NW)
         if x_scrolling:
@@ -223,14 +228,14 @@ class ScrollableFrame(Frame):
         self._shift_pressed = False
         # https://stackoverflow.com/a/8089241/10291933
         # http://www.tcl.tk/man/tcl8.4/TkCmd/keysyms.htm
-        self.frame.bind_all(&#34;&lt;Shift_L&gt;&#34;,
-                            lambda _: self._set_shift_pressed(True))
-        self.frame.bind_all(&#34;&lt;Shift_R&gt;&#34;,
-                            lambda _: self._set_shift_pressed(True))
-        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_L&gt;&#34;,
-                            lambda _: self._set_shift_pressed(False))
-        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_R&gt;&#34;,
-                            lambda _: self._set_shift_pressed(False))
+        self.frame.bind_all(&#34;&lt;Shift_L&gt;&#34;, lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(&#34;&lt;Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(
+            &#34;&lt;KeyRelease-Shift_L&gt;&#34;, lambda _: self._set_shift_pressed(False)
+        )
+        self.frame.bind_all(
+            &#34;&lt;KeyRelease-Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(False)
+        )
 
     def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
         &#34;&#34;&#34;
@@ -598,8 +603,12 @@ direction.</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class ScrollableFrame(Frame):
-    def __init__(self, parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-                 x_scrolling: bool = False, y_scrolling: bool = True):
+    def __init__(
+        self,
+        parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
+        x_scrolling: bool = False,
+        y_scrolling: bool = True,
+    ):
         &#34;&#34;&#34;
         Create a scrollable frame.
         MAKE SURE WHEN GRIDING WIDGETS TO THIS FRAME TO USE THE FRAME
@@ -615,17 +624,17 @@ direction.</p></div>
         super().__init__(parent)
         self.canvas = tk.Canvas(self)
         if x_scrolling:
-            x_scrollbar = ttk.Scrollbar(self, orient=tk.HORIZONTAL,
-                                        command=self.canvas.xview)
+            x_scrollbar = ttk.Scrollbar(
+                self, orient=tk.HORIZONTAL, command=self.canvas.xview
+            )
         if y_scrolling:
-            y_scrollbar = ttk.Scrollbar(self, orient=tk.VERTICAL,
-                                        command=self.canvas.yview)
+            y_scrollbar = ttk.Scrollbar(
+                self, orient=tk.VERTICAL, command=self.canvas.yview
+            )
         self.frame = Frame(self.canvas)
         self.frame.bind(
             &#34;&lt;Configure&gt;&#34;,
-            lambda _: self.canvas.configure(
-                scrollregion=self.canvas.bbox(tk.ALL)
-            )
+            lambda _: self.canvas.configure(scrollregion=self.canvas.bbox(tk.ALL)),
         )
         self.canvas.create_window((0, 0), window=self.frame, anchor=tk.NW)
         if x_scrolling:
@@ -643,14 +652,14 @@ direction.</p></div>
         self._shift_pressed = False
         # https://stackoverflow.com/a/8089241/10291933
         # http://www.tcl.tk/man/tcl8.4/TkCmd/keysyms.htm
-        self.frame.bind_all(&#34;&lt;Shift_L&gt;&#34;,
-                            lambda _: self._set_shift_pressed(True))
-        self.frame.bind_all(&#34;&lt;Shift_R&gt;&#34;,
-                            lambda _: self._set_shift_pressed(True))
-        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_L&gt;&#34;,
-                            lambda _: self._set_shift_pressed(False))
-        self.frame.bind_all(&#34;&lt;KeyRelease-Shift_R&gt;&#34;,
-                            lambda _: self._set_shift_pressed(False))
+        self.frame.bind_all(&#34;&lt;Shift_L&gt;&#34;, lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(&#34;&lt;Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(True))
+        self.frame.bind_all(
+            &#34;&lt;KeyRelease-Shift_L&gt;&#34;, lambda _: self._set_shift_pressed(False)
+        )
+        self.frame.bind_all(
+            &#34;&lt;KeyRelease-Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(False)
+        )
 
     def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
         &#34;&#34;&#34;

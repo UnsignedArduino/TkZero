@@ -60,6 +60,8 @@ class TextTest(TkTestCase):
         t.select_all_contents()
         self.root.update()
         t._update_context_menu_states()
+        self.assertFalse(t.can_undo())
+        self.assertFalse(t.can_redo())
         self.root.update()
         t.copy_contents()
         self.root.update()
@@ -68,6 +70,10 @@ class TextTest(TkTestCase):
         t.delete_contents()
         self.root.update()
         t.paste_contents()
+        self.root.update()
+        t._update_context_menu_states()
+        t.undo_contents()
+        t.redo_contents()
 
 
 if __name__ == '__main__':
