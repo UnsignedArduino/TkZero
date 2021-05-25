@@ -14,12 +14,12 @@ Tests: https://github.com/UnsignedArduino/TkZero/tree/main/Tests
 You can find more information on the GitHub README.
 """
 
-__version_info__ = (0, 1, 0)
+__version_info__ = (0, 1, 1)
 __version__ = ""
 for index, digit in enumerate(__version_info__):
     __version__ += str(digit)
     if index < len(__version_info__) - 1:
         __version__ += "."
 # "Prototype", "Development", or "Production"
-__status__ = "Prototype"
+__status__ = "Development"
 __author__ = "UnsignedArduino at https://github.com/UnsignedArduino"
