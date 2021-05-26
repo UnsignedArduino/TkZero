@@ -104,6 +104,10 @@ class Menu(tk.Menu):
                 f"new_items is not a list! "
                 f"(type passed in: {repr(type(new_items))})"
             )
+        end = self.index(tk.END)
+        if end is not None:
+            for index in range(int(end) + 1):
+                self.delete(0)
         self._items = new_items
         for index, item in enumerate(self._items):
             if not isinstance(
