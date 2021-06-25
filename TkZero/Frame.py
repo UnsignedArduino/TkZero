@@ -171,6 +171,7 @@ class ScrollableFrame(Frame):
         super().__init__(parent)
         self.x_scrolling = x_scrolling
         self.y_scrolling = y_scrolling
+        self.disable_warnings = False
         self.canvas = tk.Canvas(self)
         if x_scrolling:
             x_scrollbar = ttk.Scrollbar(
@@ -336,6 +337,29 @@ class ScrollableFrame(Frame):
             )
         self.frame.height = new_height
         self.canvas.configure(height=new_height)
+
+    def _warn(self, method: str):
+        """
+        DON'T USE THE GRID, PACK, OR PLACE METHODS ON THE SCROLLABLE FRAME
+        DIRECTLY!!! Make sure to set the parents of your widgets to the frame
+        attribute of this scrollable frame. You can see the ScrollableFrame
+        example in the widget examples for an example.
+        """
+        if not self.disable_warnings:
+            raise RuntimeWarning(f"It seems like you are {method}ing "
+                                 "into the ScrollableFrame directly, which "
+                                 "may not be what you want.\n"
+                                 "Usually, you would set the parent of the "
+                                 "widget it into the `frame` attribute of me, "
+                                 "so instead of:\n"
+                                 "my_label = Label(scrollable_frame, ...)\n"
+                                 "You would do:\n"
+                                 "my_label = Label(scrollable_frame.frame, "
+                                 "...)\n"
+                                 "You can turn this warning off by "
+                                 "setting disable_warnings to True on me "
+                                 "like:\n"
+                                 "scrollable_frame.disable_warnings = True")
 
     def apply_style(self, style_name: str) -> None:
         """
