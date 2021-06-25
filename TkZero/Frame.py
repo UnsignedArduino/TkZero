@@ -346,20 +346,22 @@ class ScrollableFrame(Frame):
         example in the widget examples for an example.
         """
         if not self.disable_warnings:
-            raise RuntimeWarning(f"It seems like you are {method}ing "
-                                 "into the ScrollableFrame directly, which "
-                                 "may not be what you want.\n"
-                                 "Usually, you would set the parent of the "
-                                 "widget it into the `frame` attribute of me, "
-                                 "so instead of:\n"
-                                 "my_label = Label(scrollable_frame, ...)\n"
-                                 "You would do:\n"
-                                 "my_label = Label(scrollable_frame.frame, "
-                                 "...)\n"
-                                 "You can turn this warning off by "
-                                 "setting disable_warnings to True on me "
-                                 "like:\n"
-                                 "scrollable_frame.disable_warnings = True")
+            raise RuntimeWarning(
+                f"It seems like you are {method}ing "
+                "into the ScrollableFrame directly, which "
+                "may not be what you want.\n"
+                "Usually, you would set the parent of the "
+                "widget it into the `frame` attribute of me, "
+                "so instead of:\n"
+                "my_label = Label(scrollable_frame, ...)\n"
+                "You would do:\n"
+                "my_label = Label(scrollable_frame.frame, "
+                "...)\n"
+                "You can turn this warning off by "
+                "setting disable_warnings to True on me "
+                "like:\n"
+                "scrollable_frame.disable_warnings = True"
+            )
 
     def apply_style(self, style_name: str) -> None:
         """
