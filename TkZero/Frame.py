@@ -172,7 +172,7 @@ class ScrollableFrame(Frame):
         self.x_scrolling = x_scrolling
         self.y_scrolling = y_scrolling
         self.disable_warnings = False
-        self.canvas = tk.Canvas(self)
+        self.canvas = tk.Canvas(self, highlightthickness=0)
         if x_scrolling:
             x_scrollbar = ttk.Scrollbar(
                 self, orient=tk.HORIZONTAL, command=self.canvas.xview
