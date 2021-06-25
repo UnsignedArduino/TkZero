@@ -169,6 +169,8 @@ class ScrollableFrame(Frame):
         """
         # https://blog.teclado.com/tkinter-scrollable-frames/
         super().__init__(parent)
+        self.x_scrolling = x_scrolling
+        self.y_scrolling = y_scrolling
         self.canvas = tk.Canvas(self)
         if x_scrolling:
             x_scrollbar = ttk.Scrollbar(
@@ -247,9 +249,11 @@ class ScrollableFrame(Frame):
         else:
             scroll = str(int(-1 * (event.delta / 120)))
         if self._shift_pressed:
-            self.canvas.xview_scroll(scroll, tk.UNITS)
+            if self.x_scrolling:
+                self.canvas.xview_scroll(scroll, tk.UNITS)
         else:
-            self.canvas.yview_scroll(scroll, tk.UNITS)
+            if self.y_scrolling:
+                self.canvas.yview_scroll(scroll, tk.UNITS)
 
     def _enable_children(
         self, parent: Union[tk.Widget, None] = None, enable: bool = True
