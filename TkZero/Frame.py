@@ -277,6 +277,66 @@ class ScrollableFrame(Frame):
             else:
                 self._enable_children(parent, enable)
 
+    @property
+    def width(self) -> int:
+        """
+        Get the width of the frame.
+
+        :return: An int which is the width of the frame.
+        """
+        return self.frame.width
+
+    @width.setter
+    def width(self, new_width: int) -> None:
+        """
+        Set the width of the frame.
+
+        :param new_width: An int which should be the new width of the frame.
+         Cannot be less than 1.
+        :return: None.
+        """
+        if not isinstance(new_width, int):
+            raise TypeError(
+                f"new_height is not a int! "
+                f"(type passed in: {repr(type(new_width))})"
+            )
+        if new_width < 1:
+            raise ValueError(
+                f"new_height is less than 1! " f"(value passed in: {repr(new_width)})"
+            )
+        self.frame.width = new_width
+        self.canvas.configure(width=new_width)
+
+    @property
+    def height(self) -> int:
+        """
+        Get the height of the frame.
+
+        :return: An int which is the height of the frame.
+        """
+        return self.frame.height
+
+    @height.setter
+    def height(self, new_height: int) -> None:
+        """
+        Set the width of the frame.
+
+        :param new_height: An int which should be the new height of the frame.
+         Cannot be less than 1.
+        :return: None.
+        """
+        if not isinstance(new_height, int):
+            raise TypeError(
+                f"new_height is not an int! "
+                f"(type passed in: {repr(type(new_height))})"
+            )
+        if new_height < 1:
+            raise ValueError(
+                f"new_height is less than 1! " f"(value passed in: {repr(new_height)})"
+            )
+        self.frame.height = new_height
+        self.canvas.configure(height=new_height)
+
     def apply_style(self, style_name: str) -> None:
         """
         Apply a theme to this frame.

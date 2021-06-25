@@ -9,6 +9,7 @@ root.title = "Scrollable Frame Example"
 # Create a scrollable frame
 scrollable_frame = ScrollableFrame(root, x_scrolling=True, y_scrolling=True)
 scrollable_frame.grid(row=0, column=0)
+scrollable_frame.width, scrollable_frame.height = 300, 200
 
 # Create a bunch of buttons in the scrollable frame
 for x in range(10):
