@@ -114,6 +114,29 @@ class Text(tk.Text):
         self.insert("1.0", new_text)
 
     @property
+    def cursor(self) -> str:
+        """
+        Get the editing cursor position.
+
+        :return: A string, like "1.0".
+        """
+        return self.index(tk.INSERT)
+
+    @cursor.setter
+    def cursor(self, new_pos: str) -> None:
+        """
+        Set the editing cursor position.
+
+        :param new_pos: A string, like "1.0".
+        :return: None.
+        """
+        if not isinstance(new_pos, str):
+            raise TypeError(
+                f"new_pos is not a str!" f"(type passed in: {repr(type(new_pos))})"
+            )
+        self.mark_set(tk.INSERT, new_pos)
+
+    @property
     def enabled(self) -> bool:
         """
         Get whether this widget is in normal mode or disabled mode. (grayed

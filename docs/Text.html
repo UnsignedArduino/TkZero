@@ -143,6 +143,30 @@ class Text(tk.Text):
         self.insert(&#34;1.0&#34;, new_text)
 
     @property
+    def cursor(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the editing cursor position.
+
+        :return: A string, like &#34;1.0&#34;.
+        &#34;&#34;&#34;
+        return self.index(tk.INSERT)
+
+    @cursor.setter
+    def cursor(self, new_pos: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the editing cursor position.
+
+        :param new_pos: A string, like &#34;1.0&#34;.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_pos, str):
+            raise TypeError(
+                f&#34;new_pos is not a str!&#34;
+                f&#34;(type passed in: {repr(type(new_pos))})&#34;
+            )
+        self.mark_set(tk.INSERT, new_pos)
+
+    @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
         Get whether this widget is in normal mode or disabled mode. (grayed
@@ -489,6 +513,30 @@ TextWrap.WordWrapping</p></div>
         self.insert(&#34;1.0&#34;, new_text)
 
     @property
+    def cursor(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the editing cursor position.
+
+        :return: A string, like &#34;1.0&#34;.
+        &#34;&#34;&#34;
+        return self.index(tk.INSERT)
+
+    @cursor.setter
+    def cursor(self, new_pos: str) -&gt; None:
+        &#34;&#34;&#34;
+        Set the editing cursor position.
+
+        :param new_pos: A string, like &#34;1.0&#34;.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_pos, str):
+            raise TypeError(
+                f&#34;new_pos is not a str!&#34;
+                f&#34;(type passed in: {repr(type(new_pos))})&#34;
+            )
+        self.mark_set(tk.INSERT, new_pos)
+
+    @property
     def enabled(self) -&gt; bool:
         &#34;&#34;&#34;
         Get whether this widget is in normal mode or disabled mode. (grayed
@@ -732,6 +780,24 @@ TextWrap.WordWrapping</p></div>
 </ul>
 <h3>Instance variables</h3>
 <dl>
+<dt id="TkZero.Text.Text.cursor"><code class="name">var <span class="ident">cursor</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Get the editing cursor position.</p>
+<p>:return: A string, like "1.0".</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def cursor(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the editing cursor position.
+
+    :return: A string, like &#34;1.0&#34;.
+    &#34;&#34;&#34;
+    return self.index(tk.INSERT)</code></pre>
+</details>
+</dd>
 <dt id="TkZero.Text.Text.enabled"><code class="name">var <span class="ident">enabled</span> : bool</code></dt>
 <dd>
 <div class="desc"><p>Get whether this widget is in normal mode or disabled mode. (grayed
@@ -1053,6 +1119,7 @@ spaces.</p></div>
 <li><code><a title="TkZero.Text.Text.can_redo" href="#TkZero.Text.Text.can_redo">can_redo</a></code></li>
 <li><code><a title="TkZero.Text.Text.can_undo" href="#TkZero.Text.Text.can_undo">can_undo</a></code></li>
 <li><code><a title="TkZero.Text.Text.copy_contents" href="#TkZero.Text.Text.copy_contents">copy_contents</a></code></li>
+<li><code><a title="TkZero.Text.Text.cursor" href="#TkZero.Text.Text.cursor">cursor</a></code></li>
 <li><code><a title="TkZero.Text.Text.cut_contents" href="#TkZero.Text.Text.cut_contents">cut_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.delete_contents" href="#TkZero.Text.Text.delete_contents">delete_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.enabled" href="#TkZero.Text.Text.enabled">enabled</a></code></li>

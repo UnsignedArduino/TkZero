@@ -37,6 +37,17 @@ class TextTest(TkTestCase):
         with self.assertRaises(TypeError):
             t.text = False
 
+    def test_cursor(self):
+        t = Text(self.root)
+        t.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(t.cursor, "1.0")
+        t.text = "This text\nhas some\nnewlines."
+        t.cursor = "2.0"
+        self.assertEqual(t.cursor, "2.0")
+        with self.assertRaises(TypeError):
+            t.cursor = 1.2
+
     def test_enabled(self):
         t = Text(self.root)
         t.grid(row=0, column=0)
