@@ -37,6 +37,7 @@ program!
 import tkinter as tk
 from threading import Thread
 from typing import Union, Callable
+from PIL import ImageTk
 
 from TkZero import Platform
 from TkZero import Vector
@@ -51,6 +52,7 @@ class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title = &#34;Main Window&#34;
+        self._icon = None
         self._on_close = None
         self.protocol(&#34;WM_DELETE_WINDOW&#34;, self.close)
         self._enabled = True
@@ -79,6 +81,32 @@ class MainWindow(tk.Tk):
                 f&#34;new_title is not a str! &#34; f&#34;(type passed in: {repr(type(new_title))})&#34;
             )
         self.wm_title(new_title)
+
+    @property
+    def icon(self) -&gt; Union[tk.PhotoImage, ImageTk.PhotoImage, None]:
+        &#34;&#34;&#34;
+        Get the icon of the window. Will return None if the icon was never set
+        before.
+
+        :return: A tk.PhotoImage, a PIL.ImageTk.PhotoImage, or None.
+        &#34;&#34;&#34;
+        return self._icon
+
+    @icon.setter
+    def icon(self, new_icon: Union[tk.PhotoImage, ImageTk.PhotoImage]) -&gt; None:
+        &#34;&#34;&#34;
+        Set the icon of the window.
+
+        :param new_icon: A tk.PhotoImage or a PIL.ImageTk.PhotoImage.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_icon, (tk.PhotoImage, ImageTk.PhotoImage)):
+            raise TypeError(
+                f&#34;new_icon is not a tk.PhotoImage or an ImageTk.PhotoImage!&#34;
+                f&#34;(type passed in: {repr(type(new_icon))})&#34;
+            )
+        self._icon = new_icon
+        self.tk.call(&#34;wm&#34;, &#34;iconphoto&#34;, self, new_icon)
 
     @property
     def size(self) -&gt; Vector.Size:
@@ -455,6 +483,7 @@ is the name of the widget class.</p></div>
     def __init__(self):
         super().__init__()
         self.title = &#34;Main Window&#34;
+        self._icon = None
         self._on_close = None
         self.protocol(&#34;WM_DELETE_WINDOW&#34;, self.close)
         self._enabled = True
@@ -483,6 +512,32 @@ is the name of the widget class.</p></div>
                 f&#34;new_title is not a str! &#34; f&#34;(type passed in: {repr(type(new_title))})&#34;
             )
         self.wm_title(new_title)
+
+    @property
+    def icon(self) -&gt; Union[tk.PhotoImage, ImageTk.PhotoImage, None]:
+        &#34;&#34;&#34;
+        Get the icon of the window. Will return None if the icon was never set
+        before.
+
+        :return: A tk.PhotoImage, a PIL.ImageTk.PhotoImage, or None.
+        &#34;&#34;&#34;
+        return self._icon
+
+    @icon.setter
+    def icon(self, new_icon: Union[tk.PhotoImage, ImageTk.PhotoImage]) -&gt; None:
+        &#34;&#34;&#34;
+        Set the icon of the window.
+
+        :param new_icon: A tk.PhotoImage or a PIL.ImageTk.PhotoImage.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_icon, (tk.PhotoImage, ImageTk.PhotoImage)):
+            raise TypeError(
+                f&#34;new_icon is not a tk.PhotoImage or an ImageTk.PhotoImage!&#34;
+                f&#34;(type passed in: {repr(type(new_icon))})&#34;
+            )
+        self._icon = new_icon
+        self.tk.call(&#34;wm&#34;, &#34;iconphoto&#34;, self, new_icon)
 
     @property
     def size(self) -&gt; Vector.Size:
@@ -873,6 +928,26 @@ def full_screen(self) -&gt; bool:
     return self.attributes(&#34;-fullscreen&#34;)</code></pre>
 </details>
 </dd>
+<dt id="TkZero.MainWindow.MainWindow.icon"><code class="name">var <span class="ident">icon</span> : Union[tkinter.PhotoImage, PIL.ImageTk.PhotoImage, NoneType]</code></dt>
+<dd>
+<div class="desc"><p>Get the icon of the window. Will return None if the icon was never set
+before.</p>
+<p>:return: A tk.PhotoImage, a PIL.ImageTk.PhotoImage, or None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def icon(self) -&gt; Union[tk.PhotoImage, ImageTk.PhotoImage, None]:
+    &#34;&#34;&#34;
+    Get the icon of the window. Will return None if the icon was never set
+    before.
+
+    :return: A tk.PhotoImage, a PIL.ImageTk.PhotoImage, or None.
+    &#34;&#34;&#34;
+    return self._icon</code></pre>
+</details>
+</dd>
 <dt id="TkZero.MainWindow.MainWindow.maximized"><code class="name">var <span class="ident">maximized</span> : bool</code></dt>
 <dd>
 <div class="desc"><p>Is this window maximized?</p>
@@ -1141,6 +1216,7 @@ when this event is triggered or None when binding one.</p></div>
 <li><code><a title="TkZero.MainWindow.MainWindow.enabled" href="#TkZero.MainWindow.MainWindow.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.full_screen" href="#TkZero.MainWindow.MainWindow.full_screen">full_screen</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.generate_event" href="#TkZero.MainWindow.MainWindow.generate_event">generate_event</a></code></li>
+<li><code><a title="TkZero.MainWindow.MainWindow.icon" href="#TkZero.MainWindow.MainWindow.icon">icon</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.maximized" href="#TkZero.MainWindow.MainWindow.maximized">maximized</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.minimized" href="#TkZero.MainWindow.MainWindow.minimized">minimized</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.on_close" href="#TkZero.MainWindow.MainWindow.on_close">on_close</a></code></li>

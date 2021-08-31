@@ -85,11 +85,16 @@ class Text(tk.Text):
             )
         if not isinstance(wrapping, str):
             raise TypeError(
-                f&#34;wrapping is not a str! &#34; 
-                f&#34;(type passed in: {repr(type(wrapping))})&#34;
+                f&#34;wrapping is not a str! &#34; f&#34;(type passed in: {repr(type(wrapping))})&#34;
             )
-        super().__init__(master=parent, width=width, height=height,
-                         wrap=wrapping, undo=True, maxundo=50_000)
+        super().__init__(
+            master=parent,
+            width=width,
+            height=height,
+            wrap=wrapping,
+            undo=True,
+            maxundo=50_000,
+        )
         self._enabled = True
         self._readonly = False
         if on_aqua(self):
@@ -239,10 +244,12 @@ class Text(tk.Text):
             self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
         else:
-            self._context_menu.entryconfigure(&#34;Undo&#34;,
-                                              state=tk.NORMAL if self.can_undo() else tk.DISABLED)
-            self._context_menu.entryconfigure(&#34;Redo&#34;,
-                                              state=tk.NORMAL if self.can_redo() else tk.DISABLED)
+            self._context_menu.entryconfigure(
+                &#34;Undo&#34;, state=tk.NORMAL if self.can_undo() else tk.DISABLED
+            )
+            self._context_menu.entryconfigure(
+                &#34;Redo&#34;, state=tk.NORMAL if self.can_redo() else tk.DISABLED
+            )
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)
@@ -424,11 +431,16 @@ TextWrap.WordWrapping</p></div>
             )
         if not isinstance(wrapping, str):
             raise TypeError(
-                f&#34;wrapping is not a str! &#34; 
-                f&#34;(type passed in: {repr(type(wrapping))})&#34;
+                f&#34;wrapping is not a str! &#34; f&#34;(type passed in: {repr(type(wrapping))})&#34;
             )
-        super().__init__(master=parent, width=width, height=height,
-                         wrap=wrapping, undo=True, maxundo=50_000)
+        super().__init__(
+            master=parent,
+            width=width,
+            height=height,
+            wrap=wrapping,
+            undo=True,
+            maxundo=50_000,
+        )
         self._enabled = True
         self._readonly = False
         if on_aqua(self):
@@ -578,10 +590,12 @@ TextWrap.WordWrapping</p></div>
             self._context_menu.entryconfigure(&#34;Delete&#34;, state=tk.NORMAL)
             self._context_menu.entryconfigure(&#34;Select all&#34;, state=tk.DISABLED)
         else:
-            self._context_menu.entryconfigure(&#34;Undo&#34;,
-                                              state=tk.NORMAL if self.can_undo() else tk.DISABLED)
-            self._context_menu.entryconfigure(&#34;Redo&#34;,
-                                              state=tk.NORMAL if self.can_redo() else tk.DISABLED)
+            self._context_menu.entryconfigure(
+                &#34;Undo&#34;, state=tk.NORMAL if self.can_undo() else tk.DISABLED
+            )
+            self._context_menu.entryconfigure(
+                &#34;Redo&#34;, state=tk.NORMAL if self.can_redo() else tk.DISABLED
+            )
             self._context_menu.entryconfigure(&#34;Copy&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Cut&#34;, state=tk.DISABLED)
             self._context_menu.entryconfigure(&#34;Paste&#34;, state=tk.NORMAL)

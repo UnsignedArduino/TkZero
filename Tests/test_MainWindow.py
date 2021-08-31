@@ -1,8 +1,11 @@
 """
 Test the TkZero.MainWindow module
 """
-
+import base64
+import tkinter as tk
 import unittest
+
+from PIL import ImageTk
 
 from TkZero import Vector
 from TkZero.Label import Label
@@ -15,6 +18,48 @@ class MainWindowTest(TkTestCase):
         self.assertEqual(self.root.title, "My title")
         with self.assertRaises(TypeError):
             self.root.title = 1
+
+    def test_icon(self):
+        image_data = base64.b64decode("""R0lGODlhZABkAPcAAAAAAAAAMwAAZgAAmQAAzA
+        AA/wArAAArMwArZgArmQArzAAr/wBVAABVMwBVZgBVmQBVzABV/wCAAACAMwCAZgCAmQCAz
+        ACA/wCqAACqMwCqZgCqmQCqzACq/wDVAADVMwDVZgDVmQDVzADV/wD/AAD/MwD/ZgD/mQD/
+        zAD//zMAADMAMzMAZjMAmTMAzDMA/zMrADMrMzMrZjMrmTMrzDMr/zNVADNVMzNVZjNVmTN
+        VzDNV/zOAADOAMzOAZjOAmTOAzDOA/zOqADOqMzOqZjOqmTOqzDOq/zPVADPVMzPVZjPVmT
+        PVzDPV/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYAmWYAzGYA/2YrAGYrM2YrZmYrm
+        WYrzGYr/2ZVAGZVM2ZVZmZVmWZVzGZV/2aAAGaAM2aAZmaAmWaAzGaA/2aqAGaqM2aqZmaq
+        mWaqzGaq/2bVAGbVM2bVZmbVmWbVzGbV/2b/AGb/M2b/Zmb/mWb/zGb//5kAAJkAM5kAZpk
+        AmZkAzJkA/5krAJkrM5krZpkrmZkrzJkr/5lVAJlVM5lVZplVmZlVzJlV/5mAAJmAM5mAZp
+        mAmZmAzJmA/5mqAJmqM5mqZpmqmZmqzJmq/5nVAJnVM5nVZpnVmZnVzJnV/5n/AJn/M5n/Z
+        pn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wrAMwrM8wrZswrmcwrzMwr/8xVAMxVM8xV
+        ZsxVmcxVzMxV/8yAAMyAM8yAZsyAmcyAzMyA/8yqAMyqM8yqZsyqmcyqzMyq/8zVAMzVM8z
+        VZszVmczVzMzV/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8rAP8rM/
+        8rZv8rmf8rzP8r//9VAP9VM/9VZv9Vmf9VzP9V//+AAP+AM/+AZv+Amf+AzP+A//+qAP+qM
+        /+qZv+qmf+qzP+q///VAP/VM//VZv/Vmf/VzP/V////AP//M///Zv//mf//zP///wAAAAAA
+        AAAAAAAAACH5BAEAAPwALAAAAABkAGQAAAj/APcJHEiwoMGDCBMqXMiwocOHECNKnEixosW
+        LGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2bOHPq3Mmzp8+fQIMKHUq0qN
+        GjSJMqXcq0qdOnUKNKnUq1qkx9hABohdBw2KIbWrUGiPFG2UJ6mGKEBXAAB6iFWNcagUtFb
+        KiHisI+UKhPmIq1gLXGQSgMRuC1AdRES5g3bIC7CfPVBfDYYVytFhLO+3sY8OCClzuvRbDY
+        YGitCUof1De5csPQew8K6xzjhtqwnwk2Rmyb81oBkAme1gokIWu7lrNuPcgOcAA4qgXqGxY
+        m977hOqL39Q1AQPTryhGf/0IoGbnD3bEJbl6b/WEwxMFBhwfAtWDjAIaXr24dn2/4zMLNN9
+        dDx4k1nnGTURZfaG/4Zt1A5VF2IEP6oFdQc2HV99AuaxW3EIZaDShdeHGUE5Z3pvGXXIYF0
+        eLYhK+FlxqFMqoWWhyhaQihig6Fl951Cer4WoIiLvSeeQLtNlg+DoLGI41hASjQeoJFBCIA
+        DyZ0ZW76aIGbQBxqheKOSMJl4UAguvZQmv1p1uSIXwIZlofSPQmXl/oJdGR33zG055gMRYj
+        lQBWGdQeajgUXoZoMnQnmiTA2FGZ3kboZp0AkEuQiaqUVGMChMUZJ0DqJRkRqmQpRCQCo4F
+        0qZ4h1ov9qnI8EsWnlWlkiZKt0Sl5Y6qJtIpSjer4V2ZCqxib0p42ZthhWap4Gi5CjrwIwI
+        4EJXuvfs9E1K1yCONq5LWbOzhnRplV+KJdweK7K3InPiDurXgUxWepD9orZ57cnatfrQeg+
+        oByj49JnELqUwaGQMJto+pu087QLgLE3ksedrIzR6yRgMrxV0DBeWlegWIoJ59da2g7krUF
+        7OsbqnaIapOpaB8QQA3cPzpOgYzZfDABppq0sn3OVCkstu6J5ZprESadM6L8IzUzwvHmadn
+        LSOCyzGi8+I6awsOG9fFDLUydE60LJLHKbVgfIoMm+BaWdn1Y3jGHWQkIHfa9VfPcr7fffg
+        Acu+OCEF2744YgnrvjijDfu+OOQRy755JRXbvnlmGeu+eacd754QAA7""")
+        self.assertEqual(self.root.icon, None)
+        icon = tk.PhotoImage(data=image_data)
+        self.root.icon = icon
+        self.assertEqual(self.root.icon, icon)
+        icon = ImageTk.PhotoImage(data=image_data)
+        self.root.icon = icon
+        self.assertEqual(self.root.icon, icon)
+        with self.assertRaises(TypeError):
+            self.root.icon = 69
 
     def test_size(self):
         self.assertEqual(self.root.size, Vector.Size(width=200, height=200))

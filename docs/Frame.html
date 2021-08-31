@@ -198,7 +198,10 @@ class ScrollableFrame(Frame):
         &#34;&#34;&#34;
         # https://blog.teclado.com/tkinter-scrollable-frames/
         super().__init__(parent)
-        self.canvas = tk.Canvas(self)
+        self.x_scrolling = x_scrolling
+        self.y_scrolling = y_scrolling
+        self.disable_warnings = False
+        self.canvas = tk.Canvas(self, highlightthickness=0)
         if x_scrolling:
             x_scrollbar = ttk.Scrollbar(
                 self, orient=tk.HORIZONTAL, command=self.canvas.xview
@@ -276,9 +279,11 @@ class ScrollableFrame(Frame):
         else:
             scroll = str(int(-1 * (event.delta / 120)))
         if self._shift_pressed:
-            self.canvas.xview_scroll(scroll, tk.UNITS)
+            if self.x_scrolling:
+                self.canvas.xview_scroll(scroll, tk.UNITS)
         else:
-            self.canvas.yview_scroll(scroll, tk.UNITS)
+            if self.y_scrolling:
+                self.canvas.yview_scroll(scroll, tk.UNITS)
 
     def _enable_children(
         self, parent: Union[tk.Widget, None] = None, enable: bool = True
@@ -301,6 +306,91 @@ class ScrollableFrame(Frame):
                     child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
                 self._enable_children(parent, enable)
+
+    @property
+    def width(self) -&gt; int:
+        &#34;&#34;&#34;
+        Get the width of the frame.
+
+        :return: An int which is the width of the frame.
+        &#34;&#34;&#34;
+        return self.frame.width
+
+    @width.setter
+    def width(self, new_width: int) -&gt; None:
+        &#34;&#34;&#34;
+        Set the width of the frame.
+
+        :param new_width: An int which should be the new width of the frame.
+         Cannot be less than 1.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_width, int):
+            raise TypeError(
+                f&#34;new_height is not a int! &#34;
+                f&#34;(type passed in: {repr(type(new_width))})&#34;
+            )
+        if new_width &lt; 1:
+            raise ValueError(
+                f&#34;new_height is less than 1! &#34; f&#34;(value passed in: {repr(new_width)})&#34;
+            )
+        self.frame.width = new_width
+        self.canvas.configure(width=new_width)
+
+    @property
+    def height(self) -&gt; int:
+        &#34;&#34;&#34;
+        Get the height of the frame.
+
+        :return: An int which is the height of the frame.
+        &#34;&#34;&#34;
+        return self.frame.height
+
+    @height.setter
+    def height(self, new_height: int) -&gt; None:
+        &#34;&#34;&#34;
+        Set the width of the frame.
+
+        :param new_height: An int which should be the new height of the frame.
+         Cannot be less than 1.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_height, int):
+            raise TypeError(
+                f&#34;new_height is not an int! &#34;
+                f&#34;(type passed in: {repr(type(new_height))})&#34;
+            )
+        if new_height &lt; 1:
+            raise ValueError(
+                f&#34;new_height is less than 1! &#34; f&#34;(value passed in: {repr(new_height)})&#34;
+            )
+        self.frame.height = new_height
+        self.canvas.configure(height=new_height)
+
+    def _warn(self, method: str):
+        &#34;&#34;&#34;
+        DON&#39;T USE THE GRID, PACK, OR PLACE METHODS ON THE SCROLLABLE FRAME
+        DIRECTLY!!! Make sure to set the parents of your widgets to the frame
+        attribute of this scrollable frame. You can see the ScrollableFrame
+        example in the widget examples for an example.
+        &#34;&#34;&#34;
+        if not self.disable_warnings:
+            raise RuntimeWarning(
+                f&#34;It seems like you are {method}ing &#34;
+                &#34;into the ScrollableFrame directly, which &#34;
+                &#34;may not be what you want.\n&#34;
+                &#34;Usually, you would set the parent of the &#34;
+                &#34;widget it into the `frame` attribute of me, &#34;
+                &#34;so instead of:\n&#34;
+                &#34;my_label = Label(scrollable_frame, ...)\n&#34;
+                &#34;You would do:\n&#34;
+                &#34;my_label = Label(scrollable_frame.frame, &#34;
+                &#34;...)\n&#34;
+                &#34;You can turn this warning off by &#34;
+                &#34;setting disable_warnings to True on me &#34;
+                &#34;like:\n&#34;
+                &#34;scrollable_frame.disable_warnings = True&#34;
+            )
 
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;
@@ -622,7 +712,10 @@ direction.</p></div>
         &#34;&#34;&#34;
         # https://blog.teclado.com/tkinter-scrollable-frames/
         super().__init__(parent)
-        self.canvas = tk.Canvas(self)
+        self.x_scrolling = x_scrolling
+        self.y_scrolling = y_scrolling
+        self.disable_warnings = False
+        self.canvas = tk.Canvas(self, highlightthickness=0)
         if x_scrolling:
             x_scrollbar = ttk.Scrollbar(
                 self, orient=tk.HORIZONTAL, command=self.canvas.xview
@@ -700,9 +793,11 @@ direction.</p></div>
         else:
             scroll = str(int(-1 * (event.delta / 120)))
         if self._shift_pressed:
-            self.canvas.xview_scroll(scroll, tk.UNITS)
+            if self.x_scrolling:
+                self.canvas.xview_scroll(scroll, tk.UNITS)
         else:
-            self.canvas.yview_scroll(scroll, tk.UNITS)
+            if self.y_scrolling:
+                self.canvas.yview_scroll(scroll, tk.UNITS)
 
     def _enable_children(
         self, parent: Union[tk.Widget, None] = None, enable: bool = True
@@ -725,6 +820,91 @@ direction.</p></div>
                     child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
                 self._enable_children(parent, enable)
+
+    @property
+    def width(self) -&gt; int:
+        &#34;&#34;&#34;
+        Get the width of the frame.
+
+        :return: An int which is the width of the frame.
+        &#34;&#34;&#34;
+        return self.frame.width
+
+    @width.setter
+    def width(self, new_width: int) -&gt; None:
+        &#34;&#34;&#34;
+        Set the width of the frame.
+
+        :param new_width: An int which should be the new width of the frame.
+         Cannot be less than 1.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_width, int):
+            raise TypeError(
+                f&#34;new_height is not a int! &#34;
+                f&#34;(type passed in: {repr(type(new_width))})&#34;
+            )
+        if new_width &lt; 1:
+            raise ValueError(
+                f&#34;new_height is less than 1! &#34; f&#34;(value passed in: {repr(new_width)})&#34;
+            )
+        self.frame.width = new_width
+        self.canvas.configure(width=new_width)
+
+    @property
+    def height(self) -&gt; int:
+        &#34;&#34;&#34;
+        Get the height of the frame.
+
+        :return: An int which is the height of the frame.
+        &#34;&#34;&#34;
+        return self.frame.height
+
+    @height.setter
+    def height(self, new_height: int) -&gt; None:
+        &#34;&#34;&#34;
+        Set the width of the frame.
+
+        :param new_height: An int which should be the new height of the frame.
+         Cannot be less than 1.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_height, int):
+            raise TypeError(
+                f&#34;new_height is not an int! &#34;
+                f&#34;(type passed in: {repr(type(new_height))})&#34;
+            )
+        if new_height &lt; 1:
+            raise ValueError(
+                f&#34;new_height is less than 1! &#34; f&#34;(value passed in: {repr(new_height)})&#34;
+            )
+        self.frame.height = new_height
+        self.canvas.configure(height=new_height)
+
+    def _warn(self, method: str):
+        &#34;&#34;&#34;
+        DON&#39;T USE THE GRID, PACK, OR PLACE METHODS ON THE SCROLLABLE FRAME
+        DIRECTLY!!! Make sure to set the parents of your widgets to the frame
+        attribute of this scrollable frame. You can see the ScrollableFrame
+        example in the widget examples for an example.
+        &#34;&#34;&#34;
+        if not self.disable_warnings:
+            raise RuntimeWarning(
+                f&#34;It seems like you are {method}ing &#34;
+                &#34;into the ScrollableFrame directly, which &#34;
+                &#34;may not be what you want.\n&#34;
+                &#34;Usually, you would set the parent of the &#34;
+                &#34;widget it into the `frame` attribute of me, &#34;
+                &#34;so instead of:\n&#34;
+                &#34;my_label = Label(scrollable_frame, ...)\n&#34;
+                &#34;You would do:\n&#34;
+                &#34;my_label = Label(scrollable_frame.frame, &#34;
+                &#34;...)\n&#34;
+                &#34;You can turn this warning off by &#34;
+                &#34;setting disable_warnings to True on me &#34;
+                &#34;like:\n&#34;
+                &#34;scrollable_frame.disable_warnings = True&#34;
+            )
 
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;

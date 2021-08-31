@@ -7,6 +7,8 @@ import tkinter as tk
 from threading import Thread
 from typing import Union, Callable
 
+from PIL import ImageTk
+
 from TkZero import Platform
 from TkZero import Vector
 from TkZero.Menu import Menu
@@ -20,6 +22,7 @@ class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title = "Main Window"
+        self._icon = None
         self._on_close = None
         self.protocol("WM_DELETE_WINDOW", self.close)
         self._enabled = True
@@ -48,6 +51,32 @@ class MainWindow(tk.Tk):
                 f"new_title is not a str! " f"(type passed in: {repr(type(new_title))})"
             )
         self.wm_title(new_title)
+
+    @property
+    def icon(self) -> Union[tk.PhotoImage, ImageTk.PhotoImage, None]:
+        """
+        Get the icon of the window. Will return None if the icon was never set
+        before.
+
+        :return: A tk.PhotoImage, a PIL.ImageTk.PhotoImage, or None.
+        """
+        return self._icon
+
+    @icon.setter
+    def icon(self, new_icon: Union[tk.PhotoImage, ImageTk.PhotoImage]) -> None:
+        """
+        Set the icon of the window.
+
+        :param new_icon: A tk.PhotoImage or a PIL.ImageTk.PhotoImage.
+        :return: None.
+        """
+        if not isinstance(new_icon, (tk.PhotoImage, ImageTk.PhotoImage)):
+            raise TypeError(
+                f"new_icon is not a tk.PhotoImage or an ImageTk.PhotoImage!"
+                f"(type passed in: {repr(type(new_icon))})"
+            )
+        self._icon = new_icon
+        self.tk.call("wm", "iconphoto", self, new_icon)
 
     @property
     def size(self) -> Vector.Size:

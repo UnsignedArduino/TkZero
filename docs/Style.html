@@ -31,7 +31,10 @@
 Create a theme.
 &#34;&#34;&#34;
 
+import tkinter as tk
+from pathlib import Path
 from tkinter import ttk
+from typing import Union
 
 
 class WidgetStyleRoots:
@@ -46,6 +49,44 @@ class WidgetStyleRoots:
     Scale = &#34;TScale&#34;
     Scrollbar = &#34;TScrollbar&#34;
     Spinbox = &#34;TSpinbox&#34;
+
+
+def import_theme(root: tk.Tk, path: Union[str, Path]) -&gt; None:
+    &#34;&#34;&#34;
+    `source` the theme file in Tk. You must call this before using your theme!
+
+    :param root: The root instance of the GUI. Should be a tk.Tk
+    :param path: The path to the theme file. Should be a str or a pathlib.Path
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(root, tk.Tk):
+        raise TypeError(f&#34;root is not a tk.Tk! (type passed in: {repr(type(root))})&#34;)
+    if not isinstance(path, (str, Path)):
+        raise TypeError(
+            f&#34;path is not a str or a pathlib.Path! &#34;
+            f&#34;(type passed in: {repr(type(path))})&#34;
+        )
+    path = str(Path(path).resolve())
+    root.tk.call(&#34;source&#34;, path)
+
+
+def use_theme(root: tk.Tk, theme: str) -&gt; None:
+    &#34;&#34;&#34;
+    Use an theme!
+
+    :param root: The root instance of the GUI. Should be a tk.Tk
+    :param theme: The name of the theme, either a built-in one or a theme
+     that was &#34;source&#34;d.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(root, tk.Tk):
+        raise TypeError(f&#34;root is not a tk.Tk! (type passed in: {repr(type(root))})&#34;)
+    if not isinstance(theme, str):
+        raise TypeError(
+            f&#34;theme is not a str! &#34; f&#34;(type passed in: {repr(type(theme))})&#34;
+        )
+    style = ttk.Style()
+    style.theme_use(theme)
 
 
 def define_style(style_root: str, style_name: str, **kwargs) -&gt; None:
@@ -117,6 +158,69 @@ apply_style("Warning")
         )
     style = ttk.Style()
     style.configure(f&#34;{style_name}.{style_root}&#34;, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Style.import_theme"><code class="name flex">
+<span>def <span class="ident">import_theme</span></span>(<span>root: tkinter.Tk, path: Union[str, pathlib.Path]) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p><code>source</code> the theme file in Tk. You must call this before using your theme!</p>
+<p>:param root: The root instance of the GUI. Should be a tk.Tk
+:param path: The path to the theme file. Should be a str or a pathlib.Path
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def import_theme(root: tk.Tk, path: Union[str, Path]) -&gt; None:
+    &#34;&#34;&#34;
+    `source` the theme file in Tk. You must call this before using your theme!
+
+    :param root: The root instance of the GUI. Should be a tk.Tk
+    :param path: The path to the theme file. Should be a str or a pathlib.Path
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(root, tk.Tk):
+        raise TypeError(f&#34;root is not a tk.Tk! (type passed in: {repr(type(root))})&#34;)
+    if not isinstance(path, (str, Path)):
+        raise TypeError(
+            f&#34;path is not a str or a pathlib.Path! &#34;
+            f&#34;(type passed in: {repr(type(path))})&#34;
+        )
+    path = str(Path(path).resolve())
+    root.tk.call(&#34;source&#34;, path)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Style.use_theme"><code class="name flex">
+<span>def <span class="ident">use_theme</span></span>(<span>root: tkinter.Tk, theme: str) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Use an theme!</p>
+<p>:param root: The root instance of the GUI. Should be a tk.Tk
+:param theme: The name of the theme, either a built-in one or a theme
+that was "source"d.
+:return: None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def use_theme(root: tk.Tk, theme: str) -&gt; None:
+    &#34;&#34;&#34;
+    Use an theme!
+
+    :param root: The root instance of the GUI. Should be a tk.Tk
+    :param theme: The name of the theme, either a built-in one or a theme
+     that was &#34;source&#34;d.
+    :return: None.
+    &#34;&#34;&#34;
+    if not isinstance(root, tk.Tk):
+        raise TypeError(f&#34;root is not a tk.Tk! (type passed in: {repr(type(root))})&#34;)
+    if not isinstance(theme, str):
+        raise TypeError(
+            f&#34;theme is not a str! &#34; f&#34;(type passed in: {repr(type(theme))})&#34;
+        )
+    style = ttk.Style()
+    style.theme_use(theme)</code></pre>
 </details>
 </dd>
 </dl>
@@ -211,6 +315,8 @@ apply_style("Warning")
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="TkZero.Style.define_style" href="#TkZero.Style.define_style">define_style</a></code></li>
+<li><code><a title="TkZero.Style.import_theme" href="#TkZero.Style.import_theme">import_theme</a></code></li>
+<li><code><a title="TkZero.Style.use_theme" href="#TkZero.Style.use_theme">use_theme</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
