@@ -19,5 +19,20 @@ for x in range(10):
         b = Button(scrollable_frame.frame, text=f"{x}, {y}")
         b.grid(row=y, column=x)
 
+
+# Define a function to toggle the state of the scrollable frame
+def toggle():
+    if scrollable_frame.enabled:
+        scrollable_frame.enabled = False
+        toggle_btn.text = "Enable"
+    else:
+        scrollable_frame.enabled = True
+        toggle_btn.text = "Disable"
+
+
+# Create a button to enable and disable the scrollable frame
+toggle_btn = Button(root, text="Disable", command=toggle)
+toggle_btn.grid(row=1, column=0)
+
 # Start the mainloop like in Tkinter
 root.mainloop()

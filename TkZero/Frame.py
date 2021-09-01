@@ -98,13 +98,16 @@ class Frame(ttk.Frame):
         if parent is None:
             parent = self
         for child in parent.winfo_children():
-            if child.winfo_class() not in ("Frame", "LabelFrame"):
+            if child.winfo_class() not in ("TFrame", "TLabelFrame"):
                 try:
                     child.state(["!disabled" if enable else "disabled"])
                 except AttributeError:
                     child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
-                self._enable_children(parent, enable)
+                if hasattr(child, "enabled"):
+                    child.enabled = enable
+                else:
+                    self._enable_children(child, enable)
 
     @property
     def enabled(self) -> bool:
@@ -270,13 +273,16 @@ class ScrollableFrame(Frame):
         if parent is None:
             parent = self.frame
         for child in parent.winfo_children():
-            if child.winfo_class() not in ("Frame", "LabelFrame"):
+            if child.winfo_class() not in ("TFrame", "TLabelFrame"):
                 try:
                     child.state(["!disabled" if enable else "disabled"])
                 except AttributeError:
                     child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
-                self._enable_children(parent, enable)
+                if hasattr(child, "enabled"):
+                    child.enabled = enable
+                else:
+                    self._enable_children(child, enable)
 
     @property
     def width(self) -> int:
