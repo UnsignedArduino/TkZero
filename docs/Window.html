@@ -360,13 +360,16 @@ class Window(tk.Toplevel):
         if parent is None:
             parent = self
         for child in parent.winfo_children():
-            if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
+            if child.winfo_class() not in (&#34;TFrame&#34;, &#34;TLabelFrame&#34;):
                 try:
                     child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
                 except AttributeError:
                     child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
-                self._enable_children(parent, enable)
+                if hasattr(child, &#34;enabled&#34;):
+                    child.enabled = enable
+                else:
+                    self._enable_children(child, enable)
 
     @property
     def enabled(self) -&gt; bool:
@@ -769,13 +772,16 @@ instance.</p></div>
         if parent is None:
             parent = self
         for child in parent.winfo_children():
-            if child.winfo_class() not in (&#34;Frame&#34;, &#34;LabelFrame&#34;):
+            if child.winfo_class() not in (&#34;TFrame&#34;, &#34;TLabelFrame&#34;):
                 try:
                     child.state([&#34;!disabled&#34; if enable else &#34;disabled&#34;])
                 except AttributeError:
                     child.configure(state=tk.NORMAL if enable else tk.DISABLED)
             else:
-                self._enable_children(parent, enable)
+                if hasattr(child, &#34;enabled&#34;):
+                    child.enabled = enable
+                else:
+                    self._enable_children(child, enable)
 
     @property
     def enabled(self) -&gt; bool:
