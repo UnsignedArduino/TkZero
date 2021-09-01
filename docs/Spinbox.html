@@ -104,6 +104,9 @@ class Spinbox(ttk.Spinbox):
         if values is not None:
             self[&#34;values&#34;] = tuple([str(thing) for thing in values])
         self._make_context_menu()
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def value(self) -&gt; str:
@@ -210,6 +213,24 @@ class Spinbox(ttk.Spinbox):
         self._enabled = True
         self._readonly = new_state
         self.state([&#34;readonly&#34; if self._readonly else &#34;!readonly&#34;])
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def _make_context_menu(self) -&gt; None:
         &#34;&#34;&#34;
@@ -460,6 +481,9 @@ changes. Defaults to None.</p></div>
         if values is not None:
             self[&#34;values&#34;] = tuple([str(thing) for thing in values])
         self._make_context_menu()
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def value(self) -&gt; str:
@@ -566,6 +590,24 @@ changes. Defaults to None.</p></div>
         self._enabled = True
         self._readonly = new_state
         self.state([&#34;readonly&#34; if self._readonly else &#34;!readonly&#34;])
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def _make_context_menu(self) -&gt; None:
         &#34;&#34;&#34;
@@ -749,6 +791,24 @@ def enabled(self) -&gt; bool:
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
     return self._enabled</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Spinbox.Spinbox.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Spinbox.Spinbox.read_only"><code class="name">var <span class="ident">read_only</span> : bool</code></dt>
@@ -967,6 +1027,7 @@ def values(self) -&gt; tuple[str, ...]:
 <li><code><a title="TkZero.Spinbox.Spinbox.cut_contents" href="#TkZero.Spinbox.Spinbox.cut_contents">cut_contents</a></code></li>
 <li><code><a title="TkZero.Spinbox.Spinbox.delete_contents" href="#TkZero.Spinbox.Spinbox.delete_contents">delete_contents</a></code></li>
 <li><code><a title="TkZero.Spinbox.Spinbox.enabled" href="#TkZero.Spinbox.Spinbox.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Spinbox.Spinbox.hovering_over" href="#TkZero.Spinbox.Spinbox.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Spinbox.Spinbox.paste_contents" href="#TkZero.Spinbox.Spinbox.paste_contents">paste_contents</a></code></li>
 <li><code><a title="TkZero.Spinbox.Spinbox.read_only" href="#TkZero.Spinbox.Spinbox.read_only">read_only</a></code></li>
 <li><code><a title="TkZero.Spinbox.Spinbox.select_all_contents" href="#TkZero.Spinbox.Spinbox.select_all_contents">select_all_contents</a></code></li>

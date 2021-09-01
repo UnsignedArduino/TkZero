@@ -33,6 +33,12 @@ class SeparatorTest(TkTestCase):
         with self.assertRaises(TypeError):
             s.enabled = "True"
 
+    def test_hover(self):
+        s = Separator(self.root)
+        s.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(s.hovering_over), bool)
+
 
 if __name__ == '__main__':
     unittest.main()

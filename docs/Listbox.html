@@ -110,6 +110,9 @@ class Listbox(tk.Listbox):
         if on_double_click is not None:
             self.bind(&#34;&lt;&lt;Double-1&gt;&gt;&#34;, lambda event: on_double_click())
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def selected(self) -&gt; tuple[int]:
@@ -209,7 +212,25 @@ class Listbox(tk.Listbox):
                 f&#34;(type passed in: {repr(type(new_state))})&#34;
             )
         self._enabled = new_state
-        self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)</code></pre>
+        self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering</code></pre>
 </details>
 </section>
 <section>
@@ -305,6 +326,9 @@ SelectModes.Single
         if on_double_click is not None:
             self.bind(&#34;&lt;&lt;Double-1&gt;&gt;&#34;, lambda event: on_double_click())
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def selected(self) -&gt; tuple[int]:
@@ -404,7 +428,25 @@ SelectModes.Single
                 f&#34;(type passed in: {repr(type(new_state))})&#34;
             )
         self._enabled = new_state
-        self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)</code></pre>
+        self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -438,6 +480,24 @@ def enabled(self) -&gt; bool:
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
     return self._enabled</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Listbox.Listbox.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Listbox.Listbox.selected"><code class="name">var <span class="ident">selected</span> : tuple</code></dt>
@@ -567,6 +627,7 @@ Multiple: Can select multiple items</p></div>
 <h4><code><a title="TkZero.Listbox.Listbox" href="#TkZero.Listbox.Listbox">Listbox</a></code></h4>
 <ul class="">
 <li><code><a title="TkZero.Listbox.Listbox.enabled" href="#TkZero.Listbox.Listbox.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Listbox.Listbox.hovering_over" href="#TkZero.Listbox.Listbox.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Listbox.Listbox.scroll_to" href="#TkZero.Listbox.Listbox.scroll_to">scroll_to</a></code></li>
 <li><code><a title="TkZero.Listbox.Listbox.selected" href="#TkZero.Listbox.Listbox.selected">selected</a></code></li>
 <li><code><a title="TkZero.Listbox.Listbox.values" href="#TkZero.Listbox.Listbox.values">values</a></code></li>

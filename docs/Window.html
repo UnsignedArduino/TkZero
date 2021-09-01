@@ -65,6 +65,9 @@ class Window(tk.Toplevel):
         self.protocol(&#34;WM_DELETE_WINDOW&#34;, self.close)
         self._on_close = None
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def title(self) -&gt; str:
@@ -398,6 +401,24 @@ class Window(tk.Toplevel):
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     @property
     def on_close(self) -&gt; Union[Callable, None]:
@@ -477,6 +498,9 @@ instance.</p></div>
         self.protocol(&#34;WM_DELETE_WINDOW&#34;, self.close)
         self._on_close = None
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def title(self) -&gt; str:
@@ -810,6 +834,24 @@ instance.</p></div>
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     @property
     def on_close(self) -&gt; Union[Callable, None]:
@@ -892,6 +934,24 @@ def full_screen(self) -&gt; bool:
     :return: A bool on whether this window is full-screen.
     &#34;&#34;&#34;
     return self.attributes(&#34;-fullscreen&#34;)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Window.Window.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Window.Window.maximized"><code class="name">var <span class="ident">maximized</span> : bool</code></dt>
@@ -1164,6 +1224,7 @@ when this event is triggered or None when binding one.</p></div>
 <li><code><a title="TkZero.Window.Window.enabled" href="#TkZero.Window.Window.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Window.Window.full_screen" href="#TkZero.Window.Window.full_screen">full_screen</a></code></li>
 <li><code><a title="TkZero.Window.Window.generate_event" href="#TkZero.Window.Window.generate_event">generate_event</a></code></li>
+<li><code><a title="TkZero.Window.Window.hovering_over" href="#TkZero.Window.Window.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Window.Window.maximized" href="#TkZero.Window.Window.maximized">maximized</a></code></li>
 <li><code><a title="TkZero.Window.Window.minimized" href="#TkZero.Window.Window.minimized">minimized</a></code></li>
 <li><code><a title="TkZero.Window.Window.on_close" href="#TkZero.Window.Window.on_close">on_close</a></code></li>

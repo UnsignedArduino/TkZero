@@ -34,6 +34,9 @@ class Window(tk.Toplevel):
         self.protocol("WM_DELETE_WINDOW", self.close)
         self._on_close = None
         self._enabled = True
+        self._hovering_over = False
+        self.bind("<Enter>", lambda _: self._set_hover_state(True))
+        self.bind("<Leave>", lambda _: self._set_hover_state(False))
 
     @property
     def title(self) -> str:
@@ -367,6 +370,24 @@ class Window(tk.Toplevel):
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
+
+    @property
+    def hovering_over(self) -> bool:
+        """
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        """
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -> None:
+        """
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        """
+        self._hovering_over = is_hovering
 
     @property
     def on_close(self) -> Union[Callable, None]:

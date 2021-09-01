@@ -56,6 +56,9 @@ class Scrollbar(ttk.Scrollbar):
         self._orientation = orientation
         if widget is not None:
             self.attach_to(widget=widget)
+        self._hovering_over = False
+        self.bind("<Enter>", lambda _: self._set_hover_state(True))
+        self.bind("<Leave>", lambda _: self._set_hover_state(False))
 
     def attach_to(self, widget: tk.Widget) -> None:
         """
@@ -132,3 +135,21 @@ class Scrollbar(ttk.Scrollbar):
             )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
+
+    @property
+    def hovering_over(self) -> bool:
+        """
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        """
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -> None:
+        """
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        """
+        self._hovering_over = is_hovering

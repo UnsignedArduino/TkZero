@@ -76,6 +76,9 @@ class Separator(ttk.Separator):
         self._style_root = &#34;TSeparator&#34;
         self._enabled = True
         self._orientation = orientation
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def enabled(self) -&gt; bool:
@@ -103,7 +106,25 @@ class Separator(ttk.Separator):
                 f&#34;(type passed in: {repr(type(new_state))})&#34;
             )
         self._enabled = new_state
-        self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])</code></pre>
+        self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering</code></pre>
 </details>
 </section>
 <section>
@@ -193,6 +214,9 @@ OrientModes.Vertical and is a str.</p></div>
         self._style_root = &#34;TSeparator&#34;
         self._enabled = True
         self._orientation = orientation
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def enabled(self) -&gt; bool:
@@ -220,7 +244,25 @@ OrientModes.Vertical and is a str.</p></div>
                 f&#34;(type passed in: {repr(type(new_state))})&#34;
             )
         self._enabled = new_state
-        self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])</code></pre>
+        self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -255,6 +297,24 @@ def enabled(self) -&gt; bool:
     return self._enabled</code></pre>
 </details>
 </dd>
+<dt id="TkZero.Separator.Separator.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -284,6 +344,7 @@ def enabled(self) -&gt; bool:
 <h4><code><a title="TkZero.Separator.Separator" href="#TkZero.Separator.Separator">Separator</a></code></h4>
 <ul class="">
 <li><code><a title="TkZero.Separator.Separator.enabled" href="#TkZero.Separator.Separator.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Separator.Separator.hovering_over" href="#TkZero.Separator.Separator.hovering_over">hovering_over</a></code></li>
 </ul>
 </li>
 </ul>

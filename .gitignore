@@ -7,4 +7,3 @@ dist/*
 .coverage
 coverage.xml
 Testing/*
-widget_factory.py

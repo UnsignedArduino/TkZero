@@ -70,6 +70,9 @@ class Entry(ttk.Entry):
         else:
             self.bind("<3>", lambda event: self._popup(event=event))
         self._make_context_menu()
+        self._hovering_over = False
+        self.bind("<Enter>", lambda _: self._set_hover_state(True))
+        self.bind("<Leave>", lambda _: self._set_hover_state(False))
 
     @property
     def value(self) -> str:
@@ -152,6 +155,24 @@ class Entry(ttk.Entry):
         self._enabled = True
         self._readonly = new_state
         self.state(["readonly" if self._readonly else "!readonly"])
+
+    @property
+    def hovering_over(self) -> bool:
+        """
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        """
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -> None:
+        """
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        """
+        self._hovering_over = is_hovering
 
     def _make_context_menu(self) -> None:
         """

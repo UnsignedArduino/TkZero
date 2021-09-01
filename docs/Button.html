@@ -98,6 +98,9 @@ class Button(ttk.Button):
         self.text = text
         if image is not None:
             self.image = image
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def text(self) -&gt; str:
@@ -201,6 +204,24 @@ class Button(ttk.Button):
             )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;
@@ -280,6 +301,9 @@ evaluates a command when pressed.</p>
         self.text = text
         if image is not None:
             self.image = image
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def text(self) -&gt; str:
@@ -384,6 +408,24 @@ evaluates a command when pressed.</p>
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
 
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
+
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;
         Apply a theme to this button.
@@ -449,6 +491,24 @@ def enabled(self) -&gt; bool:
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
     return self._enabled</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Button.Button.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Button.Button.image"><code class="name">var <span class="ident">image</span> : Optional[PIL.ImageTk.PhotoImage]</code></dt>
@@ -610,10 +670,11 @@ Left: Image left of text, etc.</p></div>
 <ul>
 <li>
 <h4><code><a title="TkZero.Button.Button" href="#TkZero.Button.Button">Button</a></code></h4>
-<ul class="">
+<ul class="two-column">
 <li><code><a title="TkZero.Button.Button.apply_style" href="#TkZero.Button.Button.apply_style">apply_style</a></code></li>
 <li><code><a title="TkZero.Button.Button.display_mode" href="#TkZero.Button.Button.display_mode">display_mode</a></code></li>
 <li><code><a title="TkZero.Button.Button.enabled" href="#TkZero.Button.Button.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Button.Button.hovering_over" href="#TkZero.Button.Button.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Button.Button.image" href="#TkZero.Button.Button.image">image</a></code></li>
 <li><code><a title="TkZero.Button.Button.text" href="#TkZero.Button.Button.text">text</a></code></li>
 </ul>

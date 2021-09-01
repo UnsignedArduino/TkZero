@@ -54,6 +54,12 @@ class FrameTest(TkTestCase):
         with self.assertRaises(TypeError):
             f.enabled = []
 
+    def test_hover(self):
+        f = Labelframe(self.root)
+        f.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(f.hovering_over), bool)
+
     def test_text(self):
         f = Labelframe(self.root)
         f.grid(row=0, column=0)

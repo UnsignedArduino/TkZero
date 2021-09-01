@@ -59,6 +59,9 @@ class MainWindow(tk.Tk):
         self._enabled = True
         if Platform.on_aqua(self):
             Menu(self, is_menubar=True)
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def title(self) -&gt; str:
@@ -422,6 +425,24 @@ class MainWindow(tk.Tk):
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     @property
     def on_close(self) -&gt; Union[Callable, None]:
@@ -493,6 +514,9 @@ is the name of the widget class.</p></div>
         self._enabled = True
         if Platform.on_aqua(self):
             Menu(self, is_menubar=True)
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def title(self) -&gt; str:
@@ -856,6 +880,24 @@ is the name of the widget class.</p></div>
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     @property
     def on_close(self) -&gt; Union[Callable, None]:
@@ -933,6 +975,24 @@ def full_screen(self) -&gt; bool:
     :return: A bool on whether this window is full-screen.
     &#34;&#34;&#34;
     return self.attributes(&#34;-fullscreen&#34;)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.MainWindow.MainWindow.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.MainWindow.MainWindow.icon"><code class="name">var <span class="ident">icon</span> : Union[tkinter.PhotoImage, PIL.ImageTk.PhotoImage, NoneType]</code></dt>
@@ -1223,6 +1283,7 @@ when this event is triggered or None when binding one.</p></div>
 <li><code><a title="TkZero.MainWindow.MainWindow.enabled" href="#TkZero.MainWindow.MainWindow.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.full_screen" href="#TkZero.MainWindow.MainWindow.full_screen">full_screen</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.generate_event" href="#TkZero.MainWindow.MainWindow.generate_event">generate_event</a></code></li>
+<li><code><a title="TkZero.MainWindow.MainWindow.hovering_over" href="#TkZero.MainWindow.MainWindow.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.icon" href="#TkZero.MainWindow.MainWindow.icon">icon</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.maximized" href="#TkZero.MainWindow.MainWindow.maximized">maximized</a></code></li>
 <li><code><a title="TkZero.MainWindow.MainWindow.minimized" href="#TkZero.MainWindow.MainWindow.minimized">minimized</a></code></li>

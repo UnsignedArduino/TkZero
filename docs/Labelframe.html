@@ -60,6 +60,9 @@ class Labelframe(ttk.Labelframe):
         super().__init__(master=parent, text=text)
         self._style_root = &#34;TLabelframe&#34;
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def width(self) -&gt; int:
@@ -168,6 +171,24 @@ class Labelframe(ttk.Labelframe):
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     @property
     def text(self) -&gt; str:
@@ -256,6 +277,9 @@ to "".</p></div>
         super().__init__(master=parent, text=text)
         self._style_root = &#34;TLabelframe&#34;
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def width(self) -&gt; int:
@@ -364,6 +388,24 @@ to "".</p></div>
             )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     @property
     def text(self) -&gt; str:
@@ -453,6 +495,24 @@ def height(self) -&gt; int:
     return self.cget(&#34;height&#34;)</code></pre>
 </details>
 </dd>
+<dt id="TkZero.Labelframe.Labelframe.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
+</details>
+</dd>
 <dt id="TkZero.Labelframe.Labelframe.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
 <dd>
 <div class="desc"><p>Get the text on this Labelframe.</p>
@@ -538,10 +598,11 @@ def width(self) -&gt; int:
 <ul>
 <li>
 <h4><code><a title="TkZero.Labelframe.Labelframe" href="#TkZero.Labelframe.Labelframe">Labelframe</a></code></h4>
-<ul class="">
+<ul class="two-column">
 <li><code><a title="TkZero.Labelframe.Labelframe.apply_style" href="#TkZero.Labelframe.Labelframe.apply_style">apply_style</a></code></li>
 <li><code><a title="TkZero.Labelframe.Labelframe.enabled" href="#TkZero.Labelframe.Labelframe.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Labelframe.Labelframe.height" href="#TkZero.Labelframe.Labelframe.height">height</a></code></li>
+<li><code><a title="TkZero.Labelframe.Labelframe.hovering_over" href="#TkZero.Labelframe.Labelframe.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Labelframe.Labelframe.text" href="#TkZero.Labelframe.Labelframe.text">text</a></code></li>
 <li><code><a title="TkZero.Labelframe.Labelframe.width" href="#TkZero.Labelframe.Labelframe.width">width</a></code></li>
 </ul>

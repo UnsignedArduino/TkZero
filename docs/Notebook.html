@@ -57,6 +57,9 @@ class Tab(Frame):
         super().__init__(parent=parent)
         self._title = title
         self._parent = parent
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def title(self) -&gt; str:
@@ -116,6 +119,24 @@ class Tab(Frame):
             self._parent.tab(self, state=tk.NORMAL if self._enabled else tk.DISABLED)
         except tk.TclError:
             pass
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def add_to(self, notebook: ttk.Notebook) -&gt; None:
         &#34;&#34;&#34;
@@ -474,6 +495,9 @@ together.</p>
         super().__init__(parent=parent)
         self._title = title
         self._parent = parent
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def title(self) -&gt; str:
@@ -533,6 +557,24 @@ together.</p>
             self._parent.tab(self, state=tk.NORMAL if self._enabled else tk.DISABLED)
         except tk.TclError:
             pass
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def add_to(self, notebook: ttk.Notebook) -&gt; None:
         &#34;&#34;&#34;
@@ -611,6 +653,7 @@ def title(self) -&gt; str:
 <li><code><a title="TkZero.Frame.Frame.apply_style" href="Frame.html#TkZero.Frame.Frame.apply_style">apply_style</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.enabled" href="Frame.html#TkZero.Frame.Frame.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.height" href="Frame.html#TkZero.Frame.Frame.height">height</a></code></li>
+<li><code><a title="TkZero.Frame.Frame.hovering_over" href="Frame.html#TkZero.Frame.Frame.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.width" href="Frame.html#TkZero.Frame.Frame.width">width</a></code></li>
 </ul>
 </li>

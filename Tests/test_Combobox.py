@@ -75,6 +75,12 @@ class ComboboxTest(TkTestCase):
         with self.assertRaises(TypeError):
             c.read_only = 1
 
+    def test_hover(self):
+        c = Combobox(self.root)
+        c.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(c.hovering_over), bool)
+
     def test_right_click(self):
         # Also fails randomly in GitHub actions
         try:

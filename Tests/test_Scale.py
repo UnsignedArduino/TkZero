@@ -53,6 +53,13 @@ class ScaleTest(TkTestCase):
         with self.assertRaises(TypeError):
             s.enabled = "pink cat"
 
+    def test_hover(self):
+        s = Scale(self.root, orientation=OrientModes.Vertical, length=200,
+                  minimum=0.0, maximum=100.0)
+        s.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(s.hovering_over), bool)
+
 
 if __name__ == '__main__':
     unittest.main()

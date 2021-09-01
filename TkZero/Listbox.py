@@ -81,6 +81,9 @@ class Listbox(tk.Listbox):
         if on_double_click is not None:
             self.bind("<<Double-1>>", lambda event: on_double_click())
         self._enabled = True
+        self._hovering_over = False
+        self.bind("<Enter>", lambda _: self._set_hover_state(True))
+        self.bind("<Leave>", lambda _: self._set_hover_state(False))
 
     @property
     def selected(self) -> tuple[int]:
@@ -181,3 +184,21 @@ class Listbox(tk.Listbox):
             )
         self._enabled = new_state
         self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def hovering_over(self) -> bool:
+        """
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        """
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -> None:
+        """
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        """
+        self._hovering_over = is_hovering

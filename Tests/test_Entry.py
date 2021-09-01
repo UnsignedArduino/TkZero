@@ -56,6 +56,12 @@ class EntryTest(TkTestCase):
         with self.assertRaises(TypeError):
             e.read_only = "False"
 
+    def test_hover(self):
+        e = Entry(self.root)
+        e.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(e.hovering_over), bool)
+
     def test_right_click(self):
         # Also fails randomly in GitHub actions
         try:

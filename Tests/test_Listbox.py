@@ -67,6 +67,12 @@ class ListboxTest(TkTestCase):
         with self.assertRaises(TypeError):
             l.enabled = "boo"
 
+    def test_hover(self):
+        l = Listbox(self.root)
+        l.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(l.hovering_over), bool)
+
 
 if __name__ == '__main__':
     unittest.main()

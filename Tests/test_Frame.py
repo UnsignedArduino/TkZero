@@ -52,6 +52,12 @@ class FrameTest(TkTestCase):
         with self.assertRaises(TypeError):
             f.enabled = []
 
+    def test_hover(self):
+        f = Frame(self.root)
+        f.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(f.hovering_over), bool)
+
     def test_style(self):
         f = Frame(self.root)
         f.grid(row=0, column=0)
@@ -106,6 +112,12 @@ class ScrollableFrameTest(TkTestCase):
         self.assertFalse(f.enabled)
         with self.assertRaises(TypeError):
             f.enabled = []
+
+    def test_hover(self):
+        f = ScrollableFrame(self.root)
+        f.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(f.hovering_over), bool)
 
     def test_style(self):
         f = ScrollableFrame(self.root)

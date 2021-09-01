@@ -733,6 +733,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         with self.assertRaises(TypeError):
             l.enabled = "boo"
 
+    def test_hover(self):
+        l = Label(self.root)
+        l.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(l.hovering_over), bool)
+
     def test_style(self):
         l = Label(self.root)
         l.grid(row=0, column=0)

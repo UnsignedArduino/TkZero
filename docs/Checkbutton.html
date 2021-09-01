@@ -100,6 +100,9 @@ class Checkbutton(ttk.Checkbutton):
         if image is not None:
             self.image = image
         self.value = False
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def value(self) -&gt; Union[bool, None]:
@@ -235,6 +238,24 @@ class Checkbutton(ttk.Checkbutton):
             )
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;
@@ -315,6 +336,9 @@ class Checkbutton(ttk.Checkbutton):
         if image is not None:
             self.image = image
         self.value = False
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def value(self) -&gt; Union[bool, None]:
@@ -451,6 +475,24 @@ class Checkbutton(ttk.Checkbutton):
         self._enabled = new_state
         self.state([&#34;!disabled&#34; if self._enabled else &#34;disabled&#34;])
 
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
+
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;
         Apply a theme to this checkbutton.
@@ -516,6 +558,24 @@ def enabled(self) -&gt; bool:
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
     return self._enabled</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Checkbutton.Checkbutton.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Checkbutton.Checkbutton.image"><code class="name">var <span class="ident">image</span> : Optional[PIL.ImageTk.PhotoImage]</code></dt>
@@ -703,6 +763,7 @@ Left: Image left of text, etc.</p></div>
 <li><code><a title="TkZero.Checkbutton.Checkbutton.apply_style" href="#TkZero.Checkbutton.Checkbutton.apply_style">apply_style</a></code></li>
 <li><code><a title="TkZero.Checkbutton.Checkbutton.display_mode" href="#TkZero.Checkbutton.Checkbutton.display_mode">display_mode</a></code></li>
 <li><code><a title="TkZero.Checkbutton.Checkbutton.enabled" href="#TkZero.Checkbutton.Checkbutton.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Checkbutton.Checkbutton.hovering_over" href="#TkZero.Checkbutton.Checkbutton.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Checkbutton.Checkbutton.image" href="#TkZero.Checkbutton.Checkbutton.image">image</a></code></li>
 <li><code><a title="TkZero.Checkbutton.Checkbutton.text" href="#TkZero.Checkbutton.Checkbutton.text">text</a></code></li>
 <li><code><a title="TkZero.Checkbutton.Checkbutton.value" href="#TkZero.Checkbutton.Checkbutton.value">value</a></code></li>

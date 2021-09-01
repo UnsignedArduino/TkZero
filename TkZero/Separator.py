@@ -47,6 +47,9 @@ class Separator(ttk.Separator):
         self._style_root = "TSeparator"
         self._enabled = True
         self._orientation = orientation
+        self._hovering_over = False
+        self.bind("<Enter>", lambda _: self._set_hover_state(True))
+        self.bind("<Leave>", lambda _: self._set_hover_state(False))
 
     @property
     def enabled(self) -> bool:
@@ -75,3 +78,21 @@ class Separator(ttk.Separator):
             )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
+
+    @property
+    def hovering_over(self) -> bool:
+        """
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        """
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -> None:
+        """
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        """
+        self._hovering_over = is_hovering

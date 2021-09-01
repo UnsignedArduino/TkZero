@@ -71,6 +71,12 @@ class SpinboxTest(TkTestCase):
         with self.assertRaises(TypeError):
             s.read_only = "False"
 
+    def test_hover(self):
+        s = Spinbox(self.root)
+        s.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(s.hovering_over), bool)
+
     def test_right_click(self):
         # Also fails in GitHub actions
         try:

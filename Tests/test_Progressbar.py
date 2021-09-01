@@ -88,6 +88,13 @@ class ProgressbarTest(TkTestCase):
         with self.assertRaises(TypeError):
             p.enabled = "True"
 
+    def test_hover(self):
+        p = Progressbar(self.root, orientation=OrientModes.Vertical,
+                        mode=ProgressModes.Determinate, length=200)
+        p.grid(row=0, column=1)
+        self.root.update()
+        self.assertEqual(type(p.hovering_over), bool)
+
 
 if __name__ == '__main__':
     unittest.main()

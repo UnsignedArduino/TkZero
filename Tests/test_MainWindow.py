@@ -142,6 +142,10 @@ class MainWindowTest(TkTestCase):
         with self.assertRaises(TypeError):
             self.root.enabled = "False"
 
+    def test_hover(self):
+        self.root.update()
+        self.assertEqual(type(self.root.hovering_over), bool)
+
     def test_on_close(self):
         on_close_func = lambda: None
         self.root.on_close = on_close_func

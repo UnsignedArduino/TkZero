@@ -738,6 +738,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         with self.assertRaises(TypeError):
             c.enabled = "False"
 
+    def test_hover(self):
+        c = Radiobutton(self.root)
+        c.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(c.hovering_over), bool)
+
     def test_execution(self):
         c = Radiobutton(self.root, command=lambda: None)
         c.grid(row=0, column=0)

@@ -90,6 +90,13 @@ class TabTest(TkTestCase):
         with self.assertRaises(TypeError):
             t.enabled = 1
 
+    def test_hover(self):
+        nb = Notebook(self.root)
+        nb.grid(row=0, column=0)
+        t = Tab(nb)
+        self.root.update()
+        self.assertEqual(type(t.hovering_over), bool)
+
 
 if __name__ == '__main__':
     unittest.main()

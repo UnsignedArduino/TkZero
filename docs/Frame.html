@@ -54,6 +54,9 @@ class Frame(ttk.Frame):
         super().__init__(master=parent)
         self._style_root = &#34;TFrame&#34;
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def width(self) -&gt; int:
@@ -166,6 +169,24 @@ class Frame(ttk.Frame):
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
+
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;
         Apply a theme to this frame.
@@ -242,6 +263,9 @@ class ScrollableFrame(Frame):
         self.frame.bind_all(
             &#34;&lt;KeyRelease-Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(False)
         )
+        self._hovering_over = False
+        self.frame.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.frame.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
         &#34;&#34;&#34;
@@ -373,6 +397,24 @@ class ScrollableFrame(Frame):
         self.frame.height = new_height
         self.canvas.configure(height=new_height)
 
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
+
     def _warn(self, method: str):
         &#34;&#34;&#34;
         DON&#39;T USE THE GRID, PACK, OR PLACE METHODS ON THE SCROLLABLE FRAME
@@ -451,6 +493,9 @@ together.</p>
         super().__init__(master=parent)
         self._style_root = &#34;TFrame&#34;
         self._enabled = True
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     @property
     def width(self) -&gt; int:
@@ -563,6 +608,24 @@ together.</p>
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
+
     def apply_style(self, style_name: str) -&gt; None:
         &#34;&#34;&#34;
         Apply a theme to this frame.
@@ -631,6 +694,24 @@ def height(self) -&gt; int:
     :return: An int which is the height of the frame.
     &#34;&#34;&#34;
     return self.cget(&#34;height&#34;)</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Frame.Frame.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Frame.Frame.width"><code class="name">var <span class="ident">width</span> : int</code></dt>
@@ -762,6 +843,9 @@ direction.</p></div>
         self.frame.bind_all(
             &#34;&lt;KeyRelease-Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(False)
         )
+        self._hovering_over = False
+        self.frame.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.frame.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
         &#34;&#34;&#34;
@@ -893,6 +977,24 @@ direction.</p></div>
         self.frame.height = new_height
         self.canvas.configure(height=new_height)
 
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
+
     def _warn(self, method: str):
         &#34;&#34;&#34;
         DON&#39;T USE THE GRID, PACK, OR PLACE METHODS ON THE SCROLLABLE FRAME
@@ -951,6 +1053,7 @@ direction.</p></div>
 <li><code><a title="TkZero.Frame.Frame.apply_style" href="#TkZero.Frame.Frame.apply_style">apply_style</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.enabled" href="#TkZero.Frame.Frame.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.height" href="#TkZero.Frame.Frame.height">height</a></code></li>
+<li><code><a title="TkZero.Frame.Frame.hovering_over" href="#TkZero.Frame.Frame.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.width" href="#TkZero.Frame.Frame.width">width</a></code></li>
 </ul>
 </li>
@@ -978,6 +1081,7 @@ direction.</p></div>
 <li><code><a title="TkZero.Frame.Frame.apply_style" href="#TkZero.Frame.Frame.apply_style">apply_style</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.enabled" href="#TkZero.Frame.Frame.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.height" href="#TkZero.Frame.Frame.height">height</a></code></li>
+<li><code><a title="TkZero.Frame.Frame.hovering_over" href="#TkZero.Frame.Frame.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Frame.Frame.width" href="#TkZero.Frame.Frame.width">width</a></code></li>
 </ul>
 </li>

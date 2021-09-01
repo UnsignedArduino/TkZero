@@ -58,6 +58,12 @@ class TextTest(TkTestCase):
         with self.assertRaises(TypeError):
             t.enabled = "False"
 
+    def test_hover(self):
+        t = Text(self.root)
+        t.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(t.hovering_over), bool)
+
     def test_right_click(self):
         t = Text(self.root)
         t.grid(row=0, column=0)

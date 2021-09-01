@@ -725,6 +725,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         with self.assertRaises(TypeError):
             b.enabled = 1
 
+    def test_hover(self):
+        b = Button(self.root)
+        b.grid(row=0, column=0)
+        self.root.update()
+        self.assertEqual(type(b.hovering_over), bool)
+
     def test_execution(self):
         b = Button(self.root, command=lambda: None)
         b.grid(row=0, column=0)

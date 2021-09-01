@@ -107,6 +107,9 @@ class Text(tk.Text):
         self._orig = self._w + &#34;_orig&#34;
         self.tk.call(&#34;rename&#34;, self._w, self._orig)
         self.tk.createcommand(self._w, self._proxy)
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     def _proxy(self, command, *args):
         cmd = (self._orig, command) + args
@@ -193,6 +196,24 @@ class Text(tk.Text):
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def _make_context_menu(self) -&gt; None:
         &#34;&#34;&#34;
@@ -476,6 +497,9 @@ TextWrap.WordWrapping</p></div>
         self._orig = self._w + &#34;_orig&#34;
         self.tk.call(&#34;rename&#34;, self._w, self._orig)
         self.tk.createcommand(self._w, self._proxy)
+        self._hovering_over = False
+        self.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
+        self.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
 
     def _proxy(self, command, *args):
         cmd = (self._orig, command) + args
@@ -562,6 +586,24 @@ TextWrap.WordWrapping</p></div>
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def hovering_over(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether the cursor is hovering over this widget or not.
+
+        :return: A bool.
+        &#34;&#34;&#34;
+        return self._hovering_over
+
+    def _set_hover_state(self, is_hovering: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether we are hovering over this widget or not.
+
+        :param is_hovering: A bool.
+        :return: None.
+        &#34;&#34;&#34;
+        self._hovering_over = is_hovering
 
     def _make_context_menu(self) -&gt; None:
         &#34;&#34;&#34;
@@ -814,6 +856,24 @@ def enabled(self) -&gt; bool:
     :return: A bool, True if normal otherwise False.
     &#34;&#34;&#34;
     return self._enabled</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Text.Text.hovering_over"><code class="name">var <span class="ident">hovering_over</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether the cursor is hovering over this widget or not.</p>
+<p>:return: A bool.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hovering_over(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether the cursor is hovering over this widget or not.
+
+    :return: A bool.
+    &#34;&#34;&#34;
+    return self._hovering_over</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Text.Text.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
@@ -1121,6 +1181,7 @@ spaces.</p></div>
 <li><code><a title="TkZero.Text.Text.cut_contents" href="#TkZero.Text.Text.cut_contents">cut_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.delete_contents" href="#TkZero.Text.Text.delete_contents">delete_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.enabled" href="#TkZero.Text.Text.enabled">enabled</a></code></li>
+<li><code><a title="TkZero.Text.Text.hovering_over" href="#TkZero.Text.Text.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Text.Text.paste_contents" href="#TkZero.Text.Text.paste_contents">paste_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.redo_contents" href="#TkZero.Text.Text.redo_contents">redo_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.select_all_contents" href="#TkZero.Text.Text.select_all_contents">select_all_contents</a></code></li>
