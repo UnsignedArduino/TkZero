@@ -93,6 +93,7 @@ class Entry(ttk.Entry):
         self._style_root = &#34;TEntry&#34;
         self._enabled = True
         self._readonly = False
+        self.enable_automatically = True
         if on_aqua(self):
             self.bind(&#34;&lt;2&gt;&#34;, lambda event: self._popup(event=event))
             self.bind(&#34;&lt;Control-1&gt;&#34;, lambda event: self._popup(event=event))
@@ -124,8 +125,13 @@ class Entry(ttk.Entry):
             raise TypeError(
                 f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
+        last_states = self.state()
+        if self.enable_automatically:
+            self.enabled = True
         self.delete(0, tk.END)
         self.insert(0, new_text)
+        if self.enable_automatically:
+            self.state(last_states)
 
     @property
     def enabled(self) -&gt; bool:
@@ -438,6 +444,7 @@ changes. Defaults to None.</p></div>
         self._style_root = &#34;TEntry&#34;
         self._enabled = True
         self._readonly = False
+        self.enable_automatically = True
         if on_aqua(self):
             self.bind(&#34;&lt;2&gt;&#34;, lambda event: self._popup(event=event))
             self.bind(&#34;&lt;Control-1&gt;&#34;, lambda event: self._popup(event=event))
@@ -469,8 +476,13 @@ changes. Defaults to None.</p></div>
             raise TypeError(
                 f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
+        last_states = self.state()
+        if self.enable_automatically:
+            self.enabled = True
         self.delete(0, tk.END)
         self.insert(0, new_text)
+        if self.enable_automatically:
+            self.state(last_states)
 
     @property
     def enabled(self) -&gt; bool:

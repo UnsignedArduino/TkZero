@@ -68,6 +68,7 @@ class Text(tk.Text):
         )
         self._enabled = True
         self._readonly = False
+        self.enable_automatically = True
         if on_aqua(self):
             self.bind("<2>", lambda event: self._popup(event=event))
             self.bind("<Control-1>", lambda event: self._popup(event=event))
@@ -115,8 +116,16 @@ class Text(tk.Text):
             raise TypeError(
                 f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
             )
+        last_state = "read_only" if self._readonly else self["state"]
+        if self.enable_automatically:
+            self.enabled = True
         self.delete("1.0", tk.END)
         self.insert("1.0", new_text)
+        if self.enable_automatically:
+            if last_state == "read_only":
+                self.read_only = True
+            else:
+                self.configure(state=last_state)
 
     @property
     def cursor(self) -> str:

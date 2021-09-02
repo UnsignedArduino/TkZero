@@ -264,8 +264,8 @@ class ScrollableFrame(Frame):
             &#34;&lt;KeyRelease-Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(False)
         )
         self._hovering_over = False
-        self.frame.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
-        self.frame.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
+        self.frame.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True), add=True)
+        self.frame.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False), add=True)
 
     def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
         &#34;&#34;&#34;
@@ -844,8 +844,8 @@ direction.</p></div>
             &#34;&lt;KeyRelease-Shift_R&gt;&#34;, lambda _: self._set_shift_pressed(False)
         )
         self._hovering_over = False
-        self.frame.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True))
-        self.frame.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False))
+        self.frame.bind(&#34;&lt;Enter&gt;&#34;, lambda _: self._set_hover_state(True), add=True)
+        self.frame.bind(&#34;&lt;Leave&gt;&#34;, lambda _: self._set_hover_state(False), add=True)
 
     def _set_shift_pressed(self, is_pressed: bool) -&gt; None:
         &#34;&#34;&#34;

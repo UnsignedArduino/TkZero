@@ -69,6 +69,7 @@ class Combobox(ttk.Combobox):
         self._style_root = "TCombobox"
         self._enabled = True
         self._readonly = False
+        self.enable_automatically = True
         if on_aqua(self):
             self.bind("<2>", lambda event: self._popup(event=event))
             self.bind("<Control-1>", lambda event: self._popup(event=event))
@@ -102,8 +103,13 @@ class Combobox(ttk.Combobox):
             raise TypeError(
                 f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
             )
+        last_states = self.state()
+        if self.enable_automatically:
+            self.enabled = True
         self.delete(0, tk.END)
         self.insert(0, new_text)
+        if self.enable_automatically:
+            self.state(last_states)
 
     @property
     def values(self) -> tuple[str, ...]:

@@ -97,6 +97,7 @@ class Text(tk.Text):
         )
         self._enabled = True
         self._readonly = False
+        self.enable_automatically = True
         if on_aqua(self):
             self.bind(&#34;&lt;2&gt;&#34;, lambda event: self._popup(event=event))
             self.bind(&#34;&lt;Control-1&gt;&#34;, lambda event: self._popup(event=event))
@@ -144,8 +145,16 @@ class Text(tk.Text):
             raise TypeError(
                 f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
+        last_state = &#34;read_only&#34; if self._readonly else self[&#34;state&#34;]
+        if self.enable_automatically:
+            self.enabled = True
         self.delete(&#34;1.0&#34;, tk.END)
         self.insert(&#34;1.0&#34;, new_text)
+        if self.enable_automatically:
+            if last_state == &#34;read_only&#34;:
+                self.read_only = True
+            else:
+                self.configure(state=last_state)
 
     @property
     def cursor(self) -&gt; str:
@@ -517,6 +526,7 @@ TextWrap.WordWrapping</p></div>
         )
         self._enabled = True
         self._readonly = False
+        self.enable_automatically = True
         if on_aqua(self):
             self.bind(&#34;&lt;2&gt;&#34;, lambda event: self._popup(event=event))
             self.bind(&#34;&lt;Control-1&gt;&#34;, lambda event: self._popup(event=event))
@@ -564,8 +574,16 @@ TextWrap.WordWrapping</p></div>
             raise TypeError(
                 f&#34;new_text is not a str! &#34; f&#34;(type passed in: {repr(type(new_text))})&#34;
             )
+        last_state = &#34;read_only&#34; if self._readonly else self[&#34;state&#34;]
+        if self.enable_automatically:
+            self.enabled = True
         self.delete(&#34;1.0&#34;, tk.END)
         self.insert(&#34;1.0&#34;, new_text)
+        if self.enable_automatically:
+            if last_state == &#34;read_only&#34;:
+                self.read_only = True
+            else:
+                self.configure(state=last_state)
 
     @property
     def cursor(self) -&gt; str:
