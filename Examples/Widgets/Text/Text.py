@@ -1,7 +1,8 @@
 from TkZero.Button import Button
-from TkZero.Text import Text
-from TkZero.Scrollbar import Scrollbar, OrientModes
+from TkZero.Checkbutton import Checkbutton
 from TkZero.MainWindow import MainWindow
+from TkZero.Scrollbar import Scrollbar
+from TkZero.Text import Text
 
 # Make the main window and give it a title
 root = MainWindow()
@@ -27,6 +28,16 @@ def clear():
 # Make a button to clear the contents
 clear_btn = Button(root, text="Clear contents", command=clear)
 clear_btn.grid(row=2, column=1)
+
+
+# Make a function to update the read-only state of the widget
+def update_read_only():
+    text_box.read_only = read_only_chkbtn.value
+
+
+# Make a button to make it read only or not
+read_only_chkbtn = Checkbutton(root, text="Read only", command=update_read_only)
+read_only_chkbtn.grid(row=3, column=0)
 
 # Start the mainloop like in Tkinter
 root.mainloop()

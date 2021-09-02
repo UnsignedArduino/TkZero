@@ -58,6 +58,16 @@ class TextTest(TkTestCase):
         with self.assertRaises(TypeError):
             t.enabled = "False"
 
+    def test_read_only(self):
+        t = Text(self.root)
+        t.grid(row=0, column=0)
+        self.assertFalse(t.read_only)
+        t.read_only = True
+        self.root.update()
+        self.assertTrue(t.read_only)
+        with self.assertRaises(TypeError):
+            t.read_only = "False"
+
     def test_hover(self):
         t = Text(self.root)
         t.grid(row=0, column=0)

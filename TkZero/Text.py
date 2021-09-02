@@ -85,6 +85,8 @@ class Text(tk.Text):
     def _proxy(self, command, *args):
         cmd = (self._orig, command) + args
         try:
+            if command in ("insert", "delete", "replace") and self._readonly:
+                return
             result = self.tk.call(cmd)
         except tk.TclError:
             return
@@ -167,6 +169,34 @@ class Text(tk.Text):
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def read_only(self) -> bool:
+        """
+        Get whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
+
+        :return: A bool, True if read only otherwise False.
+        """
+        return self._readonly
+
+    @read_only.setter
+    def read_only(self, new_state: bool) -> None:
+        """
+        Set whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
+
+        :param new_state: The new state (a bool) True for normal and False for
+         read only.
+        :return: None.
+        """
+        if not isinstance(new_state, bool):
+            raise TypeError(
+                f"new_state is not a bool! "
+                f"(type passed in: {repr(type(new_state))})"
+            )
+        self.enabled = True
+        self._readonly = new_state
 
     @property
     def hovering_over(self) -> bool:

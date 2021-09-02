@@ -114,6 +114,8 @@ class Text(tk.Text):
     def _proxy(self, command, *args):
         cmd = (self._orig, command) + args
         try:
+            if command in (&#34;insert&#34;, &#34;delete&#34;, &#34;replace&#34;) and self._readonly:
+                return
             result = self.tk.call(cmd)
         except tk.TclError:
             return
@@ -196,6 +198,34 @@ class Text(tk.Text):
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def read_only(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
+
+        :return: A bool, True if read only otherwise False.
+        &#34;&#34;&#34;
+        return self._readonly
+
+    @read_only.setter
+    def read_only(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
+
+        :param new_state: The new state (a bool) True for normal and False for
+         read only.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
+        self.enabled = True
+        self._readonly = new_state
 
     @property
     def hovering_over(self) -&gt; bool:
@@ -504,6 +534,8 @@ TextWrap.WordWrapping</p></div>
     def _proxy(self, command, *args):
         cmd = (self._orig, command) + args
         try:
+            if command in (&#34;insert&#34;, &#34;delete&#34;, &#34;replace&#34;) and self._readonly:
+                return
             result = self.tk.call(cmd)
         except tk.TclError:
             return
@@ -586,6 +618,34 @@ TextWrap.WordWrapping</p></div>
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
+
+    @property
+    def read_only(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Get whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
+
+        :return: A bool, True if read only otherwise False.
+        &#34;&#34;&#34;
+        return self._readonly
+
+    @read_only.setter
+    def read_only(self, new_state: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Set whether this widget is in read only mode. (can copy and paste but
+        cannot edit)
+
+        :param new_state: The new state (a bool) True for normal and False for
+         read only.
+        :return: None.
+        &#34;&#34;&#34;
+        if not isinstance(new_state, bool):
+            raise TypeError(
+                f&#34;new_state is not a bool! &#34;
+                f&#34;(type passed in: {repr(type(new_state))})&#34;
+            )
+        self.enabled = True
+        self._readonly = new_state
 
     @property
     def hovering_over(self) -&gt; bool:
@@ -874,6 +934,26 @@ def hovering_over(self) -&gt; bool:
     :return: A bool.
     &#34;&#34;&#34;
     return self._hovering_over</code></pre>
+</details>
+</dd>
+<dt id="TkZero.Text.Text.read_only"><code class="name">var <span class="ident">read_only</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Get whether this widget is in read only mode. (can copy and paste but
+cannot edit)</p>
+<p>:return: A bool, True if read only otherwise False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def read_only(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Get whether this widget is in read only mode. (can copy and paste but
+    cannot edit)
+
+    :return: A bool, True if read only otherwise False.
+    &#34;&#34;&#34;
+    return self._readonly</code></pre>
 </details>
 </dd>
 <dt id="TkZero.Text.Text.text"><code class="name">var <span class="ident">text</span> : str</code></dt>
@@ -1183,6 +1263,7 @@ spaces.</p></div>
 <li><code><a title="TkZero.Text.Text.enabled" href="#TkZero.Text.Text.enabled">enabled</a></code></li>
 <li><code><a title="TkZero.Text.Text.hovering_over" href="#TkZero.Text.Text.hovering_over">hovering_over</a></code></li>
 <li><code><a title="TkZero.Text.Text.paste_contents" href="#TkZero.Text.Text.paste_contents">paste_contents</a></code></li>
+<li><code><a title="TkZero.Text.Text.read_only" href="#TkZero.Text.Text.read_only">read_only</a></code></li>
 <li><code><a title="TkZero.Text.Text.redo_contents" href="#TkZero.Text.Text.redo_contents">redo_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.select_all_contents" href="#TkZero.Text.Text.select_all_contents">select_all_contents</a></code></li>
 <li><code><a title="TkZero.Text.Text.text" href="#TkZero.Text.Text.text">text</a></code></li>
