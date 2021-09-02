@@ -235,8 +235,8 @@ class ScrollableFrame(Frame):
             "<KeyRelease-Shift_R>", lambda _: self._set_shift_pressed(False)
         )
         self._hovering_over = False
-        self.frame.bind("<Enter>", lambda _: self._set_hover_state(True))
-        self.frame.bind("<Leave>", lambda _: self._set_hover_state(False))
+        self.frame.bind("<Enter>", lambda _: self._set_hover_state(True), add=True)
+        self.frame.bind("<Leave>", lambda _: self._set_hover_state(False), add=True)
 
     def _set_shift_pressed(self, is_pressed: bool) -> None:
         """
