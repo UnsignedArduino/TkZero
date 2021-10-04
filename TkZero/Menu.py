@@ -3,7 +3,7 @@ Creates menus.
 """
 
 import tkinter as tk
-from typing import Union, Callable, Any
+from typing import Union, Callable, Any, List
 
 
 class DisplayModes:
@@ -71,7 +71,7 @@ class Menu(tk.Menu):
             parent.configure(menu=self)
 
     @property
-    def items(self) -> list[Any]:
+    def items(self) -> List[Any]:
         """
         Get the items in this menu.
 
@@ -81,7 +81,7 @@ class Menu(tk.Menu):
         return self._items
 
     @items.setter
-    def items(self, new_items: list[Any]) -> None:
+    def items(self, new_items: List[Any]) -> None:
         """
         Set the items in this menu.
 
@@ -284,7 +284,7 @@ class MenuCascade:
     def __init__(
         self,
         label: str = "",
-        items: list[
+        items: List[
             Union[
                 MenuCommand,
                 Union[

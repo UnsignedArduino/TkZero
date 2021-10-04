@@ -7,7 +7,7 @@ from pathlib import Path
 from tkinter import colorchooser
 from tkinter import filedialog as fd
 from tkinter import messagebox as mbox
-from typing import Union
+from typing import Union, Tuple
 
 from TkZero import Window
 
@@ -15,7 +15,7 @@ from TkZero import Window
 def open_file(
     initial_dir: Path = None,
     title: str = None,
-    file_types: tuple[tuple[str, str], ...] = None,
+    file_types: Tuple[Tuple[str, str], ...] = None,
 ) -> Union[Path, None]:
     """
     Ask the user to open a file.
@@ -40,7 +40,7 @@ def open_file(
 def save_file(
     initial_dir: Path = None,
     title: str = None,
-    file_types: tuple[tuple[str, str], ...] = None,
+    file_types: Tuple[Tuple[str, str], ...] = None,
 ) -> Union[Path, None]:
     """
     Ask the user to save a file.
@@ -78,7 +78,7 @@ def select_directory(initial_dir: Path = None, title: str = None) -> Union[Path,
 
 def choose_color(
     initial_color: str = "ffffff", as_rgb: bool = False
-) -> Union[Union[str, tuple[float]], None]:
+) -> Union[Union[str, Tuple[float]], None]:
     """
     Ask the user to select a color.
 

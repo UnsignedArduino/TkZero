@@ -4,7 +4,7 @@ Creates a themed Combobox.
 
 import tkinter as tk
 from tkinter import ttk
-from typing import Union, Callable
+from typing import Union, Callable, Tuple, List
 
 from TkZero.Platform import on_aqua
 
@@ -13,7 +13,7 @@ class Combobox(ttk.Combobox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: Union[list[str, ...], tuple[str, ...]] = (),
+        values: Union[List[str, ...], Tuple[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -89,7 +89,7 @@ class Combobox(ttk.Combobox):
             self.state(last_states)
 
     @property
-    def values(self) -> tuple[str, ...]:
+    def values(self) -> Tuple[str, ...]:
         """
         Get the default options you can select.
 
@@ -98,7 +98,7 @@ class Combobox(ttk.Combobox):
         return self["values"] if self["values"] else ()
 
     @values.setter
-    def values(self, new_values: Union[tuple[str, ...], list[str, ...]]) -> None:
+    def values(self, new_values: Union[Tuple[str, ...], List[str, ...]]) -> None:
         """
         Set the default options text on this combobox.
 

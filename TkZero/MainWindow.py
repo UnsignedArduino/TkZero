@@ -5,7 +5,7 @@ program!
 
 import tkinter as tk
 from threading import Thread
-from typing import Union, Callable
+from typing import Union, Callable, List, Tuple
 
 from PIL import ImageTk
 
@@ -83,7 +83,7 @@ class MainWindow(tk.Tk):
         return Vector.Size(width=self.winfo_width(), height=self.winfo_height())
 
     @size.setter
-    def size(self, new_size: Union[Vector.Size, tuple[int, int]]) -> None:
+    def size(self, new_size: Union[Vector.Size, Tuple[int, int]]) -> None:
         """
         Set the size of the window.
 
@@ -108,7 +108,7 @@ class MainWindow(tk.Tk):
         return Vector.Position(x=self.winfo_x(), y=self.winfo_y())
 
     @position.setter
-    def position(self, new_position: Union[Vector.Position, tuple[int, int]]) -> None:
+    def position(self, new_position: Union[Vector.Position, Tuple[int, int]]) -> None:
         """
         Set the **top-left** position of the window.
 
@@ -224,7 +224,7 @@ class MainWindow(tk.Tk):
         func: Callable = None,
         run_in_thread: bool = False,
         add: bool = False,
-    ) -> Union[None, list[str]]:
+    ) -> Union[None, List[str]]:
         """
         Bind a event to a function.
 

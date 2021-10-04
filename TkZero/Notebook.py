@@ -4,7 +4,7 @@ Creates tabbed notebooks.
 
 import tkinter as tk
 from tkinter import ttk
-from typing import Union
+from typing import Union, List
 
 from TkZero.Frame import Frame
 
@@ -115,7 +115,7 @@ class Notebook(ttk.Notebook):
         self._selected = 0
 
     @property
-    def tabs(self) -> list[Tab]:
+    def tabs(self) -> List[Tab]:
         """
         Get a list of tabs in this notebook.
 
@@ -124,7 +124,7 @@ class Notebook(ttk.Notebook):
         return self._tabs
 
     @tabs.setter
-    def tabs(self, new_tabs: list[Tab]) -> None:
+    def tabs(self, new_tabs: List[Tab]) -> None:
         """
         Set the list of tabs in this notebook.
 

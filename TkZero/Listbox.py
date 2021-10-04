@@ -3,7 +3,7 @@ Creates a "classic" Listbox
 """
 
 import tkinter as tk
-from typing import Union, Callable
+from typing import Union, Callable, Tuple, List
 
 
 class SelectModes:
@@ -21,7 +21,7 @@ class Listbox(tk.Listbox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: Union[list[str, ...], tuple[str, ...]] = None,
+        values: Union[List[str, ...], Tuple[str, ...]] = None,
         select_mode: str = SelectModes.Single,
         height: int = None,
         width: int = None,
@@ -63,7 +63,7 @@ class Listbox(tk.Listbox):
         self.bind("<Leave>", lambda _: self._set_hover_state(False))
 
     @property
-    def selected(self) -> tuple[int]:
+    def selected(self) -> Tuple[int]:
         """
         Get the selected items in this listbox.
 
@@ -72,7 +72,7 @@ class Listbox(tk.Listbox):
         return self.curselection()
 
     @selected.setter
-    def selected(self, new_selection: tuple[int]) -> None:
+    def selected(self, new_selection: Tuple[int]) -> None:
         """
         Set the selected items in this listbox.
 
@@ -85,7 +85,7 @@ class Listbox(tk.Listbox):
             self.selection_set(index)
 
     @property
-    def values(self) -> list[str]:
+    def values(self) -> List[str]:
         """
         Get the values you can select.
 
@@ -94,7 +94,7 @@ class Listbox(tk.Listbox):
         return self._values
 
     @values.setter
-    def values(self, new_values: Union[list[str, ...], tuple[str, ...]]) -> None:
+    def values(self, new_values: Union[List[str, ...], Tuple[str, ...]]) -> None:
         """
         Set the items on this combobox.
 
