@@ -18,16 +18,6 @@ class Labelframe(ttk.Labelframe):
         :param text: The text on the label frame. Should be a str and defaults
          to "".
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(text, str):
-            raise TypeError(
-                f"text is not a str! " f"(type passed in: {repr(type(text))})"
-            )
         super().__init__(master=parent, text=text)
         self._style_root = "TLabelframe"
         self._enabled = True
@@ -53,11 +43,6 @@ class Labelframe(ttk.Labelframe):
          Cannot be less than 1.
         :return: None.
         """
-        if not isinstance(new_width, int):
-            raise TypeError(
-                f"new_height is not a int! "
-                f"(type passed in: {repr(type(new_width))})"
-            )
         if new_width < 1:
             raise ValueError(
                 f"new_height is less than 1! " f"(value passed in: {repr(new_width)})"
@@ -82,11 +67,6 @@ class Labelframe(ttk.Labelframe):
          Cannot be less than 1.
         :return: None.
         """
-        if not isinstance(new_height, int):
-            raise TypeError(
-                f"new_height is not an int! "
-                f"(type passed in: {repr(type(new_height))})"
-            )
         if new_height < 1:
             raise ValueError(
                 f"new_height is less than 1! " f"(value passed in: {repr(new_height)})"
@@ -135,11 +115,6 @@ class Labelframe(ttk.Labelframe):
         for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 
@@ -178,10 +153,6 @@ class Labelframe(ttk.Labelframe):
         :param new_text: The new text. Should be a str.
         :return: None.
         """
-        if not isinstance(new_text, str):
-            raise TypeError(
-                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
-            )
         self.configure(text=new_text)
 
     def apply_style(self, style_name: str) -> None:
@@ -191,9 +162,4 @@ class Labelframe(ttk.Labelframe):
         :param style_name: The name of the theme as a str, ex. "Warning"
         :return: None.
         """
-        if not isinstance(style_name, str):
-            raise TypeError(
-                f"style_name is not a str! "
-                f"(type passed in: {repr(type(style_name))})"
-            )
         self.configure(style=f"{style_name}.{self._style_root}")

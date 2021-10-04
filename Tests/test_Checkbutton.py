@@ -13,24 +13,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class CheckbuttonTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Checkbutton()
-        with self.assertRaises(TypeError):
-            Checkbutton(1)
-        with self.assertRaises(TypeError):
-            Checkbutton(self.root, text=lambda: None)
-        with self.assertRaises(TypeError):
-            Checkbutton(self.root, image="lol")
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Checkbutton(1)
-        with self.assertRaises(TypeError):
-            Checkbutton(self.root, text=lambda: None)
-        with self.assertRaises(TypeError):
-            Checkbutton(self.root, image="lol")
-
     def test_good_params(self):
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -262,8 +244,6 @@ class CheckbuttonTest(TkTestCase):
         c.value = None
         self.root.update()
         self.assertEqual(c.value, None)
-        with self.assertRaises(TypeError):
-            c.value = 1
 
     def test_text(self):
         c = Checkbutton(self.root, text="Foobar")
@@ -271,8 +251,6 @@ class CheckbuttonTest(TkTestCase):
         c.text = "Test"
         self.root.update()
         self.assertEqual(c.text, "Test")
-        with self.assertRaises(TypeError):
-            c.text = 1234
 
     def test_image(self):
         c = Checkbutton(self.root)
@@ -498,8 +476,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.image = PhotoImage(data=image_data)
         self.root.update()
         self.assertTrue(c.image is not None)
-        with self.assertRaises(TypeError):
-            c.image = "lalalalala"
 
     def test_text_and_image(self):
         c = Checkbutton(self.root, text="Click for smiles!")
@@ -732,8 +708,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.display_mode = DisplayModes.ImageTopText
         self.root.update()
         self.assertEqual(c.display_mode, DisplayModes.ImageTopText)
-        with self.assertRaises(TypeError):
-            c.display_mode = ["la", "la"]
 
     def test_enabled(self):
         c = Checkbutton(self.root)
@@ -742,8 +716,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(c.enabled)
         c.enabled = False
         self.assertFalse(c.enabled)
-        with self.assertRaises(TypeError):
-            c.enabled = {"boo"}
 
     def test_hover(self):
         c = Checkbutton(self.root)
@@ -764,8 +736,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         c.apply_style("Test")
         self.root.update()
         self.assertEqual(c.cget("style"), "Test.TCheckbutton")
-        with self.assertRaises(TypeError):
-            c.apply_style(1)
 
 
 if __name__ == '__main__':

@@ -5,14 +5,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class NotebookTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Notebook()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Notebook(parent=1)
-
     def test_good_params(self):
         Notebook(self.root).grid(row=0, column=0)
 
@@ -24,11 +16,6 @@ class NotebookTest(TkTestCase):
         nb.update_tabs()
         self.root.update()
         self.assertEqual(len(nb.tabs), 2)
-        with self.assertRaises(TypeError):
-            nb.tabs = {}
-        with self.assertRaises(TypeError):
-            nb.tabs = [1, 2]
-            nb.update_tabs()
 
     def test_selected(self):
         nb = Notebook(self.root)
@@ -54,10 +41,6 @@ class TabTest(TkTestCase):
     def test_bad_params(self):
         nb = Notebook(self.root)
         nb.grid(row=0, column=0)
-        with self.assertRaises(TypeError):
-            Tab(parent=1)
-        with self.assertRaises(TypeError):
-            Tab(nb, title=12345678)
 
     def test_good_params(self):
         nb = Notebook(self.root)
@@ -76,8 +59,6 @@ class TabTest(TkTestCase):
         t.title = "lalala"
         self.root.update()
         self.assertEqual(t.title, "lalala")
-        with self.assertRaises(TypeError):
-            t.title = 0
 
     def test_enabled(self):
         nb = Notebook(self.root)
@@ -87,8 +68,6 @@ class TabTest(TkTestCase):
         t.enabled = False
         self.root.update()
         self.assertFalse(t.enabled)
-        with self.assertRaises(TypeError):
-            t.enabled = 1
 
     def test_hover(self):
         nb = Notebook(self.root)

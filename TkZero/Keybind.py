@@ -35,30 +35,6 @@ def generate_event_sequence(
     :return: A str which is the not-so-human-friendly event sequence which
      you can pass into the bind_to_event on a widget.
     """
-    if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(
-            f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-            f"(type passed in: {repr(type(widget))})"
-        )
-    if not isinstance(ctrl_cmd, bool):
-        raise TypeError(
-            f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})"
-        )
-    if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(
-            f"ctrl_ctrl is not a bool! " f"(type passed in: {repr(type(ctrl_ctrl))})"
-        )
-    if not isinstance(shift_shift, bool):
-        raise TypeError(
-            f"shift_shift is not a bool! "
-            f"(type passed in: {repr(type(shift_shift))})"
-        )
-    if not isinstance(alt_option, bool):
-        raise TypeError(
-            f"alt_option is not a bool! " f"(type passed in: {repr(type(alt_option))})"
-        )
-    if not isinstance(letter, str):
-        raise TypeError(f"letter is not a str! (type passed in: {repr(type(letter))})")
     sequence = "<"
     if Platform.on_aqua(widget):
         if ctrl_cmd:
@@ -109,30 +85,6 @@ def generate_accelerator_sequence(
      str. Must be one character long.
     :return: A str of the accelerator.
     """
-    if not isinstance(widget, (tk.Widget, tk.Tk, tk.Toplevel)):
-        raise TypeError(
-            f"widget is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-            f"(type passed in: {repr(type(widget))})"
-        )
-    if not isinstance(ctrl_cmd, bool):
-        raise TypeError(
-            f"ctrl_cmd is not a bool! (type passed in: {repr(type(ctrl_cmd))})"
-        )
-    if not isinstance(ctrl_ctrl, bool):
-        raise TypeError(
-            f"ctrl_ctrl is not a bool! " f"(type passed in: {repr(type(ctrl_ctrl))})"
-        )
-    if not isinstance(shift_shift, bool):
-        raise TypeError(
-            f"shift_shift is not a bool! "
-            f"(type passed in: {repr(type(shift_shift))})"
-        )
-    if not isinstance(alt_option, bool):
-        raise TypeError(
-            f"alt_option is not a bool! " f"(type passed in: {repr(type(alt_option))})"
-        )
-    if not isinstance(letter, str):
-        raise TypeError(f"letter is not a str! (type passed in: {repr(type(letter))})")
     sequence = ""
     if ctrl_cmd:
         sequence += "Command-" if Platform.on_aqua(widget) else "Control-"

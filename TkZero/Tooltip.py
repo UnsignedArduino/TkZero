@@ -189,14 +189,4 @@ def add_tooltip(widget: tk.Widget, text: str, hold_time: int = 1000) -> None:
      tooltip pops up.
     :return: None.
     """
-    if not isinstance(widget, tk.Widget):
-        raise TypeError(
-            f"widget is not a tk.Widget! " f"(type passed in: {repr(type(widget))})"
-        )
-    if not isinstance(text, str):
-        raise TypeError(f"text is not a str! " f"(type passed in: {repr(type(text))})")
-    if not isinstance(hold_time, int):
-        raise TypeError(
-            f"hold_time is not a int! " f"(type passed in: {repr(type(hold_time))})"
-        )
     _Hovertip(anchor_widget=widget, text=text, hover_delay=hold_time)

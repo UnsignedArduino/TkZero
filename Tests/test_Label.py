@@ -13,18 +13,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class LabelTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Label()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Label(parent=1)
-        with self.assertRaises(TypeError):
-            Label(self.root, text=["blah"])
-        with self.assertRaises(TypeError):
-            Label(self.root, image=123456789)
-
     def test_good_params(self):
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -255,8 +243,6 @@ class LabelTest(TkTestCase):
         l.text = "Test"
         self.root.update()
         self.assertEqual(l.text, "Test")
-        with self.assertRaises(TypeError):
-            l.text = 0.2
 
     def test_image(self):
         l = Label(self.root)
@@ -483,8 +469,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.image = PhotoImage(data=image_data)
         self.root.update()
         self.assertTrue(l.image is not None)
-        with self.assertRaises(TypeError):
-            l.image = {}
         self.root.after(ms=100, func=self.root.close)
         self.root.mainloop()
 
@@ -718,8 +702,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.display_mode = DisplayModes.ImageLeftText
         self.root.update()
         self.assertEqual(l.display_mode, DisplayModes.ImageLeftText)
-        with self.assertRaises(TypeError):
-            l.display_mode = []
         self.root.after(ms=100, func=self.root.close)
         self.root.mainloop()
 
@@ -730,8 +712,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(l.enabled)
         l.enabled = False
         self.assertFalse(l.enabled)
-        with self.assertRaises(TypeError):
-            l.enabled = "boo"
 
     def test_hover(self):
         l = Label(self.root)
@@ -747,8 +727,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         l.apply_style("Test")
         self.assertEqual(l.cget("style"), "Test.TLabel")
         self.root.update()
-        with self.assertRaises(TypeError):
-            l.apply_style(69)
 
 
 if __name__ == '__main__':

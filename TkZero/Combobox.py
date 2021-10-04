@@ -35,25 +35,6 @@ class Combobox(ttk.Combobox):
         :param command: The command to run when the value of the combobox
          changes. Defaults to None.
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(values, (tuple, list)):
-            raise TypeError(
-                f"values is not a tuple or a list! "
-                f"(type passed in: {repr(type(values))})"
-            )
-        if not isinstance(width, int) and width is not None:
-            raise TypeError(
-                f"width is not a int! (type passed in: {repr(type(width))})"
-            )
-        if not isinstance(show, str) and show is not None:
-            raise TypeError(
-                f"show is not a str! " f"(type passed in: {repr(type(show))})"
-            )
         self._variable = tk.StringVar(value="")
         if command is not None:
             self._variable.trace_add("write", lambda *args: command())
@@ -99,10 +80,6 @@ class Combobox(ttk.Combobox):
         :param new_text: The new text.
         :return: None.
         """
-        if not isinstance(new_text, str):
-            raise TypeError(
-                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
-            )
         last_states = self.state()
         if self.enable_automatically:
             self.enabled = True
@@ -128,11 +105,6 @@ class Combobox(ttk.Combobox):
         :param new_values: The new options, as a tuple or list of str.
         :return: None.
         """
-        if not isinstance(new_values, (tuple, list)):
-            raise TypeError(
-                f"new_values is not a tuple or a list! "
-                f"(type passed in: {repr(type(new_values))})"
-            )
         self["values"] = tuple([str(thing) for thing in new_values])
 
     @property
@@ -155,11 +127,6 @@ class Combobox(ttk.Combobox):
          for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self._readonly = False
         self.state(["!disabled" if self._enabled else "disabled"])
@@ -184,11 +151,6 @@ class Combobox(ttk.Combobox):
          read only.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = True
         self._readonly = new_state
         self.state(["readonly" if self._readonly else "!readonly"])
@@ -352,9 +314,4 @@ class Combobox(ttk.Combobox):
         :param style_name: The name of the theme as a str, ex. "Warning"
         :return: None.
         """
-        if not isinstance(style_name, str):
-            raise TypeError(
-                f"style_name is not a str! "
-                f"(type passed in: {repr(type(style_name))})"
-            )
         self.configure(style=f"{style_name}.{self._style_root}")

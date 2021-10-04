@@ -9,22 +9,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class ListboxTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Listbox()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Listbox(parent=1)
-        with self.assertRaises(TypeError):
-            Listbox(self.root, values="")
-        with self.assertRaises(TypeError):
-            Listbox(self.root, select_mode=1)
-        with self.assertRaises(TypeError):
-            Listbox(self.root, height=2.5)
-        with self.assertRaises(TypeError):
-            Listbox(self.root, width="foo")
-
     def test_good_params(self):
         Listbox(self.root, width=20, height=10, values=["foo", "bar"],
                 on_select=lambda: print("Selected"),
@@ -39,10 +23,6 @@ class ListboxTest(TkTestCase):
         l.selected = (0, )
         self.assertEqual(l.selected, (0, ))
         l.scroll_to(0)
-        with self.assertRaises(TypeError):
-            l.selected = []
-        with self.assertRaises(TypeError):
-            l.scroll_to("")
         self.root.close()
 
     def test_values(self):
@@ -54,8 +34,6 @@ class ListboxTest(TkTestCase):
         self.assertEqual(l.values, ["Foo"])
         l.values = ("Bar", )
         self.assertEqual(l.values, ["Bar"])
-        with self.assertRaises(TypeError):
-            l.values = {}
 
     def test_enabled(self):
         l = Listbox(self.root)
@@ -64,8 +42,6 @@ class ListboxTest(TkTestCase):
         self.assertTrue(l.enabled)
         l.enabled = False
         self.assertFalse(l.enabled)
-        with self.assertRaises(TypeError):
-            l.enabled = "boo"
 
     def test_hover(self):
         l = Listbox(self.root)

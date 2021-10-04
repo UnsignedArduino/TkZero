@@ -17,14 +17,6 @@ class ButtonTest(TkTestCase):
         with self.assertRaises(TypeError):
             Button()
 
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Button("asdf")
-        with self.assertRaises(TypeError):
-            Button(self.root, text=1)
-        with self.assertRaises(TypeError):
-            Button(self.root, image="foo")
-
     def test_good_params(self):
         image_data = base64.b64decode("""Qk02MAAAAAAAADYAAAAoAAAAQAAAAEAAAAABABgAAAAAAAAwAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -251,8 +243,6 @@ class ButtonTest(TkTestCase):
         b.text = "Test"
         self.root.update()
         self.assertEqual(b.text, "Test")
-        with self.assertRaises(TypeError):
-            b.text = 1
 
     def test_image(self):
         b = Button(self.root)
@@ -478,8 +468,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         b.image = PhotoImage(data=image_data)
         self.root.update()
         self.assertTrue(b.image is not None)
-        with self.assertRaises(TypeError):
-            b.image = "foo bar"
 
     def test_text_and_image(self):
         b = Button(self.root, text="Click for smiles!")
@@ -712,8 +700,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         b.display_mode = DisplayModes.ImageTopText
         self.root.update()
         self.assertEqual(b.display_mode, DisplayModes.ImageTopText)
-        with self.assertRaises(TypeError):
-            b.display_mode = False
 
     def test_enabled(self):
         b = Button(self.root)
@@ -722,8 +708,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
         self.assertTrue(b.enabled)
         b.enabled = False
         self.assertFalse(b.enabled)
-        with self.assertRaises(TypeError):
-            b.enabled = 1
 
     def test_hover(self):
         b = Button(self.root)
@@ -742,8 +726,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA""")
                            background="red")
         b.apply_style("Test")
         self.assertEqual(b.cget("style"), "Test.TButton")
-        with self.assertRaises(TypeError):
-            b.apply_style(1)
 
 
 if __name__ == '__main__':

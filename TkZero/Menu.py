@@ -64,16 +64,6 @@ class Menu(tk.Menu):
         :param command: The command to run before actually showing it - useful
          for updating the menu items.
         """
-        if not isinstance(parent, (tk.Menu, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a Union[tk.Menu, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(is_menubar, bool):
-            raise TypeError(
-                f"is_menubar is not a bool! "
-                f"(type passed in: {repr(type(is_menubar))})"
-            )
         super().__init__(master=parent, postcommand=command, tearoff=0)
         self.is_menubar = is_menubar
         self._items = None
@@ -99,36 +89,12 @@ class Menu(tk.Menu):
          MenuCheckbutton, MenuRadiobutton, and MenuCascade.
         :return: None.
         """
-        if not isinstance(new_items, list):
-            raise TypeError(
-                f"new_items is not a list! "
-                f"(type passed in: {repr(type(new_items))})"
-            )
         end = self.index(tk.END)
         if end is not None:
             for index in range(int(end) + 1):
                 self.delete(0)
         self._items = new_items
         for index, item in enumerate(self._items):
-            if not isinstance(
-                item,
-                (
-                    MenuCommand,
-                    MenuSeparator,
-                    MenuCheckbutton,
-                    MenuRadiobutton,
-                    MenuCascade,
-                ),
-            ):
-                raise TypeError(
-                    f"Item #{index}/{len(self._items)} in "
-                    f"new_items is not a "
-                    f"MenuCommand, MenuSeparator, "
-                    f"MenuCheckbutton, MenuRadiobutton, "
-                    f"or a MenuCascade! "
-                    f"(type of item #{index}: "
-                    f"{repr(type(item))})"
-                )
             item.create(menu=self)
 
 
@@ -145,23 +111,6 @@ class MenuCommand:
         underline: int = None,
         accelerator: str = None,
     ):
-        if not isinstance(label, str):
-            raise TypeError(
-                f"label is not a str! " f"(type passed in: {repr(type(label))})"
-            )
-        if not isinstance(enabled, bool):
-            raise TypeError(
-                f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
-            )
-        if not isinstance(underline, int) and underline is not None:
-            raise TypeError(
-                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
-            )
-        if not isinstance(accelerator, str) and accelerator is not None:
-            raise TypeError(
-                f"accelerator is not a str! "
-                f"(type passed in: {repr(type(accelerator))})"
-            )
         self.label = label
         self.command = command
         self.enabled = enabled
@@ -186,11 +135,6 @@ class MenuCommand:
         :param menu: A TkZero.Menu.Menu to add too.
         :return: None.
         """
-        if not isinstance(menu, (Menu, tk.Menu)):
-            raise TypeError(
-                f"menu is not a TkZero.Menu.Menu or a Menu!"
-                f"(type passed in: {repr(type(menu))})"
-            )
         if hasattr(menu, "is_menubar") and menu.is_menubar:
             raise ValueError(
                 f"This menu seems to be a menu bar so I can't" f"be added to it!"
@@ -216,11 +160,6 @@ class MenuSeparator:
         :param menu: A TkZero.Menu.Menu to add too.
         :return: None.
         """
-        if not isinstance(menu, (Menu, tk.Menu)):
-            raise TypeError(
-                f"menu is not a TkZero.Menu.Menu or tk.Menu! "
-                f"(type passed in: {repr(type(menu))})"
-            )
         if hasattr(menu, "is_menubar") and menu.is_menubar:
             raise ValueError(
                 f"This menu seems to be a menu bar so I can't" f"be added to it!"
@@ -243,38 +182,6 @@ class MenuCheckbutton:
         underline: int = None,
         accelerator: str = None,
     ):
-        if not isinstance(label, str):
-            raise TypeError(
-                f"label is not a str! " f"(type passed in: {repr(type(label))})"
-            )
-        if not isinstance(variable, tk.Variable) and variable is not None:
-            raise TypeError(
-                f"variable is not a tk.Variable! "
-                f"(type passed in: {repr(type(variable))})"
-            )
-        if not isinstance(on_value, (str, bool, int, float)):
-            raise TypeError(
-                f"on_value is not a str, bool, int, or float! "
-                f"(type passed in: {repr(type(on_value))})"
-            )
-        if not isinstance(off_value, (str, bool, int, float)):
-            raise TypeError(
-                f"off_value is not a str, bool, int, or float! "
-                f"(type passed in: {repr(type(off_value))})"
-            )
-        if not isinstance(enabled, bool):
-            raise TypeError(
-                f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
-            )
-        if not isinstance(underline, int) and underline is not None:
-            raise TypeError(
-                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
-            )
-        if not isinstance(accelerator, str) and accelerator is not None:
-            raise TypeError(
-                f"accelerator is not a str! "
-                f"(type passed in: {repr(type(accelerator))})"
-            )
         self.label = label
         self.variable = variable
         self.on_value = on_value
@@ -301,10 +208,6 @@ class MenuCheckbutton:
         :param menu: A TkZero.Menu.Menu to add too.
         :return: None.
         """
-        if not isinstance(menu, Menu):
-            raise TypeError(
-                f"menu is not a tk.Menu! " f"(type passed in: {repr(type(menu))})"
-            )
         if menu.is_menubar:
             raise ValueError(
                 f"This menu seems to be a menu bar so I can't" f"be added to it!"
@@ -334,33 +237,6 @@ class MenuRadiobutton:
         underline: int = None,
         accelerator: str = None,
     ):
-        if not isinstance(value, (str, bool, int, float)):
-            raise TypeError(
-                f"onvalue_value is not a str, bool, int, or float! "
-                f"(type passed in: {repr(type(value))})"
-            )
-        if not isinstance(variable, tk.Variable) and variable is not None:
-            raise TypeError(
-                f"variable is not a tk.Variable! "
-                f"(type passed in: {repr(type(variable))})"
-            )
-        if not isinstance(label, str):
-            raise TypeError(
-                f"label is not a str! " f"(type passed in: {repr(type(label))})"
-            )
-        if not isinstance(enabled, bool):
-            raise TypeError(
-                f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
-            )
-        if not isinstance(underline, int) and underline is not None:
-            raise TypeError(
-                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
-            )
-        if not isinstance(accelerator, str) and accelerator is not None:
-            raise TypeError(
-                f"accelerator is not a str! "
-                f"(type passed in: {repr(type(accelerator))})"
-            )
         self.label = label
         self.variable = variable
         self.value = value
@@ -386,10 +262,6 @@ class MenuRadiobutton:
         :param menu: A TkZero.Menu.Menu to add too.
         :return: None.
         """
-        if not isinstance(menu, Menu):
-            raise TypeError(
-                f"menu is not a tk.Menu! " f"(type passed in: {repr(type(menu))})"
-            )
         if menu.is_menubar:
             raise ValueError(
                 f"This menu seems to be a menu bar so I can't" f"be added to it!"
@@ -424,22 +296,6 @@ class MenuCascade:
         enabled: bool = True,
         underline: int = None,
     ):
-        if not isinstance(label, str):
-            raise TypeError(
-                f"label is not a str! " f"(type passed in: {repr(type(label))})"
-            )
-        if not isinstance(items, list):
-            raise TypeError(
-                f"items is not a list! " f"(type passed in: {repr(type(items))})"
-            )
-        if not isinstance(enabled, bool):
-            raise TypeError(
-                f"enabled is not a bool! " f"(type passed in: {repr(type(enabled))})"
-            )
-        if not isinstance(underline, int) and underline is not None:
-            raise TypeError(
-                f"underline is not a int! " f"(type passed in: {repr(type(underline))})"
-            )
         self.menu = None
         self.label = label
         self.enabled = enabled
@@ -464,10 +320,6 @@ class MenuCascade:
         :param menu: A TkZero.Menu.Menu to add too.
         :return: None.
         """
-        if not isinstance(menu, Menu):
-            raise TypeError(
-                f"menu is not a tk.Menu! " f"(type passed in: {repr(type(menu))})"
-            )
         self.menu = Menu(parent=menu)
         menu.add_cascade(menu=self.menu, label=self.label, underline=self.underline)
         for item in self.items:

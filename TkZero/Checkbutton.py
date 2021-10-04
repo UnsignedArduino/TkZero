@@ -47,21 +47,6 @@ class Checkbutton(ttk.Checkbutton):
         :param image: The image on the checkbutton. Defaults to None.
         :param command: The command to run when toggled. Defaults to None.
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(text, str):
-            raise TypeError(
-                f"text is not a str! " f"(type passed in: {repr(type(text))})"
-            )
-        if not isinstance(image, (PhotoImage, tk.PhotoImage)) and image is not None:
-            raise TypeError(
-                f"image is not a Union[PhotoImage, tk.PhotoImage]! "
-                f"(type passed in: {repr(type(image))})"
-            )
         self._variable = tk.BooleanVar(value=False)
         super().__init__(master=parent, command=command, variable=self._variable)
         self._style_root = "TCheckbutton"
@@ -97,11 +82,6 @@ class Checkbutton(ttk.Checkbutton):
          check) or True for checked and False otherwise.
         :return: None.
         """
-        if not isinstance(new_value, bool) and new_value is not None:
-            raise TypeError(
-                f"new_value is not a bool or None! "
-                f"(type passed in: {repr(type(new_value))})"
-            )
         if new_value is None:
             self.state(["alternate"])
             return
@@ -124,10 +104,6 @@ class Checkbutton(ttk.Checkbutton):
         :param new_text: The new text.
         :return: None.
         """
-        if not isinstance(new_text, str):
-            raise TypeError(
-                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
-            )
         self.configure(text=new_text)
 
     @property
@@ -148,12 +124,6 @@ class Checkbutton(ttk.Checkbutton):
         :param new_image: A PIL.ImageTk.PhotoImage or None.
         :return: None.
         """
-        if not isinstance(new_image, (PhotoImage, tk.PhotoImage)):
-            raise TypeError(
-                f"new_image is not a "
-                f"PIL.ImageTk.PhotoImage or a tk.PhotoImage! "
-                f"(type passed in: {repr(type(new_image))})"
-            )
         self._photo_image = new_image
         self.configure(image=self._photo_image)
 
@@ -176,10 +146,6 @@ class Checkbutton(ttk.Checkbutton):
          "top", "left", "bottom", or "right".
         :return: None.
         """
-        if not isinstance(new_mode, str):
-            raise TypeError(
-                f"new_mode is not a str! (type passed in: {repr(type(new_mode))})"
-            )
         self.configure(compound=new_mode)
 
     @property
@@ -202,11 +168,6 @@ class Checkbutton(ttk.Checkbutton):
          for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
 
@@ -235,9 +196,4 @@ class Checkbutton(ttk.Checkbutton):
         :param style_name: The name of the theme as a str, ex. "Warning"
         :return: None.
         """
-        if not isinstance(style_name, str):
-            raise TypeError(
-                f"style_name is not a str! "
-                f"(type passed in: {repr(type(style_name))})"
-            )
         self.configure(style=f"{style_name}.{self._style_root}")

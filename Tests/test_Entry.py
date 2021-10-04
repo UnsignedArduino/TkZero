@@ -10,18 +10,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class EntryTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Entry()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Entry(parent=1)
-        with self.assertRaises(TypeError):
-            Entry(self.root, width=2.2)
-        with self.assertRaises(TypeError):
-            Entry(self.root, show=5)
-
     def test_good_params(self):
         Entry(self.root, width=20, show="*", validate=lambda: True,
               command=lambda: print("Changed")).grid(row=0, column=0)
@@ -33,8 +21,6 @@ class EntryTest(TkTestCase):
         self.assertEqual(e.value, "")
         e.value = "Foo"
         self.assertEqual(e.value, "Foo")
-        with self.assertRaises(TypeError):
-            e.value = 1234
 
     def test_enabled(self):
         e = Entry(self.root)
@@ -43,8 +29,6 @@ class EntryTest(TkTestCase):
         self.assertTrue(e.enabled)
         e.enabled = False
         self.assertFalse(e.enabled)
-        with self.assertRaises(TypeError):
-            e.enabled = "True"
 
     def test_read_only(self):
         e = Entry(self.root)
@@ -53,8 +37,6 @@ class EntryTest(TkTestCase):
         self.assertFalse(e.read_only)
         e.read_only = True
         self.assertTrue(e.read_only)
-        with self.assertRaises(TypeError):
-            e.read_only = "False"
 
     def test_hover(self):
         e = Entry(self.root)
@@ -100,8 +82,6 @@ class EntryTest(TkTestCase):
         e.apply_style("Test")
         self.assertEqual(e.cget("style"), "Test.TEntry")
         self.root.update()
-        with self.assertRaises(TypeError):
-            e.apply_style(123456789)
 
 
 if __name__ == '__main__':

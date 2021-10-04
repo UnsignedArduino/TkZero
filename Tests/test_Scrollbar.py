@@ -11,18 +11,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class ScrollbarTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Scrollbar()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Scrollbar(parent=1)
-        with self.assertRaises(TypeError):
-            Scrollbar(self.root, orientation=1)
-        with self.assertRaises(TypeError):
-            Scrollbar(self.root, widget=[])
-
     def test_good_params(self):
         l = Listbox(self.root)
         l.grid(row=0, column=0)
@@ -36,8 +24,6 @@ class ScrollbarTest(TkTestCase):
         s.grid(row=0, column=1)
         s.attach_to(l)
         self.root.update()
-        with self.assertRaises(TypeError):
-            s.attach_to("lol")
         e = Entry(self.root)
         e.grid(row=1, column=0)
         with self.assertRaises(ValueError):
@@ -54,8 +40,6 @@ class ScrollbarTest(TkTestCase):
         self.assertTrue(s.enabled)
         s.enabled = False
         self.assertFalse(s.enabled)
-        with self.assertRaises(TypeError):
-            s.enabled = "True"
 
     def test_hover(self):
         s = Scrollbar(self.root)

@@ -30,13 +30,6 @@ def import_theme(root: tk.Tk, path: Union[str, Path]) -> None:
     :param path: The path to the theme file. Should be a str or a pathlib.Path
     :return: None.
     """
-    if not isinstance(root, tk.Tk):
-        raise TypeError(f"root is not a tk.Tk! (type passed in: {repr(type(root))})")
-    if not isinstance(path, (str, Path)):
-        raise TypeError(
-            f"path is not a str or a pathlib.Path! "
-            f"(type passed in: {repr(type(path))})"
-        )
     path = str(Path(path).resolve())
     root.tk.call("source", path)
 
@@ -50,12 +43,6 @@ def use_theme(root: tk.Tk, theme: str) -> None:
      that was "source"d.
     :return: None.
     """
-    if not isinstance(root, tk.Tk):
-        raise TypeError(f"root is not a tk.Tk! (type passed in: {repr(type(root))})")
-    if not isinstance(theme, str):
-        raise TypeError(
-            f"theme is not a str! " f"(type passed in: {repr(type(theme))})"
-        )
     style = ttk.Style()
     style.theme_use(theme)
 
@@ -72,13 +59,5 @@ def define_style(style_root: str, style_name: str, **kwargs) -> None:
     :param kwargs: The named arguments for the style. (Like background="red")
     :return: None.
     """
-    if not isinstance(style_root, str):
-        raise TypeError(
-            f"style_root is not a str! " f"(type passed in: {repr(type(style_root))})"
-        )
-    if not isinstance(style_name, str):
-        raise TypeError(
-            f"style_name is not a str! " f"(type passed in: {repr(type(style_name))})"
-        )
     style = ttk.Style()
     style.configure(f"{style_name}.{style_root}", **kwargs)

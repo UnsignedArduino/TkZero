@@ -9,20 +9,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class TextTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Text()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Text(parent=1)
-        with self.assertRaises(TypeError):
-            Text(self.root, width=5.5)
-        with self.assertRaises(TypeError):
-            Text(self.root, height=-3.2)
-        with self.assertRaises(TypeError):
-            Text(self.root, wrapping=False)
-
     def test_good_params(self):
         Text(self.root, width=20, height=10,
              wrapping=TextWrap.NoWrapping).grid(row=0, column=0)
@@ -34,8 +20,6 @@ class TextTest(TkTestCase):
         self.assertEqual(t.text, "\n")
         t.text = "Foo"
         self.assertEqual(t.text, "Foo\n")
-        with self.assertRaises(TypeError):
-            t.text = False
 
     def test_cursor(self):
         t = Text(self.root)
@@ -45,8 +29,6 @@ class TextTest(TkTestCase):
         t.text = "This text\nhas some\nnewlines."
         t.cursor = "2.0"
         self.assertEqual(t.cursor, "2.0")
-        with self.assertRaises(TypeError):
-            t.cursor = 1.2
 
     def test_enabled(self):
         t = Text(self.root)
@@ -55,8 +37,6 @@ class TextTest(TkTestCase):
         t.enabled = False
         self.root.update()
         self.assertFalse(t.enabled)
-        with self.assertRaises(TypeError):
-            t.enabled = "False"
 
     def test_read_only(self):
         t = Text(self.root)
@@ -65,8 +45,6 @@ class TextTest(TkTestCase):
         t.read_only = True
         self.root.update()
         self.assertTrue(t.read_only)
-        with self.assertRaises(TypeError):
-            t.read_only = "False"
 
     def test_hover(self):
         t = Text(self.root)

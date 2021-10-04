@@ -35,21 +35,6 @@ class Scrollbar(ttk.Scrollbar):
         :param widget: The widget to scroll. Defaults to None and should be a
          tk.Widget.
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(orientation, str):
-            raise TypeError(
-                f"orientation is not a str! "
-                f"(type passed in: {repr(type(orientation))})"
-            )
-        if not isinstance(widget, tk.Widget) and widget is not None:
-            raise TypeError(
-                f"widget is not a tk.Widget! " f"(type passed in: {repr(type(widget))})"
-            )
         super().__init__(master=parent, orient=orientation)
         self._style_root = "TScrollbar"
         self._enabled = True
@@ -67,10 +52,6 @@ class Scrollbar(ttk.Scrollbar):
         :param widget: The widget to scroll. Should be a tk.Widget.
         :return: None.
         """
-        if not isinstance(widget, tk.Widget):
-            raise TypeError(
-                f"widget is not a tk.Widget! " f"(type passed in: {repr(type(widget))})"
-            )
         if self._orientation == OrientModes.Vertical:
             try:
                 self.configure(command=widget.yview)
@@ -128,11 +109,6 @@ class Scrollbar(ttk.Scrollbar):
          for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
 

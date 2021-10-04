@@ -23,11 +23,6 @@ class Window(tk.Toplevel):
         :param parent: The parent, either a tk.Tk instance or a tk.Toplevel
          instance.
         """
-        if not isinstance(parent, (tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a Union[tk.Tk, tk.Toplevel]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
         tk.BaseWidget.__init__(self, parent, "toplevel")
         self.iconname(self._root().iconname())
         self.title = "Window"
@@ -55,10 +50,6 @@ class Window(tk.Toplevel):
         :param new_title: A str of the new title for the window.
         :return: None.
         """
-        if not isinstance(new_title, str):
-            raise TypeError(
-                f"new_title is not a str! " f"(type passed in: {repr(type(new_title))})"
-            )
         self.wm_title(new_title)
 
     @property
@@ -80,24 +71,6 @@ class Window(tk.Toplevel):
         height attributes set to the size you want.
         :return: None.
         """
-        if not isinstance(new_size, (Vector.Size, tuple)):
-            raise TypeError(
-                f"new_size is not a Vector.Size or a tuple! "
-                f"(type passed in: {repr(type(new_size))})"
-            )
-        if isinstance(new_size, tuple):
-            if len(new_size) != 2:
-                raise ValueError(
-                    f"new_size has "
-                    f"{'more than' if len(new_size) > 2 else 'less than'}"
-                    f" 2 values! (got: {len(new_size)})"
-                )
-            for index, axis in enumerate(new_size):
-                if not isinstance(axis, int):
-                    raise TypeError(
-                        f"new_size[{index}] is not an int! "
-                        f"(type passed in: {repr(type(axis))})"
-                    )
         if isinstance(new_size, tuple):
             self.geometry(f"{new_size[0]}x{new_size[1]}")
         else:
@@ -123,24 +96,6 @@ class Window(tk.Toplevel):
          x and y attributes.
         :return: None.
         """
-        if not isinstance(new_position, (Vector.Position, tuple)):
-            raise TypeError(
-                f"new_position is not a Vector.Position or a tuple! "
-                f"(type passed in: {repr(type(new_position))})"
-            )
-        if isinstance(new_position, tuple):
-            if len(new_position) != 2:
-                raise ValueError(
-                    f"new_position has "
-                    f"{'more than' if len(new_position) > 2 else 'less than'}"
-                    f" 2 values! (got: {len(new_position)})"
-                )
-            for index, axis in enumerate(new_position):
-                if not isinstance(axis, int):
-                    raise TypeError(
-                        f"new_position[{index}] is not an int! "
-                        f"(type passed in: {repr(type(axis))})"
-                    )
         if isinstance(new_position, tuple):
             self.geometry(
                 f"{self.size.width}x{self.size.height}+"
@@ -169,11 +124,6 @@ class Window(tk.Toplevel):
         :param to_minimize: A bool on whether to minimize or to restore it.
         :return: None.
         """
-        if not isinstance(to_minimize, bool):
-            raise TypeError(
-                f"to_minimize is not a bool! "
-                f"(type passed in: {repr(type(to_minimize))})"
-            )
         if to_minimize:
             self.iconify()
         else:
@@ -196,11 +146,6 @@ class Window(tk.Toplevel):
         :param to_restore: A bool on whether to restore or to minimize it.
         :return: None.
         """
-        if not isinstance(to_restore, bool):
-            raise TypeError(
-                f"to_restore is not a bool! "
-                f"(type passed in: {repr(type(to_restore))})"
-            )
         if to_restore:
             self.deiconify()
         else:
@@ -226,11 +171,6 @@ class Window(tk.Toplevel):
         :param to_mazimize: Whether to maximize the window or minimize it.
         :return: None.
         """
-        if not isinstance(to_mazimize, bool):
-            raise TypeError(
-                f"to_mazimize is not a bool! "
-                f"(type passed in: {repr(type(to_mazimize))})"
-            )
         if to_mazimize:
             if Platform.on_x11(self):
                 self.attributes("-zoomed", True)
@@ -256,11 +196,6 @@ class Window(tk.Toplevel):
         :param full_screen: Whether to full-screen the window or not.
         :return: None.
         """
-        if not isinstance(full_screen, bool):
-            raise TypeError(
-                f"full_screen is not a bool! "
-                f"(type passed in: {repr(type(full_screen))})"
-            )
         self.attributes("-fullscreen", full_screen)
 
     def bind_to_event(
@@ -285,17 +220,6 @@ class Window(tk.Toplevel):
         :return: A list of functions (As Tk function str) that would be called
          when this event is triggered or None when binding one.
         """
-        if not isinstance(event, str):
-            raise TypeError(
-                f"event is not a str! (type passed in: {repr(type(event))})"
-            )
-        if not isinstance(run_in_thread, bool):
-            raise TypeError(
-                f"run_in_thread is not a bool! "
-                f"(type passed in: {repr(type(run_in_thread))})"
-            )
-        if not isinstance(add, bool):
-            raise TypeError(f"add is not a bool! (type passed in: {repr(type(add))})")
         if run_in_thread:
             func = Thread(target=func, args=(), daemon=True).start
         binds = self.bind(event, func, add)
@@ -310,10 +234,6 @@ class Window(tk.Toplevel):
         :param event: The event to generate ("<<MyOwnEvent>>")
         :return: None.
         """
-        if not isinstance(event, str):
-            raise TypeError(
-                f"event is not a str! (type passed in: {repr(type(event))})"
-            )
         self.event_generate(event)
 
     def _enable_children(
@@ -363,11 +283,6 @@ class Window(tk.Toplevel):
          for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
 

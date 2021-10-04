@@ -41,31 +41,6 @@ class Scale(ttk.Scale):
         :param command: The command to call when the scale changes. Will be
          passed in a positional float as the new value.
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(length, int):
-            raise TypeError(
-                f"length is not a int! (type passed in: {repr(type(length))})"
-            )
-        if not isinstance(minimum, (int, float)):
-            raise TypeError(
-                f"minimum is not an int or a float! "
-                f"(type passed in: {repr(type(minimum))})"
-            )
-        if not isinstance(maximum, float):
-            raise TypeError(
-                f"maximum is not an int or a float! "
-                f"(type passed in: {repr(type(maximum))})"
-            )
-        if not isinstance(orientation, str):
-            raise TypeError(
-                f"orientation is not a str! "
-                f"(type passed in: {repr(type(orientation))})"
-            )
         super().__init__(
             master=parent,
             orient=orientation,
@@ -100,11 +75,6 @@ class Scale(ttk.Scale):
         :param new_value: A float or an int.
         :return: None.
         """
-        if not isinstance(new_value, (float, int)):
-            raise TypeError(
-                f"new_value is not a float or an int! "
-                f"(type passed in: {repr(type(new_value))})"
-            )
         self.set(float(new_value))
 
     @property
@@ -127,11 +97,6 @@ class Scale(ttk.Scale):
          for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
 

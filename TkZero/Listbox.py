@@ -41,29 +41,6 @@ class Listbox(tk.Listbox):
         :param width: The width of the listbox. Defaults to None.
         :param on_select: The function to call
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(values, (list, tuple)) and values is not None:
-            raise TypeError(
-                f"values is not a list or a tuple! "
-                f"(type passed in: {repr(type(values))})"
-            )
-        if not isinstance(select_mode, str):
-            raise TypeError(
-                f"select_mode is not a str! " f"(type passed in: {repr(type(values))})"
-            )
-        if not isinstance(height, int) and height is not None:
-            raise TypeError(
-                f"height is not a int! (type passed in: {repr(type(height))})"
-            )
-        if not isinstance(width, int) and width is not None:
-            raise TypeError(
-                f"width is not a int! (type passed in: {repr(type(width))})"
-            )
         if values is not None:
             self._values = [str(item) for item in values]
         else:
@@ -103,11 +80,6 @@ class Listbox(tk.Listbox):
          (ex. (0, 1, 3))
         :return: None.
         """
-        if not isinstance(new_selection, tuple):
-            raise TypeError(
-                f"new_selection is not a tuple! "
-                f" (type passed in: {repr(type(new_selection))})"
-            )
         self.selection_clear(0, tk.END)
         for index in new_selection:
             self.selection_set(index)
@@ -129,11 +101,6 @@ class Listbox(tk.Listbox):
         :param new_values: The new items, as a list or tuple of str.
         :return: None.
         """
-        if not isinstance(new_values, (list, tuple)):
-            raise TypeError(
-                f"new_values is not a list or a tuple! "
-                f"(type passed in: {repr(type(new_values))})"
-            )
         self._values = [str(item) for item in new_values]
         self._variable.set(self._values)
 
@@ -145,10 +112,6 @@ class Listbox(tk.Listbox):
          list.
         :return: None.
         """
-        if not isinstance(index, int):
-            raise TypeError(
-                f"index is not a int! (type passed in: {repr(type(index))})"
-            )
         if index >= len(self._values):
             raise IndexError(
                 f"index is out of range! "
@@ -177,11 +140,6 @@ class Listbox(tk.Listbox):
          for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self.config(state=tk.NORMAL if self._enabled else tk.DISABLED)
 

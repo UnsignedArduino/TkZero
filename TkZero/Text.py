@@ -40,24 +40,6 @@ class Text(tk.Text):
         :param wrapping: How to wrap words in the text. Defaults to
          TextWrap.WordWrapping
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(width, int) and width is not None:
-            raise TypeError(
-                f"width is not a int! (type passed in: {repr(type(width))})"
-            )
-        if not isinstance(height, int) and height is not None:
-            raise TypeError(
-                f"height is not a int! (type passed in: {repr(type(height))})"
-            )
-        if not isinstance(wrapping, str):
-            raise TypeError(
-                f"wrapping is not a str! " f"(type passed in: {repr(type(wrapping))})"
-            )
         super().__init__(
             master=parent,
             width=width,
@@ -112,10 +94,6 @@ class Text(tk.Text):
         :param new_text: The new text.
         :return: None.
         """
-        if not isinstance(new_text, str):
-            raise TypeError(
-                f"new_text is not a str! " f"(type passed in: {repr(type(new_text))})"
-            )
         last_state = "read_only" if self._readonly else self["state"]
         if self.enable_automatically:
             self.enabled = True
@@ -144,10 +122,6 @@ class Text(tk.Text):
         :param new_pos: A string, like "1.0".
         :return: None.
         """
-        if not isinstance(new_pos, str):
-            raise TypeError(
-                f"new_pos is not a str!" f"(type passed in: {repr(type(new_pos))})"
-            )
         self.mark_set(tk.INSERT, new_pos)
 
     @property
@@ -170,11 +144,6 @@ class Text(tk.Text):
         for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self._readonly = False
         self.configure(state=tk.NORMAL if self._enabled else tk.DISABLED)
@@ -199,11 +168,6 @@ class Text(tk.Text):
          read only.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self.enabled = True
         self._readonly = new_state
 

@@ -16,15 +16,6 @@ class Tab(Frame):
 
         :param parent: The parent of the tab, which should be a notebook.
         """
-        if not isinstance(parent, ttk.Notebook):
-            raise TypeError(
-                f"parent is not a ttk.Notebook! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(title, str):
-            raise TypeError(
-                f"title is not a str! " f"(type passed in: {repr(type(title))})"
-            )
         super().__init__(parent=parent)
         self._title = title
         self._parent = parent
@@ -49,10 +40,6 @@ class Tab(Frame):
         :param new_title: A str.
         :return: None.
         """
-        if not isinstance(new_title, str):
-            raise TypeError(
-                f"new_title is not a str! " f"(type passed in: {repr(type(new_title))})"
-            )
         self._title = new_title
         try:
             self._parent.tab(self, text=self._title)
@@ -79,11 +66,6 @@ class Tab(Frame):
         for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self._enable_children(enable=self._enabled)
         try:
@@ -128,11 +110,6 @@ class Notebook(ttk.Notebook):
 
         :param parent: The parent of the notebook.
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]!"
-                f" (type passed in: {repr(type(parent))})"
-            )
         super().__init__(master=parent)
         self._tabs = []
         self._selected = 0
@@ -154,10 +131,6 @@ class Notebook(ttk.Notebook):
         :param new_tabs: A list of TkZero.Notebook.Tab
         :return: None.
         """
-        if not isinstance(new_tabs, list):
-            raise TypeError(
-                f"new_items is not a list! " f"(type passed in: {repr(type(new_tabs))})"
-            )
         self._tabs = new_tabs
 
     def update_tabs(self) -> None:
@@ -170,17 +143,6 @@ class Notebook(ttk.Notebook):
         for tab in super().tabs():
             self.forget(tab)
         for index, tab in enumerate(self._tabs):
-            if not isinstance(
-                tab,
-                (tk.Frame, ttk.Frame, Tab),
-            ):
-                raise TypeError(
-                    f"Item #{index}/{len(self._tabs)} in "
-                    f"new_tabs is not a "
-                    f"tk.Frame or a ttk.Frame! "
-                    f"(type of item #{index}: "
-                    f"{repr(type(tab))})"
-                )
             tab.add_to(self)
         if len(self._tabs) > 0:
             self.selected = 0
@@ -203,11 +165,6 @@ class Notebook(ttk.Notebook):
          selected.
         :return: None.
         """
-        if not isinstance(new_index, int):
-            raise TypeError(
-                f"new_index is not an int! "
-                f"(type passed in: {repr(type(new_index))})"
-            )
         if new_index < 0:
             raise ValueError(
                 f"new_index cannot be less then 0! " f"(value passed in: {new_index})"

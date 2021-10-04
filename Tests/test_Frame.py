@@ -11,14 +11,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class FrameTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Frame()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Frame(parent=1)
-
     def test_good_params(self):
         Frame(self.root).grid(row=0, column=0)
 
@@ -49,8 +41,6 @@ class FrameTest(TkTestCase):
         self.root.update()
         f.enabled = False
         self.assertFalse(f.enabled)
-        with self.assertRaises(TypeError):
-            f.enabled = []
 
     def test_hover(self):
         f = Frame(self.root)
@@ -66,19 +56,9 @@ class FrameTest(TkTestCase):
         f.apply_style("Test")
         self.assertEqual(f.cget("style"), "Test.TFrame")
         self.root.update()
-        with self.assertRaises(TypeError):
-            f.apply_style(123456789)
 
 
 class ScrollableFrameTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            ScrollableFrame()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            ScrollableFrame(parent=1)
-
     def test_good_params(self):
         ScrollableFrame(self.root, x_scrolling=True,
                         y_scrolling=True).grid(row=0, column=0)
@@ -110,8 +90,6 @@ class ScrollableFrameTest(TkTestCase):
         self.root.update()
         f.enabled = False
         self.assertFalse(f.enabled)
-        with self.assertRaises(TypeError):
-            f.enabled = []
 
     def test_hover(self):
         f = ScrollableFrame(self.root)
@@ -127,8 +105,6 @@ class ScrollableFrameTest(TkTestCase):
         f.apply_style("Test")
         self.assertEqual(f.frame.cget("style"), "Test.TFrame")
         self.root.update()
-        with self.assertRaises(TypeError):
-            f.apply_style(123456789)
 
 
 if __name__ == '__main__':

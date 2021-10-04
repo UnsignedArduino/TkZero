@@ -10,20 +10,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class ComboboxTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Combobox()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Combobox(1)
-        with self.assertRaises(TypeError):
-            Combobox(self.root, values={})
-        with self.assertRaises(TypeError):
-            Combobox(self.root, width=5.5)
-        with self.assertRaises(TypeError):
-            Combobox(self.root, show=False)
-
     def test_good_params(self):
         Combobox(self.root, width=20, show="*", values=("foo", "bar"),
                  command=lambda: print("Changed"),
@@ -36,8 +22,6 @@ class ComboboxTest(TkTestCase):
         self.assertEqual(c.value, "")
         c.value = "Foo"
         self.assertEqual(c.value, "Foo")
-        with self.assertRaises(TypeError):
-            c.value = 1
 
     def test_values(self):
         # Also fails randomly in GitHub actions
@@ -50,8 +34,6 @@ class ComboboxTest(TkTestCase):
             self.assertEqual(c.values, ("Foo", ))
             c.values = ["Bar"]
             self.assertEqual(c.values, ("Bar", ))
-            with self.assertRaises(TypeError):
-                c.values = {}
         except tk.TclError:
             pass
 
@@ -62,8 +44,6 @@ class ComboboxTest(TkTestCase):
         self.assertTrue(c.enabled)
         c.enabled = False
         self.assertFalse(c.enabled)
-        with self.assertRaises(TypeError):
-            c.enabled = "lala"
 
     def test_read_only(self):
         c = Combobox(self.root)
@@ -72,8 +52,6 @@ class ComboboxTest(TkTestCase):
         self.assertFalse(c.read_only)
         c.read_only = True
         self.assertTrue(c.read_only)
-        with self.assertRaises(TypeError):
-            c.read_only = 1
 
     def test_hover(self):
         c = Combobox(self.root)
@@ -119,8 +97,6 @@ class ComboboxTest(TkTestCase):
         c.apply_style("Test")
         self.assertEqual(c.cget("style"), "Test.TCombobox")
         self.root.update()
-        with self.assertRaises(TypeError):
-            c.apply_style([bool])
 
 
 if __name__ == '__main__':

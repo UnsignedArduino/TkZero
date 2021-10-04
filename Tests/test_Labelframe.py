@@ -11,16 +11,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class FrameTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Labelframe()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Labelframe(parent=1)
-        with self.assertRaises(TypeError):
-            Labelframe(self.root, text=5)
-
     def test_good_params(self):
         Labelframe(self.root, text="Options: ").grid(row=0, column=0)
 
@@ -51,8 +41,6 @@ class FrameTest(TkTestCase):
         self.root.update()
         f.enabled = False
         self.assertFalse(f.enabled)
-        with self.assertRaises(TypeError):
-            f.enabled = []
 
     def test_hover(self):
         f = Labelframe(self.root)
@@ -66,8 +54,6 @@ class FrameTest(TkTestCase):
         self.assertEqual(f.text, "")
         f.text = "Foo"
         self.assertEqual(f.text, "Foo")
-        with self.assertRaises(TypeError):
-            f.text = 42
 
     def test_style(self):
         f = Labelframe(self.root)
@@ -77,8 +63,6 @@ class FrameTest(TkTestCase):
         f.apply_style("Test")
         self.assertEqual(f.cget("style"), "Test.TLabelframe")
         self.root.update()
-        with self.assertRaises(TypeError):
-            f.apply_style(123456789)
 
 
 if __name__ == '__main__':

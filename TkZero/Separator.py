@@ -32,17 +32,6 @@ class Separator(ttk.Separator):
          direction it should scroll the widget in. Defaults to
          OrientModes.Vertical and is a str.
         """
-        if not isinstance(parent, (tk.Widget, tk.Tk, tk.Toplevel)):
-            raise TypeError(
-                f"parent is not a "
-                f"Union[tk.Widget, Union[tk.Tk, tk.Toplevel]]! "
-                f"(type passed in: {repr(type(parent))})"
-            )
-        if not isinstance(orientation, str):
-            raise TypeError(
-                f"orientation is not a str! "
-                f"(type passed in: {repr(type(orientation))})"
-            )
         super().__init__(master=parent, orient=orientation)
         self._style_root = "TSeparator"
         self._enabled = True
@@ -71,11 +60,6 @@ class Separator(ttk.Separator):
          for disabled.
         :return: None.
         """
-        if not isinstance(new_state, bool):
-            raise TypeError(
-                f"new_state is not a bool! "
-                f"(type passed in: {repr(type(new_state))})"
-            )
         self._enabled = new_state
         self.state(["!disabled" if self._enabled else "disabled"])
 

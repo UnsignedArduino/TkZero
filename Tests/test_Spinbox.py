@@ -10,20 +10,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class SpinboxTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Spinbox()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Spinbox(parent=1)
-        with self.assertRaises(TypeError):
-            Spinbox(self.root, values={"this", "doesn't", "work"})
-        with self.assertRaises(TypeError):
-            Spinbox(self.root, width=5.5)
-        with self.assertRaises(TypeError):
-            Spinbox(self.root, show=1)
-
     def test_good_params(self):
         Spinbox(self.root, width=20, show="*", values=("foo", "bar"),
                 validate=lambda: True,
@@ -36,8 +22,6 @@ class SpinboxTest(TkTestCase):
         self.assertEqual(s.value, "")
         s.value = "Foo"
         self.assertEqual(s.value, "Foo")
-        with self.assertRaises(TypeError):
-            s.value = ("la", )
 
     def test_values(self):
         s = Spinbox(self.root)
@@ -48,8 +32,6 @@ class SpinboxTest(TkTestCase):
         self.assertEqual(s.values, ("Foo", ))
         s.values = ["Foo"]
         self.assertEqual(s.values, ("Foo",))
-        with self.assertRaises(TypeError):
-            s.values = {}
 
     def test_enabled(self):
         s = Spinbox(self.root)
@@ -58,8 +40,6 @@ class SpinboxTest(TkTestCase):
         self.assertTrue(s.enabled)
         s.enabled = False
         self.assertFalse(s.enabled)
-        with self.assertRaises(TypeError):
-            s.enabled = "True"
 
     def test_read_only(self):
         s = Spinbox(self.root)
@@ -68,8 +48,6 @@ class SpinboxTest(TkTestCase):
         self.assertFalse(s.read_only)
         s.read_only = True
         self.assertTrue(s.read_only)
-        with self.assertRaises(TypeError):
-            s.read_only = "False"
 
     def test_hover(self):
         s = Spinbox(self.root)

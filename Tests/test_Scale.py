@@ -9,23 +9,6 @@ from TkZeroUnitTest import TkTestCase
 
 
 class ScaleTest(TkTestCase):
-    def test_no_params(self):
-        with self.assertRaises(TypeError):
-            Scale()
-
-    def test_bad_params(self):
-        with self.assertRaises(TypeError):
-            Scale(parent=1)
-        with self.assertRaises(TypeError):
-            Scale(self.root, length="5", minimum=0.0, maximum=5.0)
-        with self.assertRaises(TypeError):
-            Scale(self.root, length=5, minimum="0.0", maximum=5.0)
-        with self.assertRaises(TypeError):
-            Scale(self.root, length=5, minimum=0.0, maximum="5.0")
-        with self.assertRaises(TypeError):
-            Scale(self.root, length=5, minimum=0.0, maximum=5.0,
-                  orientation=[])
-
     def test_good_params(self):
         Scale(self.root, orientation=OrientModes.Vertical, length=200,
               minimum=0.0, maximum=100.0).grid(row=0, column=1)
@@ -39,8 +22,6 @@ class ScaleTest(TkTestCase):
         s.value = 25
         self.root.update()
         self.assertEqual(s.value, 25)
-        with self.assertRaises(TypeError):
-            s.value = "foo"
 
     def test_enabled(self):
         s = Scale(self.root, orientation=OrientModes.Vertical, length=200,
@@ -50,8 +31,6 @@ class ScaleTest(TkTestCase):
         self.assertTrue(s.enabled)
         s.enabled = False
         self.assertFalse(s.enabled)
-        with self.assertRaises(TypeError):
-            s.enabled = "pink cat"
 
     def test_hover(self):
         s = Scale(self.root, orientation=OrientModes.Vertical, length=200,
