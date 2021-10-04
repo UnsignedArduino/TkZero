@@ -48,6 +48,22 @@ class ProgressbarTest(TkTestCase):
         self.root.update()
         self.assertEqual(p.text, "Foobar")
 
+    def test_disabled_text(self):
+        p = Progressbar(self.root, orientation=OrientModes.Vertical,
+                        mode=ProgressModes.Determinate, length=200,
+                        allow_text=False)
+        p.grid(row=0, column=0)
+        p.value = 0
+        p.maximum = 100
+        self.root.update()
+        with self.assertRaises(ValueError):
+            self.assertEqual(p.text, "")
+        with self.assertRaises(ValueError):
+            p.text = "Foobar"
+        self.root.update()
+        with self.assertRaises(ValueError):
+            self.assertEqual(p.text, "Foobar")
+
     def test_indeterminate(self):
         p = Progressbar(self.root, orientation=OrientModes.Horizontal,
                         mode=ProgressModes.Indeterminate, length=200)

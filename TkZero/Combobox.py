@@ -13,7 +13,7 @@ class Combobox(ttk.Combobox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: Union[List[str, ...], Tuple[str, ...]] = (),
+        values: Union[List[str], Tuple[str, ...]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -98,7 +98,7 @@ class Combobox(ttk.Combobox):
         return self["values"] if self["values"] else ()
 
     @values.setter
-    def values(self, new_values: Union[Tuple[str, ...], List[str, ...]]) -> None:
+    def values(self, new_values: Union[Tuple[str, ...], List[str]]) -> None:
         """
         Set the default options text on this combobox.
 

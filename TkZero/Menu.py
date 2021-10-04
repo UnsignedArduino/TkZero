@@ -290,8 +290,7 @@ class MenuCascade:
                 Union[
                     MenuSeparator, Union[MenuCheckbutton, Union[MenuRadiobutton, Any]]
                 ],
-            ],
-            ...,
+            ]
         ] = [],
         enabled: bool = True,
         underline: int = None,

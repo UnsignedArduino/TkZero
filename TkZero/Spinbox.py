@@ -13,7 +13,7 @@ class Spinbox(ttk.Spinbox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: Union[Tuple[str, ...], List[str, ...]] = (),
+        values: Union[Tuple[str, ...], List[str]] = (),
         width: int = None,
         show: str = None,
         validate: Callable = None,
@@ -98,7 +98,7 @@ class Spinbox(ttk.Spinbox):
         return self["values"] if self["values"] else ()
 
     @values.setter
-    def values(self, new_values: Union[Tuple[str, ...], List[str, ...]]) -> None:
+    def values(self, new_values: Union[Tuple[str, ...], List[str]]) -> None:
         """
         Set the options text on this spinbox.
 

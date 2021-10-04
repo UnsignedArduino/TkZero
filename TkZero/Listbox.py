@@ -21,7 +21,7 @@ class Listbox(tk.Listbox):
     def __init__(
         self,
         parent: Union[tk.Widget, Union[tk.Tk, tk.Toplevel]],
-        values: Union[List[str, ...], Tuple[str, ...]] = None,
+        values: Union[List[str], Tuple[str, ...]] = None,
         select_mode: str = SelectModes.Single,
         height: int = None,
         width: int = None,
@@ -94,7 +94,7 @@ class Listbox(tk.Listbox):
         return self._values
 
     @values.setter
-    def values(self, new_values: Union[List[str, ...], Tuple[str, ...]]) -> None:
+    def values(self, new_values: Union[List[str], Tuple[str, ...]]) -> None:
         """
         Set the items on this combobox.
 

@@ -41,6 +41,7 @@ class Progressbar(ttk.Progressbar):
         length: int,
         mode: str = ProgressModes.Determinate,
         orientation: str = OrientModes.Horizontal,
+        allow_text: bool = True,
     ):
         """
         Initiate a ttk.Scrollbar.
@@ -52,59 +53,69 @@ class Progressbar(ttk.Progressbar):
         :param orientation: The orientation of the scrollbar and what
          direction it should scroll the widget in. Defaults to
          OrientModes.Horizontal and is a str value.
+        :param allow_text: Whether you can add text on this progress bar or
+         not. This can be turned off if it is messing with a theme.
         """
-        self._style = ttk.Style()
-        global _pbar_id
-        if mode == OrientModes.Horizontal:
-            self.style_name = f"LabeledProgressbar{_pbar_id}.Horizontal.TProgressbar"
-            self._style.layout(
-                self.style_name,
-                [
-                    (
-                        "Horizontal.Progressbar.trough",
-                        {
-                            "sticky": "nswe",
-                            "children": [
-                                (
-                                    "Horizontal.Progressbar.pbar",
-                                    {"side": "left", "sticky": "ns"},
-                                ),
-                                (f"{self.style_name}.label", {"sticky": ""}),
-                            ],
-                        },
-                    )
-                ],
+        self._allow_text = allow_text
+        if self._allow_text:
+            self._style = ttk.Style()
+            global _pbar_id
+            if mode == OrientModes.Horizontal:
+                self.style_name = (
+                    f"LabeledProgressbar{_pbar_id}.Horizontal.TProgressbar"
+                )
+                self._style.layout(
+                    self.style_name,
+                    [
+                        (
+                            "Horizontal.Progressbar.trough",
+                            {
+                                "sticky": "nswe",
+                                "children": [
+                                    (
+                                        "Horizontal.Progressbar.pbar",
+                                        {"side": "left", "sticky": "ns"},
+                                    ),
+                                    (f"{self.style_name}.label", {"sticky": ""}),
+                                ],
+                            },
+                        )
+                    ],
+                )
+            else:
+                self.style_name = f"LabeledProgressbar{_pbar_id}.Vertical.TProgressbar"
+                self._style.layout(
+                    self.style_name,
+                    [
+                        (
+                            "Vertical.Progressbar.trough",
+                            {
+                                "sticky": "nswe",
+                                "children": [
+                                    (
+                                        "Vertical.Progressbar.pbar",
+                                        {"side": "left", "sticky": "ns"},
+                                    ),
+                                    (f"{self.style_name}.label", {"sticky": ""}),
+                                ],
+                            },
+                        )
+                    ],
+                )
+            _pbar_id += 1
+            # https://stackoverflow.com/a/40348163/10291933
+            self._text = ""
+            super().__init__(
+                master=parent,
+                orient=orientation,
+                length=length,
+                mode=mode,
+                style=self.style_name,
             )
         else:
-            self.style_name = f"LabeledProgressbar{_pbar_id}.Vertical.TProgressbar"
-            self._style.layout(
-                self.style_name,
-                [
-                    (
-                        "Vertical.Progressbar.trough",
-                        {
-                            "sticky": "nswe",
-                            "children": [
-                                (
-                                    "Vertical.Progressbar.pbar",
-                                    {"side": "left", "sticky": "ns"},
-                                ),
-                                (f"{self.style_name}.label", {"sticky": ""}),
-                            ],
-                        },
-                    )
-                ],
+            super().__init__(
+                master=parent, orient=orientation, length=length, mode=mode
             )
-        _pbar_id += 1
-        # https://stackoverflow.com/a/40348163/10291933
-        self._text = ""
-        super().__init__(
-            master=parent,
-            orient=orientation,
-            length=length,
-            mode=mode,
-            style=self.style_name,
-        )
         self._style_root = "TProgressbar"
         self._enabled = True
         self._orientation = orientation
@@ -157,6 +168,11 @@ class Progressbar(ttk.Progressbar):
 
         :return: A str.
         """
+        if not self._allow_text:
+            raise ValueError(
+                "Text has been disabled on this progressbar! "
+                "(Enable it at creation with allow_text = True)"
+            )
         return self._text
 
     @text.setter
@@ -167,6 +183,11 @@ class Progressbar(ttk.Progressbar):
         :param new_text: A str.
         :return: None.
         """
+        if not self._allow_text:
+            raise ValueError(
+                "Text has been disabled on this progressbar! "
+                "(Enable it at creation with allow_text = True)"
+            )
         self._text = new_text
         self._style.configure(self.style_name, text=self._text)
 
